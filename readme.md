@@ -1,0 +1,43 @@
+# AgriLife Today
+[![Codeship Status for AgriLife/agrilife-today](https://app.codeship.com/projects/e79b2410-2ee2-0137-03f5-66eddf10bdad/status?branch=master)](https://app.codeship.com/projects/331732)
+
+This WordPress theme provides functionality and visual styles for the AgriLife Today website.
+
+## WordPress Requirements
+
+1. Genesis theme
+3. PHP 5.6+, tested with PHP 7.2
+
+## Installation
+
+1. [Download the latest release](https://github.com/agrilife/agrilife-today/releases/latest)
+2. Upload the theme to your site
+
+## Features
+
+## Development Installation
+
+1. Copy this repo to the desired location.
+2. In your terminal, navigate to the plugin location 'cd /path/to/the/plugin'
+3. Run "npm start" to configure your local copy of the repo, install dependencies, and build files
+
+## Development Notes
+
+When you stage changes to this repository and initiate a commit, they must pass PHP and Sass linting tasks before they will complete the commit step. Sass rules can be found and modified in the .sass-lint.yml file.
+
+Release tasks in Gruntfile.coffee can only be used by the repository's owners.
+
+## Development Tasks
+
+1. Run "grunt develop" to compile the css when developing the plugin.
+2. Run "grunt watch" to automatically compile the css after saving a *.scss file.
+3. Run "grunt" to compile the css when publishing the plugin.
+4. Run "npm run checkwp" to check PHP files against WordPress coding standards.
+
+## Development Requirements
+
+* Node: http://nodejs.org/
+* NPM: https://npmjs.org/
+* Ruby: http://www.ruby-lang.org/en/, version >= 2.0.0p648
+* Ruby Gems: http://rubygems.org/
+* Ruby Sass: version >= 3.4.22

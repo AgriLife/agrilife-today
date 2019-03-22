@@ -1,0 +1,16 @@
+{
+    "name": "agrilife/agrilife-today",
+    "description": "Functionality for AgriLife Today theme",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Zachary Watkins",
+            "email": "zachary.watkins@ag.tamu.edu"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^1.0"
+    }
+}
