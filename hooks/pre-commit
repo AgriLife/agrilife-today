@@ -1,7 +1,6 @@
 #!/bin/sh
 PATH="/usr/local/bin:$PATH"
 . $HOME/.nvm/nvm.sh
-nvm use 6
 
 #
 # Run WordPress coding standards tasks.
@@ -45,6 +44,7 @@ if [[ -z $SASSFILES ]]
 then
 	echo ""
 else
+	nvm use 6
 	for file in ${SASSFILES}
 	do
 		cssFilesStr="$cssFilesStr$cssFilesSeparator$file"
