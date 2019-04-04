@@ -69,6 +69,10 @@ class AgToday {
 	 */
 	public function init() {
 
+		// Enqueue our assets.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-assets.php';
+		$assets = new \AgToday\Assets();
+
 	}
 
 	/**
