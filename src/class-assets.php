@@ -13,7 +13,7 @@ namespace AgToday;
 /**
  * Loads required theme assets
  *
- * @package AgriFlex4
+ * @package agrilife-today
  * @since 0.1.0
  */
 class Assets {

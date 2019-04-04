@@ -2,7 +2,7 @@
 /**
  * AgriLife Today
  *
- * @package AgriLife Today
+ * @package agrilife-today
  * @since 0.1.0
  * @copyright Copyright (c) 2019, Texas A&M AgriLife Communications
  * @author Texas A&M AgriLife Communications
