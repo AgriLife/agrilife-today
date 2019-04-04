@@ -45,6 +45,7 @@ node_modules
 !node_modules/foundation-sites/dist/js/*.js
 .sass-cache
 css/*.css*
+style.css.map
 js/*.concat.js*
 vendor
 *.zip

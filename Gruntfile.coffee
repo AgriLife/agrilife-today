@@ -14,7 +14,7 @@ module.exports = (grunt) ->
           ]
           failOnError: true
         files:
-          'css/default.css': 'css/default.css'
+          'style.css': 'style.css'
       dev:
         options:
           map: true
@@ -23,7 +23,7 @@ module.exports = (grunt) ->
           ]
           failOnError: true
         files:
-          'css/default.css': 'css/default.css'
+          'style.css': 'style.css'
     sass:
       pkg:
         options:
@@ -32,14 +32,14 @@ module.exports = (grunt) ->
           style: 'compressed'
           precision: 2
         files:
-          'css/default.css': 'css/src/default.scss'
+          'style.css': 'css/src/style.scss'
       dev:
         options:
           loadPath: 'node_modules/foundation-sites/scss'
           style: 'expanded'
           precision: 2
         files:
-          'css/default.css': 'css/src/default.scss'
+          'style.css': 'css/src/style.scss'
     sasslint:
       options:
         configFile: '.sass-lint.yml'
