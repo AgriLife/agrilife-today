@@ -5,7 +5,7 @@ module.exports = (grunt) ->
       files: [
         'css/src/*.scss'
       ]
-      tasks: ['sasslint', 'sass:dev', 'postcss:dev']
+      tasks: ['develop']
     postcss:
       pkg:
         options:
