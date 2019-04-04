@@ -33,10 +33,14 @@ class Assets {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_public_scripts' ) );
 
 		// Register global styles used in the theme.
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_public_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_external_styles' ) );
 
 		// Enqueue global styles.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_public_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_external_styles' ) );
+
+		// Remove unneeded default assets.
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 	}
 
@@ -80,33 +84,32 @@ class Assets {
 	}
 
 	/**
-	 * Registers all styles used within the theme
+	 * Registers third party styles
 	 *
-	 * @since 0.1.0
+	 * @since 0.1.1
 	 * @return void
 	 */
-	public function register_public_styles() {
+	public function register_external_styles() {
 
 		wp_register_style(
-			'agrilife-today-default-styles',
-			AGTODAY_THEME_DIRURL . '/css/default.css',
+			'agriflex4-googlefonts',
+			'https://fonts.googleapis.com/css?family=Oswald',
 			array(),
-			filemtime( AGTODAY_THEME_DIRPATH . '/css/default.css' ),
-			'screen'
+			'1.0.0',
+			'all'
 		);
 
 	}
 
 	/**
-	 * Enqueues styles used globally
+	 * Enqueues third party styles
 	 *
-	 * @since 0.1.0
-	 * @global $wp_styles
+	 * @since 0.1.1
 	 * @return void
 	 */
-	public function enqueue_public_styles() {
+	public function enqueue_external_styles() {
 
-		wp_enqueue_style( 'agrilife-today-default-styles' );
+		wp_enqueue_style( 'agriflex4-googlefonts' );
 
 	}
 
