@@ -1,7 +1,7 @@
 {
   "name": "agrilife-today",
   "version": "0.1.1",
-  "description": "Genesis child theme for Texas A&M AgriLife",
+  "description": "Genesis child theme for Texas A&M AgriLife Today",
   "private": "true",
   "main": "functions.php",
   "scripts": {
@@ -47,5 +47,11 @@
     "type": "git",
     "url": "https://github.com/agrilife/agrilife-today.git"
   },
-  "homepage": "https://github.com/agrilife/agrilife-today#readme"
+  "homepage": "https://github.com/agrilife/agrilife-today#readme",
+  "org_agrilife": {
+    "themename": "AgriLife Today",
+    "authoruri": "https://communications.agrilife.org/",
+    "licenseuri": "http://www.gnu.org/licenses/gpl-2.0.html",
+    "template": "genesis"
+  }
 }

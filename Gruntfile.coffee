@@ -85,8 +85,8 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-sass-lint'
   @loadNpmTasks 'grunt-postcss'
 
-  @registerTask 'default', ['sass:pkg', 'concat:dist', 'postcss:pkg']
-  @registerTask 'develop', ['sasslint', 'sass:dev', 'concat:dev', 'postcss:dev']
+  @registerTask 'default', ['sasslint', 'sass:pkg', 'concat:dist', 'postcss:pkg', 'addcssheader']
+  @registerTask 'develop', ['sasslint', 'sass:dev', 'concat:dev', 'postcss:dev', 'addcssheader']
   @registerTask 'release', ['compress', 'makerelease']
   @registerTask 'makerelease', 'Set release branch for use in the release task', ->
     done = @async()
@@ -233,6 +233,25 @@ module.exports = (grunt) ->
 
       done(err)
       return
+    return
+  @registerTask 'addcssheader', 'Add WordPress header to main CSS file', (excludeCSS) =>
+    css = grunt.file.read 'style.css'
+    output = '/*\n'
+    output += '  Theme Name:  <%= pkg.org_agrilife.themename %>\n'
+    output += '  Theme URI:   <%= pkg.repository.url %>\n'
+    output += '  Author:      <%= pkg.author %>\n'
+    output += '  Author URI:  <%= pkg.org_agrilife.authoruri %>\n'
+    output += '  Description: <%= pkg.description %>\n'
+    output += '  Version:     <%= pkg.version %>\n'
+    output += '  License:     <%= pkg.license %>\n'
+    output += '  License URI: <%= pkg.org_agrilife.licenseuri %>\n'
+    output += '  Text Domain: <%= pkg.name %>\n'
+    output += '  Template:    <%= pkg.org_agrilife.template %>\n'
+    output += '*/\n'
+    output = grunt.template.process output
+    if not excludeCSS
+      output += css
+    grunt.file.write 'style.css', output
     return
 
   @event.on 'watch', (action, filepath) =>

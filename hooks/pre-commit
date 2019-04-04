@@ -68,4 +68,17 @@ if [ $hasLintErrors ]; then
 	exit 1
 fi
 
+#
+# Remove CSS from main style.css file.
+#
+CSSFILES=`git diff --cached --name-only --diff-filter=AM | grep 'style.css$'`
+if [[ -z $CSSFILES ]]
+then
+	echo ""
+else
+	nvm use 6
+	grunt addcssheader:true
+	git add style.css
+fi
+
 exit 0
