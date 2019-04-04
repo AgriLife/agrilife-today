@@ -15,7 +15,6 @@
  * The core plugin class
  *
  * @since 0.1.0
- * @return void
  */
 class AgToday {
 
@@ -70,8 +69,20 @@ class AgToday {
 	public function init() {
 
 		// Enqueue our assets.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-genesis.php';
+		$agt_genesis = new \AgToday\Genesis();
+
+		// Enqueue our assets.
 		require_once AGTODAY_THEME_DIRPATH . '/src/class-assets.php';
-		$assets = new \AgToday\Assets();
+		$agt_assets = new \AgToday\Assets();
+
+		// Enqueue our assets.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-navigation.php';
+		$agt_nav = new \AgToday\Navigation();
+
+		// Enqueue our assets.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-requireddom.php';
+		$agt_required = new \AgToday\RequiredDOM();
 
 	}
 
