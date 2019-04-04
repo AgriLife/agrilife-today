@@ -236,4 +236,4 @@ module.exports = (grunt) ->
     return
 
   @event.on 'watch', (action, filepath) =>
-    @log.writeln('#{filepath} has #{action}')
+    @log.writeln filepath + ' has ' + action
