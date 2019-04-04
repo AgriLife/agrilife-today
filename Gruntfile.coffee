@@ -53,7 +53,7 @@ module.exports = (grunt) ->
           {src: ['images/**']},
           {src: ['js/*.js']},
           {src: ['src/**']},
-          {src: ['functions.php']},
+          {src: ['*.php']},
           {src: ['readme.md']},
           {src: ['style.css']}
         ]
