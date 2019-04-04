@@ -6,6 +6,7 @@ This WordPress theme provides functionality and visual styles for the AgriLife T
 ## WordPress Requirements
 
 1. Genesis theme
+2. Jetpack by WordPress.com plugin, for the Related Posts feature
 3. PHP 5.6+, tested with PHP 7.2
 
 ## Installation
@@ -14,6 +15,7 @@ This WordPress theme provides functionality and visual styles for the AgriLife T
 2. Upload the theme to your site
 
 ## Features
+1. Related Posts
 
 ## Development Installation
 
