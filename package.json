@@ -1,7 +1,8 @@
 {
   "name": "agrilife-today",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Genesis child theme for Texas A&M AgriLife",
+  "private": "true",
   "main": "functions.php",
   "scripts": {
     "start": "git config core.hooksPath hooks && chmod u+x ./hooks/pre-commit && composer install && npm install && grunt",
@@ -10,6 +11,13 @@
     "checkphp": "vendor/bin/phpcs --standard=WordPress --report=source ./*.php ./src && vendor/bin/phpcs --standard=WordPress ./*.php ./src"
   },
   "author": "Texas A&M AgriLife Communications",
+  "maintainers": [
+    {
+      "name": "Zachary Watkins",
+      "email": "zachary.watkins@ag.tamu.edu",
+      "url": "https://github.com/ZachWatkins"
+    }
+  ],
   "license": "GPL-2.0+",
   "bugs": {
     "url": "https://github.com/agrilife/agrilife-today/issues",
