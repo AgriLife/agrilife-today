@@ -67,7 +67,20 @@ module.exports = (grunt) ->
             return src.replace(/\n\/\/# sourceMappingURL=[^\n]+\n?/g, '')
         src: [
           'node_modules/what-input/dist/what-input.min.js',
-          'node_modules/foundation-sites/dist/js/plugins/foundation.core.min.js'
+          'node_modules/foundation-sites/dist/js/plugins/foundation.core.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.triggers.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.mediaQuery.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.keyboard.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.touch.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.nest.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.box.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.motion.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.sticky.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.dropdownMenu.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.drilldown.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.accordionMenu.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveMenu.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveToggle.min.js'
         ]
         dest: 'js/foundation.concat.js'
       dev:
@@ -75,7 +88,20 @@ module.exports = (grunt) ->
           sourceMap: true
         src: [
           'node_modules/what-input/dist/what-input.js',
-          'node_modules/foundation-sites/dist/js/plugins/foundation.core.js'
+          'node_modules/foundation-sites/dist/js/plugins/foundation.core.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.triggers.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.mediaQuery.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.keyboard.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.touch.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.nest.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.box.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.motion.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.sticky.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.dropdownMenu.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.drilldown.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.accordionMenu.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveMenu.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveToggle.js'
         ]
         dest: 'js/foundation.concat.js'
 
