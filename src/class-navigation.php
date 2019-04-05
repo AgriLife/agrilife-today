@@ -67,10 +67,10 @@ class Navigation {
 	 */
 	public function custom_nav_walker( $nav_output, $nav, $args ) {
 
-		$args['menu_class'] = $args['menu_class'] . ' dropdown';
-		require_once AF_THEME_DIRPATH . '/src/class-customnavigationwalker.php';
-		$args['walker']     = new \AgriFlex\CustomNavigationWalker();
-		$args['items_wrap'] = '<ul id="%s" class="%s" data-responsive-menu="accordion medium-dropdown">%s</ul>';
+		$args['menu_class'] = $args['menu_class'] . ' accordion vertical medium-horizontal';
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-customnavigationwalker.php';
+		$args['walker']     = new \AgToday\CustomNavigationWalker();
+		$args['items_wrap'] = '<ul id="%s" class="%s" data-responsive-menu="accordion medium-dropdown" data-dropdown-menu>%s</ul>';
 
 		$nav_menu = wp_nav_menu( $args );
 

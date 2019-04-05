@@ -288,8 +288,8 @@ class Genesis {
 	 */
 	public function sticky_header( $output ) {
 
-		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;"><div class="layout-container"', $output );
-		$output = preg_replace( '/<\/div>$/', '</div></div></div>', $output );
+		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;"', $output );
+		$output = preg_replace( '/<\/div>$/', '</div></div>', $output );
 
 		return $output;
 
@@ -333,11 +333,11 @@ class Genesis {
 	 */
 	public function add_logo( $title, $inside, $wrap ) {
 
-		$logo = sprintf( '<img src="%s">', AGTODAY_THEME_DIRURL . '/images/logo-agrilife.png' );
+		$logo = sprintf( '<img src="%s">', AGTODAY_THEME_DIRURL . '/images/logo.png' );
 		$home = trailingslashit( home_url() );
 
 		$new_inside = sprintf(
-			'<a href="%s" title="Texas A&M AgriLife">%s</a>',
+			'<a href="%s" class="logo" title="Texas A&M AgriLife">%s</a>',
 			$home,
 			$logo
 		);

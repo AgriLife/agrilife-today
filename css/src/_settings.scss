@@ -17,6 +17,7 @@ $maroon: #500000;
 $dark-blue: #03233B;
 $light-blue: #28A9E1;
 $dark-gray: #3F4041;
+$border-primary: $dark-gray;
 
 /* Fonts
 --------------------------------------------- */
@@ -37,8 +38,10 @@ $anchor-text-decoration-hover: underline;
 /* Navigation
 --------------------------------------------- */
 
-/* Title Bar
+/* Top Bar
 --------------------------------------------- */
+$topbar-background: transparent;
+$topbar-padding: 0 0.5rem 0.5rem;
 
 /* Content
 --------------------------------------------- */

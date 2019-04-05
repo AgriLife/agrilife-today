@@ -36,7 +36,7 @@ class CustomNavigationWalker extends \Walker_Nav_Menu {
 		$indent        = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent.
 		$display_depth = ( $depth + 1 ); // because it counts the first submenu as 0.
 		$classes       = array(
-			'menu submenu sub-menu vertical medium-horizontal',
+			'menu submenu sub-menu vertical medium-horizontal is-dropdown-submenu',
 			( $display_depth % 2 ? 'menu-odd' : 'menu-even' ),
 			( $display_depth >= 2 ? 'sub-sub-menu' : '' ),
 			'menu-depth-' . $display_depth,
@@ -44,7 +44,7 @@ class CustomNavigationWalker extends \Walker_Nav_Menu {
 		$class_names   = implode( ' ', $classes );
 
 		// Build html.
-		$output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
+		$output .= "\n" . $indent . '<ul class="' . $class_names . '" data-submenu role="menubar">' . "\n";
 
 	}
 

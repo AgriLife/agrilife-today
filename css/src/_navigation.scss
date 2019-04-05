@@ -1,0 +1,45 @@
+.top-bar {
+	border-top: 1px solid $border-primary;
+}
+
+.menu-primary {
+	@include flex-align(center);
+
+	> .menu-item {
+		font-weight: bold;
+		text-transform: uppercase;
+
+		a {
+			color: $dark-blue;
+		}
+
+		@include breakpoint(medium) {
+			border: 1px solid $border-primary;
+			border-width: 0 1px 1px;
+			margin-left: -1px;
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+		}
+	}
+}
+
+.title-bar.title-bar-navigation {
+	.menu-icon {
+		@include hamburger(
+			$color: $titlebar-icon-color,
+			$color-hover: $titlebar-icon-color-hover,
+			$weight: 3px,
+			$width: 30px,
+			$height: 20px
+		);
+		margin: 0;
+	}
+
+	.title-bar-title {
+		padding-left: $titlebar-icon-spacing;
+		cursor: pointer;
+	}
+}

@@ -24,7 +24,7 @@
 @include foundation-menu;
 @include foundation-menu-icon;
 // @include foundation-drilldown-menu;
-// @include foundation-dropdown;
+@include foundation-dropdown;
 @include foundation-dropdown-menu;
 // @include foundation-responsive-embed;
 // @include foundation-label;
@@ -46,7 +46,10 @@
 @include foundation-visibility-classes;
 // @include foundation-float-classes;
 // @include foundation-flex-classes;
+@import "util/flex";
 
 // @include foundation-prototype-classes;
 
 @import "accessibility";
+@import "header";
+@import "navigation";
