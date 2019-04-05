@@ -36,6 +36,7 @@ module.exports = (grunt) ->
       dev:
         options:
           loadPath: 'node_modules/foundation-sites/scss'
+          sourcemap: 'file'
           style: 'expanded'
           precision: 2
         files:
