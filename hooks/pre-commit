@@ -79,6 +79,7 @@ else
 	nvm use 6
 	grunt themecomment:commit
 	git add style.css
+	grunt develop
 fi
 
 exit 0
