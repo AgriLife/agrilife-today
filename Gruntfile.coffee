@@ -36,7 +36,6 @@ module.exports = (grunt) ->
       dev:
         options:
           loadPath: 'node_modules/foundation-sites/scss'
-          sourcemap: 'file'
           style: 'expanded'
           precision: 2
         files:
@@ -112,8 +111,8 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-sass-lint'
   @loadNpmTasks 'grunt-postcss'
 
-  @registerTask 'default', ['sasslint', 'sass:pkg', 'concat:dist', 'postcss:pkg', 'addcssheader']
-  @registerTask 'develop', ['sasslint', 'sass:dev', 'concat:dev', 'postcss:dev', 'addcssheader']
+  @registerTask 'default', ['sasslint', 'sass:pkg', 'concat:dist', 'postcss:pkg', 'themecomment:pkg']
+  @registerTask 'develop', ['themecomment:dev', 'sasslint', 'sass:dev', 'concat:dev', 'postcss:dev']
   @registerTask 'release', ['compress', 'makerelease']
   @registerTask 'makerelease', 'Set release branch for use in the release task', ->
     done = @async()
@@ -261,8 +260,13 @@ module.exports = (grunt) ->
       done(err)
       return
     return
-  @registerTask 'addcssheader', 'Add WordPress header to main CSS file', (excludeCSS) =>
-    css = grunt.file.read 'style.css'
+  @registerTask 'themecomment', 'Add WordPress header to main CSS file', (mode) =>
+    if mode is 'dev'
+      path = 'css/src/_themecomment.scss'
+    else
+      path = 'style.css'
+    options =
+      encoding: 'utf-8'
     output = '/*\n'
     output += '  Theme Name:  <%= pkg.org_agrilife.themename %>\n'
     output += '  Theme URI:   <%= pkg.repository.url %>\n'
@@ -276,9 +280,10 @@ module.exports = (grunt) ->
     output += '  Template:    <%= pkg.org_agrilife.template %>\n'
     output += '*/\n'
     output = grunt.template.process output
-    if not excludeCSS
-      output += css
-    grunt.file.write 'style.css', output
+    if mode is 'pkg'
+      output += grunt.file.read path
+    grunt.file.delete path
+    grunt.file.write path, output, options
     return
 
   @event.on 'watch', (action, filepath) =>
