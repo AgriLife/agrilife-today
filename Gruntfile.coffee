@@ -3,7 +3,8 @@ module.exports = (grunt) ->
     pkg: @file.readJSON('package.json')
     watch:
       files: [
-        'css/src/*.scss'
+        'css/src/*.scss',
+        '!css/src/_themecomment.scss'
       ]
       tasks: ['develop']
     postcss:
@@ -43,7 +44,10 @@ module.exports = (grunt) ->
     sasslint:
       options:
         configFile: '.sass-lint.yml'
-      target: ['css/**/*.s+(a|c)ss']
+      target: [
+        'css/**/*.s+(a|c)ss',
+        '!css/src/_themecomment.scss'
+      ]
     compress:
       main:
         options:
