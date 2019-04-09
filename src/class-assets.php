@@ -93,7 +93,7 @@ class Assets {
 
 		wp_register_style(
 			'agriflex4-googlefonts',
-			'https://fonts.googleapis.com/css?family=Oswald',
+			'https://fonts.googleapis.com/css?family=Oswald|Open+Sans',
 			array(),
 			'1.0.0',
 			'all'
