@@ -32,6 +32,8 @@ $anchor-color: $primary-color;
 $anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
 $anchor-text-decoration: underline;
 $anchor-text-decoration-hover: underline;
+$global-layout-space: 1rem;
+$grid-margin-gutters: $global-layout-space * 2;
 
 /* Header
 --------------------------------------------- */

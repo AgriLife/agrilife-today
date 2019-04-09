@@ -2,27 +2,30 @@
 	@include xy-grid-container($break-xlarge, 0);
 
 	.row {
-		@include xy-grid($wrap: false);
+		@include xy-grid;
 	}
 
 	.cell {
-		@include breakpoint(small) {
-			&.small-12 {
-				@include xy-cell(12, $gutters: 2rem);
-			}
+
+		&.small-12 {
+			@include xy-cell(12);
 		}
 
 		@include breakpoint(medium) {
 			&.medium-4 {
-				@include xy-cell(4, $gutters: 2rem);
+				@include xy-cell(4);
 			}
 
 			&.medium-6 {
-				@include xy-cell(6, $gutters: 2rem);
+				@include xy-cell(6);
 			}
 
 			&.medium-8 {
-				@include xy-cell(8, $gutters: 2rem);
+				@include xy-cell(8);
+			}
+
+			&.medium-12 {
+				@include xy-cell(12);
 			}
 		}
 	}
