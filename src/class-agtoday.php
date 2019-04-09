@@ -46,6 +46,9 @@ class AgToday {
 
 		add_action( 'init', array( $this, 'init' ) );
 
+		// Add Widgets.
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
 	}
 
 	/**
@@ -114,6 +117,19 @@ class AgToday {
 	public static function get_instance() {
 
 		return null === self::$instance ? new self() : self::$instance;
+
+	}
+
+	/**
+	 * Register widgets
+	 *
+	 * @since 0.1.5
+	 * @return void
+	 */
+	public function register_widgets() {
+
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-widget-subscribe.php';
+		register_widget( 'Widget_Subscribe' );
 
 	}
 

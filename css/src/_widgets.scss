@@ -1,0 +1,192 @@
+.widget {
+	border: 1px solid $dark-blue;
+	border-top-width: 0.5rem;
+	margin-bottom: $global-layout-space;
+	padding-bottom: $global-layout-space;
+}
+
+.agt-sub {
+	$title-height: 34px;
+
+	text-align: center;
+	position: relative;
+
+	h4,
+	input {
+		font-size: 1rem;
+		line-height: #{$title-height - 2px};
+	}
+
+	h4,
+	input[type="email"] {
+		border: 1px solid $dark-gray;
+		padding: 0 .7rem;
+	}
+
+	h4 {
+		display: inline-block;
+		background: $white;
+		font: {
+			weight: bold;
+			family: $opensans;
+		}
+		margin: 0;
+		border: 1px solid $dark-gray;
+		padding: 0 .7rem;
+	}
+
+	input[type="email"] {
+		font-style: italic;
+
+		&:focus {
+			font-style: normal;
+		}
+	}
+
+	input {
+		height: auto;
+		text-align: center;
+
+		&[type="submit"] {
+			font: {
+				family: $tungsten;
+				size: 2rem;
+			}
+			text-align: left;
+			text-transform: uppercase;
+			border: none;
+			background: url("images/widget-submit-arrows-right.png") right transparent no-repeat;
+			padding: 0 rem-calc(38 + 16) 0 0;
+			cursor: pointer;
+		}
+	}
+
+	.submit-wrap {
+		display: block;
+		text-align: left;
+	}
+
+	.widget-wrap {
+		position: relative;
+		z-index: 1;
+		flex-wrap: nowrap;
+	}
+
+	@include breakpoint(small only) {
+		padding-bottom: 0;
+
+		h4 {
+			position: absolute;
+			top: 50%;
+			right: 0;
+			transform: translate(10px, -50%);
+			background: $white;
+			border: 1px solid $dark-gray;
+			font-size: .8rem;
+			white-space: nowrap;
+		}
+
+		input[type="email"],
+		.submit-wrap {
+			margin: 0.25rem 0;
+		}
+
+		.title-wrap {
+			@include xy-cell(auto, $gutter-output: false, $gutters: 0);
+			flex: 0 1 160px;
+			background: $maroon;
+			position: relative;
+		}
+
+		.textwidget {
+			@include xy-cell(auto);
+			padding-left: rem-calc(20) - $grid-margin-gutters / 2;
+		}
+
+		@include breakpoint(460px down) {
+			h4 {
+				white-space: normal;
+				line-height: 1.2;
+				padding: {
+					top: 0.25rem;
+					bottom: 0.25rem;
+				}
+			}
+
+			input[type="submit"] {
+				font-size: 1.7rem;
+				padding: 0 rem-calc(38 + 8) 0 0;
+			}
+		}
+	}
+
+	@include breakpoint(medium) {
+
+		&::before {
+			content: "";
+			display: block;
+			width: 100%;
+			height: $title-height;
+			background: $maroon;
+			position: absolute;
+			z-index: 1;
+		}
+
+		input[type="submit"] {
+			font-size: 2rem;
+			width: 100%;
+			vertical-align: top;
+			background: url("images/widget-submit-arrows.png") center center/contain transparent no-repeat;
+			text-align: center;
+			padding: 0;
+			text-shadow: -12px 0 1px $white, -9px 0 1px $white, -6px 0 1px $white, -3px 0 1px $white,
+			3px 0 1px $white, 6px 0 1px $white, 9px 0 1px $white, 12px 0 1px $white;
+
+			@include breakpoint(800px down) {
+				font-size: 1.5rem;
+			}
+		}
+
+		h4 {
+			position: static;
+
+			@include breakpoint(960px down) {
+				font-size: 0.75rem;
+			}
+
+			@include breakpoint(659px down) {
+				font-size: 0.65rem;
+			}
+		}
+
+		.title-wrap {
+			margin-bottom: $header-margin-bottom;
+		}
+
+		.submit-wrap {
+			display: block;
+		}
+
+		.widget-wrap {
+			padding-top: $title-height / 2;
+			flex-wrap: wrap;
+		}
+
+		.textwidget {
+			margin: {
+				left: 2 * $global-layout-space;
+				right: 2 * $global-layout-space;
+			}
+		}
+
+		@include breakpoint(960px down) {
+			.textwidget,
+			.title-wrap {
+				margin: {
+					left: 7%;
+					right: 7%;
+				}
+			}
+		}
+	}
+}
