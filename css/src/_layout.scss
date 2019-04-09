@@ -1,0 +1,29 @@
+.layout-container {
+	@include xy-grid-container($break-xlarge, 0);
+
+	.row {
+		@include xy-grid($wrap: false);
+	}
+
+	.cell {
+		@include breakpoint(small) {
+			&.small-12 {
+				@include xy-cell(12, $gutters: 2rem);
+			}
+		}
+
+		@include breakpoint(medium) {
+			&.medium-4 {
+				@include xy-cell(4, $gutters: 2rem);
+			}
+
+			&.medium-6 {
+				@include xy-cell(6, $gutters: 2rem);
+			}
+
+			&.medium-8 {
+				@include xy-cell(8, $gutters: 2rem);
+			}
+		}
+	}
+}

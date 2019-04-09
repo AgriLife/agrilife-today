@@ -81,6 +81,12 @@ class Genesis {
 		// Replace site title with logo.
 		add_filter( 'genesis_seo_title', array( $this, 'add_logo' ), 10, 3 );
 
+		// Add classes for CSS grid presentation.
+		add_filter( 'genesis_attr_site-inner', array( $this, 'site_inner' ) );
+		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
+		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
+		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
+
 	}
 
 	/**
@@ -346,6 +352,60 @@ class Genesis {
 
 		return $title;
 
+	}
+
+	/**
+	 * Add class name to site-inner element
+	 *
+	 * @since 0.1.4
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function site_inner( $attributes ) {
+		$attributes['class'] .= ' layout-container';
+		return $attributes;
+	}
+
+	/**
+	 * Add class name to content-sidebar-wrap element
+	 *
+	 * @since 0.1.4
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function content_sidebar_wrap_attr( $attributes ) {
+		$attributes['class'] .= ' row';
+		return $attributes;
+	}
+
+	/**
+	 * Add class names to content element
+	 *
+	 * @since 0.1.4
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function content_attr( $attributes ) {
+		$attributes['class'] .= ' cell';
+		$layout               = genesis_site_layout();
+		if ( 'content-sidebar' === $layout ) {
+			$attributes['class'] .= ' medium-8 small-12';
+		} else {
+			$attributes['class'] .= ' medium-12 small-12';
+		}
+		return $attributes;
+	}
+
+	/**
+	 * Add class names to sidebar element
+	 *
+	 * @since 0.1.4
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function sidebar_attr( $attributes ) {
+		$attributes['class'] .= ' cell medium-4 small-12';
+		return $attributes;
 	}
 
 }
