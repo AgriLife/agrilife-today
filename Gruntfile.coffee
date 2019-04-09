@@ -31,14 +31,14 @@ module.exports = (grunt) ->
           loadPath: 'node_modules/foundation-sites/scss'
           sourcemap: 'none'
           style: 'compressed'
-          precision: 2
+          precision: 4
         files:
           'style.css': 'css/src/style.scss'
       dev:
         options:
           loadPath: 'node_modules/foundation-sites/scss'
           style: 'expanded'
-          precision: 2
+          precision: 4
         files:
           'style.css': 'css/src/style.scss'
     sasslint:
