@@ -71,15 +71,14 @@ fi
 #
 # Remove CSS from main style.css file.
 #
-PKGVERSION=`git diff --cached --name-only --diff-filter=AM | grep 'package.json$'`
+PKGVERSION=`git diff --cached --name-only --diff-filter=AM | grep -e package.json -e style.css`
 if [[ -z $PKGVERSION ]]
 then
 	echo ""
 else
 	nvm use 6
-	grunt themecomment:commit
+	grunt themecomment
 	git add style.css
-	grunt develop
 fi
 
 exit 0
