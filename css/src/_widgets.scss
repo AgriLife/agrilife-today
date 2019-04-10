@@ -55,7 +55,7 @@
 			text-align: left;
 			text-transform: uppercase;
 			border: none;
-			background: url("images/widget-submit-arrows-right.png") right transparent no-repeat;
+			background: url("../images/widget-arrows-right.png") right transparent no-repeat;
 			padding: 0 rem-calc(38 + 16) 0 0;
 			cursor: pointer;
 		}
@@ -136,7 +136,7 @@
 			font-size: 2rem;
 			width: 100%;
 			vertical-align: top;
-			background: url("images/widget-submit-arrows.png") center center/contain transparent no-repeat;
+			background: url("../images/widget-arrows.png") center center/contain transparent no-repeat;
 			text-align: center;
 			padding: 0;
 			text-shadow: -12px 0 1px $white, -9px 0 1px $white, -6px 0 1px $white, -3px 0 1px $white,
