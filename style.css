@@ -4,9 +4,27 @@
   Author:      Texas A&M AgriLife Communications
   Author URI:  https://communications.agrilife.org/
   Description: Genesis child theme for Texas A&M AgriLife Today
-  Version:     0.1.5
+  Version:     0.1.6
   License:     GPL-2.0+
   License URI: http://www.gnu.org/licenses/gpl-2.0.html
   Text Domain: agrilife-today
   Template:    genesis
 */
+
+/* ----------------------------------------------------------------------------
+
+  WordPress requires a style.css file located in the theme's root folder for
+  stuff to work. However, we will not be using vanilla CSS. We're using Sass.
+
+  Sass is a superset of CSS that adds in amazing features such as variables,
+  nested selectors and loops. It's also the easiest way to customize
+  Foundation. All Sass files are located in the /css/src folder.
+
+  Please note that none of your scss files will be compiled to /css/style.css
+  before you run "npm start" or "grunt" or "grunt develop".
+
+  Please read the README.md file before getting started. More info on how to
+  use Sass with Foundation can be found here:
+  http://foundation.zurb.com/docs/sass.html
+
+---------------------------------------------------------------------------- */

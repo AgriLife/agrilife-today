@@ -33,6 +33,12 @@ class Assets {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_public_scripts' ) );
 
 		// Register global styles used in the theme.
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_public_styles' ), 1 );
+
+		// Enqueue global styles.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_public_styles' ), 1 );
+
+		// Register global styles used in the theme.
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_external_styles' ) );
 
 		// Enqueue global styles.
@@ -41,6 +47,9 @@ class Assets {
 		// Remove unneeded default assets.
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+
+		// Remove default style.css file.
+		add_action( 'wp_print_styles', array( $this, 'remove_child_theme_style' ) );
 
 	}
 
@@ -84,6 +93,38 @@ class Assets {
 	}
 
 	/**
+	 * Registers all styles used within the theme
+	 *
+	 * @since 0.1.6
+	 * @return void
+	 */
+	public function register_public_styles() {
+
+		wp_register_style(
+			'today-default-styles',
+			AGTODAY_THEME_DIRURL . '/css/style.css',
+			array(),
+			filemtime( AGTODAY_THEME_DIRPATH . '/css/style.css' ),
+			'screen'
+		);
+
+	}
+
+	/**
+	 * Enqueues styles used globally
+	 *
+	 * @since 0.1.6
+	 * @return void
+	 */
+	public function enqueue_public_styles() {
+
+		wp_dequeue_script( 'child-theme' );
+		wp_deregister_script( 'child-theme' );
+		wp_enqueue_style( 'today-default-styles' );
+
+	}
+
+	/**
 	 * Registers third party styles
 	 *
 	 * @since 0.1.1
@@ -92,7 +133,7 @@ class Assets {
 	public function register_external_styles() {
 
 		wp_register_style(
-			'agriflex4-googlefonts',
+			'googlefonts',
 			'https://fonts.googleapis.com/css?family=Oswald|Open+Sans',
 			array(),
 			'1.0.0',
@@ -109,9 +150,21 @@ class Assets {
 	 */
 	public function enqueue_external_styles() {
 
-		wp_enqueue_style( 'agriflex4-googlefonts' );
+		wp_enqueue_style( 'googlefonts' );
 
 	}
 
+	/**
+	 * Remove default style.css file
+	 *
+	 * @since 0.1.6
+	 * @return void
+	 */
+	public function remove_child_theme_style() {
+
+		wp_dequeue_style( 'child-theme' );
+		wp_deregister_style( 'child-theme' );
+
+	}
 
 }
