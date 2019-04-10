@@ -2,7 +2,29 @@
 	border: 1px solid $dark-blue;
 	border-top-width: 0.5rem;
 	margin-bottom: $global-layout-space;
-	padding-bottom: $global-layout-space;
+	padding: $global-layout-space;
+
+	h4 {
+		border-bottom: 1px solid $dark-gray;
+		padding: .1rem $global-layout-space $global-layout-space + .1rem;
+		margin-left: -$global-layout-space;
+		margin-right: -$global-layout-space;
+
+		&::before {
+			content: "\00A0";
+			display: inline-block;
+			border-left: 1px solid $dark-gray;
+			padding-left: 0.4rem;
+		}
+	}
+
+	.widget-wrap > ul {
+		list-style-position: inside;
+		margin: {
+			bottom: 0;
+			left: 0;
+		}
+	}
 }
 
 .agt-sub {
@@ -10,6 +32,11 @@
 
 	text-align: center;
 	position: relative;
+	padding: {
+		left: 0;
+		right: 0;
+		top: 0;
+	}
 
 	h4,
 	input {
@@ -33,6 +60,10 @@
 		margin: 0;
 		border: 1px solid $dark-gray;
 		padding: 0 .7rem;
+
+		&::before {
+			display: none;
+		}
 	}
 
 	input[type="email"] {
@@ -61,6 +92,11 @@
 		}
 	}
 
+	.title-wrap,
+	.textwidget {
+		padding-top: 0;
+	}
+
 	.submit-wrap {
 		display: block;
 		text-align: left;
@@ -78,7 +114,7 @@
 		h4 {
 			position: absolute;
 			top: 50%;
-			right: 0;
+			left: 0;
 			transform: translate(10px, -50%);
 			background: $white;
 			border: 1px solid $dark-gray;
@@ -99,8 +135,7 @@
 		}
 
 		.textwidget {
-			@include xy-cell(auto);
-			padding-left: rem-calc(20) - $grid-margin-gutters / 2;
+			@include xy-cell(auto, $gutters: 4rem);
 		}
 
 		@include breakpoint(460px down) {
@@ -116,6 +151,11 @@
 			input[type="submit"] {
 				font-size: 1.7rem;
 				padding: 0 rem-calc(38 + 8) 0 0;
+			}
+
+			.textwidget {
+				margin-left: 1rem;
+				margin-right: 1rem;
 			}
 		}
 	}
