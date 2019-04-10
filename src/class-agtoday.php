@@ -87,6 +87,25 @@ class AgToday {
 		require_once AGTODAY_THEME_DIRPATH . '/src/class-requireddom.php';
 		$agt_required = new \AgToday\RequiredDOM();
 
+		// Add page template custom fields.
+		if ( class_exists( 'acf' ) ) {
+			require_once AGTODAY_THEME_DIRPATH . '/fields/home.php';
+		}
+
+	}
+
+	/**
+	 * Initialize page templates
+	 *
+	 * @since 0.1.6
+	 * @return void
+	 */
+	private function register_templates() {
+
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-pagetemplate.php';
+		$home = new \AgToday\PageTemplate( AGTODAY_THEME_TEMPLATE_PATH, 'home.php', 'Home Page' );
+		$home->register();
+
 	}
 
 	/**
