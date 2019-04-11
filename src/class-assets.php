@@ -134,7 +134,7 @@ class Assets {
 			'googlefonts',
 			'https://fonts.googleapis.com/css?family=Oswald|Open+Sans',
 			array(),
-			'1.0.0',
+			'1.0.1',
 			'all'
 		);
 
