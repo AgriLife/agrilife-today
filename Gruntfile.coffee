@@ -11,7 +11,8 @@ module.exports = (grunt) ->
       pkg:
         options:
           processors: [
-            require('autoprefixer')({})
+            require('autoprefixer')({}),
+            require('cssnano')()
           ]
           failOnError: true
         files:
@@ -25,19 +26,21 @@ module.exports = (grunt) ->
           failOnError: true
         files:
           'css/style.css': 'css/style.css'
+    cmq:
+      your_target:
+        files:
+          'css': ['css/*.css']
     sass:
       pkg:
         options:
           loadPath: 'node_modules/foundation-sites/scss'
           sourcemap: 'none'
-          style: 'compressed'
           precision: 4
         files:
           'css/style.css': 'css/src/style.scss'
       dev:
         options:
           loadPath: 'node_modules/foundation-sites/scss'
-          style: 'expanded'
           precision: 4
         files:
           'css/style.css': 'css/src/style.scss'
@@ -62,7 +65,7 @@ module.exports = (grunt) ->
           {src: ['style.css']}
         ]
     concat:
-      dist:
+      pkg:
         options:
           stripBanners: true
           separator: '\n'
@@ -114,9 +117,10 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-contrib-concat'
   @loadNpmTasks 'grunt-sass-lint'
   @loadNpmTasks 'grunt-postcss'
+  @loadNpmTasks 'grunt-combine-media-queries'
 
-  @registerTask 'default', ['sasslint', 'sass:pkg', 'concat:dist', 'postcss:pkg', 'themecomment:pkg']
-  @registerTask 'develop', ['themecomment:dev', 'sasslint', 'sass:dev', 'concat:dev', 'postcss:dev']
+  @registerTask 'default', ['themecomment', 'sasslint', 'sass:pkg', 'concat:pkg', 'cmq', 'postcss:pkg']
+  @registerTask 'develop', ['themecomment', 'sasslint', 'sass:dev', 'concat:dev', 'postcss:dev']
   @registerTask 'release', ['compress', 'makerelease']
   @registerTask 'makerelease', 'Set release branch for use in the release task', ->
     done = @async()
@@ -264,12 +268,12 @@ module.exports = (grunt) ->
       done(err)
       return
     return
-  @registerTask 'themecomment', 'Add WordPress header to style.css and css/style.css', (mode) =>
+  @registerTask 'themecomment', 'Add WordPress header to style.css and css/style.css', ->
     scss = 'css/src/_themecomment.scss'
     css = 'style.css'
     options =
       encoding: 'utf-8'
-    output = '/*\n'
+    output = '/*!\n'
     output += '  Theme Name:  <%= pkg.org_agrilife.themename %>\n'
     output += '  Theme URI:   <%= pkg.repository.url %>\n'
     output += '  Author:      <%= pkg.author %>\n'
