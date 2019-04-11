@@ -118,8 +118,6 @@ class Assets {
 	 */
 	public function enqueue_public_styles() {
 
-		wp_dequeue_script( 'child-theme' );
-		wp_deregister_script( 'child-theme' );
 		wp_enqueue_style( 'today-default-styles' );
 
 	}
@@ -162,8 +160,8 @@ class Assets {
 	 */
 	public function remove_child_theme_style() {
 
-		wp_dequeue_style( 'child-theme' );
-		wp_deregister_style( 'child-theme' );
+		wp_dequeue_style( 'agrilife-today' );
+		wp_deregister_style( 'agrilife-today' );
 
 	}
 
