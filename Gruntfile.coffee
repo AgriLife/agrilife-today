@@ -11,7 +11,7 @@ module.exports = (grunt) ->
       pkg:
         options:
           processors: [
-            require('autoprefixer')({browsers: ['last 2 versions','ie > 9']})
+            require('autoprefixer')({})
           ]
           failOnError: true
         files:
@@ -20,7 +20,7 @@ module.exports = (grunt) ->
         options:
           map: true
           processors: [
-            require('autoprefixer')({browsers: ['last 2 versions','ie > 9']})
+            require('autoprefixer')({})
           ]
           failOnError: true
         files:

@@ -1,6 +1,6 @@
 {
   "name": "agrilife-today",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Genesis child theme for Texas A&M AgriLife Today",
   "private": "true",
   "main": "functions.php",
@@ -23,6 +23,10 @@
     "url": "https://github.com/agrilife/agrilife-today/issues",
     "email": "first-call@tamu.edu"
   },
+  "browserslist": [
+    "last 2 versions",
+    "ie > 10"
+  ],
   "dependencies": {
     "autoprefixer": "^9.5.1",
     "foundation-sites": "^6.5.3",
