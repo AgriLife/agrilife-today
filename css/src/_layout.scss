@@ -6,26 +6,27 @@
 	}
 
 	.cell {
+		@include xy-gutters;
 
 		&.small-12 {
-			@include xy-cell(12);
+			@include xy-cell(12, false);
 		}
 
 		@include breakpoint(medium) {
 			&.medium-4 {
-				@include xy-cell(4);
+				@include xy-cell(4, false);
 			}
 
 			&.medium-6 {
-				@include xy-cell(6);
+				@include xy-cell(6, false);
 			}
 
 			&.medium-8 {
-				@include xy-cell(8);
+				@include xy-cell(8, false);
 			}
 
 			&.medium-12 {
-				@include xy-cell(12);
+				@include xy-cell(12, false);
 			}
 		}
 	}
