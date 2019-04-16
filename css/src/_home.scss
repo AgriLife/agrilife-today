@@ -1,0 +1,27 @@
+.page-template-home {
+
+	.quote.card p {
+		font-size: 1.75rem;
+	}
+
+	.item {
+		&.post-cat .post-1 {
+			@include breakpoint(medium) {
+				p.cell {
+					margin-bottom: 0;
+				}
+
+				@include breakpoint(850px down) {
+					.cell {
+						@include xy-cell(12, true, 0);
+						order: inherit;
+					}
+
+					p.cell {
+						margin-bottom: $paragraph-margin-bottom;
+					}
+				}
+			}
+		}
+	}
+}

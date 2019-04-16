@@ -18,3 +18,7 @@ button:not(.menu-icon),
 input[type="submit"] {
 	@extend %button;
 }
+
+.no-margin {
+	margin: 0;
+}
