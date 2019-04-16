@@ -63,7 +63,7 @@ class Widget_Subscribe extends WP_Widget {
 		$title    = $instance['title'];
 		$content  = $instance['content'];
 
-		$title = '<div class="title-wrap cell medium-12">' . $args['before_title'] . $title . $args['after_title'] . '</div>';
+		$title = '<div class="title-wrap cell medium-12 small-collapse">' . $args['before_title'] . $title . $args['after_title'] . '</div>';
 
 		$args['before_widget'] = str_replace( 'class="widget-wrap', 'class="row widget-wrap', $args['before_widget'] );
 
