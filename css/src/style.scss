@@ -19,7 +19,7 @@
 // @include foundation-breadcrumbs;
 // @include foundation-button-group;
 // @include foundation-callout;
-@include foundation-card;
+// @include foundation-card;
 // @include foundation-close-button;
 @include foundation-menu;
 @include foundation-menu-icon;
@@ -48,6 +48,7 @@
 // @include foundation-flex-classes;
 // @include foundation-prototype-classes;
 
+@import "util/extends";
 @import "layout";
 @import "accessibility";
 @import "header";

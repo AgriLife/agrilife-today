@@ -87,6 +87,9 @@ class Genesis {
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
 		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
 
+		// Add classes to widgets.
+		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
+
 	}
 
 	/**
@@ -389,7 +392,7 @@ class Genesis {
 		$attributes['class'] .= ' cell';
 		$layout               = genesis_site_layout();
 		if ( 'content-sidebar' === $layout ) {
-			$attributes['class'] .= ' medium-8 small-12';
+			$attributes['class'] .= ' medium-8-collapse-right small-12';
 		} else {
 			$attributes['class'] .= ' medium-12 small-12';
 		}
@@ -406,6 +409,34 @@ class Genesis {
 	public function sidebar_attr( $attributes ) {
 		$attributes['class'] .= ' cell medium-4 small-12';
 		return $attributes;
+	}
+
+	/**
+	 * Add class name to widget elements
+	 *
+	 * @since 0.1.9
+	 * @param array $params Widget parameters.
+	 * @return array
+	 */
+	public function add_widget_class( $params ) {
+
+		// Add class to outer widget container.
+		$str = $params[0]['before_widget'];
+		preg_match( '/class="([^"]+)"/', $str, $match );
+		$classes = explode( ' ', $match[1] );
+		if ( in_array( 'widget', $classes, true ) ) {
+			$classes[]                  = 'card';
+			$class_output               = implode( ' ', $classes );
+			$params[0]['before_widget'] = str_replace( $match[0], "class=\"{$class_output}\"", $params[0]['before_widget'] );
+		}
+
+		// Add class to widget title.
+		if ( false === strpos( $params[0]['widget_id'], 'agt_subscribe' ) ) {
+			$params[0]['before_title'] = str_replace( 'widget-title', 'widget-title card-heading', $params[0]['before_title'] );
+		}
+
+		return $params;
+
 	}
 
 }

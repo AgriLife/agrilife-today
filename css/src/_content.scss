@@ -8,3 +8,13 @@ h6 {
 	color: $dark-blue;
 	letter-spacing: 1px;
 }
+
+.card {
+	@extend %card;
+}
+
+button:not(.menu-icon),
+.button,
+input[type="submit"] {
+	@extend %button;
+}
