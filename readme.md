@@ -35,6 +35,8 @@ Release tasks in Gruntfile.coffee can only be used by the repository's owners.
 2. Run "grunt watch" to automatically compile the css after saving a *.scss file.
 3. Run "grunt" to compile the css when publishing the plugin.
 4. Run "npm run checkwp" to check PHP files against WordPress coding standards.
+5. Run "npm run sassdev" to compile sass for a development environment if you don't wish to use Grunt.
+6. Run "npm run sasspkg" to compile sass for a production environment if you don't wish to use Grunt.
 
 ## Development Requirements
 
