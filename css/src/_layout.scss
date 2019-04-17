@@ -26,6 +26,22 @@
 			@include xy-cell(4, false, 0);
 		}
 
+		&.small-4-collapse-left {
+			@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
+			margin: {
+				right: $grid-margin-gutters / 2;
+				left: 0;
+			}
+		}
+
+		&.small-8-collapse-right {
+			@include -xy-cell-properties(8, $grid-margin-gutters / 2, false);
+			margin: {
+				left: $grid-margin-gutters / 2;
+				right: 0;
+			}
+		}
+
 		&.small-12-collapse {
 			@include xy-cell(12, false, 0);
 		}
@@ -45,6 +61,14 @@
 			@include xy-cell(4);
 		}
 
+		&.medium-4-collapse-left {
+			@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
+			margin: {
+				right: $grid-margin-gutters / 2;
+				left: 0;
+			}
+		}
+
 		&.medium-6 {
 			@include xy-cell(6);
 		}
@@ -53,8 +77,12 @@
 			@include xy-cell(6, false, 0);
 		}
 
+		&.medium-6-collapse-left,
+		&.medium-6-collapse-right {
+			@include -xy-cell-properties(50%, $grid-margin-gutters / 2, false);
+		}
+
 		&.medium-6-collapse-left {
-			width: calc(50% - #{$grid-margin-gutters / 2});
 			margin: {
 				right: $grid-margin-gutters / 2;
 				left: 0;
@@ -62,25 +90,8 @@
 		}
 
 		&.medium-6-collapse-right {
-			width: calc(50% - #{$grid-margin-gutters / 2});
 			margin: {
 				left: $grid-margin-gutters / 2;
-				right: 0;
-			}
-		}
-
-		&.medium-6-collapse-left-half {
-			width: calc(50% - #{$grid-margin-gutters / 4});
-			margin: {
-				right: $grid-margin-gutters / 4;
-				left: 0;
-			}
-		}
-
-		&.medium-6-collapse-right-half {
-			width: calc(50% - #{$grid-margin-gutters / 4});
-			margin: {
-				left: $grid-margin-gutters / 4;
 				right: 0;
 			}
 		}

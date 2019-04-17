@@ -85,10 +85,12 @@ class Genesis {
 		add_filter( 'genesis_attr_site-inner', array( $this, 'site_inner' ) );
 		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
-		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
 
-		// Add classes to widgets.
+		// Change widgets and sidebars.
+		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
+		add_action( 'genesis_before_sidebar_widget_area', array( $this, 'before_sidebar' ) );
+		add_action( 'genesis_after_sidebar_widget_area', array( $this, 'after_sidebar' ) );
 
 	}
 
@@ -407,7 +409,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function sidebar_attr( $attributes ) {
-		$attributes['class'] .= ' cell medium-4 small-12';
+		$attributes['class'] .= ' cell medium-4-collapse-left small-12';
 		return $attributes;
 	}
 
@@ -425,7 +427,7 @@ class Genesis {
 		preg_match( '/class="([^"]+)"/', $str, $match );
 		$classes = explode( ' ', $match[1] );
 		if ( in_array( 'widget', $classes, true ) ) {
-			$classes[]                  = 'card';
+			$classes[]                  = 'card cell medium-12 small-12';
 			$class_output               = implode( ' ', $classes );
 			$params[0]['before_widget'] = str_replace( $match[0], "class=\"{$class_output}\"", $params[0]['before_widget'] );
 		}
@@ -433,10 +435,31 @@ class Genesis {
 		// Add class to widget title.
 		if ( false === strpos( $params[0]['widget_id'], 'agt_subscribe' ) ) {
 			$params[0]['before_title'] = str_replace( 'widget-title', 'widget-title card-heading', $params[0]['before_title'] );
+			$params[0]['after_title'] .= '<hr />';
 		}
 
 		return $params;
 
+	}
+
+	/**
+	 * Add element before sidebar
+	 *
+	 * @since 0.1.10
+	 * @return void
+	 */
+	public function before_sidebar() {
+		echo '<div class="row">';
+	}
+
+	/**
+	 * Add element after sidebar
+	 *
+	 * @since 0.1.10
+	 * @return void
+	 */
+	public function after_sidebar() {
+		echo '</div>';
 	}
 
 }

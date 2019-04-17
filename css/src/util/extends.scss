@@ -23,14 +23,10 @@
 	}
 
 	.card-heading {
+		line-height: 1;
+		padding: $global-layout-space / 2.5 $global-layout-space;
 		margin-bottom: $global-layout-space;
-
-		&::before {
-			content: "\00A0";
-			display: inline-block;
-			border-left: 1px solid $dark-gray;
-			padding-left: 0.4rem;
-		}
+		border-left: 1px solid $dark-gray;
 	}
 
 	h3,
@@ -54,13 +50,19 @@
 	padding: 0.4rem .8rem;
 	color: $white;
 	border: 1px solid lighten($dark-blue, 50%);
-	margin-bottom: $paragraph-margin-bottom;
-	margin-right: $paragraph-margin-bottom;
+	margin: {
+		bottom: $paragraph-margin-bottom;
+		right: $paragraph-margin-bottom;
+	}
 	background-color: $dark-blue;
 	font: bold .8rem/1.1 $opensans;
 	text: {
 		decoration: none;
 		transform: uppercase;
+	}
+
+	&:last-of-type {
+		margin-right: 0;
 	}
 
 	&:hover,
@@ -77,9 +79,5 @@
 		&::hover {
 			color: $dark-blue;
 		}
-	}
-
-	&:last-child {
-		margin-bottom: 0;
 	}
 }

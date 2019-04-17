@@ -46,7 +46,7 @@ function agt_home_page() {
 		}
 
 		$top_output = sprintf(
-			'<div class="top-story card cell medium-12-collapse small-12-collapse"><h2 class="card-heading show-for-small-only">Featured Stories</h2><p><a href="%s" aria-hidden="true" role="presentation">%s</a></p><div class="cats">%s</div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div>',
+			'<div class="top-story card cell medium-12 small-12"><h2 class="card-heading show-for-small-only">Featured Stories</h2><p><a href="%s" aria-hidden="true" role="presentation">%s</a></p><div class="cats">%s</div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div>',
 			$permalink,
 			$thumb,
 			$cat_output,
@@ -81,10 +81,14 @@ function agt_home_page() {
 							)
 						);
 						$posts      = $post_query->posts;
+						$thumb_atts = array(
+							'wrap'       => '<span class="cell small-4-collapse-left">%s</span>',
+							'title_cols' => '8',
+						);
 
 						// Post 1.
 						$post_1 = sprintf(
-							'<div class="post-1 row"><p class="cell small-12-collapse medium-6-collapse medium-order-2"><a href="%s" aria-hidden="true" role="presentation">%s%s</a></p><div class="cell small-12-collapse medium-6-collapse-left medium-order-1"><div class="date button hollow hide-for-small-only">%s</div><p class="cats hide-for-medium"><a class="button" href="%s" aria-hidden="true" role="presentation">%s</a></p><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
+							'<div class="post-1 row"><p class="cell small-12-collapse medium-6 medium-order-2"><a href="%s" aria-hidden="true" role="presentation">%s%s</a></p><div class="cell small-12-collapse medium-6 medium-order-1"><div class="date button hollow hide-for-small-only">%s</div><div class="hide-for-medium"><a class="button" href="%s" aria-hidden="true" role="presentation">%s</a></div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
 							get_permalink( $posts[0] ),
 							get_the_post_thumbnail(
 								$posts[0],
@@ -109,42 +113,41 @@ function agt_home_page() {
 						);
 
 						// Post 2.
-						$thumbnail  = get_the_post_thumbnail( $posts[1], 'medium' );
-						$title_cols = '12-collapse';
+						$thumbnail   = get_the_post_thumbnail( $posts[1], 'medium' );
+						$title_class = 'cell small-12-collapse';
 						if ( ! empty( $thumbnail ) ) {
-							$thumbnail  = '<span class="cell small-4-collapse">' . $thumbnail . '</span>';
-							$title_cols = '8';
+							$thumbnail   = sprintf( $thumb_atts['wrap'], $thumbnail );
+							$title_class = sprintf( 'cell small-%s-collapse-right', $thumb_atts['title_cols'] );
 						}
 						$post_2 = sprintf(
-							'<div class="post-2"><hr /><a class="row" href="%s">%s<span class="cell small-%s"><h3 class="small">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
+							'<div class="post-2"><hr /><a class="row" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
 							get_permalink( $posts[1] ),
 							$thumbnail,
-							$title_cols,
+							$title_class,
 							$posts[1]->post_title,
 							str_replace( ' ', '&nbsp;', get_the_date( 'F j, Y', $posts[1] ) )
 						);
 
 						// Post 3.
-						$thumbnail  = get_the_post_thumbnail( $posts[2], 'medium' );
-						$title_cols = '12-collapse';
+						$thumbnail   = get_the_post_thumbnail( $posts[2], 'medium' );
+						$title_class = 'cell small-12-collapse';
 						if ( ! empty( $thumbnail ) ) {
-							$thumbnail  = '<span class="cell small-4-collapse">' . $thumbnail . '</span>';
-							$title_cols = '8';
+							$thumbnail   = sprintf( $thumb_atts['wrap'], $thumbnail );
+							$title_class = sprintf( 'cell small-%s-collapse-right', $thumb_atts['title_cols'] );
 						}
 
 						$post_3 = sprintf(
-							'<div class="post-3"><a class="row" href="%s">%s<span class="cell small-%s"><h3 class="small">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
+							'<div class="post-3"><a class="row" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
 							get_permalink( $posts[2] ),
 							$thumbnail,
-							$title_cols,
+							$title_class,
 							$posts[2]->post_title,
 							str_replace( ' ', '&nbsp;', get_the_date( 'F j, Y', $posts[2] ) )
 						);
 
 						// Item output.
 						$item_output .= sprintf(
-							'<div class="item post-cat card cell medium-6-collapse-%s-half small-12-collapse"><h2 class="card-heading">%s</h2>%s<div class="show-for-small-only">%s%s<div class="text-center"><a href="%s" class="button hollow">All %s</a></div></div></div>',
-							$eo,
+							'<div class="item post-cat card cell medium-6 small-12"><h2 class="card-heading">%s</h2>%s<div class="show-for-small-only">%s%s<div class="text-center"><a href="%s" class="button hollow no-margin">All %s</a></div></div></div>',
 							$cat->name,
 							$post_1,
 							$post_2,
@@ -162,8 +165,7 @@ function agt_home_page() {
 					$link_open    = $item['page'] ? "<a href=\"{$item['page']}\">" : '';
 					$link_close   = $item['page'] ? '</a>' : '';
 					$item_output .= sprintf(
-						'<div class="item podcast card card-no-padding cell medium-6-collapse-%s-half small-12-collapse">%s<img src="%s/images/podcast-title.png"><img class="hide-for-small-only" src="%s">%s</div>',
-						$eo,
+						'<div class="item podcast card card-no-padding cell medium-6 small-12">%s<img src="%s/images/podcast-title.png"><img class="hide-for-small-only" src="%s">%s</div>',
 						$link_open,
 						AGTODAY_THEME_DIRURL,
 						$thumb,
@@ -184,8 +186,7 @@ function agt_home_page() {
 					}
 
 					$item_output .= sprintf(
-						'<div class="item quote card cell medium-6-collapse-%s-half hide-for-small-only">%s%s</div>',
-						$eo,
+						'<div class="item quote card cell medium-6 hide-for-small-only">%s%s</div>',
 						$cat_button,
 						$item['quote']
 					);

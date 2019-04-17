@@ -1,11 +1,10 @@
 .widget {
-	.card-heading {
-		padding: .1rem $global-layout-space $global-layout-space + .1rem;
+	hr {
+		border-color: $dark-gray;
 		margin: {
 			left: -$global-layout-space;
 			right: -$global-layout-space;
 		}
-		border-bottom: 1px solid $dark-gray;
 	}
 
 	.widget-wrap > ul {
