@@ -8,6 +8,10 @@
 	.item {
 		&.post-cat .post-1 {
 			@include breakpoint(medium) {
+				.date.button {
+					margin-bottom: $paragraph-margin-bottom / 2;
+				}
+
 				p.cell {
 					margin-bottom: 0;
 				}
