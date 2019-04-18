@@ -4,128 +4,128 @@
 
 .row {
 	@include xy-grid;
-}
 
-.cell {
+	> .cell {
 
-	&.small-4 {
-		@include xy-cell(4);
-	}
-
-	&.small-8 {
-		@include xy-cell(8);
-	}
-
-	&.small-12 {
-		@include xy-cell(12);
-	}
-
-	@include breakpoint(small only) {
-
-		&.small-4-collapse {
-			@include xy-cell(4, false, 0);
-		}
-
-		&.small-4-collapse-left {
-			@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
-			margin: {
-				right: $grid-margin-gutters / 2;
-				left: 0;
-			}
-		}
-
-		&.small-8-collapse-right {
-			@include -xy-cell-properties(8, $grid-margin-gutters / 2, false);
-			margin: {
-				left: $grid-margin-gutters / 2;
-				right: 0;
-			}
-		}
-
-		&.small-12-collapse {
-			@include xy-cell(12, false, 0);
-		}
-
-		&.small-order-1 {
-			order: 1;
-		}
-
-		&.small-order-2 {
-			order: 2;
-		}
-	}
-
-	@include breakpoint(medium) {
-
-		&.medium-4 {
+		&.small-4 {
 			@include xy-cell(4);
 		}
 
-		&.medium-4-collapse-left {
-			@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
-			margin: {
-				right: $grid-margin-gutters / 2;
-				left: 0;
-			}
-		}
-
-		&.medium-6 {
-			@include xy-cell(6);
-		}
-
-		&.medium-6-collapse {
-			@include xy-cell(6, false, 0);
-		}
-
-		&.medium-6-collapse-left,
-		&.medium-6-collapse-right {
-			@include -xy-cell-properties(50%, $grid-margin-gutters / 2, false);
-		}
-
-		&.medium-6-collapse-left {
-			margin: {
-				right: $grid-margin-gutters / 2;
-				left: 0;
-			}
-		}
-
-		&.medium-6-collapse-right {
-			margin: {
-				left: $grid-margin-gutters / 2;
-				right: 0;
-			}
-		}
-
-		&.medium-8 {
+		&.small-8 {
 			@include xy-cell(8);
 		}
 
-		&.medium-8-collapse-left {
-			width: calc(66.6666% - #{$grid-margin-gutters / 2});
-			margin: {
-				right: $grid-margin-gutters / 2;
-				left: 0;
-			}
-		}
-
-		&.medium-8-collapse-right {
-			width: calc(66.6666% - #{$grid-margin-gutters / 2});
-			margin: {
-				left: $grid-margin-gutters / 2;
-				right: 0;
-			}
-		}
-
-		&.medium-12 {
+		&.small-12 {
 			@include xy-cell(12);
 		}
 
-		&.medium-order-1 {
-			order: 1;
+		@include breakpoint(small only) {
+
+			&.small-4-collapse {
+				@include xy-cell(4, false, 0);
+			}
+
+			&.small-4-collapse-left {
+				@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
+				margin: {
+					right: $grid-margin-gutters / 2;
+					left: 0;
+				}
+			}
+
+			&.small-8-collapse-right {
+				@include -xy-cell-properties(8, $grid-margin-gutters / 2, false);
+				margin: {
+					left: $grid-margin-gutters / 2;
+					right: 0;
+				}
+			}
+
+			&.small-12-collapse {
+				@include xy-cell(12, false, 0);
+			}
+
+			&.small-order-1 {
+				order: 1;
+			}
+
+			&.small-order-2 {
+				order: 2;
+			}
 		}
 
-		&.medium-order-2 {
-			order: 2;
+		@include breakpoint(medium) {
+
+			&.medium-4 {
+				@include xy-cell(4);
+			}
+
+			&.medium-4-collapse-left {
+				@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
+				margin: {
+					right: $grid-margin-gutters / 2;
+					left: 0;
+				}
+			}
+
+			&.medium-6 {
+				@include xy-cell(6);
+			}
+
+			&.medium-6-collapse {
+				@include xy-cell(6, false, 0);
+			}
+
+			&.medium-6-collapse-left,
+			&.medium-6-collapse-right {
+				@include -xy-cell-properties(50%, $grid-margin-gutters / 2, false);
+			}
+
+			&.medium-6-collapse-left {
+				margin: {
+					right: $grid-margin-gutters / 2;
+					left: 0;
+				}
+			}
+
+			&.medium-6-collapse-right {
+				margin: {
+					left: $grid-margin-gutters / 2;
+					right: 0;
+				}
+			}
+
+			&.medium-8 {
+				@include xy-cell(8);
+			}
+
+			&.medium-8-collapse-left {
+				width: calc(66.6666% - #{$grid-margin-gutters / 2});
+				margin: {
+					right: $grid-margin-gutters / 2;
+					left: 0;
+				}
+			}
+
+			&.medium-8-collapse-right {
+				width: calc(66.6666% - #{$grid-margin-gutters / 2});
+				margin: {
+					left: $grid-margin-gutters / 2;
+					right: 0;
+				}
+			}
+
+			&.medium-12 {
+				@include xy-cell(12);
+			}
+
+			&.medium-order-1 {
+				order: 1;
+			}
+
+			&.medium-order-2 {
+				order: 2;
+			}
 		}
 	}
 }
