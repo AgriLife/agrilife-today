@@ -13,13 +13,13 @@
 
 #header-search {
 	clear: both;
+	width: 100%;
 
 	input[type="search"] {
 		color: $white;
 	}
 
 	@include breakpoint(small only) {
-		margin: 1rem;
 
 		.no-js & {
 			@include element-invisible;
@@ -28,21 +28,40 @@
 		form {
 			@include xy-grid;
 
-			input[type=search],
-			input[type=submit] {
-				@include xy-cell-base();
-				margin: 0;
+			input {
+				max-width: 100%
 			}
 
 			input[type=search] {
-				@include xy-cell(8, $gutter-type: margin, $gutters: 0);
+				@include xy-cell(auto);
 				border-color: $border-primary;
 			}
 
 			input[type=submit] {
-				@include xy-cell(auto, $gutters: 1rem, $gutter-position: (left));
+				flex: 0 0 116px;
+				margin: {
+					left: $grid-margin-gutters / 2;
+					right: $grid-margin-gutters / 2;
+				}
 			}
 		}
+	}
+
+	@include breakpoint(400px down) {
+
+		form {
+			input[type=search],
+			input[type=submit] {
+				@include xy-cell(12);
+				flex: 1 1 100%;
+				height: 39px;
+			}
+
+			input[type=search] {
+				margin-bottom: 4px;
+			}
+		}
+
 	}
 
 	@include breakpoint(medium) {

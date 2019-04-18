@@ -41,9 +41,6 @@ class RequiredDOM {
 
 		add_filter( 'af4_before_nav', array( $this, 'add_search_toggle' ), 10, 4 );
 
-		// Add search form after navigation menu.
-		add_action( 'genesis_header', array( $this, 'add_search_form' ) );
-
 	}
 
 	/**
@@ -196,20 +193,6 @@ class RequiredDOM {
 		$content = $open . $search . $inside . $close;
 
 		return $content;
-
-	}
-
-	/**
-	 * Add header search form
-	 *
-	 * @since 0.1.1
-	 * @return void
-	 */
-	public function add_search_form() {
-
-		echo '<div id="header-search">';
-		get_search_form();
-		echo '</div>';
 
 	}
 

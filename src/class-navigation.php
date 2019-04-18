@@ -85,8 +85,9 @@ class Navigation {
 		$before_nav = apply_filters( 'agt_before_nav', $title_bars['all'], $title_bars['wrap_open'], $title_bars['wrap_close'], $title_bars['inside'] );
 
 		$nav = sprintf(
-			'<div class="top-bar" id="nav-menu-primary"><section class="top-bar-left">%s</section></div>',
-			$nav_menu
+			'<div class="top-bar" id="nav-menu-primary"><section class="top-bar-left">%s</section><div id="header-search">%s</div></div>',
+			$nav_menu,
+			get_search_form( false )
 		);
 
 		$nav_markup_open = genesis_markup(
