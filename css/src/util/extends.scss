@@ -15,6 +15,7 @@
 
 	border: 1px solid $dark-blue;
 	border-top-width: 0.5rem;
+	background: $white;
 	padding: $global-layout-space;
 	margin-bottom: $global-layout-space;
 
@@ -57,7 +58,6 @@
 	background-color: $dark-blue;
 	font: bold .8rem/1.1 $opensans;
 	text: {
-		decoration: none;
 		transform: uppercase;
 	}
 
@@ -68,7 +68,6 @@
 	&:hover,
 	&:focus {
 		color: $white;
-		text-decoration: underline;
 	}
 
 	&.hollow {

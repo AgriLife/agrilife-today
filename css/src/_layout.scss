@@ -2,7 +2,7 @@
 	@include xy-grid-container($break-xlarge, 0);
 }
 
-.row {
+.grid-x {
 	@include xy-grid;
 
 	> .cell {
@@ -81,34 +81,25 @@
 				@include -xy-cell-properties(50%, $grid-margin-gutters / 2, false);
 			}
 
-			&.medium-6-collapse-left {
-				margin: {
-					right: $grid-margin-gutters / 2;
-					left: 0;
-				}
-			}
-
-			&.medium-6-collapse-right {
-				margin: {
-					left: $grid-margin-gutters / 2;
-					right: 0;
-				}
-			}
-
 			&.medium-8 {
 				@include xy-cell(8);
 			}
 
+			&.medium-8-collapse-left,
+			&.medium-8-collapse-right {
+				@include -xy-cell-properties(66.6666%, $grid-margin-gutters / 2, false);
+			}
+
+			&.medium-6-collapse-left,
 			&.medium-8-collapse-left {
-				width: calc(66.6666% - #{$grid-margin-gutters / 2});
 				margin: {
 					right: $grid-margin-gutters / 2;
 					left: 0;
 				}
 			}
 
+			&.medium-6-collapse-right,
 			&.medium-8-collapse-right {
-				width: calc(66.6666% - #{$grid-margin-gutters / 2});
 				margin: {
 					left: $grid-margin-gutters / 2;
 					right: 0;

@@ -379,7 +379,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function content_sidebar_wrap_attr( $attributes ) {
-		$attributes['class'] .= ' row';
+		$attributes['class'] .= ' grid-x';
 		return $attributes;
 	}
 
@@ -449,7 +449,7 @@ class Genesis {
 	 * @return void
 	 */
 	public function before_sidebar() {
-		echo '<div class="row">';
+		echo '<div class="grid-x">';
 	}
 
 	/**

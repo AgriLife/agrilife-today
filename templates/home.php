@@ -16,6 +16,7 @@ add_action( 'genesis_entry_content', 'agt_home_page' );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+add_action( 'wp_enqueue_scripts', 'agt_enqueue_home_scripts' );
 
 /**
  * Output content of template.
@@ -27,7 +28,7 @@ function agt_home_page() {
 
 	$top_story = get_field( 'top_group' );
 	$items     = get_field( 'stories_group' );
-	$output    = '<div class="row">';
+	$output    = '';
 
 	if ( $top_story['story'] ) {
 
@@ -46,7 +47,7 @@ function agt_home_page() {
 		}
 
 		$top_output = sprintf(
-			'<div class="top-story card cell medium-12 small-12"><h2 class="card-heading show-for-small-only">Featured Stories</h2><p><a href="%s" aria-hidden="true" role="presentation">%s</a></p><div class="cats">%s</div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div>',
+			'<div class="grid-x"><div class="top-story card cell medium-12 small-12"><h2 class="card-heading show-for-small-only">Featured Stories</h2><p><a href="%s" aria-hidden="true" role="presentation">%s</a></p><div class="cats">%s</div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
 			$permalink,
 			$thumb,
 			$cat_output,
@@ -61,7 +62,7 @@ function agt_home_page() {
 
 	if ( $items ) {
 
-		$item_output = '';
+		$item_output = '<div class="grid-x grid-masonry">';
 
 		foreach ( $items as $key => $item ) {
 
@@ -88,7 +89,7 @@ function agt_home_page() {
 
 						// Post 1.
 						$post_1 = sprintf(
-							'<div class="post-1 row"><p class="cell small-12-collapse medium-6 medium-order-2"><a href="%s" aria-hidden="true" role="presentation">%s%s</a></p><div class="cell small-12-collapse medium-6 medium-order-1"><div class="date button hollow hide-for-small-only">%s</div><div class="hide-for-medium"><a class="button" href="%s" aria-hidden="true" role="presentation">%s</a></div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
+							'<div class="post-1 grid-x"><p class="cell small-12-collapse medium-6 medium-order-2"><a href="%s" aria-hidden="true" role="presentation">%s%s</a></p><div class="cell small-12-collapse medium-6 medium-order-1"><div class="date button hollow hide-for-small-only">%s</div><div class="hide-for-medium"><a class="button" href="%s" aria-hidden="true" role="presentation">%s</a></div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
 							get_permalink( $posts[0] ),
 							get_the_post_thumbnail(
 								$posts[0],
@@ -120,7 +121,7 @@ function agt_home_page() {
 							$title_class = sprintf( 'cell small-%s-collapse-right', $thumb_atts['title_cols'] );
 						}
 						$post_2 = sprintf(
-							'<div class="post-2"><hr /><a class="row" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
+							'<div class="post-2"><hr /><a class="grid-x" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
 							get_permalink( $posts[1] ),
 							$thumbnail,
 							$title_class,
@@ -137,7 +138,7 @@ function agt_home_page() {
 						}
 
 						$post_3 = sprintf(
-							'<div class="post-3"><a class="row" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
+							'<div class="post-3"><a class="grid-x" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
 							get_permalink( $posts[2] ),
 							$thumbnail,
 							$title_class,
@@ -147,7 +148,7 @@ function agt_home_page() {
 
 						// Item output.
 						$item_output .= sprintf(
-							'<div class="item post-cat card cell medium-6 small-12"><h2 class="card-heading">%s</h2>%s<div class="show-for-small-only">%s%s<div class="text-center"><a href="%s" class="button hollow no-margin">All %s</a></div></div></div>',
+							'<div class="item post-cat card cell masonry-item medium-6 small-12"><h2 class="card-heading">%s</h2>%s<div class="show-for-small-only">%s%s<div class="text-center"><a href="%s" class="button hollow no-margin">All %s</a></div></div></div>',
 							$cat->name,
 							$post_1,
 							$post_2,
@@ -165,7 +166,7 @@ function agt_home_page() {
 					$link_open    = $item['page'] ? "<a href=\"{$item['page']}\">" : '';
 					$link_close   = $item['page'] ? '</a>' : '';
 					$item_output .= sprintf(
-						'<div class="item podcast card card-no-padding cell medium-6 small-12">%s<img src="%s/images/podcast-title.png"><img class="hide-for-small-only" src="%s">%s</div>',
+						'<div class="item podcast card card-no-padding cell masonry-item medium-6 small-12">%s<img src="%s/images/podcast-title.png"><img class="hide-for-small-only" src="%s">%s</div>',
 						$link_open,
 						AGTODAY_THEME_DIRURL,
 						$thumb,
@@ -186,7 +187,7 @@ function agt_home_page() {
 					}
 
 					$item_output .= sprintf(
-						'<div class="item quote card cell medium-6 hide-for-small-only">%s%s</div>',
+						'<div class="item quote card cell masonry-item medium-6 hide-for-small-only">%s%s</div>',
 						$cat_button,
 						$item['quote']
 					);
@@ -198,13 +199,32 @@ function agt_home_page() {
 			}
 		}
 
-		$output .= $item_output;
+		$item_output .= '</div>';
+		$output      .= $item_output;
 
 	}
 
-	$output .= '</div>';
-
 	echo wp_kses_post( $output );
+}
+
+/**
+ * Add script for home page functionality
+ *
+ * @since 0.2.0
+ * @return void
+ */
+function agt_enqueue_home_scripts() {
+
+	wp_register_script(
+		'agt-masonry',
+		AGTODAY_THEME_DIRURL . '/js/public.masonry.min.js',
+		array( 'jquery', 'masonry' ),
+		filemtime( AGTODAY_THEME_DIRPATH . '/js/public.masonry.min.js' ),
+		true
+	);
+
+	wp_enqueue_script( 'agt-masonry' );
+
 }
 
 genesis();

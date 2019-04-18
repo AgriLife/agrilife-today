@@ -65,7 +65,7 @@ class Widget_Subscribe extends WP_Widget {
 
 		$title = '<div class="title-wrap cell medium-12 small-collapse">' . $args['before_title'] . $title . $args['after_title'] . '</div>';
 
-		$args['before_widget'] = str_replace( 'class="widget-wrap', 'class="row widget-wrap', $args['before_widget'] );
+		$args['before_widget'] = str_replace( 'class="widget-wrap', 'class="grid-x widget-wrap', $args['before_widget'] );
 
 		echo wp_kses_post( $args['before_widget'] );
 		if ( ! empty( $instance['title'] ) ) {

@@ -72,7 +72,7 @@ class Assets {
 		wp_register_script(
 			'agrilife-today-public',
 			AGTODAY_THEME_DIRURL . '/js/public.min.js',
-			false,
+			array( 'jquery' ),
 			filemtime( AGTODAY_THEME_DIRPATH . '/js/public.min.js' ),
 			true
 		);
