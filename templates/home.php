@@ -63,6 +63,7 @@ function agt_home_page() {
 	if ( $items ) {
 
 		$item_output = '<div class="grid-x grid-masonry">';
+		$post_cat_eo = 'even';
 
 		foreach ( $items as $key => $item ) {
 
@@ -75,21 +76,33 @@ function agt_home_page() {
 
 					if ( $cat ) {
 
-						$post_query = new WP_Query(
+						$post_cat_eo  = 'even' === $post_cat_eo ? 'odd' : 'even';
+						$post_query   = new WP_Query(
 							array(
 								'cat'            => $cat->term_id,
 								'posts_per_page' => 3,
 							)
 						);
-						$posts      = $post_query->posts;
-						$thumb_atts = array(
+						$posts        = $post_query->posts;
+						$post_1_atts  = array(
+							'even' => array(
+								'thumb' => 'medium-6-collapse-left',
+								'meta'  => 'medium-6-collapse-right',
+							),
+							'odd'  => array(
+								'thumb' => 'medium-6-collapse-right medium-order-2',
+								'meta'  => 'medium-6-collapse-left medium-order-1',
+							),
+						);
+						$post_23_atts = array(
 							'wrap'       => '<span class="cell small-4-collapse-left">%s</span>',
-							'title_cols' => '8',
+							'title_cols' => 'cell small-8-collapse-right',
 						);
 
 						// Post 1.
 						$post_1 = sprintf(
-							'<div class="post-1 grid-x"><p class="cell small-12-collapse medium-6 medium-order-2"><a href="%s" aria-hidden="true" role="presentation">%s%s</a></p><div class="cell small-12-collapse medium-6 medium-order-1"><div class="date button hollow hide-for-small-only">%s</div><div class="hide-for-medium"><a class="button" href="%s" aria-hidden="true" role="presentation">%s</a></div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
+							'<div class="post-1 grid-x"><p class="cell small-12-collapse %s"><a href="%s" aria-hidden="true" role="presentation">%s%s</a></p><div class="cell small-12-collapse %s"><div class="date button hollow hide-for-small-only">%s</div><div class="hide-for-medium"><a class="button" href="%s" aria-hidden="true" role="presentation">%s</a></div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
+							$post_1_atts[ $post_cat_eo ]['thumb'],
 							get_permalink( $posts[0] ),
 							get_the_post_thumbnail(
 								$posts[0],
@@ -105,6 +118,7 @@ function agt_home_page() {
 									'class' => 'hide-for-small-only',
 								)
 							),
+							$post_1_atts[ $post_cat_eo ]['meta'],
 							get_the_date( 'F j', $posts[0] ),
 							get_term_link( $cat->term_id ),
 							$cat->name,
@@ -117,8 +131,8 @@ function agt_home_page() {
 						$thumbnail   = get_the_post_thumbnail( $posts[1], 'medium' );
 						$title_class = 'cell small-12-collapse';
 						if ( ! empty( $thumbnail ) ) {
-							$thumbnail   = sprintf( $thumb_atts['wrap'], $thumbnail );
-							$title_class = sprintf( 'cell small-%s-collapse-right', $thumb_atts['title_cols'] );
+							$thumbnail   = sprintf( $post_23_atts['wrap'], $thumbnail );
+							$title_class = $post_23_atts['title_cols'];
 						}
 						$post_2 = sprintf(
 							'<div class="post-2"><hr /><a class="grid-x" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
@@ -133,8 +147,8 @@ function agt_home_page() {
 						$thumbnail   = get_the_post_thumbnail( $posts[2], 'medium' );
 						$title_class = 'cell small-12-collapse';
 						if ( ! empty( $thumbnail ) ) {
-							$thumbnail   = sprintf( $thumb_atts['wrap'], $thumbnail );
-							$title_class = sprintf( 'cell small-%s-collapse-right', $thumb_atts['title_cols'] );
+							$thumbnail   = sprintf( $post_23_atts['wrap'], $thumbnail );
+							$title_class = $post_23_atts['title_cols'];
 						}
 
 						$post_3 = sprintf(
