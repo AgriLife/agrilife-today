@@ -1,19 +1,36 @@
 .site-header {
 	text-align: center;
-	margin-bottom: 1.5rem;
 
 	.logo img {
 		max-height: 60px;
 	}
 
-	.site-title {
-		padding: 1.5rem 0;
+	@include breakpoint(medium) {
+		margin-bottom: 1.5rem;
+
+		.site-title {
+			padding: 1.5rem 0;
+		}
+	}
+}
+
+@include breakpoint(small only) {
+	.site-header {
+		.title-area {
+			text-align: left;
+		}
+
+		.grid-x .title-area,
+		.grid-x .title-bars {
+			margin: $global-layout-space;
+		}
 	}
 }
 
 #header-search {
 	clear: both;
 	width: 100%;
+	margin: $menu-items-padding-y $grid-margin-gutters / 2 0;
 
 	input[type="search"] {
 		color: $white;

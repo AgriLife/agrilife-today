@@ -23,23 +23,18 @@ $border-primary: $dark-gray;
 --------------------------------------------- */
 $tungsten: "Tungsten A", "Tungsten B", "Oswald", sans-serif;
 $opensans: "Open Sans", sans-serif;
+$body-font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 $header-font-family: $tungsten;
 
 /* Global
 --------------------------------------------- */
-$body-font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-$anchor-color: $primary-color;
-$anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
-$anchor-text-decoration: underline;
-$anchor-text-decoration-hover: underline;
 $global-layout-space: 1rem;
 $grid-margin-gutters: $global-layout-space;
 $hr-margin: $paragraph-margin-bottom 0;
+$anchor-color: $primary-color;
+$anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: underline;
-
-/* Header
---------------------------------------------- */
 $header-styles: (
 	small: (
 		"h1": ("font-size": 32),
@@ -59,13 +54,31 @@ $header-styles: (
 	),
 );
 
+/* Header
+--------------------------------------------- */
+$site-title-background: $white;
+
 /* Navigation
 --------------------------------------------- */
+$topbar-padding: 0;
+$topbar-input-width: auto;
+$topbar-background: $white;
+$dropdownmenu-arrow-color: $dark-blue;
+$dropdownmenu-border: 0 none;
+$dropdownmenu-border-width: 0;
+$accordionmenu-arrow-color: $dropdownmenu-arrow-color;
+$menu-items-padding-y: 0.7rem;
+$menu-items-padding: $menu-items-padding-y 1rem;
 
-/* Top Bar
+/* Title Bar
 --------------------------------------------- */
-$topbar-background: transparent;
-$topbar-padding: 0 0.5rem 0.5rem;
+$titlebar-background: transparent;
+$titlebar-padding: 0;
+$titlebar-color: $maroon;
+$titlebar-icon-color: $dark-blue;
+$titlebar-icon-color-hover: $dark-blue;
+$titlebar-icon-spacing: 0.6rem;
+$titlebar-text-font-weight: normal;
 
 /* Content
 --------------------------------------------- */

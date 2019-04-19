@@ -7,12 +7,24 @@
 
 	> .cell {
 
+		&.small-3 {
+			@include xy-cell(3);
+		}
+
 		&.small-4 {
 			@include xy-cell(4);
 		}
 
+		&.small-6 {
+			@include xy-cell(6);
+		}
+
 		&.small-8 {
 			@include xy-cell(8);
+		}
+
+		&.small-9 {
+			@include xy-cell(9);
 		}
 
 		&.small-12 {
@@ -108,6 +120,10 @@
 
 			&.medium-12 {
 				@include xy-cell(12);
+			}
+
+			&.medium-12-collapse {
+				@include xy-cell(12, false, 0);
 			}
 
 			&.medium-order-1 {

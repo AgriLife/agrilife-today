@@ -1,5 +1,18 @@
 .top-bar {
-	border-top: 1px solid $border-primary;
+	border: 1px solid $border-primary;
+	border-width: 1px 0;
+
+	@include breakpoint(small only) {
+
+		&,
+		ul {
+			background: darken($site-title-background, 5%);
+		}
+	}
+
+	@include breakpoint(medium) {
+		border-width: 1px 0 0;
+	}
 }
 
 .menu-primary {
@@ -26,7 +39,23 @@
 	}
 }
 
+.nav-primary {
+	@include breakpoint(small only) {
+		width: 100%;
+
+		#nav-menu-primary {
+			margin-bottom: $grid-margin-gutters;
+		}
+	}
+}
+
 .title-bar.title-bar-navigation {
+	width: 30px;
+	flex: 1 1 100%;
+	flex-wrap: wrap;
+	float: right;
+	padding: 6px 0;
+
 	.menu-icon {
 		@include hamburger(
 			$color: $titlebar-icon-color,
@@ -35,11 +64,24 @@
 			$width: 30px,
 			$height: 20px
 		);
+		order: 2;
 		margin: 0;
+		display: block;
 	}
 
 	.title-bar-title {
-		padding-left: $titlebar-icon-spacing;
+		order: 1;
 		cursor: pointer;
+		text-transform: uppercase;
+		line-height: 1;
+		font: {
+			weight: bold;
+			size: .63rem;
+		}
+	}
+
+	@include breakpoint(small only) {
+		height: 100%;
+		justify-content: flex-end;
 	}
 }

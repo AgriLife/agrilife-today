@@ -78,8 +78,18 @@ class Genesis {
 		remove_action( 'genesis_after_header', 'genesis_do_nav' );
 		add_action( 'genesis_header', 'genesis_do_nav' );
 
-		// Replace site title with logo.
+		// Modify header.
 		add_filter( 'genesis_seo_title', array( $this, 'add_logo' ), 10, 3 );
+		add_filter(
+			'genesis_markup_title-area_open',
+			function( $open ) {
+
+				$open = str_replace( 'title-area', 'title-area cell small-9 medium-12', $open );
+
+				return $open;
+
+			}
+		);
 
 		// Add classes for CSS grid presentation.
 		add_filter( 'genesis_attr_site-inner', array( $this, 'site_inner' ) );
@@ -299,7 +309,7 @@ class Genesis {
 	 */
 	public function sticky_header( $output ) {
 
-		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;"', $output );
+		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap grid-x" data-sticky data-options="stickyOn:small;marginTop:0;"', $output );
 		$output = preg_replace( '/<\/div>$/', '</div></div>', $output );
 
 		return $output;
