@@ -486,7 +486,7 @@ class Genesis {
 	 * Add class to footer wrap
 	 *
 	 * @since 0.3.0
-	 * @param string $output HTML output for the footer wrap
+	 * @param string $output HTML output for the footer wrap.
 	 * @return string
 	 */
 	public function footer_wrap( $output ) {

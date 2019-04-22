@@ -86,17 +86,17 @@ function agt_home_page() {
 						$posts        = $post_query->posts;
 						$post_1_atts  = array(
 							'even' => array(
-								'thumb' => 'medium-6-collapse-left',
-								'meta'  => 'medium-6-collapse-right',
+								'thumb' => 'medium-6-collapse-half medium-collapse-left',
+								'meta'  => 'medium-6-collapse-half medium-collapse-right',
 							),
 							'odd'  => array(
-								'thumb' => 'medium-6-collapse-right medium-order-2',
-								'meta'  => 'medium-6-collapse-left medium-order-1',
+								'thumb' => 'medium-6-collapse-half medium-collapse-right medium-order-2',
+								'meta'  => 'medium-6-collapse-half medium-collapse-left medium-order-1',
 							),
 						);
 						$post_23_atts = array(
-							'wrap'       => '<span class="cell small-4-collapse-left">%s</span>',
-							'title_cols' => 'cell small-8-collapse-right',
+							'wrap'       => '<span class="cell small-4-collapse-half small-collapse-left">%s</span>',
+							'title_cols' => 'cell small-8-collapse-half small-collapse-right',
 						);
 
 						// Post 1.

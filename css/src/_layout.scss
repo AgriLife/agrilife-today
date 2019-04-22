@@ -7,54 +7,58 @@
 
 	> .cell {
 
+		@include xy-gutters;
+
 		&.small-3 {
-			@include xy-cell(3);
+			@include xy-cell(3, false);
 		}
 
 		&.small-4 {
-			@include xy-cell(4);
+			@include xy-cell(4, false);
 		}
 
 		&.small-6 {
-			@include xy-cell(6);
+			@include xy-cell(6, false);
 		}
 
 		&.small-8 {
-			@include xy-cell(8);
+			@include xy-cell(8, false);
 		}
 
 		&.small-9 {
-			@include xy-cell(9);
+			@include xy-cell(9, false);
 		}
 
 		&.small-12 {
-			@include xy-cell(12);
+			@include xy-cell(12, false);
 		}
 
 		@include breakpoint(small only) {
 
 			&.small-4-collapse {
-				@include xy-cell(4, false, 0);
+				@include xy-cell(4, true, 0);
 			}
 
-			&.small-4-collapse-left {
-				@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
-				margin: {
-					right: $grid-margin-gutters / 2;
-					left: 0;
-				}
+			&.small-4-collapse-half {
+				@include xy-cell(4, false, $grid-margin-gutters / 2);
 			}
 
-			&.small-8-collapse-right {
-				@include -xy-cell-properties(8, $grid-margin-gutters / 2, false);
-				margin: {
-					left: $grid-margin-gutters / 2;
-					right: 0;
-				}
+			&.small-8-collapse-half {
+				@include xy-cell(8, false, $grid-margin-gutters / 2);
 			}
 
 			&.small-12-collapse {
-				@include xy-cell(12, false, 0);
+				@include xy-cell(12, true, 0);
+			}
+
+			&.small-collapse-left {
+				@include xy-gutters($gutter-position: right);
+				margin-left: 0;
+			}
+
+			&.small-collapse-right {
+				@include xy-gutters($gutter-position: left);
+				margin-right: 0;
 			}
 
 			&.small-order-1 {
@@ -68,62 +72,58 @@
 
 		@include breakpoint(medium) {
 
-			&.medium-4 {
-				@include xy-cell(4);
+			&.medium-2 {
+				@include xy-cell(2, false);
 			}
 
-			&.medium-4-collapse-left {
-				@include -xy-cell-properties(4, $grid-margin-gutters / 2, false);
-				margin: {
-					right: $grid-margin-gutters / 2;
-					left: 0;
-				}
+			&.medium-4 {
+				@include xy-cell(4, false);
+			}
+
+			&.medium-4-collapse-half {
+				@include xy-cell(4, false, $grid-margin-gutters / 2);
 			}
 
 			&.medium-6 {
-				@include xy-cell(6);
+				@include xy-cell(6, false);
 			}
 
 			&.medium-6-collapse {
-				@include xy-cell(6, false, 0);
+				@include xy-cell(6, true, 0);
 			}
 
-			&.medium-6-collapse-left,
-			&.medium-6-collapse-right {
+			&.medium-6-collapse-half {
 				@include -xy-cell-properties(50%, $grid-margin-gutters / 2, false);
 			}
 
 			&.medium-8 {
-				@include xy-cell(8);
+				@include xy-cell(8, false);
 			}
 
-			&.medium-8-collapse-left,
-			&.medium-8-collapse-right {
+			&.medium-8-collapse-half {
 				@include -xy-cell-properties(66.6666%, $grid-margin-gutters / 2, false);
 			}
 
-			&.medium-6-collapse-left,
-			&.medium-8-collapse-left {
-				margin: {
-					right: $grid-margin-gutters / 2;
-					left: 0;
-				}
-			}
-
-			&.medium-6-collapse-right,
-			&.medium-8-collapse-right {
-				margin: {
-					left: $grid-margin-gutters / 2;
-					right: 0;
-				}
+			&.medium-10 {
+				@include xy-cell(10, false);
 			}
 
 			&.medium-12 {
-				@include xy-cell(12);
+				@include xy-cell(12, false);
 			}
 
 			&.medium-12-collapse {
-				@include xy-cell(12, false, 0);
+				@include xy-cell(12, true, 0);
+			}
+
+			&.medium-collapse-left {
+				@include xy-gutters($gutter-position: right);
+				margin-left: 0;
+			}
+
+			&.medium-collapse-right {
+				@include xy-gutters($gutter-position: left);
+				margin-right: 0;
 			}
 
 			&.medium-order-1 {

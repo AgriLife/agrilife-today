@@ -14,7 +14,7 @@
 @include foundation-forms;
 // @include foundation-range-input;
 // @include foundation-accordion;
-@include foundation-accordion-menu;
+// @include foundation-accordion-menu;
 // @include foundation-badge;
 // @include foundation-breadcrumbs;
 // @include foundation-button-group;
@@ -24,7 +24,7 @@
 @include foundation-menu;
 @include foundation-menu-icon;
 // @include foundation-drilldown-menu;
-@include foundation-dropdown;
+// @include foundation-dropdown;
 @include foundation-dropdown-menu;
 // @include foundation-responsive-embed;
 // @include foundation-label;
@@ -34,7 +34,7 @@
 // @include foundation-pagination;
 // @include foundation-progress-bar;
 // @include foundation-slider;
-// @include foundation-sticky;
+@include foundation-sticky;
 // @include foundation-reveal;
 // @include foundation-switch;
 // @include foundation-table;

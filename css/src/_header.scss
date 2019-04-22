@@ -5,17 +5,28 @@
 		max-height: 60px;
 	}
 
+	.title-area {
+		background-color: $white;
+	}
+
+	.sticky-container {
+		z-index: 2;
+	}
+
 	@include breakpoint(medium) {
 		margin-bottom: 1.5rem;
 
 		.site-title {
 			padding: 1.5rem 0;
+			transition: padding .5s;
+		}
+
+		.is-stuck .site-title {
+			padding: .5rem 0;
 		}
 	}
-}
 
-@include breakpoint(small only) {
-	.site-header {
+	@include breakpoint(small only) {
 		.title-area {
 			text-align: left;
 		}
@@ -23,11 +34,22 @@
 		.grid-x .title-area,
 		.grid-x .title-bars {
 			margin: $global-layout-space;
+			transition: margin .5s;
+		}
+
+		.is-stuck {
+			background-color: $white;
+			border-bottom: 1px solid $border-primary;
+
+			.grid-x .title-area,
+			.grid-x .title-bars {
+				margin: $global-layout-space / 2 $global-layout-space;
+			}
 		}
 	}
 }
 
-#header-search {
+#hd-search {
 	clear: both;
 	width: 100%;
 	margin: $menu-items-padding-y $grid-margin-gutters / 2 0;
