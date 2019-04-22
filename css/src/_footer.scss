@@ -1,0 +1,50 @@
+.site-footer {
+	color: $footer-text-color;
+	line-height: 2.4em;
+	font: {
+		family: $footer-font-family;
+		weight: $footer-font-weight;
+	}
+	padding: 0 $grid-margin-gutters / 2 $grid-margin-gutters;
+
+	ul {
+		margin-left: 0;
+
+		li {
+			display: inline-block;
+			list-style-type: none;
+			border-left: 1px solid $border-primary;
+			line-height: 1rem;
+			margin: .2em 0 .2em .75em;
+			padding-left: .75em;
+
+			&:first-child {
+				border-left: none;
+				margin-left: 0;
+				padding-left: 0;
+			}
+		}
+	}
+
+	.footer-container-tamus {
+		text-align: center;
+	}
+
+	.footer-tamus {
+		border: 2px solid $border-primary;
+	}
+
+	@include breakpoint(medium up) {
+		text-align: left;
+
+		ul {
+			margin: 0 0 $grid-margin-gutters;
+
+			li {
+				font-size: 1em;
+			}
+		}
+
+	}
+
+}

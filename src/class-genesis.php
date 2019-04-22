@@ -80,27 +80,22 @@ class Genesis {
 
 		// Modify header.
 		add_filter( 'genesis_seo_title', array( $this, 'add_logo' ), 10, 3 );
-		add_filter(
-			'genesis_markup_title-area_open',
-			function( $open ) {
-
-				$open = str_replace( 'title-area', 'title-area cell small-9 medium-12', $open );
-
-				return $open;
-
-			}
-		);
+		add_filter( 'genesis_markup_title-area_open', array( $this, 'title_area' ) );
 
 		// Add classes for CSS grid presentation.
-		add_filter( 'genesis_attr_site-inner', array( $this, 'site_inner' ) );
+		add_filter( 'genesis_attr_site-inner', array( $this, 'add_layout_container_class' ) );
 		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
+		add_filter( 'genesis_attr_site-footer', array( $this, 'add_layout_container_class' ) );
 
 		// Change widgets and sidebars.
 		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
 		add_action( 'genesis_before_sidebar_widget_area', array( $this, 'before_sidebar' ) );
 		add_action( 'genesis_after_sidebar_widget_area', array( $this, 'after_sidebar' ) );
+
+		// Footer.
+		add_filter( 'genesis_structural_wrap-footer', array( $this, 'footer_wrap' ) );
 
 	}
 
@@ -309,8 +304,8 @@ class Genesis {
 	 */
 	public function sticky_header( $output ) {
 
-		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap grid-x" data-sticky data-options="stickyOn:small;marginTop:0;"', $output );
-		$output = preg_replace( '/<\/div>$/', '</div></div>', $output );
+		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;"><div class="grid-x"', $output );
+		$output = preg_replace( '/<\/div>$/', '</div></div></div>', $output );
 
 		return $output;
 
@@ -370,13 +365,28 @@ class Genesis {
 	}
 
 	/**
+	 * Change the title area class name
+	 *
+	 * @since 0.3.0
+	 * @param string $open HTML for the open tag.
+	 * @return string
+	 */
+	public function title_area( $open ) {
+
+		$open = str_replace( 'title-area', 'title-area cell small-9 medium-12', $open );
+
+		return $open;
+
+	}
+
+	/**
 	 * Add class name to site-inner element
 	 *
 	 * @since 0.1.4
 	 * @param array $attributes HTML attributes.
 	 * @return array
 	 */
-	public function site_inner( $attributes ) {
+	public function add_layout_container_class( $attributes ) {
 		$attributes['class'] .= ' layout-container';
 		return $attributes;
 	}
@@ -404,7 +414,7 @@ class Genesis {
 		$attributes['class'] .= ' cell';
 		$layout               = genesis_site_layout();
 		if ( 'content-sidebar' === $layout ) {
-			$attributes['class'] .= ' medium-8-collapse-right small-12';
+			$attributes['class'] .= ' medium-8-collapse-half medium-collapse-right small-12';
 		} else {
 			$attributes['class'] .= ' medium-12 small-12';
 		}
@@ -419,7 +429,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function sidebar_attr( $attributes ) {
-		$attributes['class'] .= ' cell medium-4-collapse-left small-12';
+		$attributes['class'] .= ' cell medium-4-collapse-half medium-collapse-left small-12';
 		return $attributes;
 	}
 
@@ -470,6 +480,19 @@ class Genesis {
 	 */
 	public function after_sidebar() {
 		echo '</div>';
+	}
+
+	/**
+	 * Add class to footer wrap
+	 *
+	 * @since 0.3.0
+	 * @param string $output HTML output for the footer wrap
+	 * @return string
+	 */
+	public function footer_wrap( $output ) {
+
+		return str_replace( 'class="wrap"', 'class="wrap grid-x"', $output );
+
 	}
 
 }
