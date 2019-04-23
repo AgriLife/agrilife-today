@@ -1,10 +1,7 @@
 .site-footer {
 	color: $footer-text-color;
 	line-height: 2.4em;
-	font: {
-		family: $footer-font-family;
-		weight: $footer-font-weight;
-	}
+	font-weight: $footer-font-weight;
 	padding: 0 $grid-margin-gutters / 2 $grid-margin-gutters;
 
 	ul {
