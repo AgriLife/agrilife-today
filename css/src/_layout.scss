@@ -76,6 +76,10 @@
 				@include xy-cell(2, false);
 			}
 
+			&.medium-2-collapse-half {
+				@include xy-cell(2, false, $grid-margin-gutters / 2);
+			}
+
 			&.medium-4 {
 				@include xy-cell(4, false);
 			}

@@ -88,8 +88,20 @@ class Genesis {
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
 		add_filter( 'genesis_attr_site-footer', array( $this, 'add_layout_container_class' ) );
 
+		// Modify the post page output.
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Post - Left', 'agrilife-today' ),
+				'id'          => 'post-left',
+				'description' => __( 'This is the widget area for the left side of a single post.', 'agrilife-today' ),
+			)
+		);
+		add_action( 'genesis_before_content', array( $this, 'genesis_get_sidebar_post' ) );
+		add_action( 'genesis_before', array( $this, 'post_move_hooks' ) );
+
 		// Change widgets and sidebars.
 		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
+		add_filter( 'genesis_attr_post-left', array( $this, 'sidebar_post_left_attr' ) );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
 		add_action( 'genesis_before_sidebar_widget_area', array( $this, 'before_sidebar' ) );
 		add_action( 'genesis_after_sidebar_widget_area', array( $this, 'after_sidebar' ) );
@@ -412,9 +424,11 @@ class Genesis {
 	 */
 	public function content_attr( $attributes ) {
 		$attributes['class'] .= ' cell';
-		$layout               = genesis_site_layout();
-		if ( 'content-sidebar' === $layout ) {
-			$attributes['class'] .= ' medium-8-collapse-half medium-collapse-right small-12';
+		$site_layout          = genesis_site_layout();
+		if ( is_singular( 'post' ) && in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
+			$attributes['class'] .= ' medium-6 small-12';
+		} elseif ( in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
+			$attributes['class'] .= ' medium-8 small-12';
 		} else {
 			$attributes['class'] .= ' medium-12 small-12';
 		}
@@ -429,6 +443,18 @@ class Genesis {
 	 * @return array
 	 */
 	public function sidebar_attr( $attributes ) {
+		$attributes['class'] .= ' cell medium-4-collapse-half medium-collapse-left small-12';
+		return $attributes;
+	}
+
+	/**
+	 * Add class names to post left sidebar element
+	 *
+	 * @since 0.3.2
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function sidebar_post_left_attr( $attributes ) {
 		$attributes['class'] .= ' cell medium-4-collapse-half medium-collapse-left small-12';
 		return $attributes;
 	}
@@ -493,6 +519,86 @@ class Genesis {
 
 		return str_replace( 'class="wrap"', 'class="wrap grid-x"', $output );
 
+	}
+
+	/**
+	 * Add post left sidebar
+	 *
+	 * @since 0.3.2
+	 * @return void
+	 */
+	public function genesis_get_sidebar_post() {
+
+		$site_layout = genesis_site_layout();
+
+		// Don't load sidebar-alt on pages that don't need it.
+		if ( ! is_singular( 'post' ) || ! in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
+			return;
+		}
+		genesis_widget_area(
+			'post-left',
+			array(
+				'before' => '<div class="page-widget cell medium-2-collapse-half medium-collapse-left small-12"><div class="wrap">',
+				'after'  => '</div></div>',
+			)
+		);
+
+	}
+
+	/**
+	 * Move hooks on single posts
+	 *
+	 * @since 0.3.2
+	 * @return void
+	 */
+	public function post_move_hooks() {
+
+		if ( is_singular( 'post' ) ) {
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+			remove_action( 'genesis_before_post_content', 'genesis_post_info' );
+			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_category_button' ), 4 );
+			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_open', 5 );
+			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_close', 15 );
+			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title' );
+			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ) );
+		}
+
+	}
+
+	/**
+	 * Add post category button
+	 *
+	 * @since 0.3.2
+	 * @return void
+	 */
+	public function custom_post_category_button() {
+
+		$cats       = wp_get_post_terms( get_the_ID(), 'category' );
+		$cat_output = '';
+
+		foreach ( $cats as $cat ) {
+			$cat_output .= sprintf(
+				'<a href="%s" class="button">%s</a>',
+				get_term_link( $cat->term_id ),
+				$cat->name
+			);
+		}
+
+		echo sprintf( '<div class="post-category">%s</div>', wp_kses_post( $cat_output ) );
+
+	}
+
+	/**
+	 * Add post meta
+	 *
+	 * @since 0.3.2
+	 * @return void
+	 */
+	public function custom_post_info() {
+		echo do_shortcode( '<p class="entry-meta">[post_date]</p>' );
 	}
 
 }
