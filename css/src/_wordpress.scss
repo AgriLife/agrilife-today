@@ -1,6 +1,4 @@
-.aligncenter,
-.alignleft,
-.alignright {
+.aligncenter {
 	float: none;
 	clear: both;
 	display: block;
@@ -10,22 +8,25 @@
 	}
 }
 
-@include breakpoint(460px down) {
-	.alignleft {
-		float: left;
-		clear: none;
-		margin: {
-			left: 0;
-			right: $paragraph-margin-bottom;
-		}
-	}
+.alignleft {
+	float: left;
+	margin-right: $paragraph-margin-bottom;
+}
 
+.alignright {
+	float: right;
+	margin-left: $paragraph-margin-bottom;
+}
+
+@include breakpoint(460px down) {
+	.alignleft,
 	.alignright {
-		float: right;
-		clear: none;
+		float: none;
+		clear: both;
+		display: block;
 		margin: {
-			right: 0;
-			left: $paragraph-margin-bottom;
+			left: auto;
+			right: auto;
 		}
 	}
 }
