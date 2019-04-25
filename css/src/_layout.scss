@@ -2,6 +2,20 @@
 	@include xy-grid-container($break-xlarge, 0);
 }
 
+.cell-gutter-lr {
+	margin: {
+		left: $grid-margin-gutters / 2;
+		right: $grid-margin-gutters / 2;
+	}
+}
+
+.cell-gutter-lr-x2 {
+	margin: {
+		left: $grid-margin-gutters;
+		right: $grid-margin-gutters;
+	}
+}
+
 .grid-x {
 	@include xy-grid;
 

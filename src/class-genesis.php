@@ -411,7 +411,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function content_sidebar_wrap_attr( $attributes ) {
-		$attributes['class'] .= ' grid-x';
+		$attributes['class'] .= ' grid-x cell-gutter-lr';
 		return $attributes;
 	}
 
@@ -564,6 +564,7 @@ class Genesis {
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_close', 15 );
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title' );
 			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ) );
+			add_filter( 'genesis_attr_entry-header_output', array( $this, 'add_gutter_lr_class' ), 11, 2 );
 		}
 
 	}
@@ -599,6 +600,21 @@ class Genesis {
 	 */
 	public function custom_post_info() {
 		echo do_shortcode( '<p class="entry-meta">[post_date]</p>' );
+	}
+
+
+	/**
+	 * Add gutter left and right class to element
+	 *
+	 * @since 0.3.3
+	 * @param string $output The element output.
+	 * @param array  $attributes Element attributes.
+	 * @return array
+	 */
+	public function add_gutter_lr_class( $output, $attributes ) {
+		$oldclass = $attributes['class'];
+		$newclass = $oldclass . ' cell-gutter-lr-x2';
+		return str_replace( $oldclass, $newclass, $output );
 	}
 
 }
