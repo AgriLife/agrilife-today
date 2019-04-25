@@ -567,6 +567,28 @@ class Genesis {
 		echo do_shortcode( '<p class="entry-meta">[post_date]</p>' );
 	}
 
+	/**
+	 * Add post credits below post title
+	 *
+	 * @since 0.3.3
+	 * @param string $content The post content.
+	 * @return string
+	 */
+	public function move_post_credits( $content ) {
+		$output  = '';
+		$content = strip_shortcodes( get_the_content() );
+		$pattern = '/^(?:<[^>]+>|\W|&nbsp;|\b)*([A-Z]{2,}|[A-Z][a-z][A-Z]{2,})([\w\W]*)/m';
+		preg_match( $pattern, $content, $portions );
+		if ( count( $portions ) > 1 ) {
+			// Pattern matched.
+			$excerpt = $portions[1] . $portions[2];
+		} else {
+			// Probably not a news-related post.
+			$excerpt = $output;
+		}
+
+		return $content;
+	}
 
 	/**
 	 * Add gutter left and right class to element
