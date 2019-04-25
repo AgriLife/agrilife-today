@@ -25,18 +25,15 @@
 		flex: 1 1 100%;
 	}
 
-	.left,
-	.right {
-		padding: $global-layout-space;
-	}
-
 	.left {
+		padding: $global-layout-space $global-layout-space / 2;
 		border-right: 1px solid $dark-gray;
 		width: 20%;
 		text-align: center;
 	}
 
 	.right {
+		padding: $global-layout-space;
 		width: 80%;
 	}
 
