@@ -101,10 +101,7 @@ class Genesis {
 
 		// Change widgets and sidebars.
 		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
-		add_filter( 'genesis_attr_post-left', array( $this, 'sidebar_post_left_attr' ) );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
-		add_action( 'genesis_before_sidebar_widget_area', array( $this, 'before_sidebar' ) );
-		add_action( 'genesis_after_sidebar_widget_area', array( $this, 'after_sidebar' ) );
 
 		// Footer.
 		add_filter( 'genesis_structural_wrap-footer', array( $this, 'footer_wrap' ) );
@@ -443,19 +440,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function sidebar_attr( $attributes ) {
-		$attributes['class'] .= ' cell medium-4-collapse-half medium-collapse-left small-12';
-		return $attributes;
-	}
-
-	/**
-	 * Add class names to post left sidebar element
-	 *
-	 * @since 0.3.2
-	 * @param array $attributes HTML attributes.
-	 * @return array
-	 */
-	public function sidebar_post_left_attr( $attributes ) {
-		$attributes['class'] .= ' cell medium-4-collapse-half medium-collapse-left small-12';
+		$attributes['class'] .= ' cell medium-4 small-12';
 		return $attributes;
 	}
 
@@ -473,7 +458,7 @@ class Genesis {
 		preg_match( '/class="([^"]+)"/', $str, $match );
 		$classes = explode( ' ', $match[1] );
 		if ( in_array( 'widget', $classes, true ) ) {
-			$classes[]                  = 'card cell medium-12 small-12';
+			$classes[]                  = 'card';
 			$class_output               = implode( ' ', $classes );
 			$params[0]['before_widget'] = str_replace( $match[0], "class=\"{$class_output}\"", $params[0]['before_widget'] );
 		}
@@ -486,26 +471,6 @@ class Genesis {
 
 		return $params;
 
-	}
-
-	/**
-	 * Add element before sidebar
-	 *
-	 * @since 0.1.10
-	 * @return void
-	 */
-	public function before_sidebar() {
-		echo '<div class="grid-x">';
-	}
-
-	/**
-	 * Add element after sidebar
-	 *
-	 * @since 0.1.10
-	 * @return void
-	 */
-	public function after_sidebar() {
-		echo '</div>';
 	}
 
 	/**
@@ -538,7 +503,7 @@ class Genesis {
 		genesis_widget_area(
 			'post-left',
 			array(
-				'before' => '<div class="page-widget cell medium-2-collapse-half medium-collapse-left small-12"><div class="wrap">',
+				'before' => '<div class="page-widget cell medium-2 small-12"><div class="wrap">',
 				'after'  => '</div></div>',
 			)
 		);
@@ -559,11 +524,11 @@ class Genesis {
 			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			remove_action( 'genesis_before_post_content', 'genesis_post_info' );
-			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_category_button' ), 4 );
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_open', 5 );
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_close', 15 );
-			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title' );
-			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ) );
+			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_category_button' ), 6 );
+			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
+			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ), 11 );
 			add_filter( 'genesis_attr_entry-header_output', array( $this, 'add_gutter_lr_class' ), 11, 2 );
 		}
 
