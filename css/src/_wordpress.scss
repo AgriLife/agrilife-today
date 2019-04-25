@@ -1,0 +1,35 @@
+.aligncenter,
+.alignleft,
+.alignright {
+	float: none;
+	clear: both;
+	display: block;
+	margin: {
+		left: auto;
+		right: auto;
+	}
+}
+
+@include breakpoint(460px down) {
+	.alignleft {
+		float: left;
+		clear: none;
+		margin: {
+			left: 0;
+			right: $paragraph-margin-bottom;
+		}
+	}
+
+	.alignright {
+		float: right;
+		clear: none;
+		margin: {
+			right: 0;
+			left: $paragraph-margin-bottom;
+		}
+	}
+}
+
+.wp-caption {
+	max-width: 100%;
+}
