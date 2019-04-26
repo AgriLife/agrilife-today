@@ -98,6 +98,11 @@ class Genesis {
 		);
 		add_action( 'genesis_before_content', array( $this, 'genesis_get_sidebar_post' ) );
 		add_action( 'genesis_before', array( $this, 'post_move_hooks' ) );
+		add_filter( 'term_links-category', array( $this, 'add_button_class_to_tax_links' ) );
+		add_filter( 'term_links-region_category', array( $this, 'add_button_class_to_tax_links' ) );
+		add_filter( 'term_links-agency_category', array( $this, 'add_button_class_to_tax_links' ) );
+		add_action( 'genesis_entry_footer', array( $this, 'post_meta_footer' ), 5 );
+		remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 
 		// Change widgets and sidebars.
 		add_filter( 'genesis_attr_sidebar-primary', array( $this, 'sidebar_attr' ) );
@@ -105,6 +110,10 @@ class Genesis {
 
 		// Footer.
 		add_filter( 'genesis_structural_wrap-footer', array( $this, 'footer_wrap' ) );
+
+		// Add taxonomies.
+		$this->create_agency_taxonomy();
+		$this->create_region_taxonomy();
 
 	}
 
@@ -564,7 +573,34 @@ class Genesis {
 	 * @return void
 	 */
 	public function custom_post_info() {
-		echo do_shortcode( '<p class="entry-meta">[post_date]</p>' );
+
+		$output = '<p class="entry-meta">';
+
+		// Post Date.
+		$output .= do_shortcode( '<strong>[post_date]</strong>' );
+
+		// Contacts.
+		$contacts = get_field( 'contact_group' )['contacts'];
+		if ( count( $contacts ) > 0 ) {
+			$output      .= '&nbsp; Media contact: ';
+			$contact_list = array();
+			foreach ( $contacts as $contact ) {
+				$contact_list[] = sprintf(
+					'%s, <a href="tel:+1%s">%s</a>, <a href="mailto:%s">%s</a>',
+					$contact['name'],
+					$contact['phone'],
+					$contact['phone'],
+					$contact['email'],
+					$contact['email']
+				);
+			}
+			$output .= implode( $contact_list, '; ' );
+		}
+
+		$output .= '</p>';
+
+		echo wp_kses_post( $output );
+
 	}
 
 	/**
@@ -602,6 +638,162 @@ class Genesis {
 		$oldclass = $attributes['class'];
 		$newclass = $oldclass . ' cell-gutter-lr-x2';
 		return str_replace( $oldclass, $newclass, $output );
+	}
+
+	/**
+	 * Adds a "button" class for taxonomy links.
+	 *
+	 * @since 0.3.6
+	 * @param string[] $links An array of term links.
+	 * @return array
+	 */
+	public function add_button_class_to_tax_links( $links ) {
+		foreach ( $links as $key => $link ) {
+			if ( strpos( $link, ' class=' ) ) {
+				$links[ $key ] = str_replace( 'class="', 'class="button ', $link );
+			} else {
+				$links[ $key ] = str_replace( '<a ', '<a class="button" ', $link );
+			}
+		}
+		return $links;
+	}
+
+	/**
+	 * Add post meta to the footer
+	 *
+	 * @since 0.3.6
+	 * @return void
+	 */
+	public function post_meta_footer() {
+
+		$output = sprintf( '<span class="button hollow">%s</span>', get_the_date( 'F j, Y' ) );
+
+		// Post author.
+		$output .= sprintf(
+			'<div class="p grid-x"><div class="cell shrink collapse-left">%s</div><div class="cell auto collapse-right"><p><strong>%s</strong></p><p><a href="tel:+1%s">%s</a></p><p><a href="mailto:%s">%s</a></p></div></div>',
+			get_avatar( get_the_author_meta( 'user_email' ) ),
+			get_the_author(),
+			get_the_author_meta( 'phone' ),
+			get_the_author_meta( 'phone' ),
+			get_the_author_meta( 'email' ),
+			get_the_author_meta( 'user_email' )
+		);
+
+		// Post taxonomy.
+		$output .= '<div class="news-taxonomy p">';
+
+		// Categories.
+		$categories = get_the_term_list(
+			get_the_ID(),
+			'category',
+			'<p class="grid-x"><span class="cell shrink cell-valign-center">Category:</span><span class="cell auto">',
+			', ',
+			'</span></p>'
+		);
+		if ( 'string' === gettype( $categories ) ) {
+			$output .= $categories;
+		}
+
+		// Regions.
+		$region_terms = get_the_term_list(
+			get_the_ID(),
+			'region_category',
+			'<p class="grid-x"><span class="cell shrink cell-valign-center">Region:</span><span class="cell auto">',
+			', ',
+			'</span></p>'
+		);
+		if ( 'string' === gettype( $region_terms ) ) {
+			$output .= $region_terms;
+		}
+
+		// Agencies.
+		$agency_terms = get_the_term_list(
+			get_the_ID(),
+			'agency_category',
+			'<p class="grid-x"><span class="cell shrink cell-valign-center">Agency:</span><span class="cell auto">',
+			', ',
+			'</span></p>'
+		);
+		if ( 'string' === gettype( $agency_terms ) ) {
+			$output .= $agency_terms;
+		}
+
+		$output .= '</div>';
+
+		echo wp_kses_post( $output );
+
+	}
+
+	/**
+	 * Create agency taxonomy
+	 *
+	 * @since 0.3.6
+	 * @return void
+	 */
+	public function create_agency_taxonomy() {
+
+		$labels = array(
+			'name'              => _x( 'Agency', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Agency', 'taxonomy singular name' ),
+			'search_items'      => __( 'Search Agency Categories' ),
+			'all_items'         => __( 'All Agency Categories' ),
+			'parent_item'       => __( 'Parent Agency' ),
+			'parent_item_colon' => __( 'Parent Agency:' ),
+			'edit_item'         => __( 'Edit Agency' ),
+			'update_item'       => __( 'Update Agency' ),
+			'add_new_item'      => __( 'Add New Agency' ),
+			'new_item_name'     => __( 'New Agency Name' ),
+		);
+
+		register_taxonomy(
+			'agency_category',
+			array( 'post' ),
+			array(
+				'hierarchical' => true,
+				'labels'       => $labels, /* NOTICE: Here is where the $labels variable is used */
+				'show_ui'      => true,
+				'query_var'    => true,
+				'rewrite'      => array( 'slug' => 'agency' ),
+				'show_in_rest' => true,
+			)
+		);
+
+	}
+
+	/**
+	 * Create region taxonomy
+	 *
+	 * @since 0.3.6
+	 * @return void
+	 */
+	public function create_region_taxonomy() {
+
+		$labels = array(
+			'name'              => _x( 'Region', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Region', 'taxonomy singular name' ),
+			'search_items'      => __( 'Search Region Categories' ),
+			'all_items'         => __( 'All Region Categories' ),
+			'parent_item'       => __( 'Parent Region' ),
+			'parent_item_colon' => __( 'Parent Region:' ),
+			'edit_item'         => __( 'Edit Region' ),
+			'update_item'       => __( 'Update Region' ),
+			'add_new_item'      => __( 'Add New Region' ),
+			'new_item_name'     => __( 'New Agency Region Name' ),
+		);
+
+		register_taxonomy(
+			'region_category',
+			array( 'post' ),
+			array(
+				'hierarchical' => true,
+				'labels'       => $labels,
+				'show_ui'      => true,
+				'query_var'    => true,
+				'rewrite'      => array( 'slug' => 'region' ),
+				'show_in_rest' => true,
+			)
+		);
+
 	}
 
 }

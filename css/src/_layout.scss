@@ -23,6 +23,19 @@
 
 		@include xy-gutters;
 
+		&.shrink,
+		&.auto {
+			width: auto;
+		}
+
+		&.collapse-left {
+			margin-left: 0;
+		}
+
+		&.collapse-right {
+			margin-right: 0;
+		}
+
 		&.small-3 {
 			@include xy-cell(3, false);
 		}

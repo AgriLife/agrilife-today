@@ -1,3 +1,22 @@
 .post-category {
 	margin-top: $paragraph-margin-bottom;
 }
+
+.news-taxonomy {
+	@extend %card-top-border;
+
+	p {
+		margin: 0;
+		padding: $grid-margin-gutters / 2 0;
+		border-bottom: 1px solid $dark-blue;
+	}
+
+	span {
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	.button {
+		margin-bottom: 0;
+	}
+}

@@ -10,11 +10,15 @@
 	}
 }
 
+%card-top-border {
+	border-top: 0.5rem solid $card-border-color;
+}
+
 %card {
 	@extend %card-link;
 
-	border: 1px solid $dark-blue;
-	border-top-width: 0.5rem;
+	border: 1px solid $card-border-color;
+	border-top: 0.5rem solid $card-border-color;
 	background: $white;
 	padding: $global-layout-space;
 	margin-bottom: $global-layout-space;

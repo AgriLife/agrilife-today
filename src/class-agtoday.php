@@ -90,6 +90,7 @@ class AgToday {
 		// Add page template custom fields.
 		if ( class_exists( 'acf' ) ) {
 			require_once AGTODAY_THEME_DIRPATH . '/fields/home.php';
+			require_once AGTODAY_THEME_DIRPATH . '/fields/news-post.php';
 		}
 
 	}
