@@ -65,7 +65,7 @@
 			$height: 20px
 		);
 		order: 2;
-		margin: 0;
+		margin: 0 0 2px;
 		display: block;
 	}
 
@@ -73,11 +73,13 @@
 		order: 1;
 		cursor: pointer;
 		text-transform: uppercase;
-		line-height: 1;
+		line-height: 10px;
 		font: {
 			weight: bold;
 			size: .63rem;
 		}
+		padding-bottom: 4px;
+		margin-top: 1px;
 	}
 
 	@include breakpoint(small only) {
