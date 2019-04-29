@@ -1,6 +1,5 @@
 .top-bar {
-	border: 1px solid $border-primary;
-	border-width: 1px 0;
+	border-top: 1px solid $border-primary;
 
 	@include breakpoint(small only) {
 
@@ -43,10 +42,10 @@
 .nav-primary {
 	@include breakpoint(small only) {
 		width: 100%;
+	}
 
-		#nav-menu-primary {
-			margin-bottom: $grid-margin-gutters;
-		}
+	@include breakpoint(medium) {
+		margin-bottom: -40px;
 	}
 }
 

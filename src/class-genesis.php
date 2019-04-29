@@ -96,6 +96,7 @@ class Genesis {
 				'description' => __( 'This is the widget area for the left side of a single post.', 'agrilife-today' ),
 			)
 		);
+		add_action( 'genesis_after_header', array( $this, 'news_post_header_image' ) );
 		add_action( 'genesis_before_content', array( $this, 'genesis_get_sidebar_post' ) );
 		add_action( 'genesis_before', array( $this, 'post_move_hooks' ) );
 		add_filter( 'term_links-category', array( $this, 'add_button_class_to_tax_links' ) );
@@ -114,6 +115,46 @@ class Genesis {
 		// Add taxonomies.
 		$this->create_agency_taxonomy();
 		$this->create_region_taxonomy();
+
+	}
+
+	/**
+	 * Generate responsive image sizes given an image array.
+	 *
+	 * @since 0.3.8
+	 * @param array $image Image array.
+	 * @return string
+	 */
+	public function get_img_sizes( $image ) {
+
+		$widths = array();
+		$sizes  = $image['sizes'];
+
+		foreach ( $sizes as $key => $value ) {
+			if ( strpos( $key, '-width' ) && $value > 150 ) {
+				$widths[] = sprintf( '(max-width: %1$dpx) %1$dpx', $value );
+			}
+		}
+
+		$widths[] = "{$image['width']}px";
+
+		return implode( ', ', $widths );
+
+	}
+
+	/**
+	 * Generate responsive image srcset given an image array.
+	 *
+	 * @since 0.3.8
+	 * @param array $image Image array.
+	 * @return string
+	 */
+	public function get_img_srcset( $image ) {
+
+		$srcset  = wp_get_attachment_image_srcset( $image['ID'] );
+		$srcset .= ", {$image['url']} {$image['width']}w";
+
+		return $srcset;
 
 	}
 
@@ -391,7 +432,7 @@ class Genesis {
 	 */
 	public function title_area( $open ) {
 
-		$open = str_replace( 'title-area', 'title-area cell small-9 medium-12', $open );
+		$open = str_replace( 'title-area', 'title-area cell small-9 medium-12-collapse', $open );
 
 		return $open;
 
@@ -793,6 +834,32 @@ class Genesis {
 				'show_in_rest' => true,
 			)
 		);
+
+	}
+
+	/**
+	 * Add header group image above content
+	 *
+	 * @since 0.3.8
+	 * @return void
+	 */
+	public function news_post_header_image() {
+
+		$header = get_field( 'header_group' );
+
+		if ( $header && array_key_exists( 'image', $header ) ) {
+
+			$image = $header['image'];
+
+			echo sprintf(
+				'<div class="content-heading-image"><img src="%s" srcset="%s" sizes="%s" alt="%s"></div>',
+				esc_url( $image['url'] ),
+				esc_attr( $this->get_img_srcset( $image ) ),
+				esc_attr( $this->get_img_sizes( $image ) ),
+				esc_attr( $image['alt'] )
+			);
+
+		}
 
 	}
 

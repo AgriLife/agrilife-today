@@ -26,3 +26,11 @@ input[type="submit"] {
 .p {
 	margin-bottom: $paragraph-margin-bottom;
 }
+
+.site-inner {
+	margin-top: 1rem;
+
+	@include breakpoint(medium) {
+		margin-top: 1.5rem;
+	}
+}

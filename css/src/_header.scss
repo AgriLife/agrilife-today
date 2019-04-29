@@ -15,7 +15,6 @@
 	}
 
 	@include breakpoint(medium) {
-		margin-bottom: 1.5rem;
 
 		.site-title {
 			padding: 1.5rem 0;
@@ -28,6 +27,11 @@
 	}
 
 	@include breakpoint(small only) {
+		> .wrap > .wrap {
+			background-color: $white;
+			border-bottom: 1px solid $border-primary;
+		}
+
 		.title-area {
 			text-align: left;
 		}
@@ -40,7 +44,6 @@
 
 		.is-stuck {
 			background-color: $white;
-			border-bottom: 1px solid $border-primary;
 
 			.grid-x .title-area,
 			.grid-x .title-bars {
