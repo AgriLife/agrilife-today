@@ -851,14 +851,17 @@ class Genesis {
 
 			$image = $header['image'];
 
-			echo sprintf(
-				'<div class="content-heading-image"><img src="%s" srcset="%s" sizes="%s" alt="%s"></div>',
-				esc_url( $image['url'] ),
-				esc_attr( $this->get_img_srcset( $image ) ),
-				esc_attr( $this->get_img_sizes( $image ) ),
-				esc_attr( $image['alt'] )
-			);
+			if ( $image ) {
 
+				echo sprintf(
+					'<div class="content-heading-image"><img src="%s" srcset="%s" sizes="%s" alt="%s"></div>',
+					esc_url( $image['url'] ),
+					esc_attr( $this->get_img_srcset( $image ) ),
+					esc_attr( $this->get_img_sizes( $image ) ),
+					esc_attr( $image['alt'] )
+				);
+
+			}
 		}
 
 	}
