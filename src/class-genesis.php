@@ -736,7 +736,7 @@ class Genesis {
 			get_the_ID(),
 			'category',
 			'<p class="grid-x"><span class="cell shrink cell-valign-center">Category:</span><span class="cell auto">',
-			', ',
+			'',
 			'</span></p>'
 		);
 		if ( 'string' === gettype( $categories ) ) {
@@ -748,7 +748,7 @@ class Genesis {
 			get_the_ID(),
 			'region_category',
 			'<p class="grid-x"><span class="cell shrink cell-valign-center">Region:</span><span class="cell auto">',
-			', ',
+			'',
 			'</span></p>'
 		);
 		if ( 'string' === gettype( $region_terms ) ) {
@@ -760,7 +760,7 @@ class Genesis {
 			get_the_ID(),
 			'agency_category',
 			'<p class="grid-x"><span class="cell shrink cell-valign-center">Agency:</span><span class="cell auto">',
-			', ',
+			'',
 			'</span></p>'
 		);
 		if ( 'string' === gettype( $agency_terms ) ) {
