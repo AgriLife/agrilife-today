@@ -1,6 +1,4 @@
 .top-bar {
-	border-top: 1px solid $border-primary;
-
 	@include breakpoint(small only) {
 
 		&,
@@ -42,10 +40,6 @@
 .nav-primary {
 	@include breakpoint(small only) {
 		width: 100%;
-	}
-
-	@include breakpoint(medium) {
-		margin-bottom: -40px;
 	}
 }
 

@@ -18,11 +18,24 @@
 
 		.site-title {
 			padding: 1.5rem 0;
+			border-bottom: 1px solid $border-primary;
 			transition: padding .5s;
 		}
 
 		.is-stuck .site-title {
 			padding: .5rem 0;
+		}
+
+		.sticky-container {
+			transition: height .5s;
+
+			&.child-not-stuck {
+				height: $header-height!important; // sass-lint:disable-line no-important
+			}
+
+			&.child-stuck {
+				height: $header-sticky-height!important; // sass-lint:disable-line no-important
+			}
 		}
 	}
 
@@ -36,19 +49,13 @@
 			text-align: left;
 		}
 
-		.grid-x .title-area,
-		.grid-x .title-bars {
-			margin: $global-layout-space;
-			transition: margin .5s;
-		}
-
 		.is-stuck {
 			background-color: $white;
+		}
 
-			.grid-x .title-area,
-			.grid-x .title-bars {
-				margin: $global-layout-space / 2 $global-layout-space;
-			}
+		.grid-x .title-area,
+		.grid-x .title-bars {
+			margin: $global-layout-space / 2 $global-layout-space;
 		}
 	}
 }
@@ -72,7 +79,7 @@
 			@include xy-grid;
 
 			input {
-				max-width: 100%
+				max-width: 100%;
 			}
 
 			input[type=search] {
