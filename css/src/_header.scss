@@ -37,6 +37,10 @@
 				height: $header-sticky-height!important; // sass-lint:disable-line no-important
 			}
 		}
+
+		.logged-in.admin-bar & .sticky.is-stuck {
+			top: 32px!important; // sass-lint:disable-line no-important
+		}
 	}
 
 	@include breakpoint(small only) {
