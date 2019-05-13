@@ -622,6 +622,14 @@ class Genesis {
 
 		// Contacts.
 		$contacts = get_field( 'contact_group' )['contacts'];
+		// Remove empty values from contacts.
+		foreach ( $contacts as $key => $value ) {
+			$value = array_filter( $value );
+			if ( empty( $value ) ) {
+				unset( $contacts[ $key ] );
+			}
+		}
+		// Print contacts.
 		if ( count( $contacts ) > 0 ) {
 			$output      .= '&nbsp; Media contact: ';
 			$contact_list = array();
