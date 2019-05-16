@@ -1,12 +1,4 @@
 .widget {
-	hr {
-		border-color: $dark-gray;
-		margin: {
-			left: -$global-layout-space;
-			right: -$global-layout-space;
-		}
-	}
-
 	.widget-wrap > ul {
 		list-style-position: inside;
 		margin: {
@@ -249,6 +241,96 @@
 					left: 7%;
 					right: 7%;
 				}
+			}
+		}
+	}
+}
+
+.widget-title + hr {
+	border-color: $dark-gray;
+	margin: {
+		left: -$global-layout-space;
+		right: -$global-layout-space;
+	}
+}
+
+.widgets-post-share {
+	.widget ~ .widget,
+	.addtoany_list a ~ a {
+		margin-top: $global-layout-space;
+	}
+
+	.widget .addtoany_list a {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		padding: 0;
+
+		img {
+			width: 50%;
+			max-width: 64px;
+			flex-shrink: 0;
+		}
+	}
+
+	.a2a_counter .a2a_count,
+	.addtoany_list a:not(.a2a_count)::after {
+		display: inline-block;
+		flex-shrink: 1;
+		width: 50%!important; // sass-lint:disable-line no-important
+		margin-left: $global-layout-space / 2;
+		hyphens: auto;
+		text-transform: uppercase;
+	}
+
+	.a2a_counter .a2a_count {
+		height: 32px!important; // sass-lint:disable-line no-important
+		line-height: 32px!important; // sass-lint:disable-line no-important
+		font-size: 16px!important; // sass-lint:disable-line no-important
+	}
+
+	.addtoany_list a:not(.a2a_count)::after {
+		height: auto;
+		line-height: 16px;
+		font-size: 16px;
+	}
+
+	.a2a_button_twitter::after {
+		content: "Twe\00ad e\00ad t";
+	}
+
+	.a2a_button_flickr::after {
+		content: "Flic\00ad k\00ad r";
+	}
+
+	.a2a_button_youtube::after {
+		content: "Wat\00ad c\00ad h";
+	}
+
+	.a2a_button_feed::after {
+		content: "News\00ad f\00ad ee\00ad d";
+	}
+
+	@include breakpoint(medium up) {
+		@include breakpoint(900px down) {
+			.addtoany_list a:not(.a2a_count)::after {
+				display: none;
+			}
+		}
+
+		@include breakpoint(844px down) {
+			.widget-title,
+			.widget-title + hr {
+				display: none;
+			}
+
+			.card {
+				padding: $global-layout-space / 2;
+			}
+
+			.widget ~ .widget,
+			.addtoany_list a ~ a {
+				margin-top: $global-layout-space / 2;
 			}
 		}
 	}

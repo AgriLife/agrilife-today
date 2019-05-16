@@ -91,9 +91,9 @@ class Genesis {
 		// Modify the post page output.
 		genesis_register_sidebar(
 			array(
-				'name'        => __( 'Post - Left', 'agrilife-today' ),
-				'id'          => 'post-left',
-				'description' => __( 'This is the widget area for the left side of a single post.', 'agrilife-today' ),
+				'name'        => __( 'Post - Share Buttons', 'agrilife-today' ),
+				'id'          => 'post-share',
+				'description' => __( 'This is a widget area for the share buttons of a single post.', 'agrilife-today' ),
 			)
 		);
 		add_action( 'genesis_after_header', array( $this, 'news_post_header_image' ) );
@@ -503,10 +503,15 @@ class Genesis {
 	 */
 	public function add_widget_class( $params ) {
 
+		if ( 'post-share' === $params[0]['id'] ) {
+			return $params;
+		}
+
 		// Add class to outer widget container.
 		$str = $params[0]['before_widget'];
 		preg_match( '/class="([^"]+)"/', $str, $match );
 		$classes = explode( ' ', $match[1] );
+
 		if ( in_array( 'widget', $classes, true ) ) {
 			$classes[]                  = 'card';
 			$class_output               = implode( ' ', $classes );
@@ -551,9 +556,9 @@ class Genesis {
 			return;
 		}
 		genesis_widget_area(
-			'post-left',
+			'post-share',
 			array(
-				'before' => '<div class="page-widget cell medium-2 small-12"><div class="wrap">',
+				'before' => '<div class="widgets-post-share page-widget cell medium-2 small-12"><div class="wrap card"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
 				'after'  => '</div></div>',
 			)
 		);
