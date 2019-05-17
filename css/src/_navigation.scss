@@ -1,6 +1,5 @@
 .top-bar {
 	@include breakpoint(small only) {
-
 		&,
 		ul {
 			background: darken($site-title-background, 5%);
@@ -21,6 +20,12 @@
 
 		a {
 			color: $dark-blue;
+
+			&:active,
+			&:hover {
+				background-color: $menu-item-background-active;
+				color: $menu-item-color-active;
+			}
 		}
 
 		@include breakpoint(medium) {
