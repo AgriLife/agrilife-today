@@ -49,6 +49,9 @@ class AgToday {
 		// Add Widgets.
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
+		// Remove Related Posts.
+		add_action( 'init', 'rp4wp_example_remove_filter' );
+
 	}
 
 	/**
@@ -151,6 +154,17 @@ class AgToday {
 		require_once AGTODAY_THEME_DIRPATH . '/src/class-widget-subscribe.php';
 		register_widget( 'Widget_Subscribe' );
 
+	}
+
+	/**
+	 * Remove automatic Related Post Plugin content after a post.
+	 *
+	 * @since 0.4.2
+	 * @return void
+	 */
+	public function rp4wp_example_remove_filter() {
+		$filter_instance = RP4WP_Manager_Filter::get_filter_object( 'RP4WP_Filter_After_Post' );
+		remove_filter( 'the_content', array( $filter_instance, 'run' ), $filter_instance->get_priority() );
 	}
 
 }
