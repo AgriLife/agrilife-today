@@ -558,7 +558,7 @@ class Genesis {
 		genesis_widget_area(
 			'post-share',
 			array(
-				'before' => '<div class="widgets-post-share page-widget cell medium-2 small-12"><div class="wrap card"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
+				'before' => '<div class="widgets-post-share page-widget cell medium-2 small-12"><div class="wrap medium-card"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
 				'after'  => '</div></div>',
 			)
 		);

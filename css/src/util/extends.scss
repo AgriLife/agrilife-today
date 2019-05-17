@@ -1,53 +1,5 @@
-%card-link {
-	a:not(.button) {
-		color: $card-link-color;
-		text-decoration: none;
-
-		&:hover,
-		&:focus {
-			text-decoration: underline;
-		}
-	}
-}
-
 %card-top-border {
 	border-top: 0.5rem solid $card-border-color;
-}
-
-%card {
-	@extend %card-link;
-
-	border: 1px solid $card-border-color;
-	border-top: 0.5rem solid $card-border-color;
-	background: $white;
-	padding: $global-layout-space;
-	margin-bottom: $global-layout-space;
-
-	&.card-no-padding {
-		padding: 0;
-	}
-
-	.card-heading {
-		line-height: 1;
-		padding: $global-layout-space / 2.5 $global-layout-space;
-		margin-bottom: $global-layout-space;
-		border-left: 1px solid $dark-gray;
-	}
-
-	h3,
-	h4 {
-		&.small {
-			color: $card-link-color;
-			font-size: 1.25rem;
-			line-height: 1.1;
-			text-transform: none;
-			letter-spacing: 0;
-
-			@include breakpoint(medium) {
-				font-size: 1rem;
-			}
-		}
-	}
 }
 
 %button {

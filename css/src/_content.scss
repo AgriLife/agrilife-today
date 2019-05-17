@@ -10,7 +10,13 @@ h6 {
 }
 
 .card {
-	@extend %card;
+	@include card;
+}
+
+.medium-card {
+	@include breakpoint(medium) {
+		@include card;
+	}
 }
 
 button:not(.menu-icon),
