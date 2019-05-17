@@ -50,7 +50,7 @@ class AgToday {
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 		// Remove Related Posts.
-		add_action( 'init', 'rp4wp_example_remove_filter' );
+		add_action( 'init', array( $this, 'rp4wp_example_remove_filter' ) );
 
 	}
 
@@ -163,8 +163,12 @@ class AgToday {
 	 * @return void
 	 */
 	public function rp4wp_example_remove_filter() {
-		$filter_instance = RP4WP_Manager_Filter::get_filter_object( 'RP4WP_Filter_After_Post' );
-		remove_filter( 'the_content', array( $filter_instance, 'run' ), $filter_instance->get_priority() );
+		if ( class_exists( 'RP4WP_Manager_Filter' ) ) {
+			$filter_instance = RP4WP_Manager_Filter::get_filter_object( 'RP4WP_Filter_After_Post' );
+			if ( $filter_instance ) {
+				remove_filter( 'the_content', array( $filter_instance, 'run' ), $filter_instance->get_priority() );
+			}
+		}
 	}
 
 }
