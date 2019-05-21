@@ -403,8 +403,21 @@
 		}
 
 		@include breakpoint(900px down) {
-			.addtoany_list a:not(.a2a_count)::after {
-				display: none;
+			.widget .addtoany_list {
+				a {
+					display: block;
+					text-align: center;
+					height: 64px;
+
+					img {
+						width: 100%;
+					}
+				}
+
+				.a2a_count,
+				a::after {
+					display: none;
+				}
 			}
 		}
 
