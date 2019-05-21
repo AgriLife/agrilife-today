@@ -7,7 +7,7 @@
 
 	p {
 		margin: 0;
-		padding: $grid-margin-gutters / 2 0;
+		padding: $grid-margin-gutters / 2 0 0;
 		border-bottom: 1px solid $dark-blue;
 	}
 
@@ -17,7 +17,7 @@
 	}
 
 	.button {
-		margin-bottom: 0;
+		margin-bottom: $grid-margin-gutters / 2;
 	}
 }
 
