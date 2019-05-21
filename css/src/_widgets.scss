@@ -227,7 +227,8 @@
 			flex-wrap: wrap;
 		}
 
-		.textwidget {
+		.cell.textwidget {
+			@include xy-cell(12, false, 4 * $global-layout-space);
 			margin: {
 				left: 2 * $global-layout-space;
 				right: 2 * $global-layout-space;
