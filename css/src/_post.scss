@@ -22,11 +22,13 @@
 }
 
 .content-heading-image {
-	max-height: 500px;
-	overflow: hidden;
 
 	@include breakpoint(medium) {
 		margin-top: -39px;
+	}
+
+	img {
+		width: 100%;
 	}
 }
 
