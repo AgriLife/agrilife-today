@@ -473,7 +473,7 @@ class Genesis {
 		$attributes['class'] .= ' cell';
 		$site_layout          = genesis_site_layout();
 		if ( is_singular( 'post' ) && in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
-			$attributes['class'] .= ' medium-6 small-12';
+			$attributes['class'] .= ' medium-auto small-12';
 		} elseif ( in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
 			$attributes['class'] .= ' medium-8 small-12';
 		} else {
@@ -558,7 +558,7 @@ class Genesis {
 		genesis_widget_area(
 			'post-share',
 			array(
-				'before' => '<div class="widgets-post-share page-widget cell medium-2 small-12"><div class="wrap medium-card"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
+				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12"><div class="wrap medium-card"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
 				'after'  => '</div></div>',
 			)
 		);

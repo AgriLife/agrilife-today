@@ -403,6 +403,11 @@
 		}
 
 		@include breakpoint(900px down) {
+			.widget-title,
+			.widget-title + hr {
+				display: none;
+			}
+
 			.widget .addtoany_list {
 				a {
 					display: block;
@@ -410,7 +415,7 @@
 					height: 64px;
 
 					img {
-						width: 100%;
+						width: 64px;
 					}
 				}
 
@@ -422,11 +427,6 @@
 		}
 
 		@include breakpoint(844px down) {
-			.widget-title,
-			.widget-title + hr {
-				display: none;
-			}
-
 			.medium-card {
 				padding: $global-layout-space / 2;
 			}

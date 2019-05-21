@@ -20,12 +20,18 @@
 	@include xy-grid;
 
 	> .cell {
-
 		@include xy-gutters;
+		flex: 0 0 auto;
+		min-width: 0;
+		min-height: 0;
 
 		&.shrink,
 		&.auto {
 			width: auto;
+		}
+
+		&.auto {
+			flex: 1 1 0px;
 		}
 
 		&.collapse-left {
@@ -98,6 +104,15 @@
 		}
 
 		@include breakpoint(medium) {
+
+			&.medium-shrink {
+				width: auto;
+			}
+
+			&.medium-auto {
+				width: auto;
+				flex: 1 1 0px;
+			}
 
 			&.medium-2 {
 				@include xy-cell(2, false);
