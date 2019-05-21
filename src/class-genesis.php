@@ -638,18 +638,37 @@ class Genesis {
 			}
 			// Print contacts.
 			if ( count( $contacts ) > 0 ) {
+
 				$output      .= '&nbsp; Media contact: ';
 				$contact_list = array();
+
 				foreach ( $contacts as $contact ) {
-					$contact_list[] = sprintf(
-						'%s, <a href="tel:+1%s">%s</a>, <a href="mailto:%s">%s</a>',
-						$contact['name'],
-						$contact['phone'],
-						$contact['phone'],
-						$contact['email'],
-						$contact['email']
-					);
+
+					$contact_output = array();
+
+					if ( ! empty( $contact['name'] ) ) {
+						$contact_output[] = $contact['name'];
+					}
+
+					if ( ! empty( $contact['phone'] ) ) {
+						$contact_output[] = sprintf(
+							'<a href="tel:+1%s">%s</a>',
+							$contact['phone'],
+							$contact['phone']
+						);
+					}
+
+					if ( ! empty( $contact['email'] ) ) {
+						$contact_output[] = sprintf(
+							'<a href="mailto:%s">%s</a>',
+							$contact['email'],
+							$contact['email']
+						);
+					}
+
+					$contact_list[] = implode( ', ', $contact_output );
 				}
+
 				$output .= implode( $contact_list, '; ' );
 			}
 		}
