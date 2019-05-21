@@ -49,6 +49,10 @@ class AgToday {
 		// Add Widgets.
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
+		// Add Image Sizes.
+		$this->add_image_sizes();
+		add_filter( 'image_size_names_choose', array( $this, 'select_custom_image_sizes' ) );
+
 		// Remove Related Posts.
 		add_action( 'init', array( $this, 'rp4wp_example_remove_filter' ) );
 
@@ -109,6 +113,45 @@ class AgToday {
 		require_once AGTODAY_THEME_DIRPATH . '/src/class-pagetemplate.php';
 		$home = new \AgToday\PageTemplate( AGTODAY_THEME_TEMPLATE_PATH, 'home.php', 'Home Page' );
 		$home->register();
+
+	}
+
+	/**
+	 * Add custom image sizes
+	 *
+	 * @since 0.4.7
+	 * @return void
+	 */
+	private function add_image_sizes() {
+
+		// Post headings at 16:7 aspect ratio.
+		add_image_size( 'post-heading-small', 640, 480, true );
+		add_image_size( 'post-heading-medium', 960, 420, true );
+		add_image_size( 'post-heading-medium_large', 1366, 598, true );
+		add_image_size( 'post-heading-large', 1920, 840, true );
+
+	}
+
+	/**
+	 * Make custom image sizes selectable in media dashboard
+	 *
+	 * @since 0.4.7
+	 * @param array $sizes Current image size options.
+	 * @return array
+	 */
+	public function select_custom_image_sizes( $sizes ) {
+
+		return array_merge(
+			$sizes,
+			array(
+
+				'post-heading-small'        => __( 'Post Heading - Small' ),
+				'post-heading-medium'       => __( 'Post Heading - Medium' ),
+				'post-heading-medium-large' => __( 'Post Heading - Medium Large' ),
+				'post-heading-large'        => __( 'Post Heading - Large' ),
+
+			)
+		);
 
 	}
 

@@ -869,11 +869,49 @@ class Genesis {
 
 			if ( $image ) {
 
+				$size_atts = array(
+					'post-heading-small'        => 640,
+					'post-heading-medium'       => 960,
+					'post-heading-medium_large' => 1366,
+					'post-heading-large'        => 1920,
+				);
+
+				$srcset       = array();
+				$sizes        = array();
+				$active_sizes = array();
+				$largest      = 'post-heading-small';
+
+				foreach ( $size_atts as $key => $value ) {
+
+					$current_size = $image['sizes'][ "{$key}-width" ];
+
+					if ( ! in_array( $current_size, $active_sizes, true ) && $current_size === $value ) {
+
+						$active_sizes[] = $current_size;
+						$srcset[]       = sprintf(
+							'%s %sw',
+							$image['sizes'][ $key ],
+							$current_size
+						);
+						$sizes[]        = sprintf(
+							'(max-width: %spx) %spx',
+							$current_size,
+							$current_size
+						);
+						$largest        = $key;
+
+					}
+				}
+
+				$sizes[] = $image['sizes'][ "{$largest}-width" ] . 'px';
+				$srcset  = implode( ', ', $srcset );
+				$sizes   = implode( ', ', $sizes );
+
 				echo sprintf(
 					'<div class="content-heading-image"><img src="%s" srcset="%s" sizes="%s" alt="%s"></div>',
-					esc_url( $image['url'] ),
-					esc_attr( $this->get_img_srcset( $image ) ),
-					esc_attr( $this->get_img_sizes( $image ) ),
+					esc_url( $image['sizes'][ $largest ] ),
+					esc_attr( $srcset ),
+					esc_attr( $sizes ),
 					esc_attr( $image['alt'] )
 				);
 
