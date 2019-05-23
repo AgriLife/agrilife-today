@@ -555,10 +555,11 @@ class Genesis {
 		if ( ! is_singular( 'post' ) || ! in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
 			return;
 		}
+
 		genesis_widget_area(
 			'post-share',
 			array(
-				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12"><div class="wrap medium-card"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
+				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12" data-sticky-container><div class="wrap medium-card" data-sticky data-options="stickyOn:medium;marginTop:6.5625;anchor:genesis-content"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
 				'after'  => '</div></div>',
 			)
 		);

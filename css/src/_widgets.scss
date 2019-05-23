@@ -326,6 +326,10 @@
 	@include breakpoint(medium) {
 		text-align: left;
 
+		.grid-x > &.cell {
+			width: 150px;
+		}
+
 		.medium-card {
 			display: block;
 		}
@@ -383,8 +387,8 @@
 
 		.addtoany_list a:not(.a2a_count)::after {
 			height: auto;
-			line-height: 16px;
-			font-size: 16px;
+			line-height: 1;
+			font-size: 14px;
 		}
 
 		.a2a_button_twitter::after {
@@ -403,7 +407,12 @@
 			content: "News\00ad f\00ad ee\00ad d";
 		}
 
-		@include breakpoint(900px down) {
+		@include breakpoint(1000px down) {
+
+			.grid-x > &.cell {
+				width: rem-calc(64);
+			}
+
 			.widget-title,
 			.widget-title + hr {
 				display: none;
@@ -425,11 +434,10 @@
 					display: none;
 				}
 			}
-		}
 
-		@include breakpoint(844px down) {
 			.medium-card {
-				padding: $global-layout-space / 2;
+				padding: 0;
+				border: 0;
 			}
 
 			.widget ~ .widget,
