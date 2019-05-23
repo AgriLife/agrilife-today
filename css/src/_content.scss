@@ -34,9 +34,9 @@ input[type="submit"] {
 }
 
 .site-inner {
-	margin-top: 1rem;
+	margin-top: 2 * $global-layout-space;
 
 	@include breakpoint(medium) {
-		margin-top: 1.5rem;
+		margin-top: 4 * $global-layout-space;
 	}
 }

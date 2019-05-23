@@ -1,5 +1,26 @@
-.post-category {
-	margin-top: $paragraph-margin-bottom;
+.single-post {
+	.entry-header {
+		margin-top: 2 * $global-layout-space;
+		margin-bottom: 1.5 * $global-layout-space;
+
+		@include breakpoint(medium) {
+			margin-top: 4 * $global-layout-space;
+			margin-bottom: 3 * $global-layout-space;
+		}
+	}
+
+	@include breakpoint(medium) {
+		#genesis-content {
+			margin: {
+				left: rem-calc(42);
+				right: rem-calc(42);
+			}
+		}
+	}
+}
+
+h1.entry-title {
+	line-height: 1.1;
 }
 
 .news-taxonomy {

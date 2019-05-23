@@ -59,7 +59,14 @@
 
 		.grid-x .title-area,
 		.grid-x .title-bars {
-			margin: $global-layout-space / 2 $global-layout-space;
+			margin: {
+				top: $global-layout-space / 2;
+				bottom: $global-layout-space / 2;
+			}
+		}
+
+		.grid-x .title-bars {
+			padding-right: 6px;
 		}
 	}
 }
