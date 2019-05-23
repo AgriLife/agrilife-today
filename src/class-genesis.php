@@ -408,7 +408,7 @@ class Genesis {
 	 */
 	public function add_logo( $title, $inside, $wrap ) {
 
-		$logo = sprintf( '<img src="%s">', AGTODAY_THEME_DIRURL . '/images/logo.png' );
+		$logo = sprintf( '<img src="%s">', AGTODAY_THEME_DIRURL . '/images/logo.svg' );
 		$home = trailingslashit( home_url() );
 
 		$new_inside = sprintf(
