@@ -11,7 +11,7 @@
 		bottom: $paragraph-margin-bottom;
 		right: $paragraph-margin-bottom;
 	}
-	background-color: $dark-blue;
+	background-color: $button-background;
 	font: bold .8rem/1.1 $opensans;
 	text: {
 		transform: uppercase;
@@ -34,5 +34,9 @@
 		&::hover {
 			color: $dark-blue;
 		}
+	}
+
+	a {
+		color: $white;
 	}
 }

@@ -48,9 +48,9 @@
 // @include foundation-flex-classes;
 // @include foundation-prototype-classes;
 
-@import "wordpress";
 @import "util/extends";
 @import "util/mixins";
+@import "wordpress";
 @import "layout";
 @import "accessibility";
 @import "header";

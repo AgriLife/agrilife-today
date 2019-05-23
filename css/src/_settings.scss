@@ -88,9 +88,19 @@ $titlebar-text-font-weight: normal;
 
 /* Content
 --------------------------------------------- */
+$small-side-spacing: 9%;
+$blockquote-border: none;
+$blockquote-color: darken($dark-blue, 20%);
+$blockquote-padding: rem-calc(9 20 9 19);
+$cite-font-size: 0.9rem;
+$cite-color: darken($dark-blue, 20%);
+$hr-border-color: $dark-blue;
+$table-border-color: $dark-blue;
+$table-border: 1px solid $table-border-color;
 
 /* Buttons
 --------------------------------------------- */
+$button-background: $dark-blue;
 
 /* Cards
 --------------------------------------------- */

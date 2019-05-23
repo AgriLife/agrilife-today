@@ -3,7 +3,7 @@ module.exports = (grunt) ->
     pkg: @file.readJSON('package.json')
     watch:
       files: [
-        'css/src/*.scss',
+        'css/src/**/*.scss',
         '!css/src/_themecomment.scss'
       ]
       tasks: ['develop']
