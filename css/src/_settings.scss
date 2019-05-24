@@ -59,8 +59,11 @@ $header-styles: (
 /* Header
 --------------------------------------------- */
 $site-title-background: $white;
-$header-height: rem-calc(137);
-$header-sticky-height: rem-calc(105);
+$title-area-height: rem-calc(87);
+$title-area-sticky-height: rem-calc(55);
+$nav-primary-height: rem-calc(39);
+$header-height: $title-area-height + $nav-primary-height;
+$header-sticky-height: $title-area-sticky-height + $nav-primary-height;
 
 /* Navigation
 --------------------------------------------- */

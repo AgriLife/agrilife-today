@@ -45,7 +45,7 @@ h1.entry-title {
 .content-heading-image {
 
 	@include breakpoint(medium) {
-		margin-top: -39px;
+		margin-top: -#{$nav-primary-height};
 	}
 
 	img {
