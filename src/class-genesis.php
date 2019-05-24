@@ -743,6 +743,10 @@ class Genesis {
 	 */
 	public function post_meta_footer() {
 
+		if ( ! is_singular( 'post' ) ) {
+			return;
+		}
+
 		$output = sprintf( '<span class="button hollow">%s</span>', get_the_date( 'F j, Y' ) );
 
 		// Post author.
@@ -880,6 +884,10 @@ class Genesis {
 	 * @return void
 	 */
 	public function news_post_header_image() {
+
+		if ( ! is_singular( 'post' ) ) {
+			return;
+		}
 
 		$header = get_field( 'header_group' );
 
