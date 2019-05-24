@@ -757,7 +757,7 @@ class Genesis {
 		);
 
 		// Post taxonomy.
-		$output .= '<div class="news-taxonomy p">';
+		$output .= '<div class="news-taxonomy">';
 
 		// Categories.
 		$categories = get_the_term_list(

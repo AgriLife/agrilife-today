@@ -2,7 +2,9 @@
 	color: $footer-text-color;
 	line-height: 2.4em;
 	font-weight: $footer-font-weight;
-	padding: 0 $grid-margin-gutters / 2 $grid-margin-gutters;
+	margin-top: $grid-margin-gutters;
+	margin-bottom: $grid-margin-gutters;
+	padding: 0 $grid-margin-gutters / 2;
 
 	ul {
 		margin-left: 0;
