@@ -6,6 +6,7 @@
 	margin-top: $grid-margin-gutters;
 	padding: $grid-margin-gutters;
 	font-size: .9rem;
+	text-align: center;
 
 	> .wrap {
 		align-items: center;
@@ -19,10 +20,27 @@
 		margin: 0;
 
 		li {
-			display: inline;
+			display: block;
 			list-style-type: none;
-			border-right: 1px solid $white;
 			line-height: 1.7;
+		}
+	}
+
+	.footer-container-tamus {
+		text-align: center;
+		margin-top: $grid-margin-gutters;
+	}
+
+	.footer-tamus {
+		width: 160px;
+	}
+
+	@include breakpoint(medium up) {
+		text-align: left;
+
+		ul li {
+			display: inline;
+			border-right: 1px solid $white;
 			margin: 0 .5em 0 0;
 			padding-right: .5em;
 
@@ -32,18 +50,6 @@
 				padding-right: 0;
 			}
 		}
-	}
-
-	.footer-container-tamus {
-		text-align: center;
-	}
-
-	.footer-tamus {
-		border: 2px solid $white;
-	}
-
-	@include breakpoint(medium up) {
-		text-align: left;
 
 		.footer-container {
 			margin-right: 1.5rem;
@@ -51,6 +57,7 @@
 
 		.footer-container-tamus {
 			margin-left: 1.5rem;
+			margin-top: 0;
 		}
 	}
 

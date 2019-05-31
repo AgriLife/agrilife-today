@@ -170,7 +170,7 @@ class RequiredDOM {
 	 */
 	public static function render_tamus_logo() {
 
-		$output = '<div class="footer-container-tamus cell medium-shrink small-12"><a href="http://tamus.edu/" title="Texas A&amp;M University System"><img class="footer-tamus" src="' . AGTODAY_THEME_DIRURL . '/images/footer-tamus-maroon.png" alt="Texas A&amp;M University System Member" /></a></div>';
+		$output = '<div class="footer-container-tamus cell medium-shrink small-12"><a href="http://tamus.edu/" title="Texas A&amp;M University System"><img class="footer-tamus" src="' . AGTODAY_THEME_DIRURL . '/images/footer-tamus-white.svg" alt="Texas A&amp;M University System Member" /></a></div>';
 
 		echo wp_kses_post( $output );
 
