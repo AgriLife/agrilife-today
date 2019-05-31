@@ -86,7 +86,6 @@ class Genesis {
 		add_filter( 'genesis_attr_site-inner', array( $this, 'add_layout_container_class' ) );
 		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
-		add_filter( 'genesis_attr_site-footer', array( $this, 'add_layout_container_class' ) );
 
 		// Modify the post page output.
 		genesis_register_sidebar(
@@ -537,7 +536,7 @@ class Genesis {
 	 */
 	public function footer_wrap( $output ) {
 
-		return str_replace( 'class="wrap"', 'class="wrap grid-x"', $output );
+		return str_replace( 'class="wrap"', 'class="wrap layout-container grid-x"', $output );
 
 	}
 

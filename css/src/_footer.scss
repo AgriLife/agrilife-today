@@ -1,26 +1,35 @@
 .site-footer {
-	color: $footer-text-color;
+	background-color: $maroon;
+	color: $white;
 	line-height: 2.4em;
 	font-weight: $footer-font-weight;
 	margin-top: $grid-margin-gutters;
-	margin-bottom: $grid-margin-gutters;
-	padding: 0 $grid-margin-gutters / 2;
+	padding: $grid-margin-gutters;
+	font-size: .9rem;
+
+	> .wrap {
+		align-items: center;
+	}
+
+	a {
+		color: $white;
+	}
 
 	ul {
-		margin-left: 0;
+		margin: 0;
 
 		li {
-			display: inline-block;
+			display: inline;
 			list-style-type: none;
-			border-left: 1px solid $border-primary;
-			line-height: 1rem;
-			margin: .2em 0 .2em .75em;
-			padding-left: .75em;
+			border-right: 1px solid $white;
+			line-height: 1.7;
+			margin: 0 .5em 0 0;
+			padding-right: .5em;
 
-			&:first-child {
-				border-left: none;
-				margin-left: 0;
-				padding-left: 0;
+			&:last-child {
+				border-right: none;
+				margin-right: 0;
+				padding-right: 0;
 			}
 		}
 	}
@@ -30,20 +39,19 @@
 	}
 
 	.footer-tamus {
-		border: 2px solid $border-primary;
+		border: 2px solid $white;
 	}
 
 	@include breakpoint(medium up) {
 		text-align: left;
 
-		ul {
-			margin: 0 0 $grid-margin-gutters;
-
-			li {
-				font-size: 1em;
-			}
+		.footer-container {
+			margin-right: 1.5rem;
 		}
 
+		.footer-container-tamus {
+			margin-left: 1.5rem;
+		}
 	}
 
 }
