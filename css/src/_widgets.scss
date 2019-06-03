@@ -243,6 +243,10 @@
 					right: 7%;
 				}
 			}
+
+			.grid-x > .cell.medium-12.title-wrap {
+				width: calc(100% - 14%);
+			}
 		}
 	}
 }
