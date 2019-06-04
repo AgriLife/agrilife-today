@@ -24,7 +24,7 @@ class Widget_Subscribe extends WP_Widget {
 	 */
 	protected $default_instance = array(
 		'title'   => 'Don\'t Miss A Story',
-		'content' => '<form class="subscribe" action="https://feedburner.google.com/fb/a/mailverify" method="post" onsubmit="window.open(\'https://feedburner.google.com/fb/a/mailverify?uri=AgrilifeToday\', \'popupwindow\', \'scrollbars=yes,width=550,height=520\');return true" target="popupwindow"><input value="e.g. you@gmail.com" type="email" name="email" /> <input type="hidden" name="uri" value="AgrilifeToday" /> <input type="hidden" name="loc" value="en_US" /> <span class="submit-wrap"><button type="submit">Subscribe</button></span></form>',
+		'content' => '<form class="subscribe" action="https://feedburner.google.com/fb/a/mailverify" method="post" onsubmit="window.open(\'https://feedburner.google.com/fb/a/mailverify?uri=AgrilifeToday\', \'popupwindow\', \'scrollbars=yes,width=550,height=520\');return true" target="popupwindow"><input value="e.g. you@gmail.com" type="email" name="email" /> <input type="hidden" name="uri" value="AgrilifeToday" /> <input type="hidden" name="loc" value="en_US" /> <span class="submit-wrap"><input type="submit" value="Subscribe" /></span></form>',
 	);
 
 	/**
