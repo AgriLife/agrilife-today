@@ -37,13 +37,10 @@
 .agt-sub {
 	$title-height: 34px;
 
+	background-color: $white;
 	text-align: center;
 	position: relative;
-	padding: {
-		left: 0;
-		right: 0;
-		top: 0;
-	}
+	padding: 0 0 .7rem;
 
 	h4,
 	input {
@@ -60,10 +57,6 @@
 	h4 {
 		display: inline-block;
 		background: $white;
-		font: {
-			weight: bold;
-			family: $opensans;
-		}
 		margin: 0;
 		border: 1px solid $dark-gray;
 		padding: 0 .7rem;
@@ -82,23 +75,20 @@
 	}
 
 	input {
-		height: auto;
 		text-align: center;
+		margin-bottom: .5rem;
 
 		&[type="submit"] {
-			font: {
-				family: $tungsten;
-				size: 2rem;
-			}
-			text: {
-				align: left;
-				transform: uppercase;
-			}
-			background: url("../images/widget-arrows-right.png") right transparent no-repeat;
 			border: none;
 			margin-bottom: 0;
-			padding: 0 rem-calc(38 + 16) 0 0;
+			padding: 0 0.5rem 4px;
 			cursor: pointer;
+			background-color: $white;
+			font: {
+				size: inherit;
+				family: inherit;
+			}
+			line-height: inherit;
 
 			&,
 			&:hover,
@@ -115,8 +105,17 @@
 	}
 
 	.submit-wrap {
+		background: url("../images/widget-arrows.svg") center center/contain transparent no-repeat;
 		display: block;
-		text-align: left;
+		font: {
+			family: $tungsten;
+			size: 2rem;
+		}
+		line-height: 1;
+		text: {
+			align: center;
+			transform: uppercase;
+		}
 	}
 
 	.widget-wrap {
@@ -139,7 +138,7 @@
 
 		input[type="email"],
 		.submit-wrap {
-			margin: 0.25rem 0;
+			margin: 0.5rem 0;
 		}
 
 		.title-wrap {
@@ -150,7 +149,7 @@
 		}
 
 		.textwidget {
-			@include xy-cell(auto, $gutters: 4rem);
+			@include xy-cell(auto, false);
 		}
 
 		@include breakpoint(460px down) {
@@ -163,14 +162,8 @@
 				}
 			}
 
-			input[type="submit"] {
+			.submit-wrap {
 				font-size: 1.7rem;
-				padding: 0 rem-calc(38 + 8) 0 0;
-			}
-
-			.textwidget {
-				margin-left: 1rem;
-				margin-right: 1rem;
 			}
 		}
 	}
@@ -187,19 +180,20 @@
 			z-index: 1;
 		}
 
-		input[type="submit"] {
-			font-size: 2rem;
-			width: 100%;
-			vertical-align: top;
+		.submit-wrap {
 			background: url("../images/widget-arrows.svg") center center/contain transparent no-repeat;
 			text-align: center;
-			padding: 0;
-			text-shadow: -12px 0 1px $white, -9px 0 1px $white, -6px 0 1px $white, -3px 0 1px $white,
-			3px 0 1px $white, 6px 0 1px $white, 9px 0 1px $white, 12px 0 1px $white;
+			font-size: 2rem;
 
-			@include breakpoint(800px down) {
+			@include breakpoint(900px down) {
 				font-size: 1.5rem;
+
+				input {
+					padding-bottom: 2px;
+				}
 			}
+		}
+
 		}
 
 		h4 {
@@ -228,15 +222,14 @@
 		}
 
 		.cell.textwidget {
-			@include xy-cell(12, false, 4 * $global-layout-space);
+			width: 86%;
 			margin: {
-				left: 2 * $global-layout-space;
-				right: 2 * $global-layout-space;
+				left: 7%;
+				right: 7%;
 			}
 		}
 
 		@include breakpoint(960px down) {
-			.textwidget,
 			.title-wrap {
 				margin: {
 					left: 7%;
