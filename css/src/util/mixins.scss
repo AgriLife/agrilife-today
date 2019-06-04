@@ -44,6 +44,12 @@
 			}
 		}
 	}
+
+	&.invert {
+		border-color: $light-blue;
+		background-color: transparent;
+		color: $white;
+	}
 }
 
 /// Create brackets on opposite sides of an element
