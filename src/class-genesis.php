@@ -109,6 +109,28 @@ class Genesis {
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
 
 		// Footer.
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Footer - 1', 'agrilife-today' ),
+				'id'          => 'footer-1',
+				'description' => __( 'This is the first widget area for the site footer.', 'agrilife-today' ),
+			)
+		);
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Footer - 2', 'agrilife-today' ),
+				'id'          => 'footer-2',
+				'description' => __( 'This is the second widget area for the site footer.', 'agrilife-today' ),
+			)
+		);
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Footer - 3', 'agrilife-today' ),
+				'id'          => 'footer-3',
+				'description' => __( 'This is the third widget area for the site footer.', 'agrilife-today' ),
+			)
+		);
+		add_action( 'genesis_before_footer', array( $this, 'genesis_footer_widget_area' ) );
 		add_filter( 'genesis_structural_wrap-footer', array( $this, 'footer_wrap' ) );
 
 		// Add taxonomies.
@@ -512,7 +534,20 @@ class Genesis {
 		$classes = explode( ' ', $match[1] );
 
 		if ( in_array( 'widget', $classes, true ) ) {
-			$classes[]                  = 'card';
+
+			// Invert footer widgets.
+			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true ) ) {
+				$classes[] = 'invert';
+			}
+
+			// Apply card classes.
+			if (
+				! in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true )
+				|| false !== strpos( $params[0]['widget_id'], 'agt_subscribe' )
+			) {
+				$classes[] = 'card';
+			}
+
 			$class_output               = implode( ' ', $classes );
 			$params[0]['before_widget'] = str_replace( $match[0], "class=\"{$class_output}\"", $params[0]['before_widget'] );
 		}
@@ -952,6 +987,54 @@ class Genesis {
 
 			}
 		}
+
+	}
+
+	/**
+	 * Add post left sidebar
+	 *
+	 * @since 0.3.2
+	 * @return void
+	 */
+	public function genesis_footer_widget_area() {
+
+		$logo = sprintf(
+			'<div class="footer-widgets-logo cell medium-shrink small-12"><a href="%s" class="logo" title="Texas A&M AgriLife"><img src="%s"></a></div>',
+			trailingslashit( home_url() ),
+			AGTODAY_THEME_DIRURL . '/images/logo-light.svg'
+		);
+
+		$footer_open  = '<div class="footer-widgets"><div class="wrap layout-container grid-x">';
+		$footer_open .= $logo;
+		$footer_close = '</div></div>';
+
+		echo wp_kses_post( $footer_open );
+
+		genesis_widget_area(
+			'footer-1',
+			array(
+				'before' => '<div class="widgets-footer-1 cell small-12 medium-shrink">',
+				'after'  => '</div>',
+			)
+		);
+
+		genesis_widget_area(
+			'footer-2',
+			array(
+				'before' => '<div class="widgets-footer-2 cell small-12 medium-shrink">',
+				'after'  => '</div>',
+			)
+		);
+
+		genesis_widget_area(
+			'footer-3',
+			array(
+				'before' => '<div class="widgets-footer-3 cell small-12 medium-auto">',
+				'after'  => '</div>',
+			)
+		);
+
+		echo wp_kses_post( $footer_close );
 
 	}
 
