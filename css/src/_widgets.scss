@@ -66,36 +66,36 @@
 		}
 	}
 
-	input[type="email"] {
-		font-style: italic;
-
-		&:focus {
-			font-style: normal;
-		}
-	}
-
 	input {
 		text-align: center;
 		margin-bottom: .5rem;
 
-		&[type="submit"] {
-			border: none;
-			margin-bottom: 0;
-			padding: 0 0.5rem 4px;
-			cursor: pointer;
-			background-color: $white;
-			font: {
-				size: inherit;
-				family: inherit;
-			}
-			line-height: inherit;
+		&[type="email"] {
+			font-style: italic;
 
-			&,
-			&:hover,
 			&:focus {
-				color: $body-font-color;
-				box-shadow: none;
+				font-style: normal;
 			}
+		}
+	}
+
+	*[type="submit"] {
+		border: none;
+		margin-bottom: 0;
+		padding: 0 0.5rem 3px;
+		cursor: pointer;
+		background-color: $white;
+		font: {
+			size: inherit;
+			family: inherit;
+		}
+		line-height: inherit;
+
+		&,
+		&:hover,
+		&:focus {
+			color: $body-font-color;
+			box-shadow: none;
 		}
 	}
 
@@ -188,12 +188,10 @@
 			@include breakpoint(900px down) {
 				font-size: 1.5rem;
 
-				input {
+				*[type="submit"] {
 					padding-bottom: 2px;
 				}
 			}
-		}
-
 		}
 
 		h4 {
