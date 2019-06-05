@@ -558,6 +558,11 @@ class Genesis {
 			$params[0]['after_title'] .= '<hr />';
 		}
 
+		// Remove blank space from between Add To Any widgets for styling purposes.
+		if ( in_array( $params[0]['widget_name'], array( 'AddToAny Share', 'AddToAny Follow' ), true ) ) {
+			$params[0]['after_widget'] = preg_replace( '/\s/', '', $params[0]['after_widget'] );
+		}
+
 		return $params;
 
 	}
@@ -1013,7 +1018,7 @@ class Genesis {
 		genesis_widget_area(
 			'footer-1',
 			array(
-				'before' => '<div class="widgets-footer-1 cell small-12 medium-shrink">',
+				'before' => '<div class="widgets-footer-1 cell small-12 medium-auto">',
 				'after'  => '</div>',
 			)
 		);
