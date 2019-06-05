@@ -1,9 +1,13 @@
+.site-footer,
+.footer-widgets {
+	padding: $grid-margin-gutters;
+}
+
 .site-footer {
 	background-color: $maroon;
 	color: $white;
 	line-height: 2.4em;
 	font-weight: $footer-font-weight;
-	padding: $grid-margin-gutters;
 	font-size: .9rem;
 	text-align: center;
 
@@ -62,12 +66,18 @@
 }
 
 .footer-widgets {
+	$social-media-space: .25rem;
+	$menu-items-padding-x: 1rem;
+	$menu-items-padding-y: 0.6875rem;
+	$widget-space-y: $menu-items-padding-y;
+	$widget-space-x: 3rem;
+
 	margin-top: $grid-margin-gutters;
 	background-color: $dark-blue;
 	color: $white;
 	font-size: .9rem;
 	font-weight: bold;
-	padding: 1rem 0;
+	text-align: center;
 
 	a {
 		color: $white;
@@ -76,26 +86,39 @@
 
 	li {
 		display: block;
-		width: 100%;
+
+		@include breakpoint(medium) {
+			width: 100%;
+		}
 	}
 
 	> .grid-x {
 		justify-content: center;
-		padding: .5rem;
+		text-align: center;
 
-		> .cell:not(.widgets-footer-3) {
-			margin: 0;
+		> .cell {
+			padding: $widget-space-y 0;
+		}
+
+		@include breakpoint(medium) {
+			text-align: left;
+
+			> .cell {
+				padding: $widget-space-y + .1rem 0;
+			}
 		}
 	}
 
-	.footer-widgets-logo,
-	.widgets-footer-2 {
-		padding: 1rem;
-	}
+	> .grid-x > .cell.widgets-footer-1 {
+		min-width: rem-calc(40) * 2 + $social-media-space * 4 + $widget-space-x - $social-media-space;
 
-	.widgets-footer-1 {
-		min-width: 128px;
-		padding: .75rem;
+		@include breakpoint(medium) {
+			padding: $widget-space-y - $social-media-space + .1rem
+			0
+			$widget-space-y - $social-media-space
+			$widget-space-x - $social-media-space;
+			margin-right: $grid-margin-gutters / 2 - $social-media-space;
+		}
 
 		section,
 		div {
@@ -103,9 +126,15 @@
 		}
 	}
 
-	.widgets-footer-2 {
-		margin: 0;
-		padding: .5rem 0;
+	@include breakpoint(medium) {
+		text-align: left;
+
+		> .grid-x > .cell.widgets-footer-2 {
+			padding: $widget-space-y - $menu-items-padding-y
+			$widget-space-x - $menu-items-padding-x
+			$widget-space-y - $menu-items-padding-y
+			$widget-space-x - $menu-items-padding-x;
+		}
 	}
 
 	.footer-widgets-logo {
@@ -117,21 +146,21 @@
 	}
 
 	.widget .addtoany_list {
-		line-height: 48px!important; // sass-lint:disable-line no-important
+		line-height: 1!important; // sass-lint:disable-line no-important
 
 		a {
 			display: inline-block;
-			width: 48px;
-			height: 48px;
-			margin: .25rem;
+			margin: $social-media-space;
 			padding: 0;
 			background: {
 				repeat: no-repeat;
 				size: contain;
+				position: center;
 			}
+			width: calc(20% - #{$social-media-space * 2});
+			min-width: 40px;
 
 			img {
-				width: 48px;
 				visibility: hidden;
 			}
 		}
@@ -169,9 +198,35 @@
 		*[type="submit"] {
 			background-color: $dark-blue;
 		}
+
+		@include breakpoint(380px down) {
+			.title-wrap {
+				flex-basis: 100px;
+			}
+
+			h4 {
+				width: 80px;
+				padding: 0;
+			}
+		}
 	}
 
 	.menu {
-		display: block;
+		justify-content: center;
+
+		@include breakpoint(550px down) {
+			li {
+				width: 50%;
+			}
+		}
+
+		@include breakpoint(medium) {
+			display: block;
+			text-align: left;
+
+			a {
+				max-width: 200px;
+			}
+		}
 	}
 }

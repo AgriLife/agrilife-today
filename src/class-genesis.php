@@ -598,7 +598,7 @@ class Genesis {
 		genesis_widget_area(
 			'post-share',
 			array(
-				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12" data-sticky-container><div class="wrap medium-card" data-sticky data-options="stickyOn:medium;marginTop:6.5625;anchor:genesis-content"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
+				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12" data-sticky-container><div class="wrap medium-card" data-sticky data-options="stickyOn:medium;marginTop:8.25;anchor:genesis-content"><h4 class="widget-title card-heading widgettitle">Share</h4><hr />',
 				'after'  => '</div></div>',
 			)
 		);
@@ -1018,7 +1018,7 @@ class Genesis {
 		genesis_widget_area(
 			'footer-1',
 			array(
-				'before' => '<div class="widgets-footer-1 cell small-12 medium-auto">',
+				'before' => '<div class="widgets-footer-1 cell small-12 small-order-3 medium-auto">',
 				'after'  => '</div>',
 			)
 		);
@@ -1026,7 +1026,7 @@ class Genesis {
 		genesis_widget_area(
 			'footer-2',
 			array(
-				'before' => '<div class="widgets-footer-2 cell small-12 medium-shrink">',
+				'before' => '<div class="widgets-footer-2 cell small-12 small-order-1 medium-shrink">',
 				'after'  => '</div>',
 			)
 		);
@@ -1034,7 +1034,7 @@ class Genesis {
 		genesis_widget_area(
 			'footer-3',
 			array(
-				'before' => '<div class="widgets-footer-3 cell small-12 medium-auto">',
+				'before' => '<div class="widgets-footer-3 cell small-12 small-order-2 medium-auto">',
 				'after'  => '</div>',
 			)
 		);
