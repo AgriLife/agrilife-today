@@ -83,17 +83,21 @@
 		justify-content: center;
 		padding: .5rem;
 
-		> .cell:not(.widgets-footer-2) {
-			padding: 1rem;
+		> .cell:not(.widgets-footer-3) {
 			margin: 0;
 		}
 	}
 
-	.footer-widgets-logo {
-		min-width: 175px;
+	.footer-widgets-logo,
+	.widgets-footer-2 {
+		padding: 1rem;
 	}
 
 	.widgets-footer-1 {
+		min-width: 128px;
+		padding: .75rem;
+
+		section,
 		div {
 			display: inline;
 		}
@@ -102,6 +106,10 @@
 	.widgets-footer-2 {
 		margin: 0;
 		padding: .5rem 0;
+	}
+
+	.footer-widgets-logo {
+		min-width: 175px;
 	}
 
 	.widgets-footer-3 {
@@ -115,6 +123,7 @@
 			display: inline-block;
 			width: 48px;
 			height: 48px;
+			margin: .25rem;
 			padding: 0;
 			background: {
 				repeat: no-repeat;
