@@ -186,3 +186,8 @@
 		}
 	}
 }
+
+// Layout bug with IE10 and <main> element; has display:inline by default.
+main {
+	display: block;
+}
