@@ -1,4 +1,5 @@
 $admin: false !default;
+$align-breakpoint: 1000px;
 
 .aligncenter {
 	float: none;
@@ -11,26 +12,18 @@ $admin: false !default;
 }
 
 .alignleft {
-	float: left;
-	margin-right: $paragraph-margin-bottom;
 	margin-bottom: $paragraph-margin-bottom;
 }
 
-.alignright {
-	float: right;
-	margin-left: $paragraph-margin-bottom;
-}
+@include breakpoint($align-breakpoint up) {
+	.alignleft {
+		float: left;
+		margin-right: $paragraph-margin-bottom;
+	}
 
-@include breakpoint(460px down) {
-	.alignleft,
 	.alignright {
-		float: none;
-		clear: both;
-		display: block;
-		margin: {
-			left: auto;
-			right: auto;
-		}
+		float: right;
+		margin-left: $paragraph-margin-bottom;
 	}
 }
 
@@ -94,33 +87,34 @@ $admin: false !default;
 	.wp-block-pullquote {
 		box-sizing: border-box;
 		max-width: 100%;
-		min-width: 350px;
-		text-align: center;
 
-		&.alignleft,
-		&.alignright {
-			width: calc(40% - #{$global-layout-space});
-		}
+		@include breakpoint($align-breakpoint up) {
+			min-width: 350px;
 
-		&.is-large,
-		&.is-style-large {
 			&.alignleft,
 			&.alignright {
-				width: calc(60% - #{$global-layout-space});
-			}
-		}
+				width: calc(40% - #{$paragraph-margin-bottom});
 
-		&[style*="text-align:right"],
-		&.alignright {
-			margin: 0 0 $paragraph-margin-bottom $global-layout-space;
-			float: right;
+				&.is-large,
+				&.is-style-large {
+					width: calc(60% - #{$paragraph-margin-bottom});
+				}
+			}
+
+			&[style*="text-align:right"],
+			&.alignright {
+				margin: 0 0 $paragraph-margin-bottom $paragraph-margin-bottom;
+				float: right;
+			}
 		}
 	}
 
 	.wp-block-quote {
-		&.alignleft,
-		&.alignright {
-			width: calc(40% - #{$global-layout-space});
+		@include breakpoint($align-breakpoint up) {
+			&.alignleft,
+			&.alignright {
+				width: calc(40% - #{$paragraph-margin-bottom});
+			}
 		}
 	}
 } @else {
@@ -141,26 +135,44 @@ $admin: false !default;
 
 .wp-block-quote,
 .wp-block-pullquote {
+	font-size: 1.5rem;
+
 	blockquote {
 		padding: 0;
 	}
 
 	p {
 		margin-bottom: $paragraph-margin-bottom / 2;
-	}
 
-	p,
-	&.is-style-large p,
-	&.is-large p {
-		font-size: 1.5rem;
-		line-height: 1.3;
-		font-style: italic;
+		&:before,
+		&:after {
+			font-family: Times New Roman, serif;
+			vertical-align: bottom;
+			font-size: 5rem;
+			text-align: right;
+			line-height: 22px;
+			letter-spacing: -4px;
+			margin-right: -6px;
+			color: lighten($blockquote-color, 50%);
+			font-weight: bold;
+		}
+
+		// This font family's quotation marks have a leading space of approx. 9px at this font size.
+		&:before {
+			content: "\2018 \2018";
+			text-align: left;
+			margin-right: 0;
+			padding-right: 6px;
+		}
+
+		// This font family's quotation marks have a leading space of approx. 4.5px at this font size.
+		&:after {
+			content: "\2019 \2019";
+		}
 	}
 }
 
 .wp-block-quote {
-	@include brackets($width: 20px);
-
 	&.is-style-large,
 	&.is-large {
 		padding: rem-calc(16) $global-layout-space;
@@ -168,7 +180,6 @@ $admin: false !default;
 }
 
 .wp-block-pullquote {
-	@include brackets($width: 20px, $axis: y);
 	clear: both;
 	margin-bottom: $paragraph-margin-bottom;
 	padding: $global-layout-space;
@@ -303,4 +314,10 @@ $admin: false !default;
 p.intro-text,
 .editor-styles-wrapper p.intro-text {
 	font: 1.5rem / 1.5 $opensans;
+}
+
+.wp-block-embed {
+	iframe {
+		max-width: 100%;
+	}
 }
