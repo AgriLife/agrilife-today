@@ -1004,13 +1004,12 @@ class Genesis {
 	public function genesis_footer_widget_area() {
 
 		$logo = sprintf(
-			'<div class="footer-widgets-logo cell medium-shrink small-12"><a href="%s" class="logo" title="Texas A&M AgriLife"><img src="%s"></a></div>',
+			'<a href="%s" title="Texas A&M AgriLife"><img src="%s"></a>',
 			trailingslashit( home_url() ),
 			AGTODAY_THEME_DIRURL . '/images/logo-light.svg'
 		);
 
 		$footer_open  = '<div class="footer-widgets"><div class="wrap layout-container grid-x">';
-		$footer_open .= $logo;
 		$footer_close = '</div></div>';
 
 		echo wp_kses_post( $footer_open );
@@ -1018,15 +1017,15 @@ class Genesis {
 		genesis_widget_area(
 			'footer-1',
 			array(
-				'before' => '<div class="widgets-footer-1 cell small-12 small-order-3 medium-auto">',
-				'after'  => '</div>',
+				'before' => '<div class="widgets-footer-1 cell small-12 small-order-1 medium-shrink"><div class="table"><div class="tr"><div class="td logo">' . $logo . '</div></div><div class="tr"><div class="td social-media">',
+				'after'  => '</div></div></div></div>',
 			)
 		);
 
 		genesis_widget_area(
 			'footer-2',
 			array(
-				'before' => '<div class="widgets-footer-2 cell small-12 small-order-1 medium-shrink">',
+				'before' => '<div class="widgets-footer-2 cell small-12 small-order-2 medium-shrink">',
 				'after'  => '</div>',
 			)
 		);
@@ -1034,7 +1033,7 @@ class Genesis {
 		genesis_widget_area(
 			'footer-3',
 			array(
-				'before' => '<div class="widgets-footer-3 cell small-12 small-order-2 medium-auto">',
+				'before' => '<div class="widgets-footer-3 cell small-12 small-order-3 medium-auto">',
 				'after'  => '</div>',
 			)
 		);
