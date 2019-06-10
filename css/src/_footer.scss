@@ -5,7 +5,7 @@ $widget-space-y: $menu-items-padding-y;
 $widget-space-x: 3rem;
 
 .site-footer {
-	background-color: $maroon;
+	background-color: $dark-gray;
 	color: $white;
 	line-height: 2.4em;
 	font-weight: $footer-font-weight;
@@ -33,14 +33,15 @@ $widget-space-x: 3rem;
 
 	.footer-container-tamus {
 		text-align: center;
-		margin-top: $grid-margin-gutters;
+		margin-top: ($grid-margin-gutters + $widget-space-y + .1rem);
 	}
 
 	.footer-tamus {
-		width: 160px;
+		width: 125px;
 	}
 
 	@include breakpoint(medium up) {
+		font-size: .8rem;
 		text-align: left;
 
 		ul li {
