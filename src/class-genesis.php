@@ -625,7 +625,7 @@ class Genesis {
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
 			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ), 11 );
 			add_filter( 'genesis_attr_entry-header_output', array( $this, 'add_gutter_lr_class' ), 11, 2 );
-		} else {
+		} elseif ( ! is_front_page() ) {
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			add_action( 'genesis_entry_content', array( $this, 'custom_post_category_button' ), 10 );
 			add_action( 'genesis_entry_footer', array( $this, 'custom_post_info' ), 11 );
