@@ -113,7 +113,7 @@ function agt_home_page() {
 							),
 							get_the_post_thumbnail(
 								$posts[0],
-								'medium',
+								'thumb-three-two',
 								array(
 									'class' => 'hide-for-small-only',
 								)
@@ -128,7 +128,7 @@ function agt_home_page() {
 						);
 
 						// Post 2.
-						$thumbnail   = get_the_post_thumbnail( $posts[1], 'medium' );
+						$thumbnail   = get_the_post_thumbnail( $posts[1], 'thumb-three-two' );
 						$title_class = 'cell small-12-collapse';
 						if ( ! empty( $thumbnail ) ) {
 							$thumbnail   = sprintf( $post_23_atts['wrap'], $thumbnail );
@@ -144,7 +144,7 @@ function agt_home_page() {
 						);
 
 						// Post 3.
-						$thumbnail   = get_the_post_thumbnail( $posts[2], 'medium' );
+						$thumbnail   = get_the_post_thumbnail( $posts[2], 'thumb-three-two' );
 						$title_class = 'cell small-12-collapse';
 						if ( ! empty( $thumbnail ) ) {
 							$thumbnail   = sprintf( $post_23_atts['wrap'], $thumbnail );

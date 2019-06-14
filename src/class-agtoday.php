@@ -124,6 +124,9 @@ class AgToday {
 	 */
 	private function add_image_sizes() {
 
+		// Home page post category thumbnails.
+		add_image_size( 'thumb-three-two', 300, 200, true );
+
 		// Post headings at 16:7 aspect ratio.
 		add_image_size( 'post-heading-small', 640, 480, true );
 		add_image_size( 'post-heading-medium', 960, 420, true );
