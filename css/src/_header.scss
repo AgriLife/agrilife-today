@@ -7,7 +7,7 @@
 	}
 
 	.title-area {
-		background-color: $white;
+		background-color: $dark-blue;
 	}
 
 	.sticky-container {
@@ -45,7 +45,7 @@
 
 	@include breakpoint(small only) {
 		> .wrap > .wrap {
-			background-color: $white;
+			background-color: $dark-blue;
 			border-bottom: 1px solid $border-primary;
 		}
 
@@ -54,7 +54,7 @@
 		}
 
 		.is-stuck {
-			background-color: $white;
+			background-color: $dark-blue;
 		}
 
 		.grid-x .title-area,
