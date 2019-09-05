@@ -83,7 +83,7 @@ class Genesis {
 		add_filter( 'genesis_markup_title-area_open', array( $this, 'title_area' ) );
 
 		// Add classes for CSS grid presentation.
-		add_filter( 'genesis_attr_site-inner', array( $this, 'add_layout_container_class' ) );
+		add_filter( 'genesis_structural_wrap-site-inner', array( $this, 'class_site_inner_wrap' ) );
 		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
 
@@ -136,6 +136,21 @@ class Genesis {
 		// Add taxonomies.
 		$this->create_agency_taxonomy();
 		$this->create_region_taxonomy();
+
+	}
+
+	/**
+	 * Add grid-container class name
+	 *
+	 * @since 0.1.0
+	 * @param string $output The wrap HTML.
+	 * @return string
+	 */
+	public function class_site_inner_wrap( $output ) {
+
+		$output = str_replace( 'class="', 'class="grid-container ', $output );
+
+		return $output;
 
 	}
 
@@ -460,18 +475,6 @@ class Genesis {
 	}
 
 	/**
-	 * Add class name to site-inner element
-	 *
-	 * @since 0.1.4
-	 * @param array $attributes HTML attributes.
-	 * @return array
-	 */
-	public function add_layout_container_class( $attributes ) {
-		$attributes['class'] .= ' layout-container';
-		return $attributes;
-	}
-
-	/**
 	 * Add class name to content-sidebar-wrap element
 	 *
 	 * @since 0.1.4
@@ -576,7 +579,7 @@ class Genesis {
 	 */
 	public function footer_wrap( $output ) {
 
-		return str_replace( 'class="wrap"', 'class="wrap layout-container grid-x"', $output );
+		return str_replace( 'class="wrap"', 'class="wrap grid-container grid-x"', $output );
 
 	}
 
@@ -1009,7 +1012,7 @@ class Genesis {
 			AGTODAY_THEME_DIRURL . '/images/logo-light.svg'
 		);
 
-		$footer_open  = '<div class="footer-widgets"><div class="wrap layout-container grid-x">';
+		$footer_open  = '<div class="footer-widgets"><div class="wrap grid-container grid-x">';
 		$footer_close = '</div></div>';
 
 		echo wp_kses_post( $footer_open );
