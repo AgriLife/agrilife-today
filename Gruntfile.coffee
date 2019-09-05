@@ -1,4 +1,5 @@
 module.exports = (grunt) ->
+  sass = require 'node-sass'
   @initConfig
     pkg: @file.readJSON('package.json')
     watch:
@@ -33,15 +34,20 @@ module.exports = (grunt) ->
     sass:
       pkg:
         options:
-          loadPath: 'node_modules/foundation-sites/scss'
-          sourcemap: 'none'
+          implementation: sass
+          noSourceMap: true
+          outputStyle: 'compressed'
           precision: 4
+          includePaths: ['node_modules/foundation-sites/scss']
         files:
           'css/style.css': 'css/src/style.scss'
       dev:
         options:
-          loadPath: 'node_modules/foundation-sites/scss'
-          precision: 4
+          implementation: sass
+          sourceMap: true
+          outputStyle: 'nested'
+          precision: 2
+          includePaths: ['node_modules/foundation-sites/scss']
         files:
           'css/style.css': 'css/src/style.scss'
     sasslint:
@@ -91,11 +97,11 @@ module.exports = (grunt) ->
         ]
         dest: 'js/foundation.concat.js'
 
-  @loadNpmTasks 'grunt-contrib-sass'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-contrib-compress'
   @loadNpmTasks 'grunt-contrib-concat'
   @loadNpmTasks 'grunt-sass-lint'
+  @loadNpmTasks 'grunt-sass'
   @loadNpmTasks 'grunt-postcss'
   @loadNpmTasks 'grunt-combine-media-queries'
 
