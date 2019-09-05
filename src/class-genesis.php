@@ -137,6 +137,16 @@ class Genesis {
 		$this->create_agency_taxonomy();
 		$this->create_region_taxonomy();
 
+		add_action(
+			'wp',
+			function() {
+				if ( is_archive() ) {
+					remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
+					add_action( 'genesis_entry_header', 'genesis_do_post_image', 4 );
+				}
+			}
+		);
+
 	}
 
 	/**
