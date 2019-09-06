@@ -52,6 +52,9 @@ class Assets {
 		add_action( 'wp_print_styles', array( $this, 'remove_child_theme_style' ) );
 		add_action( 'wp_print_styles', array( $this, 'remove_default_gutenberg_styles' ), 100 );
 
+		// Detect A&M Fonts.
+		add_filter( 'style_loader_tag', array( $this, 'detect_cloudfonts_loaded' ) );
+
 	}
 
 	/**
@@ -139,6 +142,14 @@ class Assets {
 			'all'
 		);
 
+		wp_register_style(
+			'cloudfonts',
+			'https://cloud.typography.com/6280314/7977592/css/fonts.css',
+			array(),
+			'1.0.0',
+			'all'
+		);
+
 	}
 
 	/**
@@ -150,6 +161,22 @@ class Assets {
 	public function enqueue_external_styles() {
 
 		wp_enqueue_style( 'googlefonts' );
+		wp_enqueue_style( 'cloudfonts' );
+
+	}
+
+	/**
+	 * Add attributes to stylesheet elements.
+	 *
+	 * @since 0.5.13
+	 * @param string $tag HTML for the stylesheet element.
+	 * @return string
+	 */
+	public function detect_cloudfonts_loaded( $tag ) {
+
+		$tag = preg_replace( "/id='cloudfonts-css'/", "id='cloudfonts-css' onload='document.documentElement.className+=\" has-cloud-fonts\"'", $tag );
+
+		return $tag;
 
 	}
 
