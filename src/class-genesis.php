@@ -1051,7 +1051,7 @@ class Genesis {
 	/**
 	 * Filter only post_date for post meta.
 	 *
-	 * @since 0.5.13
+	 * @since 0.5.14
 	 * @param string $info Current post meta with shortcodes.
 	 * @return string
 	 */
@@ -1064,7 +1064,7 @@ class Genesis {
 	/**
 	 * Customize archive pages
 	 *
-	 * @since 0.5.13
+	 * @since 0.5.14
 	 * @return void
 	 */
 	public function archive_customizations() {
@@ -1091,7 +1091,7 @@ class Genesis {
 	/**
 	 * Customize pagination previous link text.
 	 *
-	 * @since 0.5.13
+	 * @since 0.5.14
 	 * @return string
 	 */
 	public function prev_link_text() {
@@ -1101,7 +1101,7 @@ class Genesis {
 	/**
 	 * Customize pagination next link text.
 	 *
-	 * @since 0.5.13
+	 * @since 0.5.14
 	 * @return string
 	 */
 	public function next_link_text() {
