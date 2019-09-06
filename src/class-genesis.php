@@ -137,15 +137,8 @@ class Genesis {
 		$this->create_agency_taxonomy();
 		$this->create_region_taxonomy();
 
-		add_action(
-			'wp',
-			function() {
-				if ( is_archive() ) {
-					remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
-					add_action( 'genesis_entry_header', 'genesis_do_post_image', 4 );
-				}
-			}
-		);
+		// Customize archive pages.
+		add_action( 'wp', array( $this, 'archive_customizations' ) );
 
 	}
 
@@ -638,7 +631,7 @@ class Genesis {
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
 			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ), 11 );
 			add_filter( 'genesis_attr_entry-header_output', array( $this, 'add_gutter_lr_class' ), 11, 2 );
-		} elseif ( ! is_front_page() ) {
+		} elseif ( ! is_front_page() && ! is_archive() ) {
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			add_action( 'genesis_entry_content', array( $this, 'custom_post_category_button' ), 10 );
 			add_action( 'genesis_entry_footer', array( $this, 'custom_post_info' ), 11 );
@@ -1053,6 +1046,66 @@ class Genesis {
 
 		echo wp_kses_post( $footer_close );
 
+	}
+
+	/**
+	 * Filter only post_date for post meta.
+	 *
+	 * @since 0.5.13
+	 * @param string $info Current post meta with shortcodes.
+	 * @return string
+	 */
+	public function date_only( $info ) {
+
+		return '[post_date] [post_edit]';
+
+	}
+
+	/**
+	 * Customize archive pages
+	 *
+	 * @since 0.5.13
+	 * @return void
+	 */
+	public function archive_customizations() {
+
+		if ( is_archive() ) {
+
+			remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
+			remove_action( 'genesis_post_content', 'genesis_do_post_image' );
+			remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
+			remove_action( 'genesis_after_post_content', 'genesis_post_meta' );
+			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+			remove_action( 'genesis_before_post_content', 'genesis_post_info' );
+			add_action( 'genesis_entry_header', 'genesis_do_post_image', 1 );
+			add_action( 'genesis_entry_header', array( $this, 'custom_post_category_button' ), 4 );
+			add_action( 'genesis_entry_footer', 'genesis_post_info' );
+			add_filter( 'genesis_post_info', array( $this, 'date_only' ) );
+			add_filter( 'genesis_prev_link_text', array( $this, 'prev_link_text' ) );
+			add_filter( 'genesis_next_link_text', array( $this, 'next_link_text' ) );
+
+		}
+
+	}
+
+	/**
+	 * Customize pagination previous link text.
+	 *
+	 * @since 0.5.13
+	 * @return string
+	 */
+	public function prev_link_text() {
+		return '<';
+	}
+
+	/**
+	 * Customize pagination next link text.
+	 *
+	 * @since 0.5.13
+	 * @return string
+	 */
+	public function next_link_text() {
+		return '>';
 	}
 
 }

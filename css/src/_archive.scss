@@ -1,0 +1,66 @@
+.archive {
+	.post {
+		~ .post {
+			margin-top: $grid-margin-gutters * 1.5;
+		}
+
+		h2 {
+			text-transform: none;
+			font-size: 2rem;
+			line-height: 1;
+			margin: 0 0 .7rem;
+
+			.has-cloud-fonts & {
+				font-weight: 600;
+			}
+		}
+
+		p {
+			font-size: .875rem;
+			line-height: 1rem;
+
+			&.entry-meta {
+				margin-bottom: 0;
+			}
+		}
+
+		time {
+			font-style: italic;
+			font-size: 1rem;
+			line-height: 1.25rem;
+		}
+
+		.button {
+			padding: .25rem .5rem;
+			transition: 0.25s color, 0.25s background-color;
+			margin-bottom: .7rem;
+
+			&:hover {
+				background-color: transparent;
+				color: $black;
+				border: 1px solid $dark-blue;
+				text-decoration: none;
+			}
+		}
+
+		&.has-post-thumbnail {
+			position: relative;
+
+			.entry-image-link {
+				width: 25%;
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				img {
+					margin-bottom: 0;
+				}
+			}
+
+			.entry-image-link ~ * {
+				margin-left: 25%;
+				padding-left: 1rem;
+			}
+		}
+	}
+}
