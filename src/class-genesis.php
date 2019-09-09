@@ -1071,6 +1071,8 @@ class Genesis {
 
 		if ( is_archive() ) {
 
+			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
+			add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 			remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
 			remove_action( 'genesis_post_content', 'genesis_do_post_image' );
 			remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
