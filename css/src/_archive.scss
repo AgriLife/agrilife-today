@@ -1,4 +1,13 @@
 .archive {
+	h1 {
+		background: repeat-x url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkVrb+DwAB9AFiYaHxfAAAAABJRU5ErkJggg==") center center; // sass-lint:disable-line max-line-length
+		text-shadow: 20px 0 $white, 17px 0 $white, 14px 0 $white, 11px 0 $white, 8px 0 $white,
+		5px 0 $white, 2px 0 $white, -2px 0 $white, -5px 0 $white, -8px 0 $white, -11px 0 $white,
+		-14px 0 $white, -17px 0 $white, -20px 0 $white;
+		text-align: center;
+		position: relative;
+	}
+
 	.post {
 		~ .post {
 			margin-top: $grid-margin-gutters * 2.5;
