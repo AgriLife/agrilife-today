@@ -185,6 +185,13 @@
 			}
 		}
 	}
+
+	@include breakpoint(small only) {
+		> .small-auto {
+			width: auto;
+			flex: 1 1 0px;
+		}
+	}
 }
 
 // Layout bug with IE10 and <main> element; has display:inline by default.

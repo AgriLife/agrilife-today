@@ -1082,13 +1082,14 @@ class Genesis {
 			remove_action( 'genesis_after_post_content', 'genesis_post_meta' );
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			remove_action( 'genesis_before_post_content', 'genesis_post_info' );
+
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_left_open' ), 1 );
 			add_action( 'genesis_entry_header', 'genesis_do_post_image', 1 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_left_close' ), 3 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_right_open' ), 3 );
 			add_action( 'genesis_entry_header', array( $this, 'custom_post_category_button' ), 4 );
 			add_action( 'genesis_entry_footer', 'genesis_post_info' );
-			add_action( 'genesis_entry_footer', array( $this, 'archive_column_right_open' ), 11 );
+			add_action( 'genesis_entry_footer', array( $this, 'archive_column_right_close' ), 11 );
 			add_filter( 'genesis_post_info', array( $this, 'date_only' ) );
 			add_filter( 'genesis_prev_link_text', array( $this, 'prev_link_text' ) );
 			add_filter( 'genesis_next_link_text', array( $this, 'next_link_text' ) );
@@ -1105,8 +1106,28 @@ class Genesis {
 	 */
 	public function archive_column_left_open() {
 
-		?><div class="grid-x"><div class="cell medium-3 small-3">
+		?><div class="grid-x grid-margin-x">
 		<?php
+
+		if ( ! is_singular() && genesis_get_option( 'content_archive_thumbnail' ) ) {
+
+			$img = genesis_get_image(
+				array(
+					'format'  => 'html',
+					'size'    => genesis_get_option( 'image_size' ),
+					'context' => 'archive',
+					'attr'    => genesis_parse_attr( 'entry-image', array() ),
+				)
+			);
+
+			if ( ! empty( $img ) ) {
+
+				?>
+				<div class="cell medium-3 small-3">
+				<?php
+
+			}
+		}
 
 	}
 
@@ -1118,10 +1139,25 @@ class Genesis {
 	 */
 	public function archive_column_left_close() {
 
-		?>
-		</div>
-		<?php
+		if ( ! is_singular() && genesis_get_option( 'content_archive_thumbnail' ) ) {
 
+			$img = genesis_get_image(
+				array(
+					'format'  => 'html',
+					'size'    => genesis_get_option( 'image_size' ),
+					'context' => 'archive',
+					'attr'    => genesis_parse_attr( 'entry-image', array() ),
+				)
+			);
+
+			if ( ! empty( $img ) ) {
+
+				?>
+				</div>
+				<?php
+
+			}
+		}
 	}
 
 	/**
@@ -1133,7 +1169,7 @@ class Genesis {
 	public function archive_column_right_open() {
 
 		?>
-		<div class="cell medium-9 small-9">
+		<div class="cell small-auto medium-9">
 		<?php
 
 	}
