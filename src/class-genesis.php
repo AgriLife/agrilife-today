@@ -1106,8 +1106,7 @@ class Genesis {
 	 */
 	public function archive_column_left_open() {
 
-		?><div class="grid-x grid-margin-x">
-		<?php
+		$output = '<div class="grid-x grid-margin-x">';
 
 		if ( ! is_singular() && genesis_get_option( 'content_archive_thumbnail' ) ) {
 
@@ -1122,12 +1121,12 @@ class Genesis {
 
 			if ( ! empty( $img ) ) {
 
-				?>
-				<div class="cell medium-3 small-3">
-				<?php
+				$output .= '<div class="cell medium-3 small-3">';
 
 			}
 		}
+
+		echo wp_kses_post( $output );
 
 	}
 
@@ -1152,9 +1151,7 @@ class Genesis {
 
 			if ( ! empty( $img ) ) {
 
-				?>
-				</div>
-				<?php
+				echo wp_kses_post( '</div>' );
 
 			}
 		}
@@ -1168,9 +1165,7 @@ class Genesis {
 	 */
 	public function archive_column_right_open() {
 
-		?>
-		<div class="cell small-auto medium-9">
-		<?php
+		echo wp_kses_post( '<div class="cell small-auto medium-9">' );
 
 	}
 
@@ -1182,9 +1177,7 @@ class Genesis {
 	 */
 	public function archive_column_right_close() {
 
-		?>
-		</div></div>
-		<?php
+		echo wp_kses_post( '</div></div>' );
 
 	}
 
