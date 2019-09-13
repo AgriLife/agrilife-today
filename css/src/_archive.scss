@@ -9,9 +9,9 @@
 		margin-bottom: 2 * $global-layout-space;
 	}
 
-	.post {
-		~ .post {
-			margin-top: $grid-margin-gutters * 2.5;
+	.entry {
+		~ .entry {
+			margin: $grid-margin-gutters * 2.5 0 $grid-margin-gutters;
 		}
 
 		h2 {
