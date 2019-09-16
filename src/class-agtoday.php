@@ -42,6 +42,8 @@ class AgToday {
 
 		add_theme_support( 'html5', array() );
 
+		add_image_size( 'archive', 400, 225, true );
+
 		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
 
 		add_action( 'init', array( $this, 'init' ) );
