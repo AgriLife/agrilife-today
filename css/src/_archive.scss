@@ -11,7 +11,7 @@
 
 	.entry {
 		~ .entry {
-			margin: $grid-margin-gutters * 2.5 0 $grid-margin-gutters;
+			margin: $grid-margin-gutters * 2.5 0;
 		}
 
 		h2 {
