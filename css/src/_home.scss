@@ -4,9 +4,12 @@
 		margin-bottom: 0;
 	}
 
+	.cell.tall > * {
+		height: 100%;
+	}
+
 	.quote.card {
 		padding: $card-padding * 4 $card-padding;
-		height: 100%;
 
 		p {
 			font-size: 1.75rem;

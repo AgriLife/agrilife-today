@@ -159,7 +159,7 @@ function agt_home_page() {
 			}
 
 			$story_list = sprintf(
-				'<div class="cell medium-8 small-12">%s%s</div><div class="cell auto">%s</div>',
+				'<div class="cell medium-8 small-12">%s%s</div><div class="cell auto tall">%s</div>',
 				$stories_output[0],
 				$stories_output[1],
 				$stories_output[2]
@@ -173,6 +173,93 @@ function agt_home_page() {
 
 		}
 	}
+
+	// Latest Posts.
+	$section_output = '<div class="latest-story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
+	$args           = array(
+		'numberposts' => 3,
+		'post_status' => 'publish',
+	);
+	$posts          = wp_get_recent_posts( $args, ARRAY_A );
+	$stories_output = array();
+	$eo             = 'odd';
+
+	foreach ( $posts as $key => $story ) {
+
+		$id        = $story['ID'];
+		$post_atts = array(
+			'even' => array(
+				'thumb'   => 'collapse-left',
+				'content' => 'collapse-right',
+			),
+			'odd'  => array(
+				'thumb'   => 'small-collapse-left medium-collapse-right medium-order-2',
+				'content' => 'small-collapse-right medium-collapse-left medium-order-1',
+			),
+		);
+
+		// Get category button group.
+		$post_categories  = wp_get_post_categories( $id );
+		$post_cat_button  = '<a href="%s" class="button">%s</a>';
+		$post_cat_buttons = array();
+
+		foreach ( $post_categories as $cat_id ) {
+
+			$cat = get_category( $cat_id );
+
+			$post_cat_buttons[] = sprintf(
+				$post_cat_button,
+				get_category_link( $cat_id ),
+				$cat->name
+			);
+
+		}
+
+		// Get featured image.
+		$image      = '';
+		$post_image = get_the_post_thumbnail( $story['ID'], 'medium_cropped' );
+		if ( ! empty( $post_image ) ) {
+			$image = sprintf(
+				'<div class="cell medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
+				$post_atts[ $eo ]['thumb'],
+				get_permalink( $id ),
+				$post_image
+			);
+		}
+
+		// Make post.
+		$post = sprintf(
+			'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x">%s<div class="cell medium-auto small-auto %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div><footer class="entry-footer"><p class="entry-meta"><time class="entry-time" itemprop="datePublished" datetime="%s">%s</time></p></footer></div></div></article>',
+			$image,
+			$post_atts[ $eo ]['content'],
+			implode( '', $post_cat_buttons ),
+			get_permalink( $id ),
+			$story['post_title'],
+			$story['post_excerpt'],
+			get_the_time( 'c', $story['ID'] ),
+			get_the_time( 'F j, Y', $story['ID'] )
+		);
+
+		// Add post to output.
+		$stories_output[] = $post;
+
+		// Switch the even/odd indicator.
+		$eo = 'even' === $eo ? 'odd' : 'even';
+
+	}
+
+	$story_list = sprintf(
+		'<div class="cell medium-8 small-12">%s%s</div><div class="cell auto tall">%s</div>',
+		$stories_output[0],
+		$stories_output[1],
+		$stories_output[2]
+	);
+
+	$output .= sprintf(
+		$section_output,
+		$section['stories']['heading'],
+		$story_list
+	);
 
 	// LiveWhale Section.
 	$feed_json    = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/agrilife/' );
