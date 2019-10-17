@@ -62,6 +62,8 @@
 	}
 
 	.livewhale {
+		border-top: 2px solid $light-blue;
+
 		h2 {
 			color: $white;
 		}
@@ -87,6 +89,10 @@
 					weight: 600;
 				}
 			}
+		}
+
+		.date {
+			border-right-width: 1px;
 		}
 
 		@include breakpoint(medium) {
