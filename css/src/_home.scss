@@ -4,8 +4,14 @@
 		margin-bottom: 0;
 	}
 
-	.cell.tall > * {
-		height: 100%;
+	.cell.tall {
+		> * {
+			height: 100%;
+		}
+
+		.cell.image {
+			display: none;
+		}
 	}
 
 	.quote.card {
