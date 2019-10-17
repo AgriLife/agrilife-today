@@ -226,16 +226,21 @@ function agt_home_page() {
 		}
 
 		// Make post.
+		$excerpt = $story['post_excerpt'];
+
+		if ( empty( $excerpt ) ) {
+			$content = strip_shortcodes( $story['post_content'] );
+			$excerpt = wp_trim_words( $content, 55 );
+		}
+
 		$post = sprintf(
-			'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x">%s<div class="cell medium-auto small-auto %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div><footer class="entry-footer"><p class="entry-meta"><time class="entry-time" itemprop="datePublished" datetime="%s">%s</time></p></footer></div></div></article>',
+			'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x">%s<div class="cell medium-auto small-auto %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div></div></article>',
 			$image,
 			$post_atts[ $eo ]['content'],
 			implode( '', $post_cat_buttons ),
 			get_permalink( $id ),
 			$story['post_title'],
-			$story['post_excerpt'],
-			get_the_time( 'c', $story['ID'] ),
-			get_the_time( 'F j, Y', $story['ID'] )
+			$excerpt
 		);
 
 		// Add post to output.
