@@ -261,7 +261,7 @@ function agt_home_page() {
 	);
 
 	// LiveWhale Section.
-	$feed_json    = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/agrilife/' );
+	$feed_json    = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/' );
 	$feed_array   = json_decode( $feed_json['body'], true );
 	$l_events     = array_slice( $feed_array, 0, 3 ); // Choose number of events.
 	$l_event_list = '';
@@ -296,7 +296,7 @@ function agt_home_page() {
 	}
 
 	$output .= sprintf(
-		'<div class="alignfull livewhale section invert"><div class="grid-container"><div class="grid-x  padding-y"><div class="events-cell cell medium-auto small-12 grid-container"><div class="grid-x ">%s</div></div><div class="events-all cell medium-shrink small-12"><a class="h3 arrow-right" href="#">All Events</a></div></div></div></div>',
+		'<div class="alignfull livewhale section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Events</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x  padding-y">%s</div></div></div>',
 		$l_event_list
 	);
 

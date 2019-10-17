@@ -52,11 +52,19 @@
 	}
 
 	.livewhale {
-		&.alignfull .grid-container {
+		h2 {
+			color: $white;
+		}
+
+		.heading-sideline {
 			padding: {
-				left: $grid-margin-gutters + .94rem;
-				right: $grid-margin-gutters + .94rem;
+				left: $global-layout-space + .94rem;
+				right: $global-layout-space + .94rem;
 			}
+		}
+
+		.title-line {
+			border-top-color: $light-blue;
 		}
 	}
 

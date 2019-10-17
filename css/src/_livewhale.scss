@@ -1,6 +1,11 @@
 /* LiveWhale block.
 ---------------------------------- */
 .livewhale {
+	padding: {
+		top: $global-layout-space * 2;
+		bottom: $global-layout-space * 2;
+	}
+
 	p {
 		hyphens: auto;
 	}
@@ -12,8 +17,9 @@
 	}
 
 	.date {
-		border-right: 2px solid $button-red-highlight;
+		border-right: 2px solid $light-blue;
 		text-align: center;
+		margin: 0;
 		padding: {
 			top: .2rem;
 			bottom: .2rem;
@@ -25,13 +31,18 @@
 			size: 1.6rem;
 			weight: 300;
 		}
+		text-transform: uppercase;
 	}
 
 	.day {
-		font-weight: 700;
+		font: {
+			size: 2.5rem;
+			weight: 700;
+		}
 	}
 
 	.title {
+		margin: 0;
 		padding: {
 			top: .1rem;
 			bottom: .1rem;
@@ -45,11 +56,15 @@
 
 	.event {
 		@include breakpoint(medium) {
-			padding: $home-cell-padding / 2;
+			padding: $grid-margin-gutters / 2;
 		}
 
 		@include breakpoint(large down) {
 			min-width: 275px;
+		}
+
+		> .grid-x {
+			align-items: center;
 		}
 
 		.cell {
