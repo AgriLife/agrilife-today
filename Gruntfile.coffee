@@ -5,7 +5,8 @@ module.exports = (grunt) ->
     watch:
       files: [
         'css/src/**/*.scss',
-        '!css/src/_themecomment.scss'
+        '!css/src/_themecomment.scss',
+        'package.json'
       ]
       tasks: ['develop']
     postcss:
