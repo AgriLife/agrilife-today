@@ -175,7 +175,7 @@ function agt_home_page() {
 	}
 
 	// Latest Posts.
-	$section_output = '<div class="latest-story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
+	$section_output = '<div class="latest-story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>Latest Stories</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
 	$args           = array(
 		'numberposts' => 3,
 		'post_status' => 'publish',
@@ -257,7 +257,6 @@ function agt_home_page() {
 
 	$output .= sprintf(
 		$section_output,
-		$section['stories']['heading'],
 		$story_list
 	);
 
