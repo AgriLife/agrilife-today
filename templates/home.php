@@ -35,7 +35,7 @@ function agt_home_page() {
 
 		foreach ( $story_sections as $key => $section ) {
 
-			$section_output = '<div class="story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
+			$section_output = '<div class="story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
 			$stories_output = array();
 			$eo             = 'odd';
 
@@ -175,7 +175,7 @@ function agt_home_page() {
 	}
 
 	// Latest Posts.
-	$section_output = '<div class="latest-story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>Latest Stories</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
+	$section_output = '<div class="latest-story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Latest Stories</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
 	$args           = array(
 		'numberposts' => 3,
 		'post_status' => 'publish',
@@ -325,7 +325,7 @@ function agt_home_page() {
 	}
 
 	$output .= sprintf(
-		'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>',
+		'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>',
 		$in_the_news['heading'],
 		$itn_list
 	);
