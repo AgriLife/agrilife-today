@@ -60,15 +60,44 @@
 			color: $white;
 		}
 
+		.title-line {
+			border-top-color: $light-blue;
+		}
+
 		.heading-sideline {
 			padding: {
-				left: $global-layout-space + .94rem;
-				right: $global-layout-space + .94rem;
+				left: $global-layout-space + .62rem;
+				right: $global-layout-space + .62rem;
 			}
 		}
 
-		.title-line {
-			border-top-color: $light-blue;
+		.events-all {
+			margin-left: 1.62rem;
+
+			.h3 {
+				font: {
+					size: 1.5rem;
+					weight: 600;
+				}
+			}
+		}
+
+		@include breakpoint(medium) {
+
+			.cell.events-all {
+				padding-right: 1.5rem;
+			}
+
+			.heading-sideline {
+				padding: {
+					left: $global-layout-space + .94rem;
+					right: $global-layout-space + .94rem;
+				}
+			}
+
+			.events-all {
+				margin-left: 0;
+			}
 		}
 	}
 
