@@ -142,6 +142,10 @@
 				@include xy-cell(4, false, $grid-margin-gutters / 2);
 			}
 
+			&.medium-5 {
+				@include xy-cell(5, false);
+			}
+
 			&.medium-6 {
 				@include xy-cell(6, false);
 			}
