@@ -74,6 +74,11 @@
 		.events-all {
 			margin-left: 1.62rem;
 
+			a {
+				border: 1px solid $light-blue;
+				padding: .5rem .75rem;
+			}
+
 			.h3 {
 				font: {
 					size: 1.5rem;
