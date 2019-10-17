@@ -79,7 +79,7 @@ function agt_home_page() {
 						$post_image = get_the_post_thumbnail( $post_obj, 'home-story-image' );
 						if ( ! empty( $post_image ) ) {
 							$image = sprintf(
-								'<div class="cell medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
+								'<div class="cell image medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 								$post_atts[ $eo ]['thumb'],
 								get_permalink( $id ),
 								$post_image
@@ -218,7 +218,7 @@ function agt_home_page() {
 		$post_image = get_the_post_thumbnail( $story['ID'], 'home-story-image' );
 		if ( ! empty( $post_image ) ) {
 			$image = sprintf(
-				'<div class="cell medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
+				'<div class="cell image medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 				$post_atts[ $eo ]['thumb'],
 				get_permalink( $id ),
 				$post_image
