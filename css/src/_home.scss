@@ -14,8 +14,15 @@
 		}
 	}
 
-	.quote.card {
-		padding: $card-padding * 4 $card-padding;
+	.tall .card {
+		@include breakpoint(medium) {
+			margin-bottom: 0;
+		}
+	}
+
+	.quote {
+		margin-left: 0;
+		margin-right: 0;
 
 		.cat-buttons + * {
 			font-size: 1.75rem;
@@ -29,10 +36,6 @@
 				width: 1.25em;
 				margin-top: $paragraph-margin-bottom;
 			}
-		}
-
-		@include breakpoint(medium) {
-			margin-bottom: 0;
 		}
 	}
 

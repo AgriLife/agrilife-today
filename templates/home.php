@@ -142,7 +142,7 @@ function agt_home_page() {
 						$quote = str_replace( '</p', '</span', $quote );
 
 						$stories_output[] = sprintf(
-							'<div class="item quote card"><div class="cat-buttons">%s</div>%s%s%s</div>',
+							'<div class="grid-x center-y card"><div class="cell item quote"><div class="cat-buttons">%s</div>%s%s%s</div></div>',
 							$cat_buttons,
 							$post_link_open,
 							$quote,
