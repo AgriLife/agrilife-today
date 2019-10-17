@@ -76,7 +76,7 @@ function agt_home_page() {
 
 						// Get featured image.
 						$image      = '';
-						$post_image = get_the_post_thumbnail( $post_obj, 'medium_cropped' );
+						$post_image = get_the_post_thumbnail( $post_obj, 'home-story-image' );
 						if ( ! empty( $post_image ) ) {
 							$image = sprintf(
 								'<div class="cell medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
@@ -215,7 +215,7 @@ function agt_home_page() {
 
 		// Get featured image.
 		$image      = '';
-		$post_image = get_the_post_thumbnail( $story['ID'], 'medium_cropped' );
+		$post_image = get_the_post_thumbnail( $story['ID'], 'home-story-image' );
 		if ( ! empty( $post_image ) ) {
 			$image = sprintf(
 				'<div class="cell medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
