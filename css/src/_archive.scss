@@ -1,73 +1,81 @@
 .archive {
-	h1 {
-		background: repeat-x url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkVrb+DwAB9AFiYaHxfAAAAABJRU5ErkJggg==") center center; // sass-lint:disable-line max-line-length
-		text-shadow: 20px 0 $white, 17px 0 $white, 14px 0 $white, 11px 0 $white, 8px 0 $white,
-		5px 0 $white, 2px 0 $white, -2px 0 $white, -5px 0 $white, -8px 0 $white, -11px 0 $white,
-		-14px 0 $white, -17px 0 $white, -20px 0 $white;
-		text-align: center;
-		position: relative;
-		margin-bottom: 2 * $global-layout-space;
+	@extend %heading-sideline;
+}
+
+// Taken from https://github.com/AgriLife/agriflex4/blob/master/css/src/_archive.scss
+.af4-entry-compact {
+	~ .af4-entry-compact {
+		margin: $global-layout-space * 1.5 0 0;
 	}
 
-	.entry {
-		~ .entry {
-			margin: $grid-margin-gutters * 2.5 0;
+	h2 {
+		text-transform: none;
+		font-size: 2rem;
+		line-height: 1;
+		margin: 0 0 .7rem;
+
+		.has-cloud-fonts & {
+			font-weight: 600;
 		}
 
-		h2 {
-			text-transform: none;
-			font-size: 2rem;
-			line-height: 1;
-			margin: 0 0 .7rem;
+		a {
+			color: $dark-blue;
+			text-decoration: none;
 
-			.has-cloud-fonts & {
-				font-weight: 600;
-			}
-
-			a {
-				color: $dark-blue;
-			}
-		}
-
-		p {
-			font-size: .875rem;
-			line-height: 1rem;
-			margin-bottom: .7rem;
-
-			&.entry-meta {
-				margin-bottom: 0;
+			&:focus,
+			&:hover {
+				text-decoration: underline;
 			}
 		}
+	}
 
-		time {
-			font-style: italic;
-			font-size: 1rem;
-			line-height: 1.25rem;
+	p {
+		font-size: .875rem;
+		line-height: 1rem;
+		margin-bottom: .7rem;
+
+		&.entry-meta {
+			margin-bottom: 0;
 		}
+	}
 
-		.grid-x {
+	time {
+		font-style: italic;
+		font-size: 1rem;
+		line-height: 1.25rem;
+	}
+
+	.grid-x {
+		flex-wrap: nowrap;
+
+		@include breakpoint(medium) {
 			justify-content: end;
 		}
+	}
 
-		.button {
-			padding: .25rem .5rem;
-			transition: 0.25s color, 0.25s background-color;
-			margin-bottom: .7rem;
+	.post-category .button {
+		@extend %button-compact;
 
-			&:hover {
-				background-color: transparent;
-				color: $black;
-				border: 1px solid $dark-blue;
-				text-decoration: none;
-			}
+		padding: .25rem .5rem;
+		transition: 0.25s color, 0.25s background-color;
+		margin-bottom: .7rem;
+
+		&:hover {
+			background-color: transparent;
+			color: $black;
+			border: 1px solid $dark-blue;
+			text-decoration: none;
 		}
+	}
 
-		&.has-post-thumbnail {
-			position: relative;
+	&.has-post-thumbnail {
+		position: relative;
 
-			.entry-image-link img {
+		.entry-image-link {
+			img {
 				margin-bottom: 0;
 			}
 		}
 	}
 }
+// END Taken from https://github.com/AgriLife/agriflex4/blob/master/css/src/_archive.scss

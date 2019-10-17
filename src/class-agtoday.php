@@ -42,8 +42,6 @@ class AgToday {
 
 		add_theme_support( 'html5', array() );
 
-		add_image_size( 'archive', 400, 225, true );
-
 		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
 
 		add_action( 'init', array( $this, 'init' ) );
@@ -126,7 +124,11 @@ class AgToday {
 	 */
 	private function add_image_sizes() {
 
-		// Home page post category thumbnails.
+		// Archive page.
+		add_image_size( 'archive', 400, 225, true );
+
+		// Home page.
+		add_image_size( 'medium_cropped', 300, 300, true );
 		add_image_size( 'thumb-three-two', 300, 200, true );
 
 		// Post headings at 16:7 aspect ratio.

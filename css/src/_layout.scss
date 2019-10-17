@@ -126,6 +126,10 @@
 				@include xy-cell(2, false, $grid-margin-gutters / 2);
 			}
 
+			&.medium-3 {
+				@include xy-cell(3, false);
+			}
+
 			&.medium-4 {
 				@include xy-cell(4, false);
 			}
@@ -209,4 +213,8 @@ main {
 
 .td {
 	display: table-cell;
+}
+
+.site-inner {
+	overflow: hidden;
 }

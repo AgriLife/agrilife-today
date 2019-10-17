@@ -48,3 +48,19 @@ table {
 		padding: 0.5rem;
 	}
 }
+
+.heading-sideline {
+	@extend %heading-sideline;
+}
+
+.invert {
+	color: $white;
+	background-color: $darker-gray;
+
+	a,
+	a:active,
+	a:hover {
+		color: $white;
+		text-decoration: none;
+	}
+}

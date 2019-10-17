@@ -16,7 +16,7 @@ add_action( 'genesis_entry_content', 'agt_home_page' );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-add_action( 'wp_enqueue_scripts', 'agt_enqueue_home_scripts' );
+remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 /**
  * Output content of template.
@@ -26,218 +26,226 @@ add_action( 'wp_enqueue_scripts', 'agt_enqueue_home_scripts' );
  */
 function agt_home_page() {
 
-	$top_story = get_field( 'top_group' );
-	$items     = get_field( 'stories_group' );
-	$output    = '';
+	$story_sections = get_field( 'stories' );
+	$in_the_news    = get_field( 'in_the_news' );
+	$output         = '';
 
-	if ( $top_story['story'] ) {
+	// Story Sections.
+	if ( ! empty( $story_sections ) ) {
 
-		$top_post   = $top_story['story'];
-		$thumb      = get_the_post_thumbnail( $top_post, 'large', 'style=max-width:100%;height:auto;' );
-		$permalink  = get_permalink( $top_post );
-		$cats       = wp_get_post_terms( $top_post->ID, 'category' );
-		$cat_output = '';
+		foreach ( $story_sections as $key => $section ) {
 
-		foreach ( $cats as $cat ) {
-			$cat_output .= sprintf(
-				'<a href="%s" class="button">%s</a>',
-				get_term_link( $cat->term_id ),
-				$cat->name
-			);
-		}
+			$section_output = '<div class="story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
+			$stories_output = array();
+			$eo             = 'odd';
 
-		$top_output = sprintf(
-			'<div class="grid-x"><div class="top-story card cell medium-12 small-12"><h2 class="card-heading show-for-small-only">Featured Stories</h2><p><a href="%s" aria-hidden="true" role="presentation">%s</a></p><div class="cats">%s</div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
-			$permalink,
-			$thumb,
-			$cat_output,
-			$permalink,
-			$top_post->post_title,
-			str_replace( ' ', '&nbsp;', get_the_date( 'F j, Y', $top_post ) )
-		);
+			foreach ( $section['stories']['stories'] as $key => $story ) {
 
-		$output .= $top_output;
+				switch ( $story['acf_fc_layout'] ) {
 
-	}
-
-	if ( $items ) {
-
-		$item_output = '<div class="grid-x grid-masonry">';
-		$post_cat_eo = 'even';
-
-		foreach ( $items as $key => $item ) {
-
-			$eo = $key % 2 > 0 ? 'right' : 'left';
-
-			switch ( $item['acf_fc_layout'] ) {
-
-				case 'post':
-					$cat = $item['category'];
-
-					if ( $cat ) {
-
-						$post_cat_eo  = 'even' === $post_cat_eo ? 'odd' : 'even';
-						$post_query   = new WP_Query(
-							array(
-								'cat'            => $cat->term_id,
-								'posts_per_page' => 3,
-							)
-						);
-						$posts        = $post_query->posts;
-						$post_1_atts  = array(
+					case 'post':
+						$id        = $story['post']->ID;
+						$post_obj  = $story['post'];
+						$post_atts = array(
 							'even' => array(
-								'thumb' => 'medium-6-collapse-half medium-collapse-left',
-								'meta'  => 'medium-6-collapse-half medium-collapse-right',
+								'thumb'   => 'collapse-left',
+								'content' => 'collapse-right',
 							),
 							'odd'  => array(
-								'thumb' => 'medium-6-collapse-half medium-collapse-right medium-order-2',
-								'meta'  => 'medium-6-collapse-half medium-collapse-left medium-order-1',
+								'thumb'   => 'small-collapse-left medium-collapse-right medium-order-2',
+								'content' => 'small-collapse-right medium-collapse-left medium-order-1',
 							),
 						);
-						$post_23_atts = array(
-							'wrap'       => '<span class="cell small-4-collapse-half small-collapse-left">%s</span>',
-							'title_cols' => 'cell small-8-collapse-half small-collapse-right',
-						);
 
-						// Post 1.
-						$post_1 = sprintf(
-							'<div class="post-1 grid-x"><p class="cell small-12-collapse %s"><a href="%s" aria-hidden="true" role="presentation">%s%s</a></p><div class="cell small-12-collapse %s"><div class="date button hollow hide-for-small-only">%s</div><div class="hide-for-medium"><a class="button" href="%s" aria-hidden="true" role="presentation">%s</a></div><h3 class="small no-margin"><a href="%s">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></a></h3></div></div>',
-							$post_1_atts[ $post_cat_eo ]['thumb'],
-							get_permalink( $posts[0] ),
-							get_the_post_thumbnail(
-								$posts[0],
-								'medium_large',
-								array(
-									'class' => 'hide-for-medium',
-								)
-							),
-							get_the_post_thumbnail(
-								$posts[0],
-								'thumb-three-two',
-								array(
-									'class' => 'hide-for-small-only',
-								)
-							),
-							$post_1_atts[ $post_cat_eo ]['meta'],
-							get_the_date( 'F j', $posts[0] ),
-							get_term_link( $cat->term_id ),
-							$cat->name,
-							get_permalink( $posts[0] ),
-							$posts[0]->post_title,
-							str_replace( ' ', '&nbsp;', get_the_date( 'F j, Y', $posts[0] ) )
-						);
+						// Get category button group.
+						$post_categories  = wp_get_post_categories( $id );
+						$post_cat_button  = '<a href="%s" class="button">%s</a>';
+						$post_cat_buttons = array();
 
-						// Post 2.
-						$thumbnail   = get_the_post_thumbnail( $posts[1], 'thumb-three-two' );
-						$title_class = 'cell small-12-collapse';
-						if ( ! empty( $thumbnail ) ) {
-							$thumbnail   = sprintf( $post_23_atts['wrap'], $thumbnail );
-							$title_class = $post_23_atts['title_cols'];
-						}
-						$post_2 = sprintf(
-							'<div class="post-2"><hr /><a class="grid-x" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
-							get_permalink( $posts[1] ),
-							$thumbnail,
-							$title_class,
-							$posts[1]->post_title,
-							str_replace( ' ', '&nbsp;', get_the_date( 'F j, Y', $posts[1] ) )
-						);
+						foreach ( $post_categories as $cat_id ) {
 
-						// Post 3.
-						$thumbnail   = get_the_post_thumbnail( $posts[2], 'thumb-three-two' );
-						$title_class = 'cell small-12-collapse';
-						if ( ! empty( $thumbnail ) ) {
-							$thumbnail   = sprintf( $post_23_atts['wrap'], $thumbnail );
-							$title_class = $post_23_atts['title_cols'];
+							$cat = get_category( $cat_id );
+
+							$post_cat_buttons[] = sprintf(
+								$post_cat_button,
+								get_category_link( $cat_id ),
+								$cat->name
+							);
+
 						}
 
-						$post_3 = sprintf(
-							'<div class="post-3"><a class="grid-x" href="%s">%s<span class="%s"><h3 class="small no-margin">%s<span class="show-for-small-only"> &mdash;&nbsp;%s</span></h3></span></a><hr /></div>',
-							get_permalink( $posts[2] ),
-							$thumbnail,
-							$title_class,
-							$posts[2]->post_title,
-							str_replace( ' ', '&nbsp;', get_the_date( 'F j, Y', $posts[2] ) )
+						// Get featured image.
+						$image      = '';
+						$post_image = get_the_post_thumbnail( $post_obj, 'medium_cropped' );
+						if ( ! empty( $post_image ) ) {
+							$image = sprintf(
+								'<div class="cell medium-3 small-3 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
+								$post_atts[ $eo ]['thumb'],
+								get_permalink( $id ),
+								$post_image
+							);
+						}
+
+						// Make post.
+						$post = sprintf(
+							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x">%s<div class="cell medium-auto small-auto %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div><footer class="entry-footer"><p class="entry-meta"><time class="entry-time" itemprop="datePublished" datetime="%s">%s</time></p></footer></div></div></article>',
+							$image,
+							$post_atts[ $eo ]['content'],
+							implode( '', $post_cat_buttons ),
+							get_permalink( $id ),
+							$post_obj->post_title,
+							$story['description'],
+							get_the_time( 'c', $post_obj ),
+							get_the_time( 'F j, Y', $post_obj )
 						);
 
-						// Item output.
-						$item_output .= sprintf(
-							'<div class="item post-cat card cell masonry-item medium-6 small-12"><h2 class="card-heading">%s</h2>%s<div class="show-for-small-only">%s%s<div class="text-center"><a href="%s" class="button hollow no-margin">All %s</a></div></div></div>',
-							$cat->name,
-							$post_1,
-							$post_2,
-							$post_3,
-							get_term_link( $cat->term_id ),
-							$cat->name
+						// Add post to output.
+						$stories_output[] = $post;
+
+						// Switch the even/odd indicator.
+						$eo = 'even' === $eo ? 'odd' : 'even';
+						break;
+
+					case 'quote':
+						$quote           = $story['quote'];
+						$post            = $story['post'];
+						$post_link_open  = '';
+						$post_link_close = '';
+						$cat_buttons     = '';
+						// Define post-dependent variables.
+						if ( ! empty( $post ) ) {
+							$post_link_open  = sprintf(
+								'<a class="entry-title-link" rel="bookmark" href="%s">',
+								get_permalink( $post->ID )
+							);
+							$post_link_close = '</a>';
+
+							// Get all post categories as buttons.
+							$post_categories  = wp_get_post_categories( $post->ID );
+							$post_cat_button  = '<a href="%s" class="button">%s</a>';
+							$post_cat_buttons = array();
+
+							foreach ( $post_categories as $cat_id ) {
+
+								$cat = get_category( $cat_id );
+
+								$post_cat_buttons[] = sprintf(
+									$post_cat_button,
+									get_category_link( $cat_id ),
+									$cat->name
+								);
+
+							}
+							$cat_buttons = implode( '', $post_cat_buttons );
+
+						}
+
+						$quote = str_replace( '<p', '<span', $quote );
+						$quote = str_replace( '</p', '</span', $quote );
+
+						$stories_output[] = sprintf(
+							'<div class="item quote card"><div class="cat-buttons">%s</div>%s%s%s</div>',
+							$cat_buttons,
+							$post_link_open,
+							$quote,
+							$post_link_close
 						);
 
-					}
+						break;
 
-					break;
-
-				case 'podcast':
-					$thumb        = $item['image'] ? $item['image']['url'] : AGTODAY_THEME_DIRURL . '/images/podcast.jpg';
-					$link_open    = $item['page'] ? "<a href=\"{$item['page']}\">" : '';
-					$link_close   = $item['page'] ? '</a>' : '';
-					$item_output .= sprintf(
-						'<div class="item podcast card card-no-padding cell masonry-item medium-6 small-12">%s<img src="%s/images/podcast-title.png"><img class="hide-for-small-only" src="%s">%s</div>',
-						$link_open,
-						AGTODAY_THEME_DIRURL,
-						$thumb,
-						$link_close
-					);
-
-					break;
-
-				case 'quote':
-					$cat        = $item['category'];
-					$cat_button = '';
-					if ( $item['category'] ) {
-						$cat_button = sprintf(
-							'<a href="%s" class="button">%s</a>',
-							get_term_link( $cat->term_id ),
-							$cat->name
-						);
-					}
-
-					$item_output .= sprintf(
-						'<div class="item quote card cell masonry-item medium-6 hide-for-small-only">%s%s</div>',
-						$cat_button,
-						$item['quote']
-					);
-
-					break;
-
-				default:
-					break;
+					default:
+						break;
+				}
 			}
+
+			$story_list = sprintf(
+				'<div class="cell medium-8 small-12">%s%s</div><div class="cell auto">%s</div>',
+				$stories_output[0],
+				$stories_output[1],
+				$stories_output[2]
+			);
+
+			$output .= sprintf(
+				$section_output,
+				$section['stories']['heading'],
+				$story_list
+			);
+
+		}
+	}
+
+	// LiveWhale Section.
+	$feed_json    = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/agrilife/' );
+	$feed_array   = json_decode( $feed_json['body'], true );
+	$l_events     = array_slice( $feed_array, 0, 3 ); // Choose number of events.
+	$l_event_list = '';
+
+	foreach ( $l_events as $event ) {
+
+		$title      = $event['title'];
+		$url        = $event['url'];
+		$location   = $event['location'];
+		$date       = $event['date_utc'];
+		$time       = $event['date_time'];
+		$date       = date_create( $date );
+		$date_day   = date_format( $date, 'd' );
+		$date_month = date_format( $date, 'M' );
+
+		if ( array_key_exists( 'custom_room_number', $event ) && ! empty( $event['custom_room_number'] ) ) {
+
+			$location = $event['custom_room_number'];
+
 		}
 
-		$item_output .= '</div>';
-		$output      .= $item_output;
+		$l_event_list .= sprintf(
+			'<div class="event cell medium-auto small-12"><div class="grid-x "><div class="cell date shrink"><div class="month h3">%s</div><div class="h2 day">%s</div></div><div class="cell title auto"><a href="%s" title="%s" class="event-title medium-truncate-lines medium-truncate-2-lines">%s</a><div class="location medium-truncate-lines medium-truncate-2-lines">%s</div></div></div></div>',
+			$date_month,
+			$date_day,
+			$url,
+			$title,
+			$title,
+			$location
+		);
 
 	}
 
-	echo wp_kses_post( $output );
-}
-
-/**
- * Add script for home page functionality
- *
- * @since 0.2.0
- * @return void
- */
-function agt_enqueue_home_scripts() {
-
-	wp_register_script(
-		'agt-masonry',
-		AGTODAY_THEME_DIRURL . '/js/public.masonry.min.js',
-		array( 'jquery', 'masonry' ),
-		filemtime( AGTODAY_THEME_DIRPATH . '/js/public.masonry.min.js' ),
-		true
+	$output .= sprintf(
+		'<div class="alignfull livewhale section invert"><div class="grid-container"><div class="grid-x  padding-y"><div class="events-cell cell medium-auto small-12 grid-container"><div class="grid-x ">%s</div></div><div class="events-all cell medium-shrink small-12"><a class="h3 arrow-right" href="#">All Events</a></div></div></div></div>',
+		$l_event_list
 	);
 
-	wp_enqueue_script( 'agt-masonry' );
+	// In The News Section.
+	$itn_list = '';
+	foreach ( $in_the_news['stories'] as $key => $value ) {
+		$logo          = wp_get_attachment_image( $value['logo']['id'], 'medium', false, array( 'class' => 'p' ) );
+		$link_open     = '';
+		$link_close    = '';
+		$no_link_class = ' nolink';
+		if ( ! empty( $value['link'] ) ) {
+			$link_open     = sprintf( '<a class="entry-title-link" href="%s" rel="nofollow" target="_blank">', $value['link'] );
+			$link_close    = '</a>';
+			$no_link_class = '';
+		}
+
+		$itn_list .= sprintf(
+			'<div class="cell card medium-4 small-12%s">%s%s<h2 class="entry-title" itemprop="headline">%s</h2>%s</div>',
+			$no_link_class,
+			$link_open,
+			$logo,
+			$value['title'],
+			$value['description'],
+			$link_close
+		);
+	}
+
+	$output .= sprintf(
+		'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2>%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>',
+		$in_the_news['heading'],
+		$itn_list
+	);
+
+	// Produce the entire page's output.
+	echo wp_kses_post( $output );
 
 }
 

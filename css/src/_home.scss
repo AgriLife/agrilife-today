@@ -1,7 +1,12 @@
 .page-template-home {
+	.section ~ .section {
+		margin-top: $global-layout-space * 2;
+		margin-bottom: 0;
+	}
 
 	.quote.card {
 		padding: $card-padding * 4 $card-padding;
+		height: 100%;
 
 		p {
 			font-size: 1.75rem;
@@ -42,4 +47,47 @@
 			}
 		}
 	}
+
+	.livewhale {
+		&.alignfull .grid-container {
+			padding: {
+				left: $grid-margin-gutters + .94rem;
+				right: $grid-margin-gutters + .94rem;
+			}
+		}
+	}
+
+	.in-the-news {
+		a {
+			display: block;
+			padding: $global-layout-space * 2 $global-layout-space;
+
+			&:active,
+			&:hover {
+				text-decoration: none;
+				outline: 1px dashed $dark-blue;
+			}
+		}
+
+		.entry-title {
+			font: 700 1.15rem/1.2 $opensans;
+		}
+
+		.nolink {
+			padding: $card-padding + $global-layout-space * 2 $card-padding + $global-layout-space;
+		}
+	}
+
+	@include breakpoint(small only) {
+		.af4-entry-compact ~ .af4-entry-compact {
+			margin-bottom: $global-layout-space * 1.5;
+		}
+	}
+
+	@include breakpoint(medium) {
+		.section ~ .section {
+			margin-top: $global-layout-space * 5;
+			margin-bottom: 0;
+		}
+}
 }
