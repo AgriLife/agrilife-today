@@ -56,6 +56,9 @@ class AgToday {
 		// Remove Related Posts.
 		add_action( 'init', array( $this, 'rp4wp_example_remove_filter' ) );
 
+		// Enable automatic responsive image attributes.
+		add_filter( 'wp_kses_allowed_html', array( $this, 'post_allowed_tags' ), 11, 2 );
+
 	}
 
 	/**
@@ -219,6 +222,25 @@ class AgToday {
 				remove_filter( 'the_content', array( $filter_instance, 'run' ), $filter_instance->get_priority() );
 			}
 		}
+	}
+
+	/**
+	 * Change allowed HTML tags for wp_kses_post()
+	 *
+	 * @since 0.7.0
+	 * @param array  $allowedposttags Allowed HTML elements and attributes.
+	 * @param string $context The filter context within the current instance.
+	 * @return array
+	 */
+	public function post_allowed_tags( $allowedposttags, $context ) {
+
+		if ( 'post' === $context ) {
+			$allowedposttags['img']['srcset'] = true;
+			$allowedposttags['img']['sizes']  = true;
+		}
+
+		return $allowedposttags;
+
 	}
 
 }
