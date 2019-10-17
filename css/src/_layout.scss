@@ -19,6 +19,10 @@
 .grid-x {
 	@include xy-grid;
 
+	&.center-y {
+		align-items: center;
+	}
+
 	> .cell {
 		@include xy-gutters;
 		flex: 0 0 auto;
