@@ -4,9 +4,12 @@ h3,
 h4,
 h5,
 h6 {
-	text-transform: uppercase;
 	color: $dark-blue;
 	letter-spacing: 1px;
+}
+
+.entry-title {
+	text-transform: uppercase;
 }
 
 .card {
@@ -63,4 +66,8 @@ table {
 		color: $white;
 		text-decoration: none;
 	}
+}
+
+.af4-entry-compact {
+	@extend %af4-entry-compact;
 }

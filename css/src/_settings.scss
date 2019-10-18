@@ -38,6 +38,7 @@ $helvetica: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 $body-font-family: $opensans;
 $nav-font-family: $helvetica;
 $header-font-family: $tungsten;
+$entry-title-font: 700 1.15rem/1 $opensans;
 
 /* Global
 --------------------------------------------- */
@@ -120,7 +121,7 @@ $button-background: $dark-blue;
 --------------------------------------------- */
 $card-link-color: $dark-blue;
 $card-border-color: $dark-blue;
-$card-padding: $global-layout-space;
+$card-padding: $global-layout-space * 1.5;
 
 /* Footer
 --------------------------------------------- */

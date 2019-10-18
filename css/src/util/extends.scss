@@ -1,3 +1,11 @@
+%entry-title {
+	font: $entry-title-font;
+	letter-spacing: .01rem;
+	text-transform: uppercase;
+	display: block;
+	margin: 0 0 .7rem;
+}
+
 %card-top-border {
 	border-top: 0.5rem solid $card-border-color;
 }
@@ -52,16 +60,16 @@
 
 %heading-sideline {
 	text-align: center;
-	margin-bottom: $grid-margin-gutters;
+	margin-bottom: $grid-margin-gutters * 1.75;
 
 	.cell.shrink {
 		max-width: 75%;
 		position: relative;
 		margin-bottom: 0;
-		padding: 0 1rem;
 		line-height: 1.35em;
 		hyphens: auto;
 		letter-spacing: .18rem;
+		text-transform: uppercase;
 	}
 
 	.grid-x {
@@ -78,41 +86,73 @@
 	}
 }
 
-%button-compact {
-	font: 900 .75rem/1rem $opensans;
-	display: inline-block;
-	padding: 0.4rem .8rem;
-	color: $white;
-	border: 1px solid lighten($dark-blue, 50%);
-	margin: {
-		bottom: 1rem;
-		right: 1rem;
-	}
-	background-color: $dark-blue;
-	text: {
-		transform: uppercase;
+// Taken from https://github.com/AgriLife/agriflex4/blob/master/css/src/_archive.scss
+%af4-entry-compact {
+	~ * {
+		margin-top: $global-layout-space;
 	}
 
-	&:last-of-type {
-		margin-right: 0;
-	}
+	h2 {
+		@extend %entry-title;
 
-	&:hover,
-	&:focus {
-		color: $white;
-	}
+		a {
+			color: $darker-gray;
+			text-decoration: none;
 
-	&.hollow {
-		color: $dark-blue;
-		border-color: $dark-blue;
-		background-color: $white;
-
-		&::hover {
-			color: $dark-blue;
+			&:focus,
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 
-	a {
-		color: $white;
+	p {
+		font-size: .875rem;
+		line-height: 1rem;
+		margin-bottom: 0;
+
+		&.entry-meta {
+			margin-bottom: 0;
+		}
+	}
+
+	time {
+		font: {
+			style: italic;
+			size: 1rem;
+		}
+		line-height: 1.25rem;
+	}
+
+	.grid-x {
+		flex-wrap: nowrap;
+
+		@include breakpoint(medium) {
+			justify-content: end;
+		}
+	}
+
+	.post-category .button {
+		padding: .25rem .5rem;
+		transition: 0.25s color, 0.25s background-color;
+		margin-bottom: .7rem;
+
+		&:hover {
+			background-color: transparent;
+			color: $black;
+			border: 1px solid $dark-blue;
+			text-decoration: none;
+		}
+	}
+
+	&.has-post-thumbnail {
+		position: relative;
+
+		.entry-image-link {
+			img {
+				margin-bottom: 0;
+			}
+		}
 	}
 }
+// END Taken from https://github.com/AgriLife/agriflex4/blob/master/css/src/_archive.scss
