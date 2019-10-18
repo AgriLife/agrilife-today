@@ -136,7 +136,7 @@ class Assets {
 
 		wp_register_style(
 			'googlefonts',
-			'https://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,500,600,800',
+			'https://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,500,600,800',
 			array(),
 			'1.0.1',
 			'all'
