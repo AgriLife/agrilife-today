@@ -1108,6 +1108,9 @@ class Genesis {
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			remove_action( 'genesis_before_post_content', 'genesis_post_info' );
 
+			add_filter( 'genesis_attr_entry', array( $this, 'af4_entry_compact_class' ) );
+			add_action( 'genesis_archive_title_descriptions', array( $this, 'archive_title_open' ), 9 );
+			add_action( 'genesis_archive_title_descriptions', array( $this, 'archive_title_close' ), 11 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_left_open' ), 1 );
 			add_action( 'genesis_entry_header', 'genesis_do_post_image', 1 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_left_close' ), 3 );
@@ -1120,6 +1123,44 @@ class Genesis {
 			add_filter( 'genesis_next_link_text', array( $this, 'next_link_text' ) );
 
 		}
+
+	}
+
+	/**
+	 * Add af4-entry-compact class to archive posts.
+	 *
+	 * @since 0.7.13
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function af4_entry_compact_class( $attributes ) {
+
+		$attributes['class'] .= ' af4-entry-compact';
+		return $attributes;
+
+	}
+
+	/**
+	 * Open archive title grid wrapper.
+	 *
+	 * @since 0.7.13
+	 * @return void
+	 */
+	public function archive_title_open() {
+
+		echo wp_kses_post( '<div class="grid-x"><div class="cell auto title-line"></div>' );
+
+	}
+
+	/**
+	 * Close archive title grid wrapper.
+	 *
+	 * @since 0.7.13
+	 * @return void
+	 */
+	public function archive_title_close() {
+
+		echo wp_kses_post( '<div class="cell auto title-line"></div></div>' );
 
 	}
 
