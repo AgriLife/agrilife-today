@@ -304,34 +304,39 @@ function agt_home_page() {
 	);
 
 	// In The News Section.
-	$itn_list = '';
-	foreach ( $in_the_news['stories'] as $key => $value ) {
-		$logo          = wp_get_attachment_image( $value['logo']['id'], 'medium', false, array( 'class' => 'p' ) );
-		$link_open     = '';
-		$link_close    = '';
-		$no_link_class = ' nolink';
-		if ( ! empty( $value['link'] ) ) {
-			$link_open     = sprintf( '<a class="entry-title-link" href="%s" rel="nofollow" target="_blank">', $value['link'] );
-			$link_close    = '</a>';
-			$no_link_class = '';
+	if ( 'array' === gettype( $in_the_news ) && array_key_exists( 'stories', $in_the_news ) ) {
+
+		$itn_list = '';
+
+		foreach ( $in_the_news['stories'] as $key => $value ) {
+			$logo          = wp_get_attachment_image( $value['logo']['id'], 'medium', false, array( 'class' => 'p' ) );
+			$link_open     = '';
+			$link_close    = '';
+			$no_link_class = ' nolink';
+			if ( ! empty( $value['link'] ) ) {
+				$link_open     = sprintf( '<a class="entry-title-link" href="%s" rel="nofollow" target="_blank">', $value['link'] );
+				$link_close    = '</a>';
+				$no_link_class = '';
+			}
+
+			$itn_list .= sprintf(
+				'<div class="cell card medium-4 small-12%s">%s%s<h2 class="entry-title" itemprop="headline">%s</h2>%s</div>',
+				$no_link_class,
+				$link_open,
+				$logo,
+				$value['title'],
+				$value['description'],
+				$link_close
+			);
 		}
 
-		$itn_list .= sprintf(
-			'<div class="cell card medium-4 small-12%s">%s%s<h2 class="entry-title" itemprop="headline">%s</h2>%s</div>',
-			$no_link_class,
-			$link_open,
-			$logo,
-			$value['title'],
-			$value['description'],
-			$link_close
+		$output .= sprintf(
+			'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>',
+			$in_the_news['heading'],
+			$itn_list
 		);
-	}
 
-	$output .= sprintf(
-		'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>',
-		$in_the_news['heading'],
-		$itn_list
-	);
+	}
 
 	// Produce the entire page's output.
 	echo wp_kses_post( $output );
