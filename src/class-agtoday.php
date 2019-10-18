@@ -133,7 +133,7 @@ class AgToday {
 		// Home page.
 		add_image_size( 'medium_cropped', 300, 300, true );
 		add_image_size( 'thumb-three-two', 300, 200, true );
-		add_image_size( 'home-story-image', 500, 400, true );
+		add_image_size( 'home-story-image', 400, 300, true );
 
 		// Post headings at 16:7 aspect ratio.
 		add_image_size( 'post-heading-small', 640, 480, true );
