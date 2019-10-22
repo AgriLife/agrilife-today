@@ -82,7 +82,10 @@ module.exports = (grunt) ->
           'node_modules/what-input/dist/what-input.min.js',
           'node_modules/foundation-sites/dist/js/plugins/foundation.core.min.js',
           'node_modules/foundation-sites/dist/js/plugins/foundation.util.mediaQuery.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.motion.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.triggers.min.js',
           'node_modules/foundation-sites/dist/js/plugins/foundation.sticky.min.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.toggler.min.js'
           'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveToggle.min.js'
         ]
         dest: 'js/foundation.concat.js'
@@ -93,7 +96,10 @@ module.exports = (grunt) ->
           'node_modules/what-input/dist/what-input.js',
           'node_modules/foundation-sites/dist/js/plugins/foundation.core.js',
           'node_modules/foundation-sites/dist/js/plugins/foundation.util.mediaQuery.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.motion.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.util.triggers.js',
           'node_modules/foundation-sites/dist/js/plugins/foundation.sticky.js',
+          'node_modules/foundation-sites/dist/js/plugins/foundation.toggler.js'
           'node_modules/foundation-sites/dist/js/plugins/foundation.responsiveToggle.js'
         ]
         dest: 'js/foundation.concat.js'

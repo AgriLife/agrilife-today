@@ -48,12 +48,18 @@
 	}
 }
 
+.title-bars .title-bar {
+	display: inline-block;
+	vertical-align: top;
+
+	~ .title-bar {
+		margin-left: 6px;
+	}
+}
+
 .title-bar-navigation {
 	width: 30px;
-	flex: 1 1 100%;
-	flex-wrap: wrap;
-	float: right;
-	padding: 6px 0;
+	height: 38px;
 
 	.menu-icon {
 		@include hamburger(
@@ -63,13 +69,11 @@
 			$width: 30px,
 			$height: 20px
 		);
-		order: 2;
-		margin: 0 0 2px;
+		margin: 0;
 		display: block;
 	}
 
 	.title-bar-title {
-		order: 1;
 		cursor: pointer;
 		text-transform: uppercase;
 		line-height: 10px;
@@ -77,13 +81,8 @@
 			weight: bold;
 			size: .63rem;
 		}
-		padding-bottom: 4px;
+		padding-bottom: 0;
 		margin-top: 1px;
-	}
-
-	@include breakpoint(small only) {
-		height: 100%;
-		justify-content: flex-end;
 	}
 }
 
