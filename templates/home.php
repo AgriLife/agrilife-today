@@ -264,44 +264,47 @@ function agt_home_page() {
 	);
 
 	// LiveWhale Section.
-	$feed_json    = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/' );
-	$feed_array   = json_decode( $feed_json['body'], true );
-	$l_events     = array_slice( $feed_array, 0, 3 ); // Choose number of events.
-	$l_event_list = '';
+	$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/' );
 
-	foreach ( $l_events as $event ) {
+	if ( is_array( $feed_json ) && array_key_exists( 'body', $feed_json ) ) {
+		$feed_array   = json_decode( $feed_json['body'], true );
+		$l_events     = array_slice( $feed_array, 0, 3 ); // Choose number of events.
+		$l_event_list = '';
 
-		$title      = $event['title'];
-		$url        = $event['url'];
-		$location   = $event['location'];
-		$date       = $event['date_utc'];
-		$time       = $event['date_time'];
-		$date       = date_create( $date );
-		$date_day   = date_format( $date, 'd' );
-		$date_month = date_format( $date, 'M' );
+		foreach ( $l_events as $event ) {
 
-		if ( array_key_exists( 'custom_room_number', $event ) && ! empty( $event['custom_room_number'] ) ) {
+			$title      = $event['title'];
+			$url        = $event['url'];
+			$location   = $event['location'];
+			$date       = $event['date_utc'];
+			$time       = $event['date_time'];
+			$date       = date_create( $date );
+			$date_day   = date_format( $date, 'd' );
+			$date_month = date_format( $date, 'M' );
 
-			$location = $event['custom_room_number'];
+			if ( array_key_exists( 'custom_room_number', $event ) && ! empty( $event['custom_room_number'] ) ) {
+
+				$location = $event['custom_room_number'];
+
+			}
+
+			$l_event_list .= sprintf(
+				'<div class="event cell medium-auto small-12"><div class="grid-x "><div class="cell date shrink"><div class="month h3">%s</div><div class="h2 day">%s</div></div><div class="cell title auto"><a href="%s" title="%s" class="event-title medium-truncate-lines medium-truncate-2-lines">%s</a><div class="location medium-truncate-lines medium-truncate-2-lines">%s</div></div></div></div>',
+				$date_month,
+				$date_day,
+				$url,
+				$title,
+				$title,
+				$location
+			);
 
 		}
 
-		$l_event_list .= sprintf(
-			'<div class="event cell medium-auto small-12"><div class="grid-x "><div class="cell date shrink"><div class="month h3">%s</div><div class="h2 day">%s</div></div><div class="cell title auto"><a href="%s" title="%s" class="event-title medium-truncate-lines medium-truncate-2-lines">%s</a><div class="location medium-truncate-lines medium-truncate-2-lines">%s</div></div></div></div>',
-			$date_month,
-			$date_day,
-			$url,
-			$title,
-			$title,
-			$location
+		$output .= sprintf(
+			'<div class="alignfull livewhale section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Events</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x  padding-y">%s<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank"><span class="h3">All Events</span></a></div></div></div></div>',
+			$l_event_list
 		);
-
 	}
-
-	$output .= sprintf(
-		'<div class="alignfull livewhale section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Events</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x  padding-y">%s<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank"><span class="h3">All Events</span></a></div></div></div></div>',
-		$l_event_list
-	);
 
 	// In The News Section.
 	if ( 'array' === gettype( $in_the_news ) && array_key_exists( 'stories', $in_the_news ) ) {
