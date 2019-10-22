@@ -3,6 +3,7 @@ button.search-icon {
 	center center/rem-calc(38) rem-calc(38);
 	overflow: hidden;
 	text-indent: 500%;
+	white-space: nowrap;
 	cursor: pointer;
 	border: 0 none;
 	width: rem-calc(38);
@@ -53,6 +54,11 @@ button.search-icon {
 		.logged-in.admin-bar & .sticky.is-stuck {
 			top: 32px!important; // sass-lint:disable-line no-important
 		}
+
+		.widgets-header-subscribe {
+			position: relative;
+			height: 0;
+		}
 	}
 
 	@include breakpoint(small only) {
@@ -79,7 +85,7 @@ button.search-icon {
 	}
 }
 
-#header-search {
+#header-widgets {
 	font-family: $opensans;
 	background-color: $light-blue;
 
@@ -139,7 +145,7 @@ button.search-icon {
 	// }
 
 	&.active form {
-		height: $search-medium-height;
+		height: $search-small-sticky-height;
 	}
 
 	> .grid-container {
@@ -157,12 +163,25 @@ button.search-icon {
 		top: 100%;
 	}
 
+	a.subscribe {
+		display: none;
+		position: absolute;
+		top: 5px;
+		right: $grid-margin-gutters * 2 + rem-calc(30) + rem-calc(38);
+		color: $white;
+		font-weight: bold;
+	}
+
 	.is-anchored & {
 		form input {
 			margin: {
 				top: $grid-margin-gutters;
 				bottom: $grid-margin-gutters;
 			}
+		}
+
+		&.active form {
+			height: $search-small-height;
 		}
 
 		[type="search"] {
@@ -176,9 +195,6 @@ button.search-icon {
 	}
 
 	.is-stuck & {
-		&.active form {
-			height: $search-small-sticky-height;
-		}
 
 		form input {
 			margin: {
@@ -226,14 +242,24 @@ button.search-icon {
 			right: $grid-margin-gutters * 2.5;
 		}
 
+		a.subscribe {
+			display: block;
+			top: 4px;
+			right: $grid-margin-gutters * 2.5 + 3.75rem;
+		}
+
+		&.active form {
+			height: $search-medium-sticky-height;
+		}
+
 		.is-anchored & {
 			[type="search"] {
 				font-size: 2.5rem;
 			}
-		}
 
-		.is-stuck &.active form {
-			height: $search-medium-sticky-height;
+			&.active form {
+				height: $search-medium-height;
+			}
 		}
 	}
 }

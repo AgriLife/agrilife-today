@@ -29,10 +29,14 @@
 		}
 
 		@include breakpoint(medium) {
-			border: 1px solid $border-primary;
-			border-width: 0 1px 1px;
+			a {
+				color: $white;
+			}
+
+			border-bottom: 2px solid $light-blue;
 			margin-left: -1px;
-			background-color: $white;
+			background-color: $darker-gray;
+			color: $white;
 
 			&:first-child {
 				margin-left: 0;

@@ -128,8 +128,8 @@ class Genesis {
 		);
 		genesis_register_sidebar(
 			array(
-				'name'        => __( 'Footer - 3', 'agrilife-today' ),
-				'id'          => 'footer-3',
+				'name'        => __( 'Header - Subscribe', 'agrilife-today' ),
+				'id'          => 'header-subscribe',
 				'description' => __( 'This is the third widget area for the site footer.', 'agrilife-today' ),
 			)
 		);
@@ -430,22 +430,34 @@ class Genesis {
 	 */
 	public function sticky_header( $output ) {
 
-		$search_form = array(
-			'open'   => '<div id="header-search" data-toggler=".active"><div class="grid-container">',
+		ob_start();
+		genesis_widget_area(
+			'header-subscribe',
+			array(
+				'before' => '<div class="widgets-header-subscribe cell small-12 small-order-3 medium-auto">',
+				'after'  => '</div>',
+			)
+		);
+		$subscribe_widget = ob_get_clean();
+		$subscribe_widget = '<div class="widgets-header-subscribe"><a href="#" class="subscribe">Subscribe</a></div>';
+
+		$header_widgets = array(
+			'open'   => '<div id="header-widgets" data-toggler=".active"><div class="grid-container">',
 			'close'  => '</div></div>',
 			'inside' => get_search_form( false ),
 		);
 
-		$search_form['inside']  = str_replace( 'placeholder="Search this website"', 'placeholder="Search AgriLife Today"', $search_form['inside'] );
-		$search_form['inside']  = str_replace( 'value="Search"', 'value="Submit"', $search_form['inside'] );
-		$search_form['inside']  = preg_replace( '/(<form[^>]*class="[^"]*)search-form/', '$1search-form grid-x', $search_form['inside'] );
-		$search_form['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-input/', '$1search-form-input cell auto', $search_form['inside'] );
-		$search_form['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $search_form['inside'] );
-		$search_form['inside'] .= '<button class="search-icon" data-toggle="header-search" type="button">Expand!</button>';
+		$header_widgets['inside']  = str_replace( 'placeholder="Search this website"', 'placeholder="Search AgriLife Today"', $header_widgets['inside'] );
+		$header_widgets['inside']  = str_replace( 'value="Search"', 'value="Submit"', $header_widgets['inside'] );
+		$header_widgets['inside']  = preg_replace( '/(<form[^>]*class="[^"]*)search-form/', '$1search-form grid-x', $header_widgets['inside'] );
+		$header_widgets['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-input/', '$1search-form-input cell auto', $header_widgets['inside'] );
+		$header_widgets['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $header_widgets['inside'] );
+		$header_widgets['inside'] .= '<button class="search-icon" data-toggle="header-widgets" type="button">Open search form</button>';
+		$header_widgets['inside'] .= $subscribe_widget;
 
-		$search_form_output = $search_form['open'] . $search_form['inside'] . $search_form['close'];
+		$header_widgets_output = $header_widgets['open'] . $header_widgets['inside'] . $header_widgets['close'];
 
-		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;">' . $search_form_output . '<div class="grid-x"', $output );
+		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;">' . $header_widgets_output . '<div class="grid-x"', $output );
 		$output = preg_replace( '/<\/div>$/', '</div></div></div>', $output );
 
 		return $output;
@@ -585,13 +597,13 @@ class Genesis {
 		if ( in_array( 'widget', $classes, true ) ) {
 
 			// Invert footer widgets.
-			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true ) ) {
+			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'header-subscribe' ), true ) ) {
 				$classes[] = 'invert';
 			}
 
 			// Apply card classes.
 			if (
-				! in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true )
+				! in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'header-subscribe' ), true )
 				|| false !== strpos( $params[0]['widget_id'], 'agt_subscribe' )
 			) {
 				$classes[] = 'card';
@@ -1075,14 +1087,6 @@ class Genesis {
 			'footer-2',
 			array(
 				'before' => '<div class="widgets-footer-2 cell small-12 small-order-2 medium-shrink">',
-				'after'  => '</div>',
-			)
-		);
-
-		genesis_widget_area(
-			'footer-3',
-			array(
-				'before' => '<div class="widgets-footer-3 cell small-12 small-order-3 medium-auto">',
 				'after'  => '</div>',
 			)
 		);
