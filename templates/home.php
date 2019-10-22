@@ -44,18 +44,19 @@ function agt_home_page() {
 				switch ( $story['acf_fc_layout'] ) {
 
 					case 'post':
-						$id        = $story['post']->ID;
-						$post_obj  = $story['post'];
-						$post_atts = array(
-							'even' => array(
-								'thumb'   => 'collapse-left',
-								'content' => 'collapse-right',
-							),
+						$id            = $story['post']->ID;
+						$post_obj      = $story['post'];
+						$post_atts     = array(
 							'odd'  => array(
-								'thumb'   => 'small-collapse-left medium-collapse-right medium-order-2',
-								'content' => 'small-collapse-right medium-collapse-left medium-order-1',
+								'thumb'   => 'collapse-right',
+								'content' => 'collapse-left',
+							),
+							'even' => array(
+								'thumb'   => 'small-collapse-right medium-collapse-left medium-order-1',
+								'content' => 'small-collapse-left medium-collapse-right medium-order-2',
 							),
 						);
+						$content_class = 'medium-auto small-auto';
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
@@ -78,23 +79,25 @@ function agt_home_page() {
 						$image      = '';
 						$post_image = get_the_post_thumbnail( $post_obj, 'home-story-image' );
 						if ( ! empty( $post_image ) ) {
-							$image = sprintf(
+							$image         = sprintf(
 								'<div class="cell image medium-4 small-4 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 								$post_atts[ $eo ]['thumb'],
 								get_permalink( $id ),
 								$post_image
 							);
+							$content_class = 'medium-8 small-8';
 						}
 
 						// Make post.
 						$post = sprintf(
-							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y">%s<div class="cell medium-auto small-auto %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div></div></article>',
-							$image,
+							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</div></article>',
+							$content_class,
 							$post_atts[ $eo ]['content'],
 							implode( '', $post_cat_buttons ),
 							get_permalink( $id ),
 							$post_obj->post_title,
-							$story['description']
+							$story['description'],
+							$image
 						);
 
 						// Add post to output.
@@ -184,17 +187,18 @@ function agt_home_page() {
 
 	foreach ( $posts as $key => $story ) {
 
-		$id        = $story['ID'];
-		$post_atts = array(
+		$id            = $story['ID'];
+		$post_atts     = array(
 			'even' => array(
-				'thumb'   => 'collapse-left',
-				'content' => 'collapse-right',
+				'thumb'   => 'collapse-right',
+				'content' => 'collapse-left',
 			),
 			'odd'  => array(
-				'thumb'   => 'small-collapse-left medium-collapse-right medium-order-2',
-				'content' => 'small-collapse-right medium-collapse-left medium-order-1',
+				'thumb'   => 'small-collapse-right medium-collapse-left medium-order-1',
+				'content' => 'small-collapse-left medium-collapse-right medium-order-2',
 			),
 		);
+		$content_class = 'medium-auto small-auto';
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
@@ -217,12 +221,13 @@ function agt_home_page() {
 		$image      = '';
 		$post_image = get_the_post_thumbnail( $story['ID'], 'home-story-image' );
 		if ( ! empty( $post_image ) ) {
-			$image = sprintf(
+			$image         = sprintf(
 				'<div class="cell image medium-4 small-4 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 				$post_atts[ $eo ]['thumb'],
 				get_permalink( $id ),
 				$post_image
 			);
+			$content_class = 'medium-8 small-8';
 		}
 
 		// Make post.
@@ -234,13 +239,14 @@ function agt_home_page() {
 		}
 
 		$post = sprintf(
-			'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y">%s<div class="cell medium-auto small-auto %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div></div></article>',
-			$image,
+			'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</div></article>',
+			$content_class,
 			$post_atts[ $eo ]['content'],
 			implode( '', $post_cat_buttons ),
 			get_permalink( $id ),
 			$story['post_title'],
-			$excerpt
+			$excerpt,
+			$image
 		);
 
 		// Add post to output.

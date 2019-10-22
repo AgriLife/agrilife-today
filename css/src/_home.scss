@@ -1,18 +1,13 @@
 .page-template-home {
-
 	.section ~ .section {
-		margin: {
-			top: $global-layout-space * 2;
-			bottom: 0;
-		}
+		margin-top: $global-layout-space * 2;
+		margin-bottom: 0;
 	}
 
-	.section .heading-sideline .shrink {
-		font-size: 2.25rem;
-	}
-
-	.event-title {
-		@extend %entry-title;
+	.entry-title {
+		font: 600 1.15rem/1.2 $opensans;
+		letter-spacing: .01rem;
+		text-transform: uppercase;
 	}
 
 	.cell.tall {
@@ -32,15 +27,8 @@
 	}
 
 	.quote {
-		margin: {
-			left: 0;
-			right: 0;
-		}
-		color: $dark-blue;
-
-		a:not(.button) {
-			color: $dark-blue;
-		}
+		margin-left: 0;
+		margin-right: 0;
 
 		.cat-buttons + * {
 			font-size: 1.75rem;
@@ -58,7 +46,7 @@
 	}
 
 	.livewhale {
-		border-top: 4px solid $light-blue;
+		border-top: 2px solid $light-blue;
 
 		h2 {
 			color: $white;
@@ -80,12 +68,8 @@
 
 			a {
 				display: inline-block;
+				border: 1px solid $light-blue;
 				padding: .5rem .75rem;
-			}
-
-			.button {
-				background-color: $darker-gray;
-				margin-bottom: 0;
 			}
 
 			.h3 {
@@ -131,10 +115,6 @@
 			}
 		}
 
-		h2 {
-			@extend %entry-title;
-		}
-
 		.nolink {
 			padding: $card-padding + $global-layout-space * 2 $card-padding + $global-layout-space;
 		}
@@ -144,14 +124,40 @@
 		.af4-entry-compact ~ .af4-entry-compact {
 			margin-bottom: $global-layout-space * 1.5;
 		}
+
+		.post.card {
+			padding: 0;
+			position: relative;
+
+			.cell:first-child {
+				padding: $card-padding 0 $card-padding $card-padding;
+			}
+
+			.cell.image {
+				position: absolute;
+				overflow: hidden;
+				top: 0;
+				right: 0;
+				bottom: 0;
+
+				img {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					width: auto;
+					max-width: none;
+					height: 100%;
+					max-height: none;
+				}
+			}
+		}
 	}
 
 	@include breakpoint(medium) {
 		.section ~ .section {
-			margin: {
-				top: $global-layout-space * 5;
-				bottom: 0;
-			}
+			margin-top: $global-layout-space * 5;
+			margin-bottom: 0;
 		}
 }
 }
