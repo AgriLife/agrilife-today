@@ -65,7 +65,7 @@ class Meta_Boxes {
 		echo '</label> ';
 		echo '<input type="checkbox" name="featured-post" id="featured-post" ', ( intval( get_post_meta( $post->ID, 'featured-post', true ) ) === 1 ? ' checked="checked"' : '' ), ' />';
 		echo ' <span>';
-		esc_html_e( 'Feature this on home and category pages', 'agrilife-today' );
+		esc_html_e( 'Feature this on archive pages', 'agrilife-today' );
 		echo '</span>';
 
 	}
