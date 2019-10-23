@@ -60,6 +60,10 @@ table {
 	color: $white;
 	background-color: $darker-gray;
 
+	&.no-bg {
+		background-color: transparent;
+	}
+
 	a,
 	a:active,
 	a:hover {
