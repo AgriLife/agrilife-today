@@ -25,6 +25,22 @@ button.search-icon {
 
 	.sticky-container {
 		z-index: 2;
+		transition: height .25s ease-in-out;
+
+		&.child-not-stuck {
+			height: $header-small-height + $search-closed-height
+			!important; // sass-lint:disable-line no-important
+
+			&.search-open {
+				height: $header-small-height + $search-small-height
+				!important; // sass-lint:disable-line no-important
+			}
+		}
+
+		&.child-stuck {
+			height: $header-small-height + $search-closed-height
+			!important; // sass-lint:disable-line no-important
+		}
 	}
 
 	@include breakpoint(medium) {
@@ -40,14 +56,19 @@ button.search-icon {
 		}
 
 		.sticky-container {
-			transition: height .5s;
-
 			&.child-not-stuck {
-				height: $header-height!important; // sass-lint:disable-line no-important
+				height: $header-medium-height + $search-closed-height
+				!important; // sass-lint:disable-line no-important
+
+				&.search-open {
+					height: $header-medium-height + $search-medium-height
+					!important; // sass-lint:disable-line no-important
+				}
 			}
 
 			&.child-stuck {
-				height: $header-sticky-height!important; // sass-lint:disable-line no-important
+				height: $header-medium-sticky-height + $search-closed-height
+				!important; // sass-lint:disable-line no-important
 			}
 		}
 
@@ -64,7 +85,7 @@ button.search-icon {
 	@include breakpoint(small only) {
 		> .wrap > .wrap {
 			background-color: $dark-blue;
-			border-bottom: 1px solid $border-primary;
+			border-bottom: 2px solid $light-blue;
 		}
 
 		.title-area {
@@ -104,6 +125,10 @@ button.search-icon {
 	form {
 		overflow: hidden;
 		height: 2px;
+	}
+
+	&:not(.active) form {
+		visibility: hidden;
 	}
 
 	input {

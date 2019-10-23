@@ -71,15 +71,17 @@ $header-styles: (
 /* Header
 --------------------------------------------- */
 $site-title-background: $white;
+$search-closed-height: .125rem;
 $search-small-height: rem-calc(92);
 $search-small-sticky-height: rem-calc(40);
 $search-medium-height: rem-calc(92);
 $search-medium-sticky-height: rem-calc(40);
 $title-area-height: rem-calc(87);
 $title-area-sticky-height: rem-calc(55);
-$nav-primary-height: rem-calc(39);
-$header-height: $title-area-height + $nav-primary-height;
-$header-sticky-height: $title-area-sticky-height + $nav-primary-height;
+$nav-primary-height: rem-calc(38);
+$header-small-height: rem-calc(56);
+$header-medium-height: $title-area-height + $nav-primary-height;
+$header-medium-sticky-height: $title-area-sticky-height + $nav-primary-height;
 
 /* Navigation
 --------------------------------------------- */
@@ -90,7 +92,7 @@ $dropdownmenu-arrow-color: $dark-blue;
 $dropdownmenu-border: 0 none;
 $dropdownmenu-border-width: 0;
 $accordionmenu-arrow-color: $dropdownmenu-arrow-color;
-$menu-items-padding-y: rem-calc(11);
+$menu-items-padding-y: .625rem;
 $menu-items-padding: $menu-items-padding-y 1rem;
 $menu-item-color-active: $white;
 $menu-item-background-active: $maroon;

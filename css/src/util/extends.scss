@@ -24,6 +24,7 @@
 	text: {
 		transform: uppercase;
 	}
+	cursor: pointer;
 
 	&:last-of-type {
 		margin-right: 0;
@@ -48,8 +49,9 @@
 		border: {
 			width: 1px;
 			style: solid;
-			image: linear-gradient(90deg, $light-blue, $light-green);
-			image-slice: 1;
+			image: linear-gradient( 90deg, $light-blue, $light-green ) {
+				slice: 1;
+			}
 		}
 	}
 
