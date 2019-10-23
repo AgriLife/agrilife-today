@@ -70,6 +70,9 @@ class Genesis {
 		// Remove some Genesis settings metaboxes.
 		add_action( 'genesis_theme_settings_metaboxes', array( $this, 'remove_genesis_metaboxes' ) );
 
+		// Modify body class.
+		add_filter( 'body_class', array( $this, 'today_archive_class' ) );
+
 		// Sticky Header.
 		add_filter( 'genesis_structural_wrap-header', array( $this, 'sticky_header' ) );
 		remove_action( 'wp_head', 'genesis_custom_header_style' );
@@ -1332,6 +1335,23 @@ class Genesis {
 	 */
 	public function next_link_text() {
 		return '>';
+	}
+
+	/**
+	 * Add today-archive class to multiple page types we want to display as an archive.
+	 *
+	 * @since 0.8.6
+	 * @param array $classes Current body classes.
+	 * @return array
+	 */
+	public function today_archive_class( $classes ) {
+
+		if ( is_archive() || ( ! is_front_page() && is_home() ) ) {
+			$classes[] = 'today-archive';
+		}
+
+		return $classes;
+
 	}
 
 }

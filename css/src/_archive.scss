@@ -2,10 +2,10 @@
 	@extend %heading-sideline;
 }
 
-.archive {
+.today-archive {
 	.af4-entry-compact {
 		~ * {
-			margin-top: $global-layout-space * 1.5;
+			margin-top: $global-layout-space * 3;
 		}
 
 		h2 {

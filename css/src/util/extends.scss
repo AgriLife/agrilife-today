@@ -49,9 +49,8 @@
 		border: {
 			width: 1px;
 			style: solid;
-			image: linear-gradient( 90deg, $light-blue, $light-green ) {
-				slice: 1;
-			}
+			image: linear-gradient( 90deg, $light-blue, $light-green );
+			image-slice: 1;
 		}
 	}
 
