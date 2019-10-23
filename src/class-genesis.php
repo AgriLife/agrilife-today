@@ -93,6 +93,9 @@ class Genesis {
 		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
 
+		// Add featured post class.
+		add_filter( 'genesis_attr_entry', array( $this, 'af4_featured_post_class' ) );
+
 		// Modify the post page output.
 		genesis_register_sidebar(
 			array(
@@ -1175,17 +1178,6 @@ class Genesis {
 	 */
 	public function af4_entry_compact_class( $attributes ) {
 
-		preg_match( '/post-([\d]+)/i', $attributes['class'], $post_id );
-
-		if ( is_array( $post_id ) && count( $post_id ) > 1 ) {
-
-			$featured = get_post_meta( intval( $post_id[1] ), 'featured_post', true );
-
-			if ( '1' === $featured ) {
-				$attributes['class'] .= ' featured-post';
-			}
-		}
-
 		$attributes['class'] .= ' af4-entry-compact';
 
 		return $attributes;
@@ -1363,6 +1355,30 @@ class Genesis {
 		}
 
 		return $classes;
+
+	}
+
+	/**
+	 * Add af4-entry-compact class to archive posts.
+	 *
+	 * @since 0.8.9
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function af4_featured_post_class( $attributes ) {
+
+		preg_match( '/post-([\d]+)/i', $attributes['class'], $post_id );
+
+		if ( is_array( $post_id ) && count( $post_id ) > 1 ) {
+
+			$featured = get_post_meta( intval( $post_id[1] ), 'featured-post', true );
+
+			if ( '1' === $featured ) {
+				$attributes['class'] .= ' featured-post';
+			}
+		}
+
+		return $attributes;
 
 	}
 
