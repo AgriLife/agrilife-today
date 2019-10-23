@@ -606,6 +606,14 @@ class Genesis {
 
 		if ( in_array( 'widget', $classes, true ) ) {
 
+			// Apply card classes.
+			if (
+				! in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3', 'header-subscribe' ), true )
+				|| false !== strpos( $params[0]['widget_id'], 'agt_subscribe' )
+			) {
+				$classes[] = 'card';
+			}
+
 			// Invert footer widgets.
 			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true ) ) {
 				$classes[] = 'invert no-bg';
