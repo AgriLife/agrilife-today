@@ -114,23 +114,33 @@ class Genesis {
 		// Footer.
 		genesis_register_sidebar(
 			array(
-				'name'        => __( 'Footer - 1', 'agrilife-today' ),
+				'name'        => __( 'Footer - Menu', 'agrilife-today' ),
 				'id'          => 'footer-1',
 				'description' => __( 'This is the first widget area for the site footer.', 'agrilife-today' ),
 			)
 		);
+
 		genesis_register_sidebar(
 			array(
-				'name'        => __( 'Footer - 2', 'agrilife-today' ),
+				'name'        => __( 'Footer - Social', 'agrilife-today' ),
 				'id'          => 'footer-2',
 				'description' => __( 'This is the second widget area for the site footer.', 'agrilife-today' ),
 			)
 		);
+
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Footer - Contact', 'agrilife-today' ),
+				'id'          => 'footer-3',
+				'description' => __( 'This is the third widget area for the site footer.', 'agrilife-today' ),
+			)
+		);
+
 		genesis_register_sidebar(
 			array(
 				'name'        => __( 'Header - Subscribe', 'agrilife-today' ),
 				'id'          => 'header-subscribe',
-				'description' => __( 'This is the third widget area for the site footer.', 'agrilife-today' ),
+				'description' => __( 'This is the widget area for the site header.', 'agrilife-today' ),
 			)
 		);
 		add_action( 'genesis_before_footer', array( $this, 'genesis_footer_widget_area' ) );
@@ -597,16 +607,8 @@ class Genesis {
 		if ( in_array( 'widget', $classes, true ) ) {
 
 			// Invert footer widgets.
-			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'header-subscribe' ), true ) ) {
-				$classes[] = 'invert';
-			}
-
-			// Apply card classes.
-			if (
-				! in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'header-subscribe' ), true )
-				|| false !== strpos( $params[0]['widget_id'], 'agt_subscribe' )
-			) {
-				$classes[] = 'card';
+			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true ) ) {
+				$classes[] = 'invert no-bg';
 			}
 
 			$class_output               = implode( ' ', $classes );
@@ -1067,7 +1069,7 @@ class Genesis {
 		$logo = sprintf(
 			'<a href="%s" title="Texas A&M AgriLife"><img src="%s"></a>',
 			trailingslashit( home_url() ),
-			AGTODAY_THEME_DIRURL . '/images/logo-light.svg'
+			AGTODAY_THEME_DIRURL . '/images/logo-agrilife.png'
 		);
 
 		$footer_open  = '<div class="footer-widgets"><div class="wrap grid-container grid-x">';
@@ -1078,15 +1080,23 @@ class Genesis {
 		genesis_widget_area(
 			'footer-1',
 			array(
-				'before' => '<div class="widgets-footer-1 cell small-12 small-order-1 medium-shrink"><div class="table"><div class="tr"><div class="td logo">' . $logo . '</div></div><div class="tr"><div class="td social-media">',
-				'after'  => '</div></div></div></div>',
+				'before' => '<div class="widgets-footer-1 cell small-12 medium-12"><div class="logo">' . $logo . '</div>',
+				'after'  => '</div>',
 			)
 		);
 
 		genesis_widget_area(
 			'footer-2',
 			array(
-				'before' => '<div class="widgets-footer-2 cell small-12 small-order-2 medium-shrink">',
+				'before' => '<div class="widgets-footer-2 heading-sideline cell small-12 medium-12"><div class="grid-x"><div class="cell auto title-line"></div><div class="cell shrink social-media">',
+				'after'  => '</div><div class="cell auto title-line"></div></div></div>',
+			)
+		);
+
+		genesis_widget_area(
+			'footer-3',
+			array(
+				'before' => '<div class="widgets-footer-3 cell small-12 medium-12">',
 				'after'  => '</div>',
 			)
 		);
