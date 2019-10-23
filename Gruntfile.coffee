@@ -47,7 +47,7 @@ module.exports = (grunt) ->
           implementation: sass
           sourceMap: true
           outputStyle: 'nested'
-          precision: 2
+          precision: 4
           includePaths: ['node_modules/foundation-sites/scss']
         files:
           'css/style.css': 'css/src/style.scss'
