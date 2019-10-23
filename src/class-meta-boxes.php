@@ -39,7 +39,6 @@ class Meta_Boxes {
 	 * @return void
 	 */
 	public function add_meta_boxes() {
-
 		add_meta_box(
 			'agrilife_featured_post',
 			__( 'Featured Post', 'agrilife-today' ),
@@ -47,7 +46,6 @@ class Meta_Boxes {
 			'post',
 			'side'
 		);
-
 	}
 
 	/**
@@ -60,14 +58,14 @@ class Meta_Boxes {
 	public function inner_custom_box( $post ) {
 
 		// Use nonce for verification.
-		wp_nonce_field( plugin_basename( __FILE__ ), 'today_noncename' );
+		wp_nonce_field( plugin_basename( __FILE__ ), 'featured-post_noncename' );
 
 		// The actual fields for data entry.
-		echo '<label for="agrilife_featured_post">';
+		echo '<label for="featured-post">';
 		echo '</label> ';
-		echo '<input type="checkbox" name="agrilife_featured_post" id="agrilife_featured_post" ', ( get_post_meta( $post->ID, 'featured-post', true ) === '1' ? ' checked="checked"' : '' ), ' />';
+		echo '<input type="checkbox" name="featured-post" id="featured-post" ', ( intval( get_post_meta( $post->ID, 'featured-post', true ) ) === 1 ? ' checked="checked"' : '' ), ' />';
 		echo ' <span>';
-		esc_html_e( 'Feature this on archive pages', 'agrilife-today' );
+		esc_html_e( 'Feature this on home and category pages', 'agrilife-today' );
 		echo '</span>';
 
 	}
@@ -80,33 +78,37 @@ class Meta_Boxes {
 	 * @return void
 	 */
 	public function save_postdata( $post_id ) {
-
-		// Verify if this is an auto save routine.
-		// If it is our form has not been submitted, so we don't want to do anything.
+		// verify if this is an auto save routine.
+		// If it is our form has not been submitted, so we dont want to do anything.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
 
-		/*
-		Verify this came from the our screen and with proper authorization,
-		because save_post can be triggered at other times.
-		*/
+		// verify this came from the our screen and with proper authorization,
+		// because save_post can be triggered at other times.
 		if (
-			isset( $_POST['featured_post'], $_POST['featured_post_nonce'] )
-			&& wp_verify_nonce( sanitize_key( $_POST['featured_post_nonce'] ) )
+			isset( $_POST['featured-post_noncename'] )
+			&& wp_verify_nonce( sanitize_key( $_POST['featured-post_noncename'] ), plugin_basename( __FILE__ ) )
 		) {
 
 			// Check permissions.
-			if ( ! current_user_can( 'edit_post', $post_id ) ) {
-				return;
+			if (
+				isset( $_POST['post_type'] )
+				&& 'post' === $_POST['post_type']
+				&& current_user_can( 'edit_post', $post_id )
+			) {
+
+				// OK, we're authenticated: we need to find and save the data.
+				// Update The Value.
+				if ( isset( $_POST['featured-post'] ) && 'on' === $_POST['featured-post'] ) {
+					$value = 1;
+				} else {
+					$value = 0;
+				}
+
+				update_post_meta( $post_id, 'featured-post', $value );
+
 			}
-
-			$featured = sanitize_key( wp_unslash( $_POST['featured_post'] ) );
-
-			// OK, we're authenticated: we need to find and save the data.
-			// Update the value.
-			update_post_meta( $post_id, 'featured_post', ( 'on' === $featured ? 1 : 0 ) );
-
 		}
 
 	}

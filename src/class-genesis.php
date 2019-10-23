@@ -1179,7 +1179,7 @@ class Genesis {
 
 		if ( is_array( $post_id ) && count( $post_id ) > 1 ) {
 
-			$featured = get_post_meta( intval( $post_id[1] ), 'featured-post', true );
+			$featured = get_post_meta( intval( $post_id[1] ), 'featured_post', true );
 
 			if ( '1' === $featured ) {
 				$attributes['class'] .= ' featured-post';
