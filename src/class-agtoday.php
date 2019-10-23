@@ -103,6 +103,10 @@ class AgToday {
 			require_once AGTODAY_THEME_DIRPATH . '/fields/news-post.php';
 		}
 
+		// Add meta boxes.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-meta-boxes.php';
+		$meta_boxes = new \AgToday\Meta_Boxes();
+
 	}
 
 	/**

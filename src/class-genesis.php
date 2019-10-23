@@ -1175,7 +1175,19 @@ class Genesis {
 	 */
 	public function af4_entry_compact_class( $attributes ) {
 
+		preg_match( '/post-([\d]+)/i', $attributes['class'], $post_id );
+
+		if ( is_array( $post_id ) && count( $post_id ) > 1 ) {
+
+			$featured = get_post_meta( intval( $post_id[1] ), 'featured-post', true );
+
+			if ( '1' === $featured ) {
+				$attributes['class'] .= ' featured-post';
+			}
+		}
+
 		$attributes['class'] .= ' af4-entry-compact';
+
 		return $attributes;
 
 	}
@@ -1227,7 +1239,7 @@ class Genesis {
 
 			if ( ! empty( $img ) ) {
 
-				$output .= '<div class="cell medium-3 small-3">';
+				$output .= '<div class="archive-post-image cell medium-3 small-3">';
 
 			}
 		}
@@ -1271,7 +1283,7 @@ class Genesis {
 	 */
 	public function archive_column_right_open() {
 
-		echo wp_kses_post( '<div class="cell small-auto medium-9">' );
+		echo wp_kses_post( '<div class="archive-post-content cell small-auto medium-9">' );
 
 	}
 
