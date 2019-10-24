@@ -421,19 +421,19 @@
 		}
 
 		.a2a_button_twitter::after {
-			content: "Twe\00ad e\00ad t";
+			content: "Tweet";
 		}
 
 		.a2a_button_flickr::after {
-			content: "Flic\00ad k\00ad r";
+			content: "Flickr";
 		}
 
 		.a2a_button_youtube::after {
-			content: "Wat\00ad c\00ad h";
+			content: "Watch";
 		}
 
 		.a2a_button_feed::after {
-			content: "News\00ad f\00ad ee\00ad d";
+			content: "News\00ad feed";
 		}
 
 		@include breakpoint(1000px down) {
