@@ -952,6 +952,18 @@ class Genesis {
 
 		$output .= '</div>';
 
+		// Related Posts.
+		if ( function_exists( 'rp4wp_children' ) ) {
+
+			$output .= '<div class="related_posts">';
+
+			$related_posts = rp4wp_children( get_the_ID(), false );
+
+			$output .= $related_posts;
+			$output .= '</div>';
+
+		}
+
 		echo wp_kses_post( $output );
 
 	}
