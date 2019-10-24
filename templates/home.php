@@ -227,7 +227,7 @@ function agt_home_page() {
 				get_permalink( $id ),
 				$post_image
 			);
-			$content_class = 'medium-8 small-8';
+			$content_class = 'medium-auto small-8';
 		}
 
 		// Make post.

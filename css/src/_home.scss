@@ -14,10 +14,6 @@
 		> * {
 			height: 100%;
 		}
-
-		.cell.image {
-			display: none;
-		}
 	}
 
 	.tall .card {
@@ -159,5 +155,9 @@
 			margin-top: $global-layout-space * 5;
 			margin-bottom: 0;
 		}
-}
+
+		.cell.tall .cell.image {
+			display: none;
+		}
+	}
 }
