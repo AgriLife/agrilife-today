@@ -1202,6 +1202,7 @@ class Genesis {
 
 		if ( is_archive() ) {
 
+			add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 			add_filter( 'get_term_metadata', array( $this, 'archive_title' ), 10, 4 );
 
 			remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
