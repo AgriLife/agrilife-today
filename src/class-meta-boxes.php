@@ -42,20 +42,20 @@ class Meta_Boxes {
 		add_meta_box(
 			'agrilife_featured_post',
 			__( 'Featured Post', 'agrilife-today' ),
-			array( $this, 'inner_custom_box' ),
+			array( $this, 'featured_custom_box' ),
 			'post',
 			'side'
 		);
 	}
 
 	/**
-	 * Initialize the class
+	 * Render the featured post field
 	 *
 	 * @since 0.8.7
 	 * @param object $post WP Post object.
 	 * @return void
 	 */
-	public function inner_custom_box( $post ) {
+	public function featured_custom_box( $post ) {
 
 		// Use nonce for verification.
 		wp_nonce_field( plugin_basename( __FILE__ ), 'featured-post_noncename' );
