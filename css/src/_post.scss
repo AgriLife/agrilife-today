@@ -16,8 +16,8 @@
 
 		#genesis-content {
 			margin: {
-				left: rem-calc(42);
-				right: rem-calc(42);
+				left: rem-calc(map-get($grid-container-padding, "medium") / 2) + $grid-margin-gutters / 2;
+				right: rem-calc(map-get($grid-container-padding, "medium") / 2) + $grid-margin-gutters / 2;
 			}
 		}
 	}
