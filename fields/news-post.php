@@ -58,7 +58,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				),
 				array(
 					'key'               => 'field_5cc1e2a48aa80',
-					'label'             => 'Media Contacts',
+					'label'             => 'For the Media',
 					'name'              => 'contact_group',
 					'type'              => 'group',
 					'instructions'      => '',
@@ -73,7 +73,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'sub_fields'        => array(
 						array(
 							'key'               => 'field_5cc1e2c98aa81',
-							'label'             => '',
+							'label'             => 'Contacts',
 							'name'              => 'contacts',
 							'type'              => 'repeater',
 							'instructions'      => '',

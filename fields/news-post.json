@@ -46,7 +46,7 @@
             },
             {
                 "key": "field_5cc1e2a48aa80",
-                "label": "Media Contacts",
+                "label": "For the Media",
                 "name": "contact_group",
                 "type": "group",
                 "instructions": "",
@@ -61,7 +61,7 @@
                 "sub_fields": [
                     {
                         "key": "field_5cc1e2c98aa81",
-                        "label": "",
+                        "label": "Contacts",
                         "name": "contacts",
                         "type": "repeater",
                         "instructions": "",

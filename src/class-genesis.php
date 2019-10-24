@@ -155,6 +155,7 @@ class Genesis {
 		// Add taxonomies.
 		$this->create_agency_taxonomy();
 		$this->create_region_taxonomy();
+		$this->create_research_center_taxonomy();
 
 		// Customize archive pages.
 		add_action( 'wp', array( $this, 'archive_customizations' ) );
@@ -751,54 +752,6 @@ class Genesis {
 		// Post Date.
 		$output .= do_shortcode( '<strong>[post_date]</strong>' );
 
-		// Contacts.
-		$contacts = get_field( 'contact_group' )['contacts'];
-
-		if ( ! empty( $contacts ) ) {
-			// Remove empty values from contacts.
-			foreach ( $contacts as $key => $value ) {
-				$value = array_filter( $value );
-				if ( empty( $value ) ) {
-					unset( $contacts[ $key ] );
-				}
-			}
-			// Print contacts.
-			if ( count( $contacts ) > 0 ) {
-
-				$output      .= '&nbsp; Media contact: ';
-				$contact_list = array();
-
-				foreach ( $contacts as $contact ) {
-
-					$contact_output = array();
-
-					if ( ! empty( $contact['name'] ) ) {
-						$contact_output[] = $contact['name'];
-					}
-
-					if ( ! empty( $contact['phone'] ) ) {
-						$contact_output[] = sprintf(
-							'<a href="tel:+1%s">%s</a>',
-							$contact['phone'],
-							$contact['phone']
-						);
-					}
-
-					if ( ! empty( $contact['email'] ) ) {
-						$contact_output[] = sprintf(
-							'<a href="mailto:%s">%s</a>',
-							$contact['email'],
-							$contact['email']
-						);
-					}
-
-					$contact_list[] = implode( ', ', $contact_output );
-				}
-
-				$output .= implode( $contact_list, '; ' );
-			}
-		}
-
 		$output .= '</p>';
 
 		if ( ! is_singular( 'post' ) ) {
@@ -876,7 +829,76 @@ class Genesis {
 			return;
 		}
 
-		$output = sprintf( '<span class="button hollow">%s</span>', get_the_date( 'F j, Y' ) );
+		$output = '';
+
+		// Contacts.
+		$contacts = get_field( 'contact_group' )['contacts'];
+
+		if ( ! empty( $contacts ) ) {
+
+			$output .= '<div id="post-media-contact-group" data-toggler=".active" class="media-contact-group clear-both"><button class="alignright" data-toggle="post-media-contact-group" type="button">Media Inquiries</button><div class="meta aligncenter">';
+
+			// Remove empty values from contacts.
+			foreach ( $contacts as $key => $value ) {
+
+				$value = array_filter( $value );
+
+				if ( empty( $value ) ) {
+
+					unset( $contacts[ $key ] );
+
+				}
+			}
+
+			// Print contacts.
+			if ( count( $contacts ) > 0 ) {
+
+				$contact_list = array();
+
+				foreach ( $contacts as $contact ) {
+
+					$contact_output = array();
+
+					if ( ! empty( $contact['name'] ) ) {
+
+						$contact_output[] = $contact['name'];
+
+					}
+
+					if ( ! empty( $contact['email'] ) ) {
+
+						$contact_output[] = sprintf(
+							'<a href="mailto:%s">%s</a>',
+							$contact['email'],
+							$contact['email']
+						);
+
+					}
+
+					if ( ! empty( $contact['phone'] ) ) {
+
+						$contact_output[] = sprintf(
+							'<a href="tel:+1%s">%s</a>',
+							$contact['phone'],
+							$contact['phone']
+						);
+
+					}
+
+					$contact_list[] = implode( '<br>', $contact_output );
+
+				}
+
+				$output .= implode( $contact_list, '; ' );
+
+			}
+
+			$output .= '</div></div>';
+
+		}
+
+		// Post date.
+		$output .= sprintf( '<span class="button hollow">%s</span>', get_the_date( 'F j, Y' ) );
 
 		// Post author.
 		$output .= sprintf(
@@ -964,6 +986,39 @@ class Genesis {
 				'show_ui'      => true,
 				'query_var'    => true,
 				'rewrite'      => array( 'slug' => 'agency' ),
+				'show_in_rest' => true,
+			)
+		);
+
+	}
+
+	/**
+	 * Create agency taxonomy
+	 *
+	 * @since 0.3.6
+	 * @return void
+	 */
+	public function create_research_center_taxonomy() {
+
+		$labels = array(
+			'name'          => _x( 'Research Center', 'taxonomy general name' ),
+			'singular_name' => _x( 'Research Center', 'taxonomy singular name' ),
+			'search_items'  => __( 'Search Research Centers' ),
+			'all_items'     => __( 'All Research Centers' ),
+			'edit_item'     => __( 'Edit Research Center' ),
+			'update_item'   => __( 'Update Research Center' ),
+			'add_new_item'  => __( 'Add New Research Center' ),
+			'new_item_name' => __( 'New Research Center Name' ),
+		);
+
+		register_taxonomy(
+			'research_center',
+			array( 'post' ),
+			array(
+				'labels'       => $labels, /* NOTICE: Here is where the $labels variable is used */
+				'show_ui'      => true,
+				'query_var'    => true,
+				'rewrite'      => array( 'slug' => 'research-center' ),
 				'show_in_rest' => true,
 			)
 		);

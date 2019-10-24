@@ -60,3 +60,27 @@ h1.entry-title {
 .entry-footer {
 	clear: both;
 }
+
+.media-contact-group {
+	transition: all .25s ease-in-out;
+	overflow: hidden;
+	height: 2.8rem;
+
+	button {
+		@include simple-arrow;
+	}
+
+	.meta {
+		padding: $grid-margin-gutters;
+		margin-bottom: $paragraph-margin-bottom;
+		border: 1px solid $card-border-color;
+	}
+
+	&.active {
+		height: auto;
+
+		button {
+			@include simple-arrow-up;
+		}
+	}
+}

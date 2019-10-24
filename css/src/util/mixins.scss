@@ -132,3 +132,27 @@
 		border-color: $color;
 	}
 }
+
+@mixin simple-arrow-up() {
+	&::after {
+		transform: rotate(-45deg) translate(-.07rem, 0);
+	}
+}
+
+@mixin simple-arrow ( $color: $white, $direction: down ) {
+	&::after {
+		content: "";
+		display: inline-block;
+		width: .5rem;
+		height: .5rem;
+		border: 2px solid $white;
+		border-width: 2px 2px 0 0;
+		margin-left: .7rem;
+		transform-origin: 50% 50% 0;
+		@if $direction == up {
+			transform: rotate(-45deg) translate(-.07rem, 0);
+		} @else {
+			transform: rotate(135deg) translate(-.1rem, .1rem);
+		}
+	}
+}
