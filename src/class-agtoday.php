@@ -212,6 +212,9 @@ class AgToday {
 		require_once AGTODAY_THEME_DIRPATH . '/src/class-widget-subscribe.php';
 		register_widget( 'Widget_Subscribe' );
 
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-widget-livewhale.php';
+		register_widget( 'Widget_LiveWhale' );
+
 	}
 
 	/**

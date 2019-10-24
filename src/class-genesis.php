@@ -620,6 +620,11 @@ class Genesis {
 				$classes[] = 'card';
 			}
 
+			// Add class to LiveWhale widget.
+			if ( false !== strpos( $params[0]['widget_id'], 'agt_livewhale' ) ) {
+				$classes[] = 'livewhale invert';
+			}
+
 			// Invert footer widgets.
 			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true ) ) {
 				$classes[] = 'invert no-bg';
@@ -630,7 +635,7 @@ class Genesis {
 		}
 
 		// Add class to widget title.
-		if ( false === strpos( $params[0]['widget_id'], 'agt_subscribe' ) ) {
+		if ( false === strpos( $params[0]['widget_id'], 'agt_subscribe' ) && false === strpos( $params[0]['widget_id'], 'agt_livewhale' ) ) {
 			$params[0]['before_title'] = str_replace( 'widget-title', 'widget-title card-heading', $params[0]['before_title'] );
 			$params[0]['after_title'] .= '<hr />';
 		}

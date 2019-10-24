@@ -1,9 +1,15 @@
 /* LiveWhale block.
 ---------------------------------- */
 .livewhale {
-	padding: {
-		top: $global-layout-space * 3;
-		bottom: $global-layout-space * 3;
+	.page-template-home & {
+		padding: {
+			top: $global-layout-space * 3;
+			bottom: $global-layout-space * 3;
+		}
+	}
+
+	&.invert {
+		background-color: $darker-gray;
 	}
 
 	p {
@@ -55,16 +61,18 @@
 	}
 
 	.event {
-		@include breakpoint(large down) {
-			min-width: 275px;
-		}
-
 		> .grid-x {
 			align-items: center;
 		}
 
 		.cell {
 			padding: 1rem;
+		}
+
+		@include breakpoint(large down) {
+			.page-template-home & {
+				min-width: 275px;
+			}
 		}
 	}
 
@@ -83,6 +91,44 @@
 		align-items: center;
 	}
 
+	&.widget {
+		padding: 1.25rem;
+
+		.widget-title {
+			text-transform: uppercase;
+		}
+
+		.grid-container {
+			padding: 0;
+		}
+
+		.event {
+			margin: 0;
+			width: 100%;
+
+			~ .event {
+				margin-top: $grid-margin-gutters;
+			}
+
+			.cell {
+				padding: .75rem;
+			}
+		}
+
+		.events-all {
+			margin-top: $grid-margin-gutters * 1.5;
+			text-align: center;
+
+			.button {
+				margin-bottom: 0;
+			}
+		}
+
+		.date {
+			border-right-width: 1px;
+		}
+	}
+
 	@include breakpoint(small only) {
 		.small-12 ~ .small-12 {
 			margin-top: 2rem;
@@ -90,9 +136,11 @@
 	}
 
 	@include breakpoint(medium) {
-		.event,
-		.events-all {
-			padding: $grid-margin-gutters / 2;
+		.page-template-home & {
+			.event,
+			.events-all {
+				padding: $grid-margin-gutters / 2;
+			}
 		}
 	}
 }

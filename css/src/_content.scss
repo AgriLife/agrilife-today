@@ -89,3 +89,25 @@ table {
 .af4-entry-compact {
 	@extend %af4-entry-compact;
 }
+
+@mixin text-truncate {
+	display: -webkit-box; // sass-lint:disable-line no-vendor-prefixes
+	-webkit-line-clamp: 3; // sass-lint:disable-line no-vendor-prefixes
+	-webkit-box-orient: vertical; // sass-lint:disable-line no-vendor-prefixes
+	overflow: hidden;
+	hyphens: auto;
+}
+
+@include breakpoint(medium) {
+	.medium-truncate-lines {
+		@include text-truncate;
+	}
+
+	.medium-truncate-2-lines {
+		-webkit-line-clamp: 2; // sass-lint:disable-line no-vendor-prefixes
+	}
+
+	.medium-truncate-1-line {
+		-webkit-line-clamp: 1; // sass-lint:disable-line no-vendor-prefixes
+	}
+}
