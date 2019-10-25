@@ -756,10 +756,6 @@ class Genesis {
 
 		$output .= '</p>';
 
-		if ( ! is_singular( 'post' ) ) {
-			$output .= '<hr />';
-		}
-
 		echo wp_kses_post( $output );
 
 	}
