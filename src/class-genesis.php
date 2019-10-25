@@ -160,6 +160,9 @@ class Genesis {
 		// Customize archive pages.
 		add_action( 'wp', array( $this, 'archive_customizations' ) );
 
+		// Change thumbnail size for related posts.
+		add_filter( 'rp4wp_thumbnail_size', array( $this, 'rp4wp_thumbnail_size' ) );
+
 	}
 
 	/**
@@ -912,7 +915,7 @@ class Genesis {
 		);
 
 		// Post taxonomy.
-		$output .= '<div class="news-taxonomy">';
+		$output .= '<div class="news-taxonomy p">';
 
 		// Categories.
 		$categories = get_the_term_list(
@@ -924,18 +927,6 @@ class Genesis {
 		);
 		if ( 'string' === gettype( $categories ) ) {
 			$output .= $categories;
-		}
-
-		// Regions.
-		$region_terms = get_the_term_list(
-			get_the_ID(),
-			'region_category',
-			'<p class="grid-x"><span class="cell shrink cell-valign-center">Region:</span><span class="cell auto">',
-			'',
-			'</span></p>'
-		);
-		if ( 'string' === gettype( $region_terms ) ) {
-			$output .= $region_terms;
 		}
 
 		// Agencies.
@@ -958,6 +949,9 @@ class Genesis {
 			$output .= '<div class="related_posts">';
 
 			$related_posts = rp4wp_children( get_the_ID(), false );
+			$related_posts = str_replace( '<ul', '<div class="grid-x"', $related_posts );
+			$related_posts = str_replace( '<li', '<div class="cell medium-6 small-12"', $related_posts );
+			$related_posts = preg_replace( '/<\/(ul|li)/', '</div', $related_posts );
 
 			$output .= $related_posts;
 			$output .= '</div>';
@@ -1452,6 +1446,20 @@ class Genesis {
 		}
 
 		return $attributes;
+
+	}
+
+
+	/**
+	 * Add af4-entry-compact class to archive posts.
+	 *
+	 * @since 0.8.13
+	 * @param string $thumb_size The current thumbnail size slug.
+	 * @return string
+	 */
+	public function rp4wp_thumbnail_size( $thumb_size ) {
+
+		return 'archive';
 
 	}
 
