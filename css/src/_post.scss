@@ -1,19 +1,13 @@
 .single-post {
 	.entry-header {
-		margin-top: 2 * $global-layout-space;
-		margin-bottom: 1.5 * $global-layout-space;
+		margin-bottom: $global-layout-space;
 
 		@include breakpoint(medium) {
-			margin-top: 4 * $global-layout-space;
 			margin-bottom: 3 * $global-layout-space;
 		}
 	}
 
 	@include breakpoint(medium) {
-		.site-inner {
-			margin-top: 4 * $global-layout-space;
-		}
-
 		#genesis-content {
 			margin: {
 				left: rem-calc(map-get($grid-container-padding, "medium") / 2) + $grid-margin-gutters / 2;

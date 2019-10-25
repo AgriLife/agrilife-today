@@ -131,6 +131,10 @@ $align-breakpoint: 1000px;
 			border-right-width: 0;
 		}
 	}
+
+	.alignleft {
+		margin-right: $paragraph-margin-bottom;
+	}
 }
 
 .wp-block-quote,

@@ -151,6 +151,10 @@
 	}
 
 	@include breakpoint(medium) {
+		.site-inner {
+			margin-top: 3.5 * $global-layout-space;
+		}
+
 		.section ~ .section {
 			margin-top: $global-layout-space * 5;
 			margin-bottom: 0;

@@ -286,7 +286,7 @@
 
 .widgets-post-share {
 	text-align: center;
-	margin-bottom: 2 * $grid-margin-gutters;
+	margin-bottom: $grid-margin-gutters;
 
 	@include breakpoint(small) {
 		> .sticky {

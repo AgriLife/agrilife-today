@@ -225,4 +225,9 @@ main {
 
 .site-inner {
 	overflow: hidden;
+	margin-top: 2 * $global-layout-space;
+
+	@include breakpoint(medium) {
+		margin-top: 4 * $global-layout-space;
+	}
 }
