@@ -895,9 +895,6 @@ class Genesis {
 
 		}
 
-		// Post date.
-		$output .= sprintf( '<span class="button hollow">%s</span>', get_the_date( 'F j, Y' ) );
-
 		// Post author.
 		$output .= sprintf(
 			'<div class="p grid-x"><div class="cell shrink collapse-left">%s</div><div class="cell auto collapse-right"><div><strong>%s</strong></div><div><a href="tel:+1%s">%s</a></div><div><a href="mailto:%s">%s</a></div></div></div>',
