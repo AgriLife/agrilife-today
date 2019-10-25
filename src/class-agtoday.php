@@ -59,6 +59,9 @@ class AgToday {
 		// Enable automatic responsive image attributes.
 		add_filter( 'wp_kses_allowed_html', array( $this, 'post_allowed_tags' ), 11, 2 );
 
+		// Change related post excerpt length.
+		add_filter( 'rp4wp_general_post_excerpt_length', array( $this, 'rp4wp_change_post_excerpt_length' ) );
+
 	}
 
 	/**
@@ -249,6 +252,17 @@ class AgToday {
 
 		return $allowedposttags;
 
+	}
+
+	/**
+	 * Remove related post excerpt
+	 *
+	 * @since 0.8.13
+	 * @param string $excerpt_length The excerpt length.
+	 * @return string
+	 */
+	public function rp4wp_change_post_excerpt_length( $excerpt_length ) {
+		return '0';
 	}
 
 }
