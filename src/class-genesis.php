@@ -832,7 +832,7 @@ class Genesis {
 		// Contacts.
 		$contacts = get_field( 'contact_group' )['contacts'];
 
-		if ( ! empty( $contacts ) ) {
+		if ( 1 < count( $contacts ) || ( 1 === count( $contacts ) && ! empty( $contacts[0]['name'] ) ) ) {
 
 			$output .= '<div id="post-media-contact-group" data-toggler=".active" class="media-contact-group clear-both"><button class="alignright" data-toggle="post-media-contact-group" type="button">Media Inquiries</button><div class="meta aligncenter"><div>';
 
