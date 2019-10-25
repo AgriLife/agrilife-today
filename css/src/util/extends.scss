@@ -24,24 +24,23 @@
 	text: {
 		transform: uppercase;
 	}
+	transition: 0.25s color, 0.25s background-color;
 
 	&:last-of-type {
 		margin-right: 0;
 	}
 
 	&:hover,
-	&:focus {
-		color: $white;
-	}
-
+	&:focus,
 	&.hollow {
 		color: $dark-blue;
 		border-color: $dark-blue;
 		background-color: $white;
+		text-decoration: none;
+	}
 
-		&::hover {
-			color: $dark-blue;
-		}
+	&.hollow:hover {
+		color: $dark-blue;
 	}
 
 	&.gradient {
@@ -132,17 +131,8 @@
 		}
 	}
 
-	.post-category .button {
-		padding: .25rem .5rem;
-		transition: 0.25s color, 0.25s background-color;
+	.button {
 		margin-bottom: .7rem;
-
-		&:hover {
-			background-color: transparent;
-			color: $black;
-			border: 1px solid $dark-blue;
-			text-decoration: none;
-		}
 	}
 
 	&.has-post-thumbnail {

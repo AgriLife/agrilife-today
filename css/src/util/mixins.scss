@@ -155,4 +155,8 @@
 			transform: rotate(135deg) translate(-.1rem, .1rem);
 		}
 	}
+
+	&:hover::after {
+		border-color: $dark-blue;
+	}
 }
