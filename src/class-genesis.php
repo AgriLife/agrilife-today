@@ -714,7 +714,6 @@ class Genesis {
 		} elseif ( ! is_front_page() && ! is_archive() ) {
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			add_action( 'genesis_entry_content', array( $this, 'custom_post_category_button' ), 10 );
-			add_action( 'genesis_entry_footer', array( $this, 'custom_post_info' ), 11 );
 		}
 
 	}
