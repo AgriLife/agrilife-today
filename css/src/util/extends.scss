@@ -93,6 +93,7 @@
 
 	h2 {
 		@extend %entry-title;
+		font-weight: 600;
 
 		a {
 			color: $darker-gray;
@@ -107,7 +108,7 @@
 
 	p {
 		font-size: .875rem;
-		line-height: 1rem;
+		line-height: 1.3rem;
 		margin-bottom: 0;
 
 		&.entry-meta {

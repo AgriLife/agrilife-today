@@ -50,7 +50,7 @@ button.search-icon {
 	@include breakpoint(medium) {
 
 		.site-title {
-			padding: 1.5rem 0;
+			padding: 2rem 0;
 			border-bottom: 1px solid $border-primary;
 			transition: padding .5s;
 		}
@@ -110,19 +110,29 @@ button.search-icon {
 	}
 }
 
-#header-widgets + .grid-x {
-	.title-area {
-		padding-left: 1.625rem;
-	}
-
-	.title-bars {
-		padding-right: 1.625rem;
-	}
-}
-
 #header-widgets {
 	font-family: $opensans;
 	background-color: $light-blue;
+
+	+ .grid-x {
+		.title-area {
+			padding-left: 1.625rem;
+		}
+
+		.title-bars {
+			padding-right: 1.625rem;
+		}
+
+		@include breakpoint(medium) {
+			.title-area {
+				padding-left: 0;
+			}
+
+			.title-bars {
+				padding-right: 0;
+			}
+		}
+	}
 
 	form,
 	input {
@@ -274,8 +284,9 @@ button.search-icon {
 
 		a.subscribe {
 			display: block;
-			top: 4px;
 			right: $grid-margin-gutters * 2.5 + 3.75rem;
+			font-weight: normal;
+			top: .5rem;
 		}
 
 		&.active form {

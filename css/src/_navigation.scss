@@ -31,6 +31,8 @@
 		@include breakpoint(medium) {
 			a {
 				color: $white;
+				letter-spacing: .05em;
+				font-weight: normal;
 			}
 
 			border-bottom: 2px solid $light-blue;
@@ -91,9 +93,11 @@
 }
 
 .pagination {
-	text-transform: uppercase;
+	text: {
+		align: center;
+		transform: uppercase;
+	}
 	font-weight: 700;
-	text-align: center;
 
 	ul {
 		list-style-type: none;
