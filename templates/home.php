@@ -238,8 +238,14 @@ function agt_home_page() {
 			$excerpt = wp_trim_words( $content, 55 );
 		}
 
+		$article_class = '';
+		if ( 2 === $key ) {
+			$article_class = 'center-y';
+		}
+
 		$post = sprintf(
-			'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</div></article>',
+			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</article>',
+			$article_class,
 			$content_class,
 			$post_atts[ $eo ]['content'],
 			implode( '', $post_cat_buttons ),
