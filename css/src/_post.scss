@@ -62,22 +62,27 @@ h1.entry-title {
 }
 
 .media-contact-group {
-	transition: all .25s ease-in-out;
-	overflow: hidden;
-	height: 2.8rem;
-
 	button {
 		@include simple-arrow;
 	}
 
 	.meta {
-		padding: $grid-margin-gutters;
+		overflow: hidden;
 		margin-bottom: $paragraph-margin-bottom;
-		border: 1px solid $card-border-color;
+		max-height: 1px;
+		transition: all .25s ease-in-out;
+
+		div {
+			margin-top: 1px;
+			padding: $grid-margin-gutters;
+			border: 1px solid $card-border-color;
+		}
 	}
 
 	&.active {
-		height: auto;
+		.meta {
+			max-height: 55rem;
+		}
 
 		button {
 			@include simple-arrow-up;

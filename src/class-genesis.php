@@ -836,7 +836,7 @@ class Genesis {
 
 		if ( ! empty( $contacts ) ) {
 
-			$output .= '<div id="post-media-contact-group" data-toggler=".active" class="media-contact-group clear-both"><button class="alignright" data-toggle="post-media-contact-group" type="button">Media Inquiries</button><div class="meta aligncenter">';
+			$output .= '<div id="post-media-contact-group" data-toggler=".active" class="media-contact-group clear-both"><button class="alignright" data-toggle="post-media-contact-group" type="button">Media Inquiries</button><div class="meta aligncenter"><div>';
 
 			// Remove empty values from contacts.
 			foreach ( $contacts as $key => $value ) {
@@ -893,7 +893,7 @@ class Genesis {
 
 			}
 
-			$output .= '</div></div>';
+			$output .= '</div></div></div>';
 
 		}
 
