@@ -288,6 +288,12 @@
 	text-align: center;
 	margin-bottom: 2 * $grid-margin-gutters;
 
+	@include breakpoint(small) {
+		> .sticky {
+			position: static !important; // sass-lint:disable-line no-important
+		}
+	}
+
 	.medium-card {
 		display: flex;
 		flex-wrap: nowrap;
