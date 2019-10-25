@@ -115,3 +115,7 @@ table {
 		-webkit-line-clamp: 1; // sass-lint:disable-line no-vendor-prefixes
 	}
 }
+
+input[type="submit"] {
+	cursor: pointer;
+}
