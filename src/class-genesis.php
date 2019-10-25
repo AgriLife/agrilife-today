@@ -924,18 +924,6 @@ class Genesis {
 			$output .= $categories;
 		}
 
-		// Agencies.
-		$agency_terms = get_the_term_list(
-			get_the_ID(),
-			'agency_category',
-			'<p class="grid-x"><span class="cell shrink cell-valign-center">Agency:</span><span class="cell auto">',
-			'',
-			'</span></p>'
-		);
-		if ( 'string' === gettype( $agency_terms ) ) {
-			$output .= $agency_terms;
-		}
-
 		$output .= '</div>';
 
 		// Related Posts.
