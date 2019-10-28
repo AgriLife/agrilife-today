@@ -907,21 +907,29 @@ class Genesis {
 		);
 
 		// Post taxonomy.
-		$output .= '<div class="news-taxonomy p">';
-
-		// Categories.
 		$categories = get_the_term_list(
 			get_the_ID(),
 			'category',
-			'<p class="grid-x"><span class="cell shrink cell-valign-center">Category:</span><span class="cell auto">',
 			'',
-			'</span></p>'
+			'',
+			''
 		);
-		if ( 'string' === gettype( $categories ) ) {
-			$output .= $categories;
-		}
 
-		$output .= '</div>';
+		// Remove uncategorized term.
+		preg_match( '/<a [^>]+>[^uU]*Uncategorized[^<]*<\/a>/', $categories, $uncategorized );
+		$categories = str_replace( $uncategorized[0], '', $categories );
+
+		// Add to output.
+		if ( 'string' === gettype( $categories ) && ! empty( $categories ) ) {
+
+			$output    .= '';
+			$categories = sprintf(
+				'<div class="news-taxonomy p"><p class="grid-x"><span class="cell shrink cell-valign-center">Category:</span><span class="cell auto">%s</span></p></div>',
+				$categories
+			);
+			$output    .= $categories;
+
+		}
 
 		// Related Posts.
 		if ( function_exists( 'rp4wp_children' ) ) {

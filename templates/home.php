@@ -52,11 +52,11 @@ function agt_home_page() {
 								'content' => 'collapse-left',
 							),
 							'even' => array(
-								'thumb'   => 'small-collapse-right medium-collapse-left medium-order-1',
-								'content' => 'small-collapse-left medium-collapse-right medium-order-2',
+								'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
+								'content' => 'small-collapse-left medium-collapse-right medium-8-collapse-half medium-order-2',
 							),
 						);
-						$content_class = 'medium-auto small-auto';
+						$content_class = 'medium-auto small-auto collapse-right';
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
@@ -67,12 +67,15 @@ function agt_home_page() {
 
 							$cat = get_category( $cat_id );
 
-							$post_cat_buttons[] = sprintf(
-								$post_cat_button,
-								get_category_link( $cat_id ),
-								$cat->name
-							);
+							if ( false === strpos( $cat->slug, 'uncategorized' ) ) {
 
+								$post_cat_buttons[] = sprintf(
+									$post_cat_button,
+									get_category_link( $cat_id ),
+									$cat->name
+								);
+
+							}
 						}
 
 						// Get featured image.
@@ -194,11 +197,11 @@ function agt_home_page() {
 				'content' => 'collapse-left',
 			),
 			'odd'  => array(
-				'thumb'   => 'small-collapse-right medium-collapse-left medium-order-1',
-				'content' => 'small-collapse-left medium-collapse-right medium-order-2',
+				'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
+				'content' => 'small-collapse-left medium-collapse-right medium-8-collapse-half medium-order-2',
 			),
 		);
-		$content_class = 'medium-auto small-auto';
+		$content_class = 'medium-auto small-auto collapse-right';
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
