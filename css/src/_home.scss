@@ -10,12 +10,6 @@
 		text-transform: uppercase;
 	}
 
-	.cell.tall {
-		> * {
-			height: 100%;
-		}
-	}
-
 	.tall .card {
 		@include breakpoint(medium) {
 			margin-bottom: 0;
@@ -111,6 +105,27 @@
 			}
 		}
 
+		img {
+			width: auto;
+			max-height: 100%;
+		}
+
+		.logo {
+			height: 44px;
+
+			@include breakpoint( medium ) {
+				height: 32px;
+			}
+
+			@include breakpoint( large ) {
+				height: 38px;
+			}
+
+			@include breakpoint( xlarge ) {
+				height: 44px;
+			}
+		}
+
 		.nolink {
 			padding: $card-padding + $global-layout-space * 2 $card-padding + $global-layout-space;
 		}
@@ -151,6 +166,10 @@
 	}
 
 	@include breakpoint(medium) {
+		.card {
+			margin-bottom: 0;
+		}
+
 		.site-inner {
 			margin-top: 3.5 * $global-layout-space;
 		}

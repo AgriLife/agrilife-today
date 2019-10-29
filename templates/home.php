@@ -327,7 +327,11 @@ function agt_home_page() {
 		$itn_list = '';
 
 		foreach ( $in_the_news['stories'] as $key => $value ) {
-			$logo          = wp_get_attachment_image( $value['logo']['id'], 'medium', false, array( 'class' => 'p' ) );
+			if ( $key > 2 ) {
+				$itn_list .= '</div><div class="grid-x">';
+			}
+
+			$logo          = wp_get_attachment_image( $value['logo']['id'], 'medium', false );
 			$link_open     = '';
 			$link_close    = '';
 			$no_link_class = ' nolink';
@@ -338,7 +342,7 @@ function agt_home_page() {
 			}
 
 			$itn_list .= sprintf(
-				'<div class="cell card medium-4 small-12%s">%s%s<h2 class="entry-title" itemprop="headline">%s</h2>%s</div>',
+				'<div class="cell card medium-4 small-12%s">%s<div class="logo p">%s</div><h2 class="entry-title" itemprop="headline">%s</h2>%s</div>',
 				$no_link_class,
 				$link_open,
 				$logo,

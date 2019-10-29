@@ -29,6 +29,12 @@
 		min-width: 0;
 		min-height: 0;
 
+		&.tall {
+			> * {
+				height: 100%;
+			}
+		}
+
 		&.shrink,
 		&.auto {
 			width: auto;
