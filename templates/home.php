@@ -48,15 +48,15 @@ function agt_home_page() {
 						$post_obj      = $story['post'];
 						$post_atts     = array(
 							'odd'  => array(
-								'thumb'   => 'collapse-right',
-								'content' => 'collapse-left',
+								'thumb'   => 'small-collapse-right medium-collapse-right medium-4-collapse-half',
+								'content' => 'small-collapse-left medium-collapse-left medium-8-collapse-half',
 							),
 							'even' => array(
 								'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
 								'content' => 'small-collapse-left medium-collapse-right medium-8-collapse-half medium-order-2',
 							),
 						);
-						$content_class = 'medium-auto small-auto collapse-right';
+						$content_class = 'auto no-image';
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
@@ -82,13 +82,19 @@ function agt_home_page() {
 						$image      = '';
 						$post_image = get_the_post_thumbnail( $post_obj, 'home-story-image' );
 						if ( ! empty( $post_image ) ) {
+
 							$image         = sprintf(
 								'<div class="cell image medium-4 small-4 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 								$post_atts[ $eo ]['thumb'],
 								get_permalink( $id ),
 								$post_image
 							);
-							$content_class = 'medium-8 small-8';
+							$content_class = 'medium-8 small-8 has-image';
+
+						} else {
+
+							$post_atts[ $eo ]['content'] = preg_replace( '/medium-collapse-(left|right) medium-8-collapse-half/', 'collapse', $post_atts[ $eo ]['content'] );
+
 						}
 
 						// Make post.
@@ -196,15 +202,15 @@ function agt_home_page() {
 		$id            = $story['ID'];
 		$post_atts     = array(
 			'even' => array(
-				'thumb'   => 'collapse-right',
-				'content' => 'collapse-left',
+				'thumb'   => 'small-collapse-right medium-collapse-right medium-4-collapse-half',
+				'content' => 'small-collapse-left medium-collapse-left medium-8-collapse-half',
 			),
 			'odd'  => array(
 				'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
 				'content' => 'small-collapse-left medium-collapse-right medium-8-collapse-half medium-order-2',
 			),
 		);
-		$content_class = 'medium-auto small-auto collapse-right';
+		$content_class = 'auto collapse no-image';
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
@@ -230,13 +236,19 @@ function agt_home_page() {
 		$image      = '';
 		$post_image = get_the_post_thumbnail( $story['ID'], 'home-story-image' );
 		if ( ! empty( $post_image ) ) {
+
 			$image         = sprintf(
 				'<div class="cell image medium-4 small-4 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 				$post_atts[ $eo ]['thumb'],
 				get_permalink( $id ),
 				$post_image
 			);
-			$content_class = 'medium-auto small-8';
+			$content_class = 'medium-auto small-8 has-image';
+
+		} else {
+
+			$post_atts[ $eo ]['content'] = preg_replace( '/medium-collapse-(left|right) medium-8-collapse-half/', 'collapse', $post_atts[ $eo ]['content'] );
+
 		}
 
 		// Make post.
@@ -249,7 +261,8 @@ function agt_home_page() {
 
 		$article_class = '';
 		if ( 2 === $key ) {
-			$article_class = 'center-y';
+			$article_class               = 'center-y';
+			$post_atts[ $eo ]['content'] = preg_replace( '/medium-[\d\-]*collapse-(half|right)/', '', $post_atts[ $eo ]['content'] ) . ' medium-collapse';
 		}
 
 		$post = sprintf(

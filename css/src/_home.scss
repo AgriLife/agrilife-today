@@ -153,6 +153,10 @@
 			position: relative;
 
 			.cell:first-child {
+				padding: $card-padding;
+			}
+
+			.cell.has-image:first-child {
 				padding: $card-padding 0 $card-padding $card-padding;
 			}
 
