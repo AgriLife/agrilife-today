@@ -1,4 +1,12 @@
 .page-template-home {
+	.entry-content .card {
+		border-color: $light-gray-blue;
+	}
+
+	.heading-sideline .title-line {
+		border-top-color: $light-gray-blue;
+	}
+
 	.section ~ .section {
 		margin-top: $global-layout-space * 2;
 		margin-bottom: 0;
