@@ -240,7 +240,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'min'               => 0,
 							'max'               => 0,
 							'layout'            => 'block',
-							'button_label'      => '',
+							'button_label'      => 'Add Story',
 							'sub_fields'        => array(
 								array(
 									'key'               => 'field_5da754fed0db4',

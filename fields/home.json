@@ -228,7 +228,7 @@
                         "min": 0,
                         "max": 0,
                         "layout": "block",
-                        "button_label": "",
+                        "button_label": "Add Story",
                         "sub_fields": [
                             {
                                 "key": "field_5da754fed0db4",
