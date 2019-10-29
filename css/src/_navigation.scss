@@ -27,15 +27,12 @@
 				color: $menu-item-color-active;
 			}
 		}
+	}
 
-		@include breakpoint(medium) {
-			a {
-				color: $white;
-				letter-spacing: .05em;
-				font-weight: normal;
-			}
+	@include breakpoint(medium) {
+		border-bottom: 2px solid $light-blue;
 
-			border-bottom: 2px solid $light-blue;
+		> .menu-item {
 			margin-left: -1px;
 			background-color: $darker-gray;
 			color: $white;
@@ -44,13 +41,20 @@
 				margin-left: 0;
 			}
 
+			a {
+				color: $white;
+				letter-spacing: .05em;
+				font-weight: normal;
+			}
 		}
 	}
 }
 
 .nav-primary {
-	@include breakpoint(small only) {
-		width: 100%;
+	width: 100%;
+
+	@include breakpoint(medium) {
+		background-color: $darker-gray;
 	}
 }
 
