@@ -142,13 +142,6 @@ class Genesis {
 			)
 		);
 
-		genesis_register_sidebar(
-			array(
-				'name'        => __( 'Header - Subscribe', 'agrilife-today' ),
-				'id'          => 'header-subscribe',
-				'description' => __( 'This is the widget area for the site header.', 'agrilife-today' ),
-			)
-		);
 		add_action( 'genesis_before_footer', array( $this, 'genesis_footer_widget_area' ) );
 		add_filter( 'genesis_structural_wrap-footer', array( $this, 'footer_wrap' ) );
 
@@ -450,17 +443,6 @@ class Genesis {
 	 */
 	public function sticky_header( $output ) {
 
-		ob_start();
-		genesis_widget_area(
-			'header-subscribe',
-			array(
-				'before' => '<div class="widgets-header-subscribe cell small-12 small-order-3 medium-auto">',
-				'after'  => '</div>',
-			)
-		);
-		$subscribe_widget = ob_get_clean();
-		$subscribe_widget = '<div class="widgets-header-subscribe"><a href="#" class="subscribe">Subscribe</a></div>';
-
 		$header_widgets = array(
 			'open'   => '<div id="header-widgets" data-toggler=".active"><div class="grid-container">',
 			'close'  => '</div></div>',
@@ -473,7 +455,6 @@ class Genesis {
 		$header_widgets['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-input/', '$1search-form-input cell auto', $header_widgets['inside'] );
 		$header_widgets['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $header_widgets['inside'] );
 		$header_widgets['inside'] .= '<button class="search-icon" data-toggle="header-widgets" type="button">Open search form</button>';
-		$header_widgets['inside'] .= $subscribe_widget;
 
 		$header_widgets_output = $header_widgets['open'] . $header_widgets['inside'] . $header_widgets['close'];
 
