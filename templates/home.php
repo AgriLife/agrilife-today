@@ -60,7 +60,7 @@ function agt_home_page() {
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
-						$post_cat_button  = '<a href="%s" class="button">%s</a>';
+						$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 						$post_cat_buttons = array();
 
 						foreach ( $post_categories as $cat_id ) {
@@ -126,19 +126,22 @@ function agt_home_page() {
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
-							$post_cat_button  = '<a href="%s" class="button">%s</a>';
+							$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 							$post_cat_buttons = array();
 
 							foreach ( $post_categories as $cat_id ) {
 
 								$cat = get_category( $cat_id );
 
-								$post_cat_buttons[] = sprintf(
-									$post_cat_button,
-									get_category_link( $cat_id ),
-									$cat->name
-								);
+								if ( false === strpos( $cat->slug, 'uncategorized' ) ) {
 
+									$post_cat_buttons[] = sprintf(
+										$post_cat_button,
+										get_category_link( $cat_id ),
+										$cat->name
+									);
+
+								}
 							}
 							$cat_buttons = implode( '', $post_cat_buttons );
 
@@ -205,7 +208,7 @@ function agt_home_page() {
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
-		$post_cat_button  = '<a href="%s" class="button">%s</a>';
+		$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 		$post_cat_buttons = array();
 
 		foreach ( $post_categories as $cat_id ) {
