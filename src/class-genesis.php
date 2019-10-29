@@ -711,11 +711,16 @@ class Genesis {
 		$cat_output = '';
 
 		foreach ( $cats as $cat ) {
-			$cat_output .= sprintf(
-				'<a href="%s" class="button">%s</a>',
-				get_term_link( $cat->term_id ),
-				$cat->name
-			);
+
+			if ( false === strpos( $cat->slug, 'uncategorized' ) ) {
+
+				$cat_output .= sprintf(
+					'<a href="%s" class="button">%s</a>',
+					get_term_link( $cat->term_id ),
+					$cat->name
+				);
+
+			}
 		}
 
 		echo sprintf( '<div class="post-category">%s</div>', wp_kses_post( $cat_output ) );
