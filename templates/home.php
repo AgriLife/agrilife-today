@@ -212,12 +212,15 @@ function agt_home_page() {
 
 			$cat = get_category( $cat_id );
 
-			$post_cat_buttons[] = sprintf(
-				$post_cat_button,
-				get_category_link( $cat_id ),
-				$cat->name
-			);
+			if ( false === strpos( $cat->slug, 'uncategorized' ) ) {
 
+				$post_cat_buttons[] = sprintf(
+					$post_cat_button,
+					get_category_link( $cat_id ),
+					$cat->name
+				);
+
+			}
 		}
 
 		// Get featured image.
