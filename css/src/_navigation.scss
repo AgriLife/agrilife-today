@@ -20,12 +20,13 @@
 
 		a {
 			color: $dark-blue;
+		}
 
-			&:active,
-			&:hover {
-				background-color: $menu-item-background-active;
-				color: $menu-item-color-active;
-			}
+		&.current-menu-item a,
+		a:active,
+		a:hover {
+			background-color: $menu-item-background-active;
+			color: $menu-item-color-active;
 		}
 	}
 
