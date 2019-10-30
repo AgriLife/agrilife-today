@@ -156,8 +156,8 @@
 				padding: $card-padding;
 			}
 
-			.cell.has-image:first-child {
-				padding: $card-padding 0 $card-padding $card-padding;
+			.cell.has-image {
+				padding: $card-padding $card-padding - $grid-margin-gutters $card-padding $card-padding;
 			}
 
 			.cell.image {

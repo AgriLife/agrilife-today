@@ -29,6 +29,22 @@ function agt_home_page() {
 	$story_sections = get_field( 'stories' );
 	$in_the_news    = get_field( 'in_the_news' );
 	$output         = '';
+	$post_atts      = array(
+		'odd'  => array(
+			'thumb'   => 'small-collapse-right medium-collapse-right medium-4-collapse-half',
+			'content' => array(
+				'thumb'    => 'has-image small-collapse-left medium-collapse-left collapse-8-half',
+				'no-thumb' => 'auto collapse no-image',
+			),
+		),
+		'even' => array(
+			'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
+			'content' => array(
+				'thumb'    => 'has-image small-collapse-left medium-collapse-right small-8-collapse-half medium-8-collapse-half medium-order-2',
+				'no-thumb' => 'auto collapse no-image',
+			),
+		),
+	);
 
 	// Story Sections.
 	if ( ! empty( $story_sections ) ) {
@@ -44,19 +60,9 @@ function agt_home_page() {
 				switch ( $story['acf_fc_layout'] ) {
 
 					case 'post':
-						$id            = $story['post']->ID;
-						$post_obj      = $story['post'];
-						$post_atts     = array(
-							'odd'  => array(
-								'thumb'   => 'small-collapse-right medium-collapse-right medium-4-collapse-half',
-								'content' => 'small-collapse-left medium-collapse-left medium-8-collapse-half',
-							),
-							'even' => array(
-								'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
-								'content' => 'small-collapse-left medium-collapse-right medium-8-collapse-half medium-order-2',
-							),
-						);
-						$content_class = 'auto no-image';
+						$id        = $story['post']->ID;
+						$post_obj  = $story['post'];
+						$has_thumb = 'thumb';
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
@@ -83,25 +89,23 @@ function agt_home_page() {
 						$post_image = get_the_post_thumbnail( $post_obj, 'home-story-image' );
 						if ( ! empty( $post_image ) ) {
 
-							$image         = sprintf(
-								'<div class="cell image medium-4 small-4 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
+							$image = sprintf(
+								'<div class="cell image medium-4 small-4-collapse-half %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 								$post_atts[ $eo ]['thumb'],
 								get_permalink( $id ),
 								$post_image
 							);
-							$content_class = 'medium-8 small-8 has-image';
 
 						} else {
 
-							$post_atts[ $eo ]['content'] = preg_replace( '/medium-collapse-(left|right) medium-8-collapse-half/', 'collapse', $post_atts[ $eo ]['content'] );
+							$has_thumb = 'no-thumb';
 
 						}
 
 						// Make post.
 						$post = sprintf(
-							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</div></article>',
-							$content_class,
-							$post_atts[ $eo ]['content'],
+							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</div></article>',
+							$post_atts[ $eo ]['content'][ $has_thumb ],
 							implode( '', $post_cat_buttons ),
 							get_permalink( $id ),
 							$post_obj->post_title,
@@ -199,18 +203,8 @@ function agt_home_page() {
 
 	foreach ( $posts as $key => $story ) {
 
-		$id            = $story['ID'];
-		$post_atts     = array(
-			'even' => array(
-				'thumb'   => 'small-collapse-right medium-collapse-right medium-4-collapse-half',
-				'content' => 'small-collapse-left medium-collapse-left medium-8-collapse-half',
-			),
-			'odd'  => array(
-				'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
-				'content' => 'small-collapse-left medium-collapse-right medium-8-collapse-half medium-order-2',
-			),
-		);
-		$content_class = 'auto collapse no-image';
+		$id        = $story['ID'];
+		$has_thumb = 'thumb';
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
@@ -235,19 +229,19 @@ function agt_home_page() {
 		// Get featured image.
 		$image      = '';
 		$post_image = get_the_post_thumbnail( $story['ID'], 'home-story-image' );
+
 		if ( ! empty( $post_image ) ) {
 
-			$image         = sprintf(
-				'<div class="cell image medium-4 small-4 %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
+			$image = sprintf(
+				'<div class="cell image medium-4 small-4-collapse-half %s"><a class="entry-image-link" href="%s" aria-hidden="true" tabindex="-1">%s</a></div>',
 				$post_atts[ $eo ]['thumb'],
 				get_permalink( $id ),
 				$post_image
 			);
-			$content_class = 'medium-auto small-8 has-image';
 
 		} else {
 
-			$post_atts[ $eo ]['content'] = preg_replace( '/medium-collapse-(left|right) medium-8-collapse-half/', 'collapse', $post_atts[ $eo ]['content'] );
+			$has_thumb = 'no-thumb';
 
 		}
 
@@ -259,17 +253,21 @@ function agt_home_page() {
 			$excerpt = wp_trim_words( $content, 55 );
 		}
 
-		$article_class = '';
+		// Change content if in right column.
+		$article_class          = '';
+		$content_class_modified = $post_atts[ $eo ]['content'][ $has_thumb ];
+
 		if ( 2 === $key ) {
-			$article_class               = 'center-y';
-			$post_atts[ $eo ]['content'] = preg_replace( '/medium-[\d\-]*collapse-(half|right)/', '', $post_atts[ $eo ]['content'] ) . ' medium-collapse';
+			$article_class           = 'center-y';
+			$content_class_modified  = preg_replace( '/medium-8-collapse-half|medium-collapse-left/', '', $content_class_modified );
+			$content_class_modified .= ' medium-auto medium-collapse';
 		}
 
+		// Combine into post.
 		$post = sprintf(
-			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</article>',
+			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s"><div class="post-category">%s</div><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div></div>%s</article>',
 			$article_class,
-			$content_class,
-			$post_atts[ $eo ]['content'],
+			$content_class_modified,
 			implode( '', $post_cat_buttons ),
 			get_permalink( $id ),
 			$story['post_title'],

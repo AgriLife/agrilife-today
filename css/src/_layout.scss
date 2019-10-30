@@ -59,6 +59,10 @@
 			margin-right: 0;
 		}
 
+		&.collapse-8-half {
+			@include xy-cell(8, false, $grid-margin-gutters / 2);
+		}
+
 		&.small-3 {
 			@include xy-cell(3, false);
 		}
