@@ -14,9 +14,19 @@
 		}
 	}
 
-	.section ~ .section {
-		margin-top: $global-layout-space * 2;
-		margin-bottom: 0;
+	.section {
+		margin: {
+			top: $global-layout-space * 2;
+			bottom: $global-layout-space * 2;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&.subscribe {
+			margin-bottom: 0;
+		}
 	}
 
 	.entry-title {
@@ -209,9 +219,19 @@
 			margin-top: 3.5 * $global-layout-space;
 		}
 
-		.section ~ .section {
-			margin-top: $global-layout-space * 5;
-			margin-bottom: 0;
+		.section {
+			margin: {
+				top: $global-layout-space * 5;
+				bottom: $global-layout-space * 5;
+			}
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&.subscribe {
+				margin-bottom: 0;
+			}
 		}
 
 		.cell.tall .cell.image {
