@@ -132,11 +132,13 @@ function agt_home_page() {
 						break;
 
 					case 'quote':
-						$quote           = $story['quote'];
+						$quote           = "<div class=\"quote-text\">{$story['quote']}</div>";
 						$post            = $story['post'];
 						$post_link_open  = '';
 						$post_link_close = '';
+						$headings        = '';
 						$cat_buttons     = '';
+
 						// Define post-dependent variables.
 						if ( ! empty( $post ) ) {
 							$post_link_open  = sprintf(
@@ -144,6 +146,9 @@ function agt_home_page() {
 								get_permalink( $post->ID )
 							);
 							$post_link_close = '</a>';
+
+							// Get post heading and subheading.
+							$headings = "<h3>{$post->post_title}</h3>";
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
@@ -164,19 +169,26 @@ function agt_home_page() {
 
 								}
 							}
-							$cat_buttons = implode( '', $post_cat_buttons );
 
+							if ( 0 < count( $post_cat_buttons ) ) {
+
+								$cat_buttons = sprintf(
+									'<div class="post-category">%s</div>',
+									implode( '', $post_cat_buttons )
+								);
+
+							}
 						}
 
 						$quote = str_replace( '<p', '<span', $quote );
 						$quote = str_replace( '</p', '</span', $quote );
 
 						$stories_output[] = sprintf(
-							'<div class="grid-x center-y card"><div class="cell item quote"><div class="cat-buttons">%s</div>%s%s%s</div></div>',
-							$cat_buttons,
+							'<div class="grid-x center-y card"><div class="cell item quote">%s%s%s%s</div></div>',
 							$post_link_open,
 							$quote,
-							$post_link_close
+							$post_link_close,
+							$cat_buttons
 						);
 
 						break;
