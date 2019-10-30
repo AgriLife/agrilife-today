@@ -1,23 +1,9 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	color: $dark-blue;
-	letter-spacing: 1px;
-}
-
 .clear-both {
 	clear: both;
 }
 
 .content {
 	hyphens: auto;
-}
-
-.entry-title {
-	text-transform: uppercase;
 }
 
 .card {
@@ -69,11 +55,17 @@ table {
 	background-color: $darker-gray;
 
 	h1,
+	.h1,
 	h2,
+	.h2,
 	h3,
+	.h3,
 	h4,
+	.h4,
 	h5,
+	.h5,
 	h6,
+	.h6,
 	a:not(.button) {
 		color: $white;
 	}

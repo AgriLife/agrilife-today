@@ -7,10 +7,6 @@
 		~ * {
 			margin-top: $global-layout-space * 3;
 		}
-
-		h2 {
-			font-size: 1.5rem;
-		}
 	}
 
 	.featured-post {
@@ -20,7 +16,7 @@
 		}
 
 		h2 {
-			font-size: 2rem;
+			font-size: rem-calc(53);
 		}
 	}
 }

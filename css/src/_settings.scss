@@ -39,7 +39,6 @@ $helvetica: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 $body-font-family: $opensans;
 $nav-font-family: $helvetica;
 $header-font-family: $tungsten;
-$entry-title-font: 700 1.15rem/1 $opensans;
 
 /* Global
 --------------------------------------------- */
@@ -53,7 +52,7 @@ $anchor-text-decoration-hover: underline;
 $header-styles: (
 	small: (
 		"h1": ("font-size": 32),
-		"h2": ("font-size": 28),
+		"h2": ("font-size": 28, "line-height": 1.2),
 		"h3": ("font-size": 19),
 		"h4": ("font-size": 18),
 		"h5": ("font-size": 17),
@@ -61,7 +60,7 @@ $header-styles: (
 	),
 	medium: (
 		"h1": ("font-size": 48),
-		"h2": ("font-size": 28),
+		"h2": ("font-size": 40, "line-height": 1.2),
 		"h3": ("font-size": 31),
 		"h4": ("font-size": 25),
 		"h5": ("font-size": 20),
@@ -71,7 +70,7 @@ $header-styles: (
 $header-styles-tungsten: (
 	small: (
 		"h1": ("font-size": 39),
-		"h2": ("font-size": 32),
+		"h2": ("font-size": 32, "line-height": 1.2),
 		"h3": ("font-size": 26),
 		"h4": ("font-size": 22),
 		"h5": ("font-size": 19),
@@ -79,13 +78,15 @@ $header-styles-tungsten: (
 	),
 	medium: (
 		"h1": ("font-size": 52),
-		"h2": ("font-size": 44),
+		"h2": ("font-size": 44, "line-height": 1.2),
 		"h3": ("font-size": 33),
 		"h4": ("font-size": 27),
 		"h5": ("font-size": 22),
 		"h6": ("font-size": 19),
 	),
 );
+$header-color: $dark-blue;
+$header-font-weight: 500;
 
 /* Header
 --------------------------------------------- */

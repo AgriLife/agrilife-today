@@ -148,7 +148,7 @@ function agt_home_page() {
 							$post_link_close = '</a>';
 
 							// Get post heading and subheading.
-							$headings = "<h3>{$post->post_title}</h3>";
+							$headings = "<h2>{$post->post_title}</h2>";
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
