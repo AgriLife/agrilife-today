@@ -449,12 +449,14 @@ class Genesis {
 			'inside' => get_search_form( false ),
 		);
 
-		$header_widgets['inside']  = str_replace( 'placeholder="Search this website"', 'placeholder="Search AgriLife Today"', $header_widgets['inside'] );
-		$header_widgets['inside']  = str_replace( 'value="Search"', 'value="Submit"', $header_widgets['inside'] );
-		$header_widgets['inside']  = preg_replace( '/(<form[^>]*class="[^"]*)search-form/', '$1search-form grid-x', $header_widgets['inside'] );
-		$header_widgets['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-input/', '$1search-form-input cell auto', $header_widgets['inside'] );
-		$header_widgets['inside']  = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $header_widgets['inside'] );
-		$header_widgets['inside'] .= '<button class="search-icon" data-toggle="header-widgets" type="button">Open search form</button>';
+		$header_widgets['inside'] = str_replace( 'placeholder="Search this website"', 'placeholder="Search AgriLife Today"', $header_widgets['inside'] );
+		$header_widgets['inside'] = str_replace( 'value="Search"', 'value="Submit"', $header_widgets['inside'] );
+		$header_widgets['inside'] = preg_replace( '/(<form[^>]*class="[^"]*)search-form/', '$1search-form grid-x', $header_widgets['inside'] );
+		$header_widgets['inside'] = preg_replace( '/(<input[^>]*class="[^"]*)search-form-input/', '$1search-form-input cell auto', $header_widgets['inside'] );
+		$header_widgets['inside'] = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $header_widgets['inside'] );
+
+		// Add search icon and label.
+		$header_widgets['inside'] .= '<div class="search-flags"><span class="search-label">Search</span> <button class="search-icon" data-toggle="header-widgets" type="button">Open search form</button></div>';
 
 		$header_widgets_output = $header_widgets['open'] . $header_widgets['inside'] . $header_widgets['close'];
 
