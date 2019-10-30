@@ -69,6 +69,7 @@ function agt_home_page() {
 						$post_categories  = wp_get_post_categories( $id );
 						$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 						$post_cat_buttons = array();
+						$cat_buttons      = '';
 
 						foreach ( $post_categories as $cat_id ) {
 
@@ -83,6 +84,15 @@ function agt_home_page() {
 								);
 
 							}
+						}
+
+						if ( 0 < count( $post_cat_buttons ) ) {
+
+							$cat_buttons = sprintf(
+								'<div class="post-category">%s</div>',
+								implode( '', $post_cat_buttons )
+							);
+
 						}
 
 						// Get featured image.
@@ -105,12 +115,12 @@ function agt_home_page() {
 
 						// Make post.
 						$post = sprintf(
-							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div><div class="post-category">%s</div></div>%s</div></article>',
+							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</div></article>',
 							$post_atts[ $eo ]['content'][ $has_thumb ],
 							get_permalink( $id ),
 							$post_obj->post_title,
 							$story['description'],
-							implode( '', $post_cat_buttons ),
+							$cat_buttons,
 							$image
 						);
 
@@ -211,6 +221,7 @@ function agt_home_page() {
 		$post_categories  = wp_get_post_categories( $id );
 		$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 		$post_cat_buttons = array();
+		$cat_buttons      = '';
 
 		foreach ( $post_categories as $cat_id ) {
 
@@ -225,6 +236,15 @@ function agt_home_page() {
 				);
 
 			}
+		}
+
+		if ( 0 < $post_cat_buttons ) {
+
+			$cat_buttons = sprintf(
+				'<div class="post-category">%s</div>',
+				implode( '', $post_cat_buttons )
+			);
+
 		}
 
 		// Get featured image.
@@ -266,13 +286,13 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div><div class="post-category">%s</div></div>%s</article>',
+			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</article>',
 			$article_class,
 			$content_class_modified,
 			get_permalink( $id ),
 			$story['post_title'],
 			$excerpt,
-			implode( '', $post_cat_buttons ),
+			$cat_buttons,
 			$image
 		);
 
