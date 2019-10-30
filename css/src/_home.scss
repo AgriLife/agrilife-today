@@ -7,6 +7,13 @@
 		border-top-color: $light-gray-blue;
 	}
 
+	.section.invert {
+		padding: {
+			top: $global-layout-space * 3;
+			bottom: $global-layout-space * 3;
+		}
+	}
+
 	.section ~ .section {
 		margin-top: $global-layout-space * 2;
 		margin-bottom: 0;
@@ -149,6 +156,10 @@
 		.nolink {
 			padding: $card-padding + $global-layout-space * 2 $card-padding + $global-layout-space;
 		}
+	}
+
+	.footer-widgets {
+		margin-top: 0;
 	}
 
 	@include breakpoint(small only) {

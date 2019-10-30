@@ -1,13 +1,6 @@
 /* LiveWhale block.
 ---------------------------------- */
 .livewhale {
-	.page-template-home & {
-		padding: {
-			top: $global-layout-space * 3;
-			bottom: $global-layout-space * 3;
-		}
-	}
-
 	&.invert {
 		background-color: $darker-gray;
 	}

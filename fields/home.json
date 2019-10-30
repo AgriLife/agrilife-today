@@ -126,25 +126,6 @@
                                         "display": "block",
                                         "sub_fields": [
                                             {
-                                                "key": "field_5da74e24d0dab",
-                                                "label": "Quote",
-                                                "name": "quote",
-                                                "type": "wysiwyg",
-                                                "instructions": "",
-                                                "required": 0,
-                                                "conditional_logic": 0,
-                                                "wrapper": {
-                                                    "width": "",
-                                                    "class": "",
-                                                    "id": ""
-                                                },
-                                                "default_value": "",
-                                                "tabs": "all",
-                                                "toolbar": "basic",
-                                                "media_upload": 0,
-                                                "delay": 0
-                                            },
-                                            {
                                                 "key": "field_5da8717347591",
                                                 "label": "Post",
                                                 "name": "post",
@@ -163,6 +144,25 @@
                                                 "multiple": 0,
                                                 "return_format": "object",
                                                 "ui": 1
+                                            },
+                                            {
+                                                "key": "field_5da74e24d0dab",
+                                                "label": "Quote",
+                                                "name": "quote",
+                                                "type": "wysiwyg",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "tabs": "all",
+                                                "toolbar": "basic",
+                                                "media_upload": 0,
+                                                "delay": 0
                                             }
                                         ],
                                         "min": "",
@@ -311,6 +311,25 @@
                         ]
                     }
                 ]
+            },
+            {
+                "key": "field_5db9c397a1237",
+                "label": "Subscribe",
+                "name": "subscribe",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 1,
+                "delay": 0
             }
         ],
         "location": [

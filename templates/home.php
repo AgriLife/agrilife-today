@@ -28,6 +28,7 @@ function agt_home_page() {
 
 	$story_sections = get_field( 'stories' );
 	$in_the_news    = get_field( 'in_the_news' );
+	$subscribe      = get_field( 'subscribe' );
 	$output         = '';
 	$post_atts      = array(
 		'odd'  => array(
@@ -377,8 +378,21 @@ function agt_home_page() {
 
 	}
 
+	// Subscribe section.
+	if ( ! empty( $subscribe ) ) {
+
+		$output .= sprintf(
+			'<div class="subscribe alignfull section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Subscribe</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x"><div class="cell">%s</div></div></div></div>',
+			$subscribe
+		);
+
+	}
+
 	// Produce the entire page's output.
-	echo wp_kses_post( $output );
+	$allowed_tags         = wp_kses_allowed_html( 'post' );
+	$allowed_tags['form'] = array();
+
+	echo wp_kses( $output, $allowed_tags );
 
 }
 
