@@ -20,9 +20,9 @@
 	}
 
 	.entry-title {
-		font: 600 1.15rem/1.2 $opensans;
+		font-size: 1.15rem;
+		line-height: 1.2;
 		letter-spacing: .01rem;
-		text-transform: uppercase;
 	}
 
 	.tall .card {
@@ -43,7 +43,7 @@
 		margin-left: 0;
 		margin-right: 0;
 
-		.cat-buttons + * {
+		.quote-text {
 			font-size: 1.75rem;
 			line-height: 1.25;
 			margin-bottom: 0;
