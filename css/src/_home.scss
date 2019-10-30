@@ -24,6 +24,14 @@
 		}
 	}
 
+	.post-category {
+		margin-top: $grid-margin-gutters;
+
+		.button {
+			margin-bottom: 0;
+		}
+	}
+
 	.quote {
 		margin-left: 0;
 		margin-right: 0;
