@@ -694,6 +694,7 @@ class Genesis {
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
 			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ), 11 );
 			add_filter( 'genesis_attr_entry-header_output', array( $this, 'add_gutter_lr_class' ), 11, 2 );
+			add_filter( 'the_content', array( $this, 'remove_subheading_from_content' ) );
 		} elseif ( ! is_front_page() && ! is_archive() ) {
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			add_action( 'genesis_entry_content', array( $this, 'custom_post_category_button' ), 10 );
@@ -737,14 +738,42 @@ class Genesis {
 	 */
 	public function custom_post_info() {
 
-		$output = '<p class="entry-meta">';
+		global $post;
 
-		// Post Date.
+		// Find the first h2 element, sometimes between two HTML comments created by Gutenberg.
+		$content = $post->post_content;
+		$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<h2[^>]*>[^<]*<\/h2>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
+		preg_match( $pattern, $post->post_content, $subheading );
+
+		// Add first h2 element below post title.
+		$output = $subheading[5];
+
+		// Add post meta.
+		$output .= '<p class="entry-meta">';
 		$output .= do_shortcode( '<strong>[post_date]</strong>' );
-
 		$output .= '</p>';
 
 		echo wp_kses_post( $output );
+
+	}
+
+	/**
+	 * Remove subheading from content
+	 *
+	 * @since 0.8.23
+	 * @param string $content The post content.
+	 * @return string
+	 */
+	public function remove_subheading_from_content( $content ) {
+
+		// Find the first h2 element, sometimes between two HTML comments created by Gutenberg.
+		$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<h2[^>]*>[^<]*<\/h2>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
+		preg_match( $pattern, $content, $subheading );
+
+		// Remove subheading and occasional wrapping HTML comments created by Gutenberg.
+		$content = str_replace( $subheading[0], '', $content );
+
+		return $content;
 
 	}
 
