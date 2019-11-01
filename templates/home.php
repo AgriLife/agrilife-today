@@ -19,6 +19,24 @@ remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 /**
+ * Retrieve subheading from within post content.
+ * Copied from class-genesis.php.
+ *
+ * @since 0.8.24
+ * @param string $content Post content.
+ * @return string
+ */
+function agt_get_subheading( $content ) {
+
+	$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<\s*?(h2){1}\b[^>]*>(.*?)<\/(h2){1}\b[^>]*>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
+	preg_match( $pattern, $content, $subheading );
+	$output = $subheading[5];
+
+	return $output;
+
+}
+
+/**
  * Output content of template.
  *
  * @since 0.1.7
@@ -61,9 +79,13 @@ function agt_home_page() {
 				switch ( $story['acf_fc_layout'] ) {
 
 					case 'post':
-						$id        = $story['post']->ID;
 						$post_obj  = $story['post'];
+						$id        = $post_obj->ID;
 						$has_thumb = 'thumb';
+
+						// Make the post subtitle.
+						$subheading    = agt_get_subheading( $post_obj->post_content );
+						$h3_subheading = str_replace( 'h2', 'h3', $subheading );
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
@@ -114,12 +136,24 @@ function agt_home_page() {
 						}
 
 						// Make post.
+						if ( empty( $story['description'] ) ) {
+
+							$excerpt = $story['description'];
+
+						} else {
+
+							$excerpt = wp_trim_excerpt( '', $id );
+
+						}
+
+						// Make post.
 						$post = sprintf(
-							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</div></article>',
+							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2>%s</header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</div></article>',
 							$post_atts[ $eo ]['content'][ $has_thumb ],
 							get_permalink( $id ),
 							$post_obj->post_title,
-							$story['description'],
+							$h3_subheading,
+							$excerpt,
 							$cat_buttons,
 							$image
 						);
@@ -227,8 +261,10 @@ function agt_home_page() {
 
 	foreach ( $posts as $key => $story ) {
 
-		$id        = $story['ID'];
-		$has_thumb = 'thumb';
+		$id            = $story['ID'];
+		$has_thumb     = 'thumb';
+		$subheading    = agt_get_subheading( $story['post_content'] );
+		$h3_subheading = str_replace( 'h2', 'h3', $subheading );
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
@@ -280,12 +316,7 @@ function agt_home_page() {
 		}
 
 		// Make post.
-		$excerpt = $story['post_excerpt'];
-
-		if ( empty( $excerpt ) ) {
-			$content = strip_shortcodes( $story['post_content'] );
-			$excerpt = wp_trim_words( $content, 55 );
-		}
+		$excerpt = wp_trim_excerpt( '', $id );
 
 		// Change content if in right column.
 		$article_class          = '';
@@ -299,11 +330,12 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</article>',
+			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2>%s</header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</article>',
 			$article_class,
 			$content_class_modified,
 			get_permalink( $id ),
 			$story['post_title'],
+			$h3_subheading,
 			$excerpt,
 			$cat_buttons,
 			$image

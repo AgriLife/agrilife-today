@@ -156,6 +156,49 @@ class Genesis {
 		// Change thumbnail size for related posts.
 		add_filter( 'rp4wp_thumbnail_size', array( $this, 'rp4wp_thumbnail_size' ) );
 
+		// Remove subheading from excerpts.
+		add_filter( 'the_content', array( $this, 'remove_subhead_from_content' ) );
+
+	}
+
+	/**
+	 * Retrieve subheading from within post content.
+	 *
+	 * @since 0.8.24
+	 * @param string $content Post content.
+	 * @return string
+	 */
+	private function get_subheading( $content ) {
+
+		// Get first h2 in $content, sometimes wrapped by HTML comments by Gutenberg.
+		$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<\s*?(h2){1}\b[^>]*>(.*?)<\/(h2){1}\b[^>]*>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
+		preg_match( $pattern, $content, $subheading );
+		$output = $subheading[5];
+
+		return $output;
+
+	}
+
+	/**
+	 * Remove subheading from within post content.
+	 *
+	 * @since 0.8.24
+	 * @param string $content Post content.
+	 * @return string
+	 */
+	public function remove_subhead_from_content( $content ) {
+
+		global $post;
+		$subheading = $this->get_subheading( $content );
+
+		if ( ! empty( $subheading ) ) {
+
+			$content = str_replace( $subheading, '', $content );
+
+		}
+
+		return $content;
+
 	}
 
 	/**
@@ -1231,6 +1274,7 @@ class Genesis {
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_left_close' ), 3 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_right_open' ), 3 );
 			add_action( 'genesis_entry_header', array( $this, 'custom_post_category_button' ), 4 );
+			add_action( 'genesis_entry_header', array( $this, 'add_sub_heading' ), 11 );
 			add_action( 'genesis_entry_footer', 'genesis_post_info' );
 			add_action( 'genesis_entry_footer', array( $this, 'archive_column_right_close' ), 11 );
 			add_filter( 'genesis_post_info', array( $this, 'date_only' ) );
@@ -1277,6 +1321,31 @@ class Genesis {
 	public function archive_title_close() {
 
 		echo wp_kses_post( '<div class="cell auto title-line"></div></div>' );
+
+	}
+
+	/**
+	 * Add subheading below title.
+	 *
+	 * @since 0.8.24
+	 * @return void
+	 */
+	public function add_sub_heading() {
+
+		global $post;
+		$subheading = $this->get_subheading( $post->post_content );
+
+		if ( ! is_singular( 'post' ) ) {
+
+			$subheading = str_replace( 'h2', 'h3', $subheading );
+
+		}
+
+		if ( ! empty( $subheading ) ) {
+
+			echo wp_kses_post( $subheading );
+
+		}
 
 	}
 
