@@ -102,6 +102,16 @@ h1.entry-title {
 		margin-bottom: $paragraph-margin-bottom;
 	}
 
+	.rp4wp-related-post-content:first-child {
+		margin-left: 0;
+	}
+
+	@include breakpoint(small only) {
+		.grid-x + .grid-x {
+			margin-top: $grid-margin-gutters;
+		}
+	}
+
 	@include breakpoint(medium) {
 		margin-bottom: 0;
 

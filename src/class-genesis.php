@@ -1025,9 +1025,12 @@ class Genesis {
 			$output .= '<div class="related_posts">';
 
 			$related_posts = rp4wp_children( get_the_ID(), false );
-			$related_posts = str_replace( '<ul', '<div class="grid-x"', $related_posts );
-			$related_posts = str_replace( '<li', '<div class="cell medium-6 small-12"', $related_posts );
-			$related_posts = preg_replace( '/<\/(ul|li)/', '</div', $related_posts );
+			$related_posts = str_replace( '<ul>', '', $related_posts );
+			$related_posts = str_replace( '<li', '<div class="grid-x"', $related_posts );
+			$related_posts = str_replace( '</li', '</div', $related_posts );
+			$related_posts = str_replace( 'rp4wp-related-post-image', 'rp4wp-related-post-image cell collapse-left medium-4 small-4', $related_posts );
+			$related_posts = str_replace( 'rp4wp-related-post-content', 'rp4wp-related-post-content cell medium-auto small-auto collapse-right', $related_posts );
+			$related_posts = str_replace( '</ul>', '', $related_posts );
 
 			$output .= $related_posts;
 			$output .= '</div>';
