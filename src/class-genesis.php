@@ -1279,7 +1279,8 @@ class Genesis {
 			add_action( 'genesis_entry_header', 'genesis_do_post_image', 1 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_left_close' ), 3 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_right_open' ), 3 );
-			add_action( 'genesis_entry_header', array( $this, 'add_sub_heading' ), 11 );
+			add_action( 'genesis_entry_content', array( $this, 'archive_subheading' ), 9 );
+			add_filter( 'get_the_excerpt', array( $this, 'archive_excerpts' ), 10 );
 			add_action( 'genesis_entry_footer', 'genesis_post_info' );
 			add_action( 'genesis_entry_footer', array( $this, 'custom_post_category_button' ), 11 );
 			add_action( 'genesis_entry_footer', array( $this, 'archive_column_right_close' ), 11 );
@@ -1336,14 +1337,14 @@ class Genesis {
 	 * @since 0.8.24
 	 * @return void
 	 */
-	public function add_sub_heading() {
+	public function archive_subheading() {
 
 		global $post;
 		$subheading = $this->get_subheading( $post->post_content );
 
 		if ( ! is_singular( 'post' ) ) {
 
-			$subheading = str_replace( 'h2', 'h3', $subheading );
+			$subheading = str_replace( 'h2', 'p', $subheading );
 
 		}
 
@@ -1352,6 +1353,26 @@ class Genesis {
 			echo wp_kses_post( $subheading );
 
 		}
+
+	}
+
+	/**
+	 * Add subheading below title.
+	 *
+	 * @since 0.8.24
+	 * @param string $excerpt The post excerpt.
+	 * @return string
+	 */
+	public function archive_excerpts( $excerpt ) {
+
+		global $post;
+		$subheading = $this->get_subheading( $post->post_content );
+
+		if ( ! empty( $subheading ) ) {
+			$excerpt = '';
+		}
+
+		return $excerpt;
 
 	}
 
