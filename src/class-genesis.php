@@ -499,7 +499,7 @@ class Genesis {
 		$header_widgets['inside'] = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $header_widgets['inside'] );
 
 		// Add search icon and label.
-		$header_widgets['inside'] .= '<div class="search-flags"><span class="search-label">Search</span> <button class="search-icon" data-toggle="header-widgets" type="button">Open search form</button></div>';
+		$header_widgets['inside'] .= '<div class="search-flags"><span class="search-label">Search</span> <label class="search-icon" for="searchform-1" data-toggle="header-widgets">Open search form</label></div>';
 
 		$header_widgets_output = $header_widgets['open'] . $header_widgets['inside'] . $header_widgets['close'];
 
@@ -1273,9 +1273,9 @@ class Genesis {
 			add_action( 'genesis_entry_header', 'genesis_do_post_image', 1 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_left_close' ), 3 );
 			add_action( 'genesis_entry_header', array( $this, 'archive_column_right_open' ), 3 );
-			add_action( 'genesis_entry_header', array( $this, 'custom_post_category_button' ), 4 );
 			add_action( 'genesis_entry_header', array( $this, 'add_sub_heading' ), 11 );
 			add_action( 'genesis_entry_footer', 'genesis_post_info' );
+			add_action( 'genesis_entry_footer', array( $this, 'custom_post_category_button' ), 11 );
 			add_action( 'genesis_entry_footer', array( $this, 'archive_column_right_close' ), 11 );
 			add_filter( 'genesis_post_info', array( $this, 'date_only' ) );
 			add_filter( 'genesis_prev_link_text', array( $this, 'prev_link_text' ) );
