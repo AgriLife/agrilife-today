@@ -152,6 +152,8 @@ function agt_home_page() {
 
 						}
 
+						$excerpt .= ' <span class="read-more">Read More →</span>';
+
 						// Make post.
 						$post = sprintf(
 							'<article class="post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
@@ -176,7 +178,7 @@ function agt_home_page() {
 						$post_link_close = '';
 						$headings        = '';
 						$cat_buttons     = '';
-						$quote           = '<div class="quote-text%s">%s</div>';
+						$quote           = '<span class="quote-text%s">%s</span>';
 
 						// Define post-dependent variables.
 						if ( ! empty( $post ) ) {
@@ -194,12 +196,14 @@ function agt_home_page() {
 							$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
 
 							if ( ! empty( $subheading ) ) {
-								$quote = sprintf( $quote, ' has-subheading', $subheading );
+								$excerpt = sprintf( $quote, ' has-subheading', $subheading );
 							} else {
-								$quote = sprintf( $quote, ' no-subheading', $story['quote'] );
-								$quote = str_replace( '<p', '<span', $quote );
-								$quote = str_replace( '</p', '</span', $quote );
+								$excerpt = sprintf( $quote, ' no-subheading', $story['quote'] );
+								$excerpt = str_replace( '<p', '<span', $quote );
+								$excerpt = str_replace( '</p', '</span', $quote );
 							}
+
+							$excerpt .= ' <span class="read-more">Read More →</span>';
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
@@ -234,7 +238,7 @@ function agt_home_page() {
 							'<article class="grid-x center-y card">%s%s%s%s%s</article>',
 							$post_link_open,
 							$heading,
-							$quote,
+							$excerpt,
 							$cat_buttons,
 							$post_link_close
 						);
@@ -346,6 +350,8 @@ function agt_home_page() {
 			$excerpt = wp_trim_excerpt( '', $id );
 
 		}
+
+		$excerpt .= ' <span class="read-more">Read More →</span>';
 
 		// Change content if in right column.
 		$article_class          = '';
