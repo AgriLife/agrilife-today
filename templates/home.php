@@ -260,18 +260,28 @@ function agt_home_page() {
 	// Latest Posts.
 	$section_output = '<div class="latest-story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Latest Stories</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
 	$args           = array(
-		'numberposts' => 3,
-		'post_status' => 'publish',
+		'posts_per_page' => 3,
+		'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+			'relation' => 'OR',
+			array(
+				'key'     => 'featured-post',
+				'compare' => 'NOT EXISTS',
+			),
+			array(
+				'key'     => 'featured-post',
+				'value'   => '1',
+				'compare' => '!=',
+			),
+		),
 	);
-	$posts          = wp_get_recent_posts( $args, ARRAY_A );
+	$query          = new WP_Query( $args );
 	$stories_output = array();
 	$eo             = 'odd';
 
-	foreach ( $posts as $key => $story ) {
-
-		$id         = $story['ID'];
+	foreach ( $query->posts as $key => $story ) {
+		$id         = $story->ID;
 		$has_thumb  = 'thumb';
-		$subheading = agt_get_subheading( $story['post_content'] );
+		$subheading = agt_get_subheading( $story->post_content );
 		$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
 
 		// Get category button group.
@@ -306,7 +316,7 @@ function agt_home_page() {
 
 		// Get featured image.
 		$image      = '';
-		$post_image = get_the_post_thumbnail( $story['ID'], 'home-story-image' );
+		$post_image = get_the_post_thumbnail( $id, 'home-story-image' );
 
 		if ( ! empty( $post_image ) ) {
 
@@ -350,7 +360,7 @@ function agt_home_page() {
 			$article_class,
 			$content_class_modified,
 			get_permalink( $id ),
-			$story['post_title'],
+			$story->post_title,
 			$excerpt,
 			$cat_buttons,
 			$image

@@ -810,12 +810,11 @@ class Genesis {
 		global $post;
 
 		// Find the first h2 element, sometimes between two HTML comments created by Gutenberg.
-		$content = $post->post_content;
-		$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<h2[^>]*>[^<]*<\/h2>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
-		preg_match( $pattern, $post->post_content, $subheading );
+		$content    = $post->post_content;
+		$subheading = $this->get_subheading( $content );
 
 		// Add first h2 element below post title.
-		$output = $subheading[5];
+		$output = $subheading;
 
 		// Add post meta.
 		$output .= '<p class="entry-meta">';
@@ -1029,7 +1028,7 @@ class Genesis {
 			$related_posts = str_replace( '<li', '<div class="grid-x"', $related_posts );
 			$related_posts = str_replace( '</li', '</div', $related_posts );
 			$related_posts = str_replace( 'rp4wp-related-post-image', 'rp4wp-related-post-image cell collapse-left medium-4 small-4', $related_posts );
-			$related_posts = str_replace( 'rp4wp-related-post-content', 'rp4wp-related-post-content cell medium-auto small-auto collapse-right', $related_posts );
+			$related_posts = str_replace( 'rp4wp-related-post-content', 'rp4wp-related-post-content cell medium-auto small-auto', $related_posts );
 			$related_posts = str_replace( '</ul>', '', $related_posts );
 
 			$output .= $related_posts;
