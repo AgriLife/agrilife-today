@@ -174,12 +174,12 @@ function agt_home_page() {
 						break;
 
 					case 'quote':
-						$quote           = "<div class=\"quote-text\">{$story['quote']}</div>";
 						$post            = $story['post'];
 						$post_link_open  = '';
 						$post_link_close = '';
 						$headings        = '';
 						$cat_buttons     = '';
+						$quote           = '<div class="quote-text%s">%s</div>';
 
 						// Define post-dependent variables.
 						if ( ! empty( $post ) ) {
@@ -190,7 +190,15 @@ function agt_home_page() {
 							$post_link_close = '</a>';
 
 							// Get post heading and subheading.
-							$headings = "<h2>{$post->post_title}</h2>";
+							$heading    = "<h2>{$post->post_title}</h2>";
+							$subheading = agt_get_subheading( $post->post_content );
+							$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
+
+							if ( ! empty( $subheading ) ) {
+								$quote = sprintf( $quote, ' has-subheading', $subheading );
+							} else {
+								$quote = sprintf( $quote, ' no-subheading', $story['quote'] );
+							}
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
@@ -228,7 +236,7 @@ function agt_home_page() {
 						$stories_output[] = sprintf(
 							'<div class="grid-x center-y card"><div class="cell item quote">%s%s%s%s%s</div></div>',
 							$post_link_open,
-							$headings,
+							$heading,
 							$quote,
 							$post_link_close,
 							$cat_buttons

@@ -60,16 +60,19 @@
 		margin-right: 0;
 
 		.quote-text {
-			font-size: 1.75rem;
-			line-height: 1.25;
 			margin-bottom: 0;
 
-			&::after {
-				content: "";
-				display: block;
-				border-top: 1px solid #000;
-				width: 1.25em;
-				margin-top: $paragraph-margin-bottom;
+			&.no-subheading {
+				font-size: 1.75rem;
+				line-height: 1.25;
+
+				&::after {
+					content: "";
+					display: block;
+					border-top: 1px solid #000;
+					width: 1.25em;
+					margin-top: $paragraph-margin-bottom;
+				}
 			}
 		}
 	}
