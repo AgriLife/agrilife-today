@@ -1,6 +1,16 @@
 .page-template-home {
-	.entry-content .card {
-		border-color: $light-gray-blue;
+	article {
+		a {
+			color: $body-font-color;
+		}
+	}
+
+	.entry-content {
+		display: block;
+
+		.card {
+			border-color: $light-gray-blue;
+		}
 	}
 
 	.heading-sideline .title-line {

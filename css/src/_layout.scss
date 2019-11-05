@@ -29,6 +29,10 @@
 		min-width: 0;
 		min-height: 0;
 
+		&.span {
+			display: block;
+		}
+
 		&.tall {
 			> * {
 				height: 100%;
