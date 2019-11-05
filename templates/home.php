@@ -84,9 +84,10 @@ function agt_home_page() {
 				switch ( $story['acf_fc_layout'] ) {
 
 					case 'post':
-						$post_obj  = $story['post'];
-						$id        = $post_obj->ID;
-						$has_thumb = 'thumb';
+						$post_obj     = $story['post'];
+						$id           = $post_obj->ID;
+						$has_thumb    = 'thumb';
+						$auto_excerpt = '';
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
@@ -140,23 +141,26 @@ function agt_home_page() {
 
 						if ( ! empty( $subheading ) ) {
 
-							$excerpt = $subheading;
+							$excerpt  = $subheading;
+							$excerpt .= '<span class="read-more">Read More →</span>';
 
 						} elseif ( ! empty( $story['description'] ) ) {
 
-							$excerpt = $story['description'];
+							$excerpt  = $story['description'];
+							$excerpt .= '<span class="read-more">Read More →</span>';
 
 						} else {
 
-							$excerpt = wp_trim_excerpt( '', $id );
+							$auto_excerpt = ' has-auto-excerpt';
+							$excerpt      = wp_trim_excerpt( '', $id );
+							$excerpt      = preg_replace( '/<a [^>]+>|<\/a>/', '', $excerpt );
 
 						}
 
-						$excerpt .= ' <span class="read-more">Read More →</span>';
-
 						// Make post.
 						$post = sprintf(
-							'<article class="post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+							$auto_excerpt,
 							get_permalink( $id ),
 							$post_atts[ $eo ]['content'][ $has_thumb ],
 							$post_obj->post_title,
@@ -196,14 +200,17 @@ function agt_home_page() {
 							$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
 
 							if ( ! empty( $subheading ) ) {
-								$excerpt = sprintf( $quote, ' has-subheading', $subheading );
+
+								$excerpt  = sprintf( $quote, ' has-subheading', $subheading );
+								$excerpt .= '<span class="read-more">Read More →</span>';
+
 							} else {
+
 								$excerpt = sprintf( $quote, ' no-subheading', $story['quote'] );
 								$excerpt = str_replace( '<p', '<span', $quote );
 								$excerpt = str_replace( '</p', '</span', $quote );
-							}
 
-							$excerpt .= ' <span class="read-more">Read More →</span>';
+							}
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
@@ -288,10 +295,11 @@ function agt_home_page() {
 	$eo             = 'odd';
 
 	foreach ( $query->posts as $key => $story ) {
-		$id         = $story->ID;
-		$has_thumb  = 'thumb';
-		$subheading = agt_get_subheading( $story->post_content );
-		$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
+		$id           = $story->ID;
+		$has_thumb    = 'thumb';
+		$subheading   = agt_get_subheading( $story->post_content );
+		$subheading   = preg_replace( '/<(\/)?h2>/', '', $subheading );
+		$auto_excerpt = '';
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
@@ -343,18 +351,19 @@ function agt_home_page() {
 		// Get excerpt.
 		if ( ! empty( $subheading ) ) {
 
-			$excerpt = $subheading;
+			$excerpt  = $subheading;
+			$excerpt .= '<span class="read-more">Read More →</span>';
 
 		} else {
 
-			$excerpt = wp_trim_excerpt( '', $id );
+			$auto_excerpt = ' has-auto-excerpt';
+			$excerpt      = wp_trim_excerpt( '', $id );
+			$excerpt      = preg_replace( '/<a [^>]+>|<\/a>/', '', $excerpt );
 
 		}
 
-		$excerpt .= ' <span class="read-more">Read More →</span>';
-
 		// Change content if in right column.
-		$article_class          = '';
+		$article_class          = $auto_excerpt;
 		$content_class_modified = $post_atts[ $eo ]['content'][ $has_thumb ];
 
 		if ( 2 === $key ) {
