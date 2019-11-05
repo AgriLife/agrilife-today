@@ -10,9 +10,12 @@
 	}
 
 	.featured-post {
-		.archive-post-image,
+		.archive-post-image {
+			@include xy-cell(4);
+		}
+
 		.archive-post-content {
-			@include xy-cell(6);
+			@include xy-cell(8);
 		}
 
 		h2 {
