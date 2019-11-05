@@ -89,8 +89,8 @@ function agt_home_page() {
 						$has_thumb = 'thumb';
 
 						// Make the post subtitle.
-						$subheading    = agt_get_subheading( $post_obj->post_content );
-						$h3_subheading = str_replace( 'h2', 'h3', $subheading );
+						$subheading = agt_get_subheading( $post_obj->post_content );
+						$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
@@ -140,8 +140,12 @@ function agt_home_page() {
 
 						}
 
-						// Make post.
-						if ( empty( $story['description'] ) ) {
+						// Get excerpt.
+						if ( ! empty( $subheading ) ) {
+
+							$excerpt = $subheading;
+
+						} elseif ( ! empty( $story['description'] ) ) {
 
 							$excerpt = $story['description'];
 
@@ -153,11 +157,10 @@ function agt_home_page() {
 
 						// Make post.
 						$post = sprintf(
-							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2>%s</header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</div></article>',
+							'<article class="card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</div></article>',
 							$post_atts[ $eo ]['content'][ $has_thumb ],
 							get_permalink( $id ),
 							$post_obj->post_title,
-							$h3_subheading,
 							$excerpt,
 							$cat_buttons,
 							$image
@@ -266,10 +269,10 @@ function agt_home_page() {
 
 	foreach ( $posts as $key => $story ) {
 
-		$id            = $story['ID'];
-		$has_thumb     = 'thumb';
-		$subheading    = agt_get_subheading( $story['post_content'] );
-		$h3_subheading = str_replace( 'h2', 'h3', $subheading );
+		$id         = $story['ID'];
+		$has_thumb  = 'thumb';
+		$subheading = agt_get_subheading( $story['post_content'] );
+		$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
@@ -320,8 +323,16 @@ function agt_home_page() {
 
 		}
 
-		// Make post.
-		$excerpt = wp_trim_excerpt( '', $id );
+		// Get excerpt.
+		if ( ! empty( $subheading ) ) {
+
+			$excerpt = $subheading;
+
+		} else {
+
+			$excerpt = wp_trim_excerpt( '', $id );
+
+		}
 
 		// Change content if in right column.
 		$article_class          = '';
@@ -335,12 +346,11 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2>%s</header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</article>',
+			'<article class="grid-x %s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell %s"><header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="%s">%s</a></h2></header><div class="entry-content" itemprop="text"><p>%s</p></div>%s</div>%s</article>',
 			$article_class,
 			$content_class_modified,
 			get_permalink( $id ),
 			$story['post_title'],
-			$h3_subheading,
 			$excerpt,
 			$cat_buttons,
 			$image

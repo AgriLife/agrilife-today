@@ -818,7 +818,9 @@ class Genesis {
 		preg_match( $pattern, $content, $subheading );
 
 		// Remove subheading and occasional wrapping HTML comments created by Gutenberg.
-		$content = str_replace( $subheading[0], '', $content );
+		if ( isset( $subheading[0] ) ) {
+			$content = str_replace( $subheading[0], '', $content );
+		}
 
 		return $content;
 
