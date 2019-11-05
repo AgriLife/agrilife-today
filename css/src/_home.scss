@@ -48,10 +48,12 @@
 	}
 
 	.post-category {
-		margin-top: $grid-margin-gutters;
 
 		.button {
-			margin-bottom: 0;
+			margin: {
+				top: $grid-margin-gutters;
+				bottom: 0;
+			}
 		}
 	}
 
