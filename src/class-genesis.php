@@ -503,7 +503,7 @@ class Genesis {
 		$header_widgets['inside'] = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $header_widgets['inside'] );
 
 		// Add search icon and label.
-		$header_widgets['inside'] .= '<div class="search-flags"><span class="search-label">Search</span> <label class="search-icon" for="searchform-1" data-toggle="header-widgets">Open search form</label></div>';
+		$header_widgets['inside'] .= '<div class="search-flags"><span class="search-label">Search</span> <button class="search-icon" data-toggle="header-widgets" type="button">Open search form</button></div>';
 
 		$header_widgets_output = $header_widgets['open'] . $header_widgets['inside'] . $header_widgets['close'];
 
