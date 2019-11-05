@@ -115,3 +115,26 @@ h1.entry-title {
 		}
 	}
 }
+
+.widgets-post-after-entry {
+	margin-top: $global-layout-space * 2;
+
+	& + .footer-widgets {
+		margin-top: 0;
+	}
+
+	.card {
+		border: {
+			left: none;
+			right: none;
+		}
+	}
+
+	@include breakpoint(medium) {
+		margin-top: $global-layout-space * 5;
+
+		& + .footer-widgets {
+			margin-top: 0;
+		}
+	}
+}

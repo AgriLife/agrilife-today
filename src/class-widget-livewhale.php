@@ -58,18 +58,30 @@ class Widget_LiveWhale extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		$instance = array_merge( $this->default_instance, $instance );
-		$title    = $instance['title'];
+		$instance  = array_merge( $this->default_instance, $instance );
+		$title     = $instance['title'];
+		$direction = array_key_exists( 'direction', $instance ) ? $instance['direction'] : 'vertical';
 
-		$title = '<div class="title-wrap">' . $args['before_title'] . $title . $args['after_title'] . '</div>';
+		if ( 'horizontal' === $direction ) {
 
-		$args['before_widget'] = str_replace( 'class="widget-wrap', 'class="widget-wrap', $args['before_widget'] );
+			$args['before_widget'] = str_replace( 'class="widget-wrap', 'class="widget-wrap grid-container', $args['before_widget'] );
+			$args['before_title']  = str_replace( 'widget-title', 'widget-title cell shrink', $args['before_title'] );
+			$args['before_title']  = '<div class="grid-x"><div class="cell auto title-line"></div>' . $args['before_title'];
+			$args['after_title']   = $args['after_title'] . '<div class="cell auto title-line"></div></div>';
+
+		}
+
+		$title = '<div class="title-wrap heading-sideline">' . $args['before_title'] . $title . $args['after_title'] . '</div>';
 
 		echo wp_kses_post( $args['before_widget'] );
 		if ( ! empty( $instance['title'] ) ) {
 			echo wp_kses_post( $title );
 		}
-		echo '<div class="textwidget custom-html-widget">'; // The textwidget class is for theme styling compatibility.
+
+		// Begin events list.
+		$grid   = 'horizontal' === $direction ? ' grid-x' : '';
+		$cell   = 'horizontal' === $direction ? ' cell medium-auto small-12' : '';
+		$output = "<div class=\"textwidget custom-html-widget {$direction}{$grid}\">";
 
 		// Output LiveWhale events.
 		$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/' );
@@ -96,8 +108,9 @@ class Widget_LiveWhale extends WP_Widget {
 
 				}
 
-				$l_event_list .= sprintf(
-					'<div class="event"><div class="grid-x "><div class="cell date shrink"><div class="month h3">%s</div><div class="h2 day">%s</div></div><div class="cell title auto"><a href="%s" title="%s" class="event-title medium-truncate-lines medium-truncate-2-lines">%s</a><div class="location medium-truncate-lines medium-truncate-1-line">%s</div></div></div></div>',
+				$output .= sprintf(
+					'<div class="event%s"><div class="grid-x"><div class="cell date shrink"><div class="month h3">%s</div><div class="h2 day">%s</div></div><div class="cell title auto"><a href="%s" title="%s" class="event-title medium-truncate-lines medium-truncate-2-lines">%s</a><div class="location medium-truncate-lines medium-truncate-1-line">%s</div></div></div></div>',
+					$cell,
 					$date_month,
 					$date_day,
 					$url,
@@ -108,16 +121,16 @@ class Widget_LiveWhale extends WP_Widget {
 
 			}
 
-			echo wp_kses_post(
-				sprintf(
-					'%s<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank"><span class="h3">All Events</span></a></div>',
-					$l_event_list
-				)
-			);
+			$output .= '<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank"><span class="h3">All Events</span></a></div>';
 		}
 
 		// Close the widget.
-		echo '</div>';
+		$output .= '</div>';
+
+		echo wp_kses_post(
+			$output
+		);
+
 		echo wp_kses_post( $args['after_widget'] );
 
 	}
@@ -133,13 +146,13 @@ class Widget_LiveWhale extends WP_Widget {
 
 		$instance = wp_parse_args( (array) $instance, $this->default_instance );
 
-		$output = '<p><label for="%s">%s</label><input type="text" id="%s" name="%s" class="title widefat" value="%s"/></p>';
+		$title_output = '<p><label for="%s">%s</label><input type="text" id="%s" name="%s" class="title widefat" value="%s"/></p>';
 
 		echo wp_kses(
 			sprintf(
-				$output,
+				$title_output,
 				esc_attr( $this->get_field_id( 'title' ) ),
-				esc_attr_e( 'Title:', 'agrilife-today' ),
+				esc_attr( 'Title:', 'agrilife-today' ),
 				esc_attr( $this->get_field_id( 'title' ) ),
 				$this->get_field_name( 'title' ),
 				esc_attr( $instance['title'] )
@@ -159,6 +172,48 @@ class Widget_LiveWhale extends WP_Widget {
 			)
 		);
 
+		$direction_output = '<p><label for="%s">%s</label><select id="%s" name="%s" class="direction widefat"><option value="vertical"%s>Vertical</option><option value="horizontal"%s>Horizontal</option></select></p>';
+
+		if ( array_key_exists( 'direction', $instance ) ) {
+
+			$is_vertical   = 'vertical' === $instance['direction'] ? ' selected' : '';
+			$is_horizontal = 'horizontal' === $instance['direction'] ? ' selected' : '';
+
+		} else {
+
+			$is_vertical   = ' selected';
+			$is_horizontal = '';
+
+		}
+
+		echo wp_kses(
+			sprintf(
+				$direction_output,
+				esc_attr( $this->get_field_id( 'direction' ) ),
+				esc_attr( 'Direction:', 'agrilife-today' ),
+				esc_attr( $this->get_field_id( 'direction' ) ),
+				$this->get_field_name( 'direction' ),
+				$is_vertical,
+				$is_horizontal
+			),
+			array(
+				'p'      => array(),
+				'label'  => array(
+					'for' => 1,
+				),
+				'select' => array(
+					'id'    => 1,
+					'name'  => 1,
+					'class' => 1,
+					'value' => 1,
+				),
+				'option' => array(
+					'value'    => 1,
+					'selected' => 1,
+				),
+			)
+		);
+
 	}
 
 	/**
@@ -171,8 +226,9 @@ class Widget_LiveWhale extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 
-		$instance          = array_merge( $this->default_instance, $old_instance );
-		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance              = array_merge( $this->default_instance, $old_instance );
+		$instance['title']     = sanitize_text_field( $new_instance['title'] );
+		$instance['direction'] = sanitize_text_field( $new_instance['direction'] );
 		return $instance;
 
 	}

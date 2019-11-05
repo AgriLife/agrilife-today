@@ -42,6 +42,14 @@
 			image: linear-gradient( 90deg, $light-blue, $light-green );
 			image-slice: 1;
 		}
+
+		&:hover,
+		&:focus {
+			&,
+			& * {
+				color: $dark-blue;
+			}
+		}
 	}
 
 	a {

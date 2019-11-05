@@ -104,6 +104,13 @@ class Genesis {
 				'description' => __( 'This is a widget area for the share buttons of a single post.', 'agrilife-today' ),
 			)
 		);
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Post - After Entry', 'agrilife-today' ),
+				'id'          => 'post-after-entry',
+				'description' => __( 'This is a widget area for after single post content.', 'agrilife-today' ),
+			)
+		);
 		add_action( 'genesis_after_header', array( $this, 'news_post_header_image' ) );
 		add_action( 'genesis_before_content', array( $this, 'genesis_get_sidebar_post' ) );
 		add_action( 'genesis_before', array( $this, 'post_move_hooks' ) );
@@ -743,6 +750,20 @@ class Genesis {
 			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ), 11 );
 			add_filter( 'genesis_attr_entry-header_output', array( $this, 'add_gutter_lr_class' ), 11, 2 );
 			add_filter( 'the_content', array( $this, 'remove_subheading_from_content' ) );
+			add_action(
+				'genesis_before_footer',
+				function() {
+
+					genesis_widget_area(
+						'post-after-entry',
+						array(
+							'before' => '<div class="widgets-post-after-entry page-widget alignfull invert">',
+							'after'  => '</div>',
+						)
+					);
+				},
+				9
+			);
 		} elseif ( ! is_front_page() && ! is_archive() ) {
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			add_action( 'genesis_entry_content', array( $this, 'custom_post_category_button' ), 10 );
