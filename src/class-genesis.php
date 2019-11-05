@@ -735,6 +735,7 @@ class Genesis {
 			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 			remove_action( 'genesis_before_post_content', 'genesis_post_info' );
+			remove_action( 'genesis_after_content', 'genesis_get_sidebar' );
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_open', 5 );
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_close', 15 );
 			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_category_button' ), 6 );
