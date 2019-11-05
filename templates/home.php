@@ -28,9 +28,14 @@ remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
  */
 function agt_get_subheading( $content ) {
 
+	// Get first h2 in $content, sometimes wrapped by HTML comments by Gutenberg.
+	$output  = '';
 	$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<\s*?(h2){1}\b[^>]*>(.*?)<\/(h2){1}\b[^>]*>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
 	preg_match( $pattern, $content, $subheading );
-	$output = $subheading[5];
+
+	if ( isset( $subheading[5] ) ) {
+		$output = $subheading[5];
+	}
 
 	return $output;
 
