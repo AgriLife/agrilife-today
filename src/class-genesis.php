@@ -765,7 +765,7 @@ class Genesis {
 			if ( false === strpos( $cat->slug, 'uncategorized' ) ) {
 
 				$cat_output .= sprintf(
-					'<a href="%s" class="button">%s</a>',
+					'<a href="%s" class="button hollow">%s</a>',
 					get_term_link( $cat->term_id ),
 					$cat->name
 				);
