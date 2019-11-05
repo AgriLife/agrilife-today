@@ -2,6 +2,10 @@
 	article {
 		a {
 			color: $body-font-color;
+
+			&.card {
+				display: block;
+			}
 		}
 
 		.read-more {
