@@ -187,7 +187,7 @@ function agt_home_page() {
 						// Define post-dependent variables.
 						if ( ! empty( $post ) ) {
 							$post_link_open  = sprintf(
-								'<a class="cell item quote entry-title-link" rel="bookmark" href="%s">',
+								'<a class="text cell item quote entry-title-link" rel="bookmark" href="%s">',
 								get_permalink( $post->ID )
 							);
 							$post_link_close = '</a>';
@@ -242,7 +242,7 @@ function agt_home_page() {
 						}
 
 						$stories_output[] = sprintf(
-							'<article class="grid-x center-y card">%s%s%s%s%s</article>',
+							'<article class="af4-entry-compact full-height"><div class="card grid-x center-y full-height">%s%s%s%s%s</div></article>',
 							$post_link_open,
 							$heading,
 							$excerpt,
@@ -384,9 +384,9 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="grid-x%s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="cell collapse auto entry-link" rel="bookmark"><span class="grid-x"><span class="cell text small-collapse small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
-			$article_class,
+			'<article class="post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link full-height" rel="bookmark"><span class="grid-x%s full-height"><span class="cell text small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
 			get_permalink( $id ),
+			$article_class,
 			$content_class_modified,
 			$story->post_title,
 			$excerpt,

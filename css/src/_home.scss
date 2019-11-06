@@ -69,6 +69,15 @@
 		}
 	}
 
+	.subscribe {
+		.grid-x {
+			padding: {
+				left: $grid-margin-gutters;
+				right: $grid-margin-gutters;
+			}
+		}
+	}
+
 	.post-category {
 		display: block;
 
@@ -222,33 +231,6 @@
 		.post.card {
 			padding: 0;
 			position: relative;
-
-			.cell:first-child {
-				padding: $card-padding;
-			}
-
-			.cell.has-image {
-				padding: $card-padding $card-padding - $grid-margin-gutters $card-padding $card-padding;
-			}
-
-			.cell.image {
-				position: absolute;
-				overflow: hidden;
-				top: 0;
-				right: 0;
-				bottom: 0;
-
-				img {
-					position: absolute;
-					top: 50%;
-					left: 50%;
-					transform: translate(-50%, -50%);
-					width: auto;
-					max-width: none;
-					height: 100%;
-					max-height: none;
-				}
-			}
 		}
 	}
 
