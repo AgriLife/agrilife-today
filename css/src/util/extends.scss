@@ -114,6 +114,7 @@
 	p {
 		font-size: .875rem;
 		line-height: 1.3rem;
+		margin-bottom: 0;
 	}
 
 	time {
@@ -133,7 +134,8 @@
 	}
 
 	.button {
-		margin-bottom: .7rem;
+		margin-bottom: 0;
+		margin-top: $grid-margin-gutters;
 	}
 
 	&.has-post-thumbnail {
@@ -144,14 +146,6 @@
 				margin-bottom: 0;
 			}
 		}
-	}
-
-	.entry-content p {
-		margin-bottom: 0;
-	}
-
-	.post-category .button {
-		margin-bottom: 0;
 	}
 }
 // END Taken from https://github.com/AgriLife/agriflex4/blob/master/css/src/_archive.scss
