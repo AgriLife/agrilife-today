@@ -721,7 +721,7 @@ class Genesis {
 		genesis_widget_area(
 			'post-share',
 			array(
-				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:medium;marginTop:7;anchor:genesis-content">',
+				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:medium;marginTop:9;anchor:genesis-content">',
 				'after'  => '</div></div>',
 			)
 		);
