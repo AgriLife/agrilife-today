@@ -1,5 +1,5 @@
 .page-template-home {
-	article {
+	.section article {
 		a {
 			color: $body-font-color;
 
@@ -99,6 +99,14 @@
 					margin-top: $paragraph-margin-bottom;
 				}
 			}
+		}
+	}
+
+	.view-all {
+		text-align: center;
+
+		.button {
+			margin: 0;
 		}
 	}
 

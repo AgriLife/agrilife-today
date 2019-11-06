@@ -414,6 +414,12 @@ function agt_home_page() {
 		$story_list
 	);
 
+	// View all posts.
+	$output .= sprintf(
+		'<div class="view-all section"><a class="big button" href="%s">View All Posts</a></div>',
+		get_permalink( get_option( 'page_for_posts' ) )
+	);
+
 	// LiveWhale Section.
 	$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/' );
 
@@ -452,7 +458,7 @@ function agt_home_page() {
 		}
 
 		$output .= sprintf(
-			'<div class="alignfull livewhale section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Events</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x  padding-y">%s<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank"><span class="h3">All Events</span></a></div></div></div></div>',
+			'<div class="alignfull livewhale section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Events</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x  padding-y">%s<div class="events-all cell medium-shrink small-12"><a class="button big gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank">All Events</a></div></div></div></div>',
 			$l_event_list
 		);
 	}
