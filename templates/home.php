@@ -193,7 +193,7 @@ function agt_home_page() {
 							$post_link_close = '</a>';
 
 							// Get post heading.
-							$heading = "<h2>{$post->post_title}</h2>";
+							$heading = "<h3>{$post->post_title}</h3>";
 
 							// Get post quote, dependent on subheading.
 							$subheading = agt_get_subheading( $post->post_content );
@@ -374,7 +374,7 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="grid-x%s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="cell collapse auto entry-link" rel="bookmark"><span class="grid-x"><span class="cell %s"><span class="entry-header"><h2 class="entry-title" itemprop="headline">%s</h2></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+			'<article class="grid-x%s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="cell collapse auto entry-link" rel="bookmark"><span class="grid-x"><span class="cell %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
 			$article_class,
 			get_permalink( $id ),
 			$content_class_modified,
