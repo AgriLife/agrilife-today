@@ -110,14 +110,13 @@
 	.search-form-input {
 		background-color: $light-gray;
 		margin-bottom: 0;
-		padding: rem-calc(1) 1rem rem-calc(1) rem-calc(1);
+		padding: rem-calc(1) rem-calc(1) rem-calc(1) 1rem;
 		border: 0 none;
 		height: rem-calc(30);
 		font-size: rem-calc(13);
 		font-weight: 500;
 		line-height: 1.75rem;
 		color: $black;
-		text-align: right;
 		box-sizing: content-box;
 
 		&::placeholder {
