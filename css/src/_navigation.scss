@@ -97,6 +97,30 @@
 	}
 }
 
+.title-bar-search {
+	.search-icon {
+		border: none;
+		display: inline-block;
+		vertical-align: middle;
+		cursor: pointer;
+		position: relative;
+		width: rem-calc(38);
+		height: rem-calc(38);
+		margin-bottom: 0;
+		background: transparent url("../images/search-icon-light.svg") no-repeat center {
+			size: contain;
+		};
+
+		&:hover {
+			background-color: transparent;
+		}
+	}
+
+	.title-bar-title {
+		@include element-invisible;
+	}
+}
+
 .pagination {
 	text: {
 		align: center;

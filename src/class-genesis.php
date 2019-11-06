@@ -497,8 +497,21 @@ class Genesis {
 	 */
 	public function sticky_header( $output ) {
 
+		$header_widgets = array(
+			'open'   => '<div id="header-widgets"><div class="grid-container">',
+			'close'  => '</div></div>',
+			'inside' => get_search_form( false ),
+		);
+
+		$header_widgets['inside'] = str_replace( '<form class="search-form', '<form class="search-form grid-x', $header_widgets['inside'] );
+		$header_widgets['inside'] = str_replace( 'search-form-input', 'search-form-input cell auto medium-collapse small-collapse', $header_widgets['inside'] );
+		$header_widgets['inside'] = str_replace( 'search-form-submit', 'search-form-submit search-icon cell shrink small-collapse', $header_widgets['inside'] );
+		$header_widgets['inside'] = str_replace( 'placeholder="Search this website"', 'placeholder="Search"', $header_widgets['inside'] );
+
+		$header_widgets_output = $header_widgets['open'] . $header_widgets['inside'] . $header_widgets['close'];
+
 		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;"><div class="grid-x"', $output );
-		$output = preg_replace( '/<\/div>$/', '</div></div></div>', $output );
+		$output = preg_replace( '/<\/div>$/', '</div>' . $header_widgets_output . '</div></div>', $output );
 
 		return $output;
 

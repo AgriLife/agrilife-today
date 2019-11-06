@@ -77,7 +77,7 @@ class Navigation {
 		$title_bars = array(
 			'wrap_open'  => '<div class="title-bars title-bar-right cell small-3 show-for-small-only">',
 			'wrap_close' => '</div>',
-			'inside'     => '<div class="title-bar title-bar-navigation" data-responsive-toggle="nav-menu-primary"><button class="menu-icon" type="button" data-toggle="nav-menu-primary"></button><div class="title-bar-title" data-toggle="nav-menu-primary">Menu</div></div>',
+			'inside'     => '<div class="title-bar title-bar-search" data-responsive-toggle="header-widgets"><button class="search-icon" type="button" data-toggle="header-widgets"></button><div class="title-bar-title">Search</div></div><div class="title-bar title-bar-navigation" data-responsive-toggle="nav-menu-primary"><button class="menu-icon" type="button" data-toggle="nav-menu-primary"></button><div class="title-bar-title" data-toggle="nav-menu-primary">Menu</div></div>',
 		);
 
 		$title_bars['all'] = $title_bars['wrap_open'] . $title_bars['inside'] . $title_bars['wrap_close'];
