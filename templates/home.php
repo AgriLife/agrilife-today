@@ -478,7 +478,7 @@ function agt_home_page() {
 			}
 
 			$itn_list .= sprintf(
-				'<div class="cell card medium-4 small-12%s">%s<div class="logo p">%s</div><h2 class="entry-title" itemprop="headline">%s</h2>%s</div>',
+				'<div class="cell card medium-4 small-12%s">%s<div class="logo p">%s</div><h2 class="entry-title" itemprop="headline">%s</h2>%s%s</div>',
 				$no_link_class,
 				$link_open,
 				$logo,
