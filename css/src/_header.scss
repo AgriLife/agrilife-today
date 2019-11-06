@@ -32,17 +32,17 @@ button.search-icon {
 		transition: height .25s ease-in-out;
 
 		&.child-not-stuck {
-			height: $header-small-height + $search-closed-height
+			height: $header-small-height
 			!important; // sass-lint:disable-line no-important
 
 			&.search-open {
-				height: $header-small-height + $search-small-height
+				height: $header-small-height
 				!important; // sass-lint:disable-line no-important
 			}
 		}
 
 		&.child-stuck {
-			height: $header-small-height + $search-closed-height
+			height: $header-small-height
 			!important; // sass-lint:disable-line no-important
 		}
 	}
@@ -61,17 +61,17 @@ button.search-icon {
 
 		.sticky-container {
 			&.child-not-stuck {
-				height: $header-medium-height + $search-closed-height
+				height: $header-medium-height
 				!important; // sass-lint:disable-line no-important
 
 				&.search-open {
-					height: $header-medium-height + $search-medium-height
+					height: $header-medium-height
 					!important; // sass-lint:disable-line no-important
 				}
 			}
 
 			&.child-stuck {
-				height: $header-medium-sticky-height + $search-closed-height
+				height: $header-medium-sticky-height
 				!important; // sass-lint:disable-line no-important
 			}
 		}
@@ -105,221 +105,6 @@ button.search-icon {
 			margin: {
 				top: $global-layout-space / 2;
 				bottom: $global-layout-space / 2;
-			}
-		}
-	}
-}
-
-#header-widgets {
-	font-family: $opensans;
-	background-color: $light-blue;
-
-	+ .grid-x {
-		.title-area {
-			padding-left: 1.625rem;
-		}
-
-		.title-bars {
-			padding-right: 1.625rem;
-		}
-
-		@include breakpoint(medium) {
-			.title-area {
-				padding-left: 0;
-			}
-
-			.title-bars {
-				padding-right: 0;
-			}
-		}
-	}
-
-	form,
-	input {
-		transition: all .25s ease-in-out;
-	}
-
-	form input {
-		margin: {
-			top: $grid-margin-gutters / 4;
-			bottom: $grid-margin-gutters / 4;
-		}
-	}
-
-	form {
-		overflow: hidden;
-		height: 2px;
-	}
-
-	&:not(.active) form {
-		visibility: hidden;
-	}
-
-	input {
-		margin: {
-			top: $grid-margin-gutters;
-			bottom: $grid-margin-gutters;
-		}
-	}
-
-	[type="search"] {
-		font-size: 1rem;
-		color: $white;
-		border: 0 none;
-		box-shadow: none;
-		height: auto;
-		background-color: transparent;
-		padding: 0;
-	}
-
-	[type="submit"] {
-		font: {
-			size: 1rem;
-			weight: normal;
-		}
-		text-transform: none;
-		border: 1px solid $white;
-		background-color: transparent;
-		margin-right: $grid-margin-gutters / 2;
-		padding: 0;
-	}
-
-	&.active form {
-		height: $search-small-sticky-height;
-	}
-
-	> .grid-container {
-		position: relative;
-		padding: 0;
-	}
-
-	.search-flags {
-		position: absolute;
-		right: $grid-margin-gutters + rem-calc(30) + 1.625rem;
-		top: 100%;
-		color: $white;
-		margin-top: .5rem;
-	}
-
-	.search-label {
-		display: none;
-		font-weight: 600;
-	}
-
-	.search-icon {
-		width: rem-calc(38);
-		height: rem-calc(38);
-		display: inline-block;
-	}
-
-	a.subscribe {
-		display: none;
-		position: absolute;
-		top: 5px;
-		right: $grid-margin-gutters * 2 + rem-calc(30) + rem-calc(38);
-		color: $white;
-		font-weight: bold;
-	}
-
-	.is-anchored & {
-		form input {
-			margin: {
-				top: $grid-margin-gutters;
-				bottom: $grid-margin-gutters;
-			}
-		}
-
-		&.active form {
-			height: $search-small-height;
-		}
-
-		[type="search"] {
-			font-size: 1.5rem;
-		}
-
-		[type="submit"] {
-			font-size: 1.5rem;
-			padding: 0 1.5rem;
-		}
-	}
-
-	.is-stuck & {
-
-		form input {
-			margin: {
-				top: 0;
-				bottom: 0;
-			}
-		}
-
-		[type="search"] {
-			&:focus {
-				margin: {
-					top: .25rem;
-					bottom: .25rem;
-				}
-				font-size: 1.5rem;
-			}
-		}
-
-		[type="submit"] {
-			border: 0 none;
-		}
-	}
-
-	@include breakpoint(medium) {
-		[type="submit"] {
-			padding: 0 .75rem;
-		}
-
-		> .grid-container {
-			padding: 0 $grid-margin-gutters / 2;
-		}
-
-		.search-form {
-			margin: 0 $grid-margin-gutters;
-		}
-
-		.search-flags {
-			margin-top: 0;
-			right: $grid-margin-gutters * 2.5;
-		}
-
-		.search-label {
-			display: inline-block;
-			margin-right: $grid-margin-gutters / 2;
-			height: 2rem;
-			line-height: 2rem;
-			vertical-align: top;
-		}
-
-		.search-icon {
-			background: {
-				color: $light-blue;
-				size: 1.5rem 1.5rem;
-			}
-			width: 2.75rem;
-			height: 2rem;
-		}
-
-		a.subscribe {
-			display: block;
-			right: $grid-margin-gutters * 2.5 + 3.75rem;
-			font-weight: normal;
-			top: .5rem;
-		}
-
-		&.active form {
-			height: $search-medium-sticky-height;
-		}
-
-		.is-anchored & {
-			[type="search"] {
-				font-size: 2.5rem;
-			}
-
-			&.active form {
-				height: $search-medium-height;
 			}
 		}
 	}

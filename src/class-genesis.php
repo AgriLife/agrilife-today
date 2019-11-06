@@ -497,24 +497,7 @@ class Genesis {
 	 */
 	public function sticky_header( $output ) {
 
-		$header_widgets = array(
-			'open'   => '<div id="header-widgets" data-toggler=".active"><div class="grid-container">',
-			'close'  => '</div></div>',
-			'inside' => get_search_form( false ),
-		);
-
-		$header_widgets['inside'] = str_replace( 'placeholder="Search this website"', 'placeholder="Search AgriLife Today"', $header_widgets['inside'] );
-		$header_widgets['inside'] = str_replace( 'value="Search"', 'value="Submit"', $header_widgets['inside'] );
-		$header_widgets['inside'] = preg_replace( '/(<form[^>]*class="[^"]*)search-form/', '$1search-form grid-x', $header_widgets['inside'] );
-		$header_widgets['inside'] = preg_replace( '/(<input[^>]*class="[^"]*)search-form-input/', '$1search-form-input cell auto', $header_widgets['inside'] );
-		$header_widgets['inside'] = preg_replace( '/(<input[^>]*class="[^"]*)search-form-submit/', '$1search-form-submit cell shrink', $header_widgets['inside'] );
-
-		// Add search icon and label.
-		$header_widgets['inside'] .= '<div class="search-flags"><span class="search-label">Search</span> <button class="search-icon" data-toggle="header-widgets" type="button">Open search form</button></div>';
-
-		$header_widgets_output = $header_widgets['open'] . $header_widgets['inside'] . $header_widgets['close'];
-
-		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;">' . $header_widgets_output . '<div class="grid-x"', $output );
+		$output = preg_replace( '/<div class="wrap"/', '<div class="wrap" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:small;marginTop:0;"><div class="grid-x"', $output );
 		$output = preg_replace( '/<\/div>$/', '</div></div></div>', $output );
 
 		return $output;
