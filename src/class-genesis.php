@@ -179,11 +179,11 @@ class Genesis {
 
 		// Get first h2 in $content, sometimes wrapped by HTML comments by Gutenberg.
 		$output  = '';
-		$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<\s*?(h2){1}\b[^>]*>(.*?)<\/(h2){1}\b[^>]*>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
+		$pattern = '/^((<!--(.*?)-->)?[\r\n]*(<\s*?(h2){1}\b[^>]*>(.*?)<\/(h2){1}\b[^>]*>))/';
 		preg_match( $pattern, $content, $subheading );
 
-		if ( isset( $subheading[5] ) ) {
-			$output = $subheading[5];
+		if ( isset( $subheading[4] ) ) {
+			$output = $subheading[4];
 		}
 
 		return $output;
