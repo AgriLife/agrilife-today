@@ -273,6 +273,16 @@ function agt_home_page() {
 		}
 	}
 
+	// Subscribe section.
+	if ( ! empty( $subscribe ) ) {
+
+		$output .= sprintf(
+			'<div class="subscribe alignfull section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Subscribe</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x"><div class="cell">%s</div></div></div></div>',
+			$subscribe
+		);
+
+	}
+
 	// Latest Posts.
 	$section_output = '<div class="latest-story section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Latest Stories</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>';
 	$args           = array(
@@ -482,16 +492,6 @@ function agt_home_page() {
 			'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>',
 			$in_the_news['heading'],
 			$itn_list
-		);
-
-	}
-
-	// Subscribe section.
-	if ( ! empty( $subscribe ) ) {
-
-		$output .= sprintf(
-			'<div class="subscribe alignfull section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Subscribe</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x"><div class="cell">%s</div></div></div></div>',
-			$subscribe
 		);
 
 	}
