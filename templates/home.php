@@ -416,7 +416,7 @@ function agt_home_page() {
 
 	// View all posts.
 	$output .= sprintf(
-		'<div class="view-all section"><a class="big button" href="%s">View All Posts</a></div>',
+		'<div class="view-all section"><a class="button h3 big" href="%s">View All Posts</a></div>',
 		get_permalink( get_option( 'page_for_posts' ) )
 	);
 
@@ -458,7 +458,7 @@ function agt_home_page() {
 		}
 
 		$output .= sprintf(
-			'<div class="alignfull livewhale section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Events</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x  padding-y">%s<div class="events-all cell medium-shrink small-12"><a class="button big gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank">All Events</a></div></div></div></div>',
+			'<div class="alignfull livewhale section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Events</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x  padding-y">%s<div class="events-all cell medium-shrink small-12"><a class="button h3 big gradient" href="http://calendar.tamu.edu/agrilife/" target="_blank">All Events</a></div></div></div></div>',
 			$l_event_list
 		);
 	}
