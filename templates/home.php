@@ -17,6 +17,12 @@ remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+add_filter(
+	'excerpt_length',
+	function( $length ) {
+		return 20;
+	}
+);
 
 /**
  * Retrieve subheading from within post content.
@@ -138,33 +144,35 @@ function agt_home_page() {
 						// Get excerpt or post subtitle.
 						$subheading = agt_get_subheading( $post_obj->post_content );
 						$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
+						$excerpt    = '';
+						$readmore   = '<span class="read-more">Read More →</span>';
 
 						if ( ! empty( $subheading ) ) {
 
-							$excerpt  = $subheading;
-							$excerpt .= '<span class="read-more">Read More →</span>';
+							$excerpt = $subheading;
 
 						} elseif ( ! empty( $story['description'] ) ) {
 
-							$excerpt  = $story['description'];
-							$excerpt .= '<span class="read-more">Read More →</span>';
+							$excerpt = $story['description'];
 
 						} else {
 
 							$auto_excerpt = ' has-auto-excerpt';
 							$excerpt      = wp_trim_excerpt( '', $id );
 							$excerpt      = preg_replace( '/<a [^>]+>|<\/a>/', '', $excerpt );
+							$excerpt      = preg_replace( '/<span class="read-more"><a [^>]+>[^<]+<\/a><\/span>/', '', $excerpt );
 
 						}
 
 						// Make post.
 						$post = sprintf(
-							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell text small-12-collapse small-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell text small-12-collapse small-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</span>%s%s</span>%s</span></a></article>',
 							$auto_excerpt,
 							get_permalink( $id ),
 							$post_atts[ $eo ]['content'][ $has_thumb ],
 							$post_obj->post_title,
 							$excerpt,
+							$readmore,
 							$cat_buttons,
 							$image
 						);
@@ -359,16 +367,17 @@ function agt_home_page() {
 		}
 
 		// Get excerpt.
+		$readmore = '<span class="read-more">Read More →</span>';
+
 		if ( ! empty( $subheading ) ) {
 
-			$excerpt  = $subheading;
-			$excerpt .= '<span class="read-more">Read More →</span>';
+			$excerpt = $subheading;
 
 		} else {
 
 			$auto_excerpt = ' has-auto-excerpt';
 			$excerpt      = wp_trim_excerpt( '', $id );
-			$excerpt      = preg_replace( '/<a [^>]+>|<\/a>/', '', $excerpt );
+			$excerpt      = preg_replace( '/<span class="read-more"><a [^>]+>[^<]+<\/a><\/span>/', '', $excerpt );
 
 		}
 
@@ -384,12 +393,13 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link full-height" rel="bookmark"><span class="grid-x%s full-height"><span class="cell text small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+			'<article class="post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link full-height" rel="bookmark"><span class="grid-x%s full-height"><span class="cell text small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</span>%s%s</span>%s</span></a></article>',
 			get_permalink( $id ),
 			$article_class,
 			$content_class_modified,
 			$story->post_title,
 			$excerpt,
+			$readmore,
 			$cat_buttons,
 			$image
 		);

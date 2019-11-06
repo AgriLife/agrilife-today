@@ -261,5 +261,10 @@
 		.cell.tall .cell.image {
 			display: none;
 		}
+
+		article .entry-content.medium-truncate-2-lines {
+			max-height: 3rem;
+			display: -webkit-box; // sass-lint:disable-line no-vendor-prefixes
+		}
 	}
 }

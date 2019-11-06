@@ -92,6 +92,7 @@ table {
 	-webkit-box-orient: vertical; // sass-lint:disable-line no-vendor-prefixes
 	overflow: hidden;
 	hyphens: auto;
+	text-overflow: ellipsis;
 }
 
 @include breakpoint(medium) {
