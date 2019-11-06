@@ -834,14 +834,11 @@ class Genesis {
 	 */
 	public function remove_subheading_from_content( $content ) {
 
-		// Find the first h2 element, sometimes between two HTML comments created by Gutenberg.
-		$pattern = '/^((<!--(.|\s)*?-->)?([\r\n]*)?(<h2[^>]*>[^<]*<\/h2>)([\r\n]*)?(<!--(.|\s)*?-->)?)/';
-		preg_match( $pattern, $content, $subheading );
+		// Find subheading.
+		$subheading = $this->get_subheading( $content );
 
 		// Remove subheading and occasional wrapping HTML comments created by Gutenberg.
-		if ( isset( $subheading[0] ) ) {
-			$content = str_replace( $subheading[0], '', $content );
-		}
+		$content = str_replace( $subheading, '', $content );
 
 		return $content;
 
