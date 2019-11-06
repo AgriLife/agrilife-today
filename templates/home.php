@@ -145,7 +145,6 @@ function agt_home_page() {
 						$subheading = agt_get_subheading( $post_obj->post_content );
 						$subheading = preg_replace( '/<(\/)?h2>/', '', $subheading );
 						$excerpt    = '';
-						$readmore   = '<span class="read-more">Read More →</span>';
 
 						if ( ! empty( $subheading ) ) {
 
@@ -166,13 +165,12 @@ function agt_home_page() {
 
 						// Make post.
 						$post = sprintf(
-							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell text small-12-collapse small-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</span>%s%s</span>%s</span></a></article>',
+							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell text small-12-collapse small-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
 							$auto_excerpt,
 							get_permalink( $id ),
 							$post_atts[ $eo ]['content'][ $has_thumb ],
 							$post_obj->post_title,
 							$excerpt,
-							$readmore,
 							$cat_buttons,
 							$image
 						);
@@ -209,8 +207,7 @@ function agt_home_page() {
 
 							if ( ! empty( $subheading ) ) {
 
-								$excerpt  = sprintf( $quote, ' has-subheading', $subheading );
-								$excerpt .= '<span class="read-more">Read More →</span>';
+								$excerpt = sprintf( $quote, ' has-subheading', $subheading );
 
 							} else {
 
@@ -367,8 +364,6 @@ function agt_home_page() {
 		}
 
 		// Get excerpt.
-		$readmore = '<span class="read-more">Read More →</span>';
-
 		if ( ! empty( $subheading ) ) {
 
 			$excerpt = $subheading;
@@ -393,13 +388,12 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link full-height" rel="bookmark"><span class="grid-x%s full-height"><span class="cell text small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</span>%s%s</span>%s</span></a></article>',
+			'<article class="post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link full-height" rel="bookmark"><span class="grid-x%s full-height"><span class="cell text small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</span>%s</span>%s</span></a></article>',
 			get_permalink( $id ),
 			$article_class,
 			$content_class_modified,
 			$story->post_title,
 			$excerpt,
-			$readmore,
 			$cat_buttons,
 			$image
 		);
