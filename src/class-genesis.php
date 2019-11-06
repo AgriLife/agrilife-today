@@ -1403,7 +1403,7 @@ class Genesis {
 
 			if ( ! empty( $img ) ) {
 
-				$output .= '<div class="archive-post-image cell medium-3 small-3">';
+				$output .= '<div class="archive-post-image image cell medium-3 small-12">';
 
 			}
 		}

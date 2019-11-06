@@ -136,9 +136,8 @@
 	}
 
 	.grid-x {
-		flex-wrap: nowrap;
-
 		@include breakpoint(medium) {
+			flex-wrap: nowrap;
 			justify-content: end;
 		}
 	}
@@ -155,6 +154,20 @@
 			img {
 				margin-bottom: 0;
 			}
+		}
+	}
+
+	@include breakpoint(small only) {
+		.card {
+			padding: 0;
+		}
+
+		.cell.image img {
+			width: 100%;
+		}
+
+		.cell.text {
+			padding: $card-padding / 2;
 		}
 	}
 }

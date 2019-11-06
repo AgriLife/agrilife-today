@@ -55,16 +55,16 @@ function agt_home_page() {
 	$output         = '';
 	$post_atts      = array(
 		'odd'  => array(
-			'thumb'   => 'small-collapse-right medium-collapse-right medium-4-collapse-half',
+			'thumb'   => 'medium-collapse-right medium-4-collapse-half',
 			'content' => array(
-				'thumb'    => 'has-image small-collapse-left medium-collapse-left collapse-8-half',
+				'thumb'    => 'has-image medium-collapse-left medium-8-collapse-half',
 				'no-thumb' => 'auto collapse no-image',
 			),
 		),
 		'even' => array(
-			'thumb'   => 'small-collapse-right medium-collapse-left medium-4-collapse-half medium-order-1',
+			'thumb'   => 'medium-collapse-left medium-4-collapse-half medium-order-1',
 			'content' => array(
-				'thumb'    => 'has-image small-collapse-left medium-collapse-right small-8-collapse-half medium-8-collapse-half medium-order-2',
+				'thumb'    => 'has-image medium-collapse-right medium-8-collapse-half medium-order-2',
 				'no-thumb' => 'auto collapse no-image',
 			),
 		),
@@ -124,7 +124,7 @@ function agt_home_page() {
 						if ( ! empty( $post_image ) ) {
 
 							$image = sprintf(
-								'<span class="cell image medium-4 small-4-collapse-half %s">%s</span>',
+								'<span class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s">%s</span>',
 								$post_atts[ $eo ]['thumb'],
 								$post_image
 							);
@@ -159,7 +159,7 @@ function agt_home_page() {
 
 						// Make post.
 						$post = sprintf(
-							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell text small-12-collapse small-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
 							$auto_excerpt,
 							get_permalink( $id ),
 							$post_atts[ $eo ]['content'][ $has_thumb ],
@@ -347,7 +347,7 @@ function agt_home_page() {
 		if ( ! empty( $post_image ) ) {
 
 			$image = sprintf(
-				'<span class="cell image medium-4 small-4-collapse-half %s">%s</span>',
+				'<span class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s">%s</span>',
 				$post_atts[ $eo ]['thumb'],
 				$post_image
 			);
@@ -384,7 +384,7 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="grid-x%s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="cell collapse auto entry-link" rel="bookmark"><span class="grid-x"><span class="cell %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+			'<article class="grid-x%s card post type-post entry af4-entry-compact" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="cell collapse auto entry-link" rel="bookmark"><span class="grid-x"><span class="cell text small-collapse small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
 			$article_class,
 			get_permalink( $id ),
 			$content_class_modified,

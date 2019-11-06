@@ -93,6 +93,10 @@
 
 		@include breakpoint(small only) {
 
+			&.small-collapse {
+				@include xy-gutters(0);
+			}
+
 			&.small-4-collapse {
 				@include xy-cell(4, true, 0);
 			}

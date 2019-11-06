@@ -136,6 +136,7 @@ class AgToday {
 
 		// Archive page.
 		add_image_size( 'archive', 400, 225, true );
+		add_image_size( 'archive_medium', 640, 360, true );
 
 		// Home page.
 		add_image_size( 'medium_cropped', 300, 300, true );
