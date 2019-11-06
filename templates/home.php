@@ -97,7 +97,7 @@ function agt_home_page() {
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
-						$post_cat_button  = '<span class="button hollow">%s</span>';
+						$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 						$post_cat_buttons = array();
 						$cat_buttons      = '';
 
@@ -109,6 +109,7 @@ function agt_home_page() {
 
 								$post_cat_buttons[] = sprintf(
 									$post_cat_button,
+									get_category_link( $cat_id ),
 									$cat->name
 								);
 
@@ -118,7 +119,7 @@ function agt_home_page() {
 						if ( 0 < count( $post_cat_buttons ) ) {
 
 							$cat_buttons = sprintf(
-								'<span class="post-category">%s</span>',
+								'<div class="post-category">%s</div>',
 								implode( '', $post_cat_buttons )
 							);
 
@@ -130,7 +131,7 @@ function agt_home_page() {
 						if ( ! empty( $post_image ) ) {
 
 							$image = sprintf(
-								'<span class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s">%s</span>',
+								'<div class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s">%s</div>',
 								$post_atts[ $eo ]['thumb'],
 								$post_image
 							);
@@ -158,17 +159,16 @@ function agt_home_page() {
 
 							$auto_excerpt = ' has-auto-excerpt';
 							$excerpt      = wp_trim_excerpt( '', $id );
-							$excerpt      = preg_replace( '/<a [^>]+>|<\/a>/', '', $excerpt );
 							$excerpt      = preg_replace( '/<span class="read-more"><a [^>]+>[^<]+<\/a><\/span>/', '', $excerpt );
 
 						}
 
 						// Make post.
 						$post = sprintf(
-							'<article class="post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link" rel="bookmark"><span class="grid-x center-y"><span class="cell text small-12-collapse small-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content" itemprop="text">%s</span>%s</span>%s</span></a></article>',
+							'<article class="card post type-post entry af4-entry-compact%s" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x center-y"><div class="cell text small-12-collapse small-collapse small-order-2 %s"><header class="entry-header"><h3 class="entry-title" itemprop="headline"><a href="%s" class="entry-link" rel="bookmark">%s</a></h3></header><div class="entry-content" itemprop="text">%s</div>%s</div>%s</div></article>',
 							$auto_excerpt,
-							get_permalink( $id ),
 							$post_atts[ $eo ]['content'][ $has_thumb ],
+							get_permalink( $id ),
 							$post_obj->post_title,
 							$excerpt,
 							$cat_buttons,
@@ -188,12 +188,12 @@ function agt_home_page() {
 						$post_link_close = '';
 						$headings        = '';
 						$cat_buttons     = '';
-						$quote           = '<span class="quote-text%s">%s</span>';
+						$quote           = '<div class="quote-text%s">%s</div>';
 
 						// Define post-dependent variables.
 						if ( ! empty( $post ) ) {
 							$post_link_open  = sprintf(
-								'<a class="text cell item quote entry-title-link" rel="bookmark" href="%s">',
+								'<a class="entry-title-link" rel="bookmark" href="%s">',
 								get_permalink( $post->ID )
 							);
 							$post_link_close = '</a>';
@@ -212,14 +212,14 @@ function agt_home_page() {
 							} else {
 
 								$excerpt = sprintf( $quote, ' no-subheading', $story['quote'] );
-								$excerpt = str_replace( '<p', '<span', $quote );
-								$excerpt = str_replace( '</p', '</span', $quote );
+								$excerpt = str_replace( '<p', '<span', $excerpt );
+								$excerpt = str_replace( '</p', '</span', $excerpt );
 
 							}
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
-							$post_cat_button  = '<span class="button hollow">%s</span>';
+							$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 							$post_cat_buttons = array();
 
 							foreach ( $post_categories as $cat_id ) {
@@ -230,6 +230,7 @@ function agt_home_page() {
 
 									$post_cat_buttons[] = sprintf(
 										$post_cat_button,
+										get_category_link( $cat_id ),
 										$cat->name
 									);
 
@@ -239,20 +240,20 @@ function agt_home_page() {
 							if ( 0 < count( $post_cat_buttons ) ) {
 
 								$cat_buttons = sprintf(
-									'<span class="post-category">%s</span>',
+									'<div class="post-category">%s</div>',
 									implode( '', $post_cat_buttons )
 								);
 
 							}
-						}
+						};
 
 						$stories_output[] = sprintf(
-							'<article class="af4-entry-compact full-height"><div class="card grid-x center-y full-height">%s%s%s%s%s</div></article>',
+							'<article class="grid-x center-y card full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="cell item quote">%s%s%s%s%s</div></article>',
 							$post_link_open,
 							$heading,
+							$post_link_close,
 							$excerpt,
-							$cat_buttons,
-							$post_link_close
+							$cat_buttons
 						);
 
 						break;
@@ -318,7 +319,7 @@ function agt_home_page() {
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
-		$post_cat_button  = '<span class="button hollow">%s</span>';
+		$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
 		$post_cat_buttons = array();
 		$cat_buttons      = '';
 
@@ -330,6 +331,7 @@ function agt_home_page() {
 
 				$post_cat_buttons[] = sprintf(
 					$post_cat_button,
+					get_category_link( $cat_id ),
 					$cat->name
 				);
 
@@ -339,7 +341,7 @@ function agt_home_page() {
 		if ( 0 < $post_cat_buttons ) {
 
 			$cat_buttons = sprintf(
-				'<span class="post-category">%s</span>',
+				'<div class="post-category">%s</div>',
 				implode( '', $post_cat_buttons )
 			);
 
@@ -388,10 +390,10 @@ function agt_home_page() {
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><a href="%s" class="card entry-link full-height" rel="bookmark"><span class="grid-x%s full-height"><span class="cell text small-12-collapse small-order-2 %s"><span class="entry-header"><h3 class="entry-title" itemprop="headline">%s</h3></span><span class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</span>%s</span>%s</span></a></article>',
-			get_permalink( $id ),
+			'<article class="card post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x%s full-height"><div class="cell text small-12-collapse small-order-2 %s"><header class="entry-header"><h3 class="entry-title" itemprop="headline"><a href="%s" class="entry-link full-height" rel="bookmark">%s</a></h3></header><div class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</div>%s</div>%s</div></article>',
 			$article_class,
 			$content_class_modified,
+			get_permalink( $id ),
 			$story->post_title,
 			$excerpt,
 			$cat_buttons,
@@ -425,7 +427,7 @@ function agt_home_page() {
 	);
 
 	// LiveWhale Section.
-	$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/' );
+	$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/max/3/' );
 
 	if ( is_array( $feed_json ) && array_key_exists( 'body', $feed_json ) ) {
 		$feed_array   = json_decode( $feed_json['body'], true );
