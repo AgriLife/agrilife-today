@@ -277,7 +277,7 @@ function agt_home_page() {
 	if ( ! empty( $subscribe ) ) {
 
 		$output .= sprintf(
-			'<div class="subscribe alignfull section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Subscribe</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x"><div class="cell">%s</div></div></div></div>',
+			'<div class="subscribe alignfull section invert"><div class="heading-sideline grid-container"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">Subscribe</h2><div class="cell auto title-line"></div></div></div><div class="grid-container"><div class="grid-x"><div class="cell auto">%s</div></div></div></div>',
 			$subscribe
 		);
 
@@ -503,8 +503,20 @@ function agt_home_page() {
 	}
 
 	// Produce the entire page's output.
-	$allowed_tags         = wp_kses_allowed_html( 'post' );
-	$allowed_tags['form'] = array();
+	$allowed_tags          = wp_kses_allowed_html( 'post' );
+	$allowed_tags['form']  = array(
+		'action'   => 1,
+		'method'   => 1,
+		'onsubmit' => 1,
+		'target'   => 1,
+	);
+	$allowed_tags['input'] = array(
+		'placeholder' => 1,
+		'type'        => 1,
+		'name'        => 1,
+		'value'       => 1,
+		'class'       => 1,
+	);
 
 	echo wp_kses( $output, $allowed_tags );
 
