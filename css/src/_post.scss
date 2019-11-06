@@ -9,9 +9,15 @@
 
 	@include breakpoint(medium) {
 		#genesis-content {
+			$medium-padding: map-get($grid-container-padding, "medium");
+			$margin-left: rem-calc($medium-padding / 2) + $grid-margin-gutters / 2;
 			margin: {
-				left: rem-calc(map-get($grid-container-padding, "medium") / 2) + $grid-margin-gutters / 2;
-				right: rem-calc(map-get($grid-container-padding, "medium") / 2) + $grid-margin-gutters / 2;
+				left: $margin-left;
+				right: $grid-margin-gutters + rem-calc(150) + $margin-left;
+			}
+
+			@include breakpoint(1000px down) {
+				margin-right: $grid-margin-gutters + rem-calc(64) + $margin-left;
 			}
 		}
 	}
