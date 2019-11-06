@@ -427,7 +427,7 @@ function agt_home_page() {
 	);
 
 	// LiveWhale Section.
-	$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/max/3/' );
+	$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/max/3/hide_repeats/true/' );
 
 	if ( is_array( $feed_json ) && array_key_exists( 'body', $feed_json ) ) {
 		$feed_array   = json_decode( $feed_json['body'], true );
