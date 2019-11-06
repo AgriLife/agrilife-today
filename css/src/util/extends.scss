@@ -52,6 +52,17 @@
 		}
 	}
 
+	&.big {
+		font: {
+			size: 1.5rem;
+			weight: 600;
+			family: $tungsten;
+		}
+		padding: .5rem .75rem;
+		line-height: 1.5rem;
+		height: 2.78rem;
+	}
+
 	a {
 		color: $white;
 	}
