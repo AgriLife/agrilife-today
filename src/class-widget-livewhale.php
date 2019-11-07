@@ -84,7 +84,7 @@ class Widget_LiveWhale extends WP_Widget {
 		$output = "<div class=\"textwidget custom-html-widget {$direction}{$grid}\">";
 
 		// Output LiveWhale events.
-		$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/' );
+		$feed_json = wp_remote_get( 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/max/3/hide_repeats/true/' );
 
 		if ( is_array( $feed_json ) && array_key_exists( 'body', $feed_json ) ) {
 			$feed_array   = json_decode( $feed_json['body'], true );
