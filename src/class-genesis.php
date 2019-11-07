@@ -1315,7 +1315,7 @@ class Genesis {
 	 * Output page title for blog posts page.
 	 *
 	 * @since 0.9.3
-	 * @return void;
+	 * @return void
 	 */
 	public function blog_posts_page_heading() {
 
