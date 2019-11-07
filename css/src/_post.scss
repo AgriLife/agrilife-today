@@ -11,14 +11,6 @@
 		}
 	}
 
-	.has-cloud-fonts & {
-		h2,
-		.h2 {
-			font-weight: 400;
-			font-size: 2.2rem;
-		}
-	}
-
 	@include breakpoint(medium) {
 		#genesis-content {
 			$medium-padding: map-get($grid-container-padding, "medium");
@@ -37,6 +29,13 @@
 
 h1.entry-title {
 	line-height: 1.1;
+}
+
+.has-cloud-fonts header {
+	h2,
+	.h2 {
+		font-weight: 400;
+	}
 }
 
 .news-taxonomy {
