@@ -131,8 +131,10 @@ function agt_home_page() {
 						if ( ! empty( $post_image ) ) {
 
 							$image = sprintf(
-								'<div class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s">%s</div>',
+								'<div class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s"><a href="%s" title="%s">%s</a></div>',
 								$post_atts[ $eo ]['thumb'],
+								get_permalink( $post_obj->ID ),
+								$post_obj->post_title,
 								$post_image
 							);
 
@@ -354,8 +356,10 @@ function agt_home_page() {
 		if ( ! empty( $post_image ) ) {
 
 			$image = sprintf(
-				'<span class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s">%s</span>',
+				'<span class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s"><a href="%s" title="%s">%s</a></span>',
 				$post_atts[ $eo ]['thumb'],
+				get_permalink( $post_obj->ID ),
+				$post_obj->post_title,
 				$post_image
 			);
 
