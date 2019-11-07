@@ -760,11 +760,7 @@ class Genesis {
 				},
 				9
 			);
-		} elseif ( ! is_front_page() && ! is_archive() ) {
-			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-			add_action( 'genesis_entry_content', array( $this, 'custom_post_category_button' ), 10 );
 		}
-
 	}
 
 	/**
@@ -1277,7 +1273,7 @@ class Genesis {
 	 */
 	public function archive_customizations() {
 
-		if ( is_archive() ) {
+		if ( is_archive() || ( ! is_front_page() && is_home() ) ) {
 
 			add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 			add_filter( 'get_term_metadata', array( $this, 'archive_title' ), 10, 4 );
@@ -1306,6 +1302,25 @@ class Genesis {
 			add_filter( 'genesis_next_link_text', array( $this, 'next_link_text' ) );
 
 		}
+
+		if ( ! is_front_page() && is_home() ) {
+
+			add_action( 'genesis_before_loop', array( $this, 'blog_posts_page_heading' ), 15 );
+
+		}
+
+	}
+
+	/**
+	 * Output page title for blog posts page.
+	 *
+	 * @since 0.9.3
+	 * @return void;
+	 */
+	public function blog_posts_page_heading() {
+
+		$heading = get_the_title( get_option( 'page_for_posts', true ) );
+		do_action( 'genesis_archive_title_descriptions', $heading, '', 'taxonomy-archive-description' );
 
 	}
 
