@@ -92,6 +92,10 @@
 
 	.title-line {
 		border-top: 2px solid $light-blue;
+
+		&.two-line {
+			line-height: 1;
+		}
 	}
 }
 
