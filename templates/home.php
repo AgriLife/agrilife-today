@@ -523,6 +523,11 @@ function agt_home_page() {
 		'value'       => 1,
 		'class'       => 1,
 	);
+	$allowed_tags['script'] = array(
+		'id'    => 1,
+		'src'   => 1,
+		'async' => 1,
+	);
 
 	echo wp_kses( $output, $allowed_tags );
 
