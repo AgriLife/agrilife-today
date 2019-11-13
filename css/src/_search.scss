@@ -1,0 +1,15 @@
+button.gsc-search-button {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: .625rem;
+	margin: 0;
+
+	&:hover {
+		background-color: $dark-blue;
+	}
+
+	svg {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+}
