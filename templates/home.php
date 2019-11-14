@@ -97,7 +97,7 @@ function agt_home_page() {
 
 						// Get category button group.
 						$post_categories  = wp_get_post_categories( $id );
-						$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
+						$post_cat_button  = '<a href="%s" class="button hollow gradient-hover">%s</a>';
 						$post_cat_buttons = array();
 						$cat_buttons      = '';
 
@@ -221,7 +221,7 @@ function agt_home_page() {
 
 							// Get all post categories as buttons.
 							$post_categories  = wp_get_post_categories( $post->ID );
-							$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
+							$post_cat_button  = '<a href="%s" class="button hollow gradient-hover">%s</a>';
 							$post_cat_buttons = array();
 
 							foreach ( $post_categories as $cat_id ) {
@@ -321,7 +321,7 @@ function agt_home_page() {
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
-		$post_cat_button  = '<a href="%s" class="button hollow">%s</a>';
+		$post_cat_button  = '<a href="%s" class="button hollow gradient-hover">%s</a>';
 		$post_cat_buttons = array();
 		$cat_buttons      = '';
 
@@ -513,14 +513,14 @@ function agt_home_page() {
 	}
 
 	// Produce the entire page's output.
-	$allowed_tags          = wp_kses_allowed_html( 'post' );
-	$allowed_tags['form']  = array(
+	$allowed_tags           = wp_kses_allowed_html( 'post' );
+	$allowed_tags['form']   = array(
 		'action'   => 1,
 		'method'   => 1,
 		'onsubmit' => 1,
 		'target'   => 1,
 	);
-	$allowed_tags['input'] = array(
+	$allowed_tags['input']  = array(
 		'placeholder' => 1,
 		'type'        => 1,
 		'name'        => 1,
