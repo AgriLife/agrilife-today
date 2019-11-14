@@ -45,3 +45,26 @@ Release tasks in Gruntfile.coffee can only be used by the repository's owners.
 * Ruby: http://www.ruby-lang.org/en/, version >= 2.0.0p648
 * Ruby Gems: http://rubygems.org/
 * Ruby Sass: version >= 3.4.22
+
+## To do
+### Global
+Remove hyphens: auto from content element and selectively apply it where needed
+Reduce width of content areas to that of the single page template for genesis layout of full-width only
+Green to blue border gradient on white category buttons on hover
+Strip leading spaces from post excerpts
+
+### Home
+Add 2 lines of description to centered aside posts on home page
+
+### Single Page
+Fix related post issue on single page, example: https://agtodaydev.wpengine.com/2019/10/11/new-texas-am-dual-purpose-cotton-variety-can-be-used-for-food-fiber/
+Missing events calendar
+
+### Category archive pages
+Make story title font match home page story title font attributes
+
+### Search page
+Change title to just “Search Results”
+Make the search box look better
+Fix search filter line break issue in Chrome
+Remove sidebar widget area from search results page
