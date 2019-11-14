@@ -48,10 +48,8 @@ Release tasks in Gruntfile.coffee can only be used by the repository's owners.
 
 ## To do
 ### Global
-Remove hyphens: auto from content element and selectively apply it where needed
 Reduce width of content areas to that of the single page template for genesis layout of full-width only
-Green to blue border gradient on white category buttons on hover
-Strip leading spaces from post excerpts
+Automatically remove leading spaces from post excerpts
 
 ### Home
 Add 2 lines of description to centered aside posts on home page
@@ -64,7 +62,4 @@ Missing events calendar
 Make story title font match home page story title font attributes
 
 ### Search page
-Change title to just “Search Results”
 Make the search box look better
-Fix search filter line break issue in Chrome
-Remove sidebar widget area from search results page
