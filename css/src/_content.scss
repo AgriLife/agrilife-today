@@ -2,10 +2,6 @@
 	clear: both;
 }
 
-.content {
-	hyphens: auto;
-}
-
 .card {
 	@include card;
 }
