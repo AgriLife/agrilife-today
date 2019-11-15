@@ -119,10 +119,12 @@
 	h2 {
 		display: block;
 		margin: 0 0 .7rem;
-		font-size: 2.5rem;
+		font-size: 1.9rem;
+		line-height: 1.15;
 
 		.has-cloud-fonts & {
-			font-size: 2.75rem;
+			font-size: 2.25rem;
+			line-height: 1;
 		}
 
 		a {

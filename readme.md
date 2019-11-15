@@ -55,8 +55,5 @@ Automatically remove leading spaces from post excerpts
 Fix related post issue on single page, example: https://agtodaydev.wpengine.com/2019/10/11/new-texas-am-dual-purpose-cotton-variety-can-be-used-for-food-fiber/
 Missing events calendar
 
-### Category archive pages
-Make story title font match home page story title font attributes
-
 ### Search page
 Make the search box look better
