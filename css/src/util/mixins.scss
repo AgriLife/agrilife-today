@@ -160,3 +160,12 @@
 		border-color: $dark-blue;
 	}
 }
+
+@mixin text-truncate {
+	display: -webkit-box; // sass-lint:disable-line no-vendor-prefixes
+	-webkit-line-clamp: 3; // sass-lint:disable-line no-vendor-prefixes
+	-webkit-box-orient: vertical; // sass-lint:disable-line no-vendor-prefixes
+	overflow: hidden;
+	hyphens: auto;
+	text-overflow: ellipsis;
+}

@@ -51,9 +51,6 @@ Release tasks in Gruntfile.coffee can only be used by the repository's owners.
 Reduce width of content areas to that of the single page template for genesis layout of full-width only
 Automatically remove leading spaces from post excerpts
 
-### Home
-Add 2 lines of description to centered aside posts on home page
-
 ### Single Page
 Fix related post issue on single page, example: https://agtodaydev.wpengine.com/2019/10/11/new-texas-am-dual-purpose-cotton-variety-can-be-used-for-food-fiber/
 Missing events calendar

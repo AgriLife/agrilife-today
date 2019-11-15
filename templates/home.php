@@ -190,7 +190,7 @@ function agt_home_page() {
 						$post_link_close = '';
 						$headings        = '';
 						$cat_buttons     = '';
-						$quote           = '<div class="quote-text%s">%s</div>';
+						$quote           = '<div class="quote-text medium-truncate-lines medium-truncate-4-lines%s">%s</div>';
 
 						// Define post-dependent variables.
 						if ( ! empty( $post ) ) {
@@ -313,11 +313,12 @@ function agt_home_page() {
 	$eo             = 'odd';
 
 	foreach ( $query->posts as $key => $story ) {
-		$id           = $story->ID;
-		$has_thumb    = 'thumb';
-		$subheading   = agt_get_subheading( $story->post_content );
-		$subheading   = preg_replace( '/<(\/)?h2>/', '', $subheading );
-		$auto_excerpt = '';
+		$id            = $story->ID;
+		$has_thumb     = 'thumb';
+		$subheading    = agt_get_subheading( $story->post_content );
+		$subheading    = preg_replace( '/<(\/)?h2>/', '', $subheading );
+		$auto_excerpt  = '';
+		$excerpt_lines = '2';
 
 		// Get category button group.
 		$post_categories  = wp_get_post_categories( $id );
@@ -390,15 +391,17 @@ function agt_home_page() {
 			$article_class           = ' center-y';
 			$content_class_modified  = preg_replace( '/medium-8-collapse-half|medium-collapse-left/', '', $content_class_modified );
 			$content_class_modified .= ' medium-auto medium-collapse';
+			$excerpt_lines           = 4;
 		}
 
 		// Combine into post.
 		$post = sprintf(
-			'<article class="card post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x%s full-height"><div class="cell text small-12-collapse small-order-2 %s"><header class="entry-header"><h3 class="entry-title" itemprop="headline"><a href="%s" class="entry-link full-height" rel="bookmark">%s</a></h3></header><div class="entry-content medium-truncate-lines medium-truncate-2-lines" itemprop="text">%s</div>%s</div>%s</div></article>',
+			'<article class="card post type-post entry af4-entry-compact full-height" itemscope="" itemtype="https://schema.org/CreativeWork"><div class="grid-x%s full-height"><div class="cell text small-12-collapse small-order-2 %s"><header class="entry-header"><h3 class="entry-title" itemprop="headline"><a href="%s" class="entry-link full-height" rel="bookmark">%s</a></h3></header><div class="entry-content medium-truncate-lines medium-truncate-%s-lines" itemprop="text">%s</div>%s</div>%s</div></article>',
 			$article_class,
 			$content_class_modified,
 			get_permalink( $id ),
 			$story->post_title,
+			$excerpt_lines,
 			$excerpt,
 			$cat_buttons,
 			$image
