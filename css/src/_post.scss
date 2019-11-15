@@ -25,17 +25,17 @@
 			}
 		}
 	}
+
+	.has-cloud-fonts header {
+		h2,
+		.h2 {
+			font-weight: 400;
+		}
+	}
 }
 
 h1.entry-title {
 	line-height: 1.1;
-}
-
-.has-cloud-fonts header {
-	h2,
-	.h2 {
-		font-weight: 400;
-	}
 }
 
 .news-taxonomy {
