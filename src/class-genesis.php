@@ -166,6 +166,9 @@ class Genesis {
 		// Remove subheading from excerpts.
 		add_filter( 'the_content', array( $this, 'remove_subhead_from_content' ) );
 
+		// Replace nonbreaking spaces in excerpt.
+		add_filter( 'the_excerpt', array( $this, 'replace_nbsp' ) );
+
 	}
 
 	/**
@@ -1593,6 +1596,19 @@ class Genesis {
 	public function rp4wp_thumbnail_size( $thumb_size ) {
 
 		return 'archive';
+
+	}
+
+	/**
+	 * Replace nonbreaking spaces in given string.
+	 *
+	 * @since 0.9.7
+	 * @param string $str String which has nonbreaking spaces.
+	 * @return string
+	 */
+	public function replace_nbsp( $str ) {
+
+		return str_replace( '&nbsp;', ' ', $str );
 
 	}
 
