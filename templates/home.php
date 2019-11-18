@@ -11,7 +11,7 @@
 /**
  * Template Name: Home Page
  */
-add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_content_sidebar' );
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 add_filter( 'body_class', 'agt_home_body_class' );
 add_action( 'genesis_entry_content', 'agt_home_page' );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
