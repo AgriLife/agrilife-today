@@ -52,7 +52,6 @@ Reduce width of content areas to that of the single page template for genesis la
 Automatically remove leading spaces from post excerpts
 
 ### Single Page
-Fix related post issue on single page, example: https://agtodaydev.wpengine.com/2019/10/11/new-texas-am-dual-purpose-cotton-variety-can-be-used-for-food-fiber/
 Missing events calendar
 
 ### Search page

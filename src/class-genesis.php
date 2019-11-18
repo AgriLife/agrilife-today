@@ -654,7 +654,7 @@ class Genesis {
 
 			// Apply card classes.
 			if (
-				! in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3', 'header-subscribe' ), true )
+				! in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3', 'header-subscribe', 'post-after-entry' ), true )
 				|| false !== strpos( $params[0]['widget_id'], 'agt_subscribe' )
 			) {
 				$classes[] = 'card';
