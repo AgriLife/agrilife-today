@@ -13,3 +13,28 @@ button.gsc-search-button {
 		height: 1.25rem;
 	}
 }
+
+.gsc-input[type="text"] {
+	font-size: 1.3333rem;
+	height: rem-calc(40) !important; // sass-lint:disable-line no-important
+	border: 1px solid $dark-gray-2 !important; // sass-lint:disable-line no-important
+}
+
+table.gsc-input {
+	margin-bottom: 0;
+}
+
+table td.gsib_a {
+	padding: {
+		top: 0;
+		bottom: 0;
+	}
+}
+
+table td.gsib_b {
+	padding: 0;
+}
+
+table .gscb_a {
+	line-height: rem-calc(40);
+}

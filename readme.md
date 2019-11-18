@@ -55,6 +55,5 @@ Release tasks in Gruntfile.coffee can only be used by the repository's owners.
 Reduce width of content areas to that of the single page template for genesis layout of full-width only
 Automatically remove leading spaces from post excerpts
 
-
 ### Search page
 Make the search box look better
