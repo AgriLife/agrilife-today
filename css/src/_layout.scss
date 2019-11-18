@@ -263,7 +263,7 @@ main {
 }
 
 .full-width-content {
-	.grid-container {
+	.site-inner .grid-container {
 		/* Max width: 776px plus all margins or padding from post entry to
 		   element inside of .grid-container. */
 		max-width: 48.5rem + 0.9375rem * 2 + 0.5rem * 2 + 0.5rem * 2;
