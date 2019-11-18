@@ -12,6 +12,7 @@
  * Template Name: Home Page
  */
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_content_sidebar' );
+add_filter( 'body_class', 'agt_home_body_class' );
 add_action( 'genesis_entry_content', 'agt_home_page' );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
@@ -23,6 +24,21 @@ add_filter(
 		return 20;
 	}
 );
+
+/**
+ * Add wide class to home page.
+ *
+ * @since 0.9.11
+ * @param array $classes Current body classes.
+ * @return array
+ */
+function agt_home_body_class( $classes ) {
+
+	$classes[] = 'wide';
+
+	return $classes;
+
+}
 
 /**
  * Retrieve subheading from within post content.
