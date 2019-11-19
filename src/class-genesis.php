@@ -114,6 +114,7 @@ class Genesis {
 		add_action( 'genesis_after_header', array( $this, 'news_post_header_image' ) );
 		add_action( 'genesis_before_content', array( $this, 'genesis_get_sidebar_post' ) );
 		add_action( 'genesis_before', array( $this, 'post_move_hooks' ) );
+		add_action( 'genesis_before', array( $this, 'move_subheading' ) );
 		add_filter( 'term_links-category', array( $this, 'add_button_class_to_tax_links' ) );
 		add_filter( 'term_links-region_category', array( $this, 'add_button_class_to_tax_links' ) );
 		add_filter( 'term_links-agency_category', array( $this, 'add_button_class_to_tax_links' ) );
@@ -163,9 +164,6 @@ class Genesis {
 		// Change thumbnail size for related posts.
 		add_filter( 'rp4wp_thumbnail_size', array( $this, 'rp4wp_thumbnail_size' ) );
 
-		// Remove subheading from excerpts.
-		add_filter( 'the_content', array( $this, 'remove_subhead_from_content' ) );
-
 		// Replace nonbreaking spaces in excerpt.
 		add_filter( 'the_excerpt', array( $this, 'replace_nbsp' ) );
 
@@ -200,9 +198,8 @@ class Genesis {
 	 * @param string $content Post content.
 	 * @return string
 	 */
-	public function remove_subhead_from_content( $content ) {
+	public function remove_subheading_from_content( $content ) {
 
-		global $post;
 		$subheading = $this->get_subheading( $content );
 
 		if ( ! empty( $subheading ) ) {
@@ -748,7 +745,6 @@ class Genesis {
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
 			add_action( 'genesis_before_content_sidebar_wrap', array( $this, 'custom_post_info' ), 11 );
 			add_filter( 'genesis_attr_entry-header_output', array( $this, 'add_gutter_lr_class' ), 11, 2 );
-			add_filter( 'the_content', array( $this, 'remove_subheading_from_content' ) );
 			add_action(
 				'genesis_before_footer',
 				function() {
@@ -817,25 +813,6 @@ class Genesis {
 		$output .= '</p>';
 
 		echo wp_kses_post( $output );
-
-	}
-
-	/**
-	 * Remove subheading from content
-	 *
-	 * @since 0.8.23
-	 * @param string $content The post content.
-	 * @return string
-	 */
-	public function remove_subheading_from_content( $content ) {
-
-		// Find subheading.
-		$subheading = $this->get_subheading( $content );
-
-		// Remove subheading and occasional wrapping HTML comments created by Gutenberg.
-		$content = str_replace( $subheading, '', $content );
-
-		return $content;
 
 	}
 
@@ -1609,6 +1586,22 @@ class Genesis {
 	public function replace_nbsp( $str ) {
 
 		return str_replace( '&nbsp;', ' ', $str );
+
+	}
+
+	/**
+	 * Handle subheadings for posts and not pages.
+	 *
+	 * @since 0.9.13
+	 * @return void
+	 */
+	public function move_subheading() {
+
+		if ( is_singular( 'post' ) || is_front_page() ) {
+
+			add_filter( 'the_content', array( $this, 'remove_subheading_from_content' ) );
+
+		}
 
 	}
 
