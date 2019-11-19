@@ -1578,6 +1578,8 @@ class Genesis {
 
 	/**
 	 * Replace nonbreaking spaces in given string.
+	 * The editors that some story authors used added non-standard space
+	 * characters, which WordPress converts to non-breaking spaces.
 	 *
 	 * @since 0.9.7
 	 * @param string $str String which has nonbreaking spaces.
@@ -1585,7 +1587,10 @@ class Genesis {
 	 */
 	public function replace_nbsp( $str ) {
 
-		return str_replace( '&nbsp;', ' ', $str );
+		$excerpt = preg_replace( '/\xc2\xa0/', ' ', $str );
+		$excerpt = preg_replace( '/\s+/', ' ', $excerpt );
+
+		return $excerpt;
 
 	}
 
