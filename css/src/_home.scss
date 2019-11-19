@@ -29,13 +29,6 @@
 		border-top-color: $light-gray-blue;
 	}
 
-	.section.invert {
-		padding: {
-			top: $global-layout-space * 3;
-			bottom: $global-layout-space * 3;
-		}
-	}
-
 	.section {
 		margin: {
 			top: $global-layout-space * 2;
@@ -44,6 +37,13 @@
 
 		&:first-child {
 			margin-top: 0;
+		}
+
+		&.invert {
+			padding: {
+				top: $global-layout-space * 3;
+				bottom: $global-layout-space * 3;
+			}
 		}
 
 		&.subscribe {
