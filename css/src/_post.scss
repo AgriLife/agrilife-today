@@ -11,6 +11,10 @@
 		}
 	}
 
+	.entry-meta {
+		font-weight: bold;
+	}
+
 	@include breakpoint(medium) {
 		#genesis-content {
 			$medium-padding: map-get($grid-container-padding, "medium");
@@ -70,6 +74,10 @@ h1.entry-title {
 
 .entry-footer {
 	clear: both;
+
+	.author-name {
+		font-weight: bold;
+	}
 }
 
 .media-contact-group {

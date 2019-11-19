@@ -809,7 +809,7 @@ class Genesis {
 
 		// Add post meta.
 		$output .= '<p class="entry-meta">';
-		$output .= do_shortcode( '<strong>[post_date]</strong>' );
+		$output .= do_shortcode( '[post_date]' );
 		$output .= '</p>';
 
 		echo wp_kses_post( $output );
@@ -953,7 +953,7 @@ class Genesis {
 
 		// Post author.
 		$output .= sprintf(
-			'<div class="p grid-x"><div class="cell shrink collapse-left">%s</div><div class="cell auto collapse-right"><div><strong>%s</strong></div><div><a href="tel:+1%s">%s</a></div><div><a href="mailto:%s">%s</a></div></div></div>',
+			'<div class="p grid-x"><div class="cell shrink collapse-left">%s</div><div class="cell auto collapse-right"><div class="author-name">%s</div><div><a href="tel:+1%s">%s</a></div><div><a href="mailto:%s">%s</a></div></div></div>',
 			get_avatar( get_the_author_meta( 'user_email' ) ),
 			get_the_author(),
 			get_the_author_meta( 'phone' ),
