@@ -49,6 +49,32 @@
 		&.subscribe {
 			margin-bottom: 0;
 		}
+
+		.heading-sideline h2 {
+			$small: map-get(map-get($header-styles, "small"), "h1");
+			$small-tungsten: map-get(map-get($header-styles-tungsten, "small"), "h1");
+			$medium: map-get(map-get($header-styles, "medium"), "h1");
+			$medium-tungsten: map-get(map-get($header-styles-tungsten, "medium"), "h1");
+
+			font: {
+				size: rem-calc( map-get( $small, "font-size" ) );
+				weight: 500;
+			}
+			line-height: $header-lineheight;
+			margin-bottom: .5rem;
+
+			.has-cloud-fonts & {
+				font-size: rem-calc( map-get( $small-tungsten, "font-size" ) );
+			}
+
+			@include breakpoint(medium) {
+				font-size: rem-calc( map-get( $medium, "font-size" ) );
+
+				.has-cloud-fonts & {
+					font-size: rem-calc( map-get( $medium-tungsten, "font-size" ) );
+				}
+			}
+		}
 	}
 
 	.tall .card {
