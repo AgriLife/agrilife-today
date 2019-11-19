@@ -420,28 +420,6 @@
 			}
 		}
 
-		.addtoany_list a:not(.a2a_count)::after {
-			height: auto;
-			line-height: 1;
-			font-size: 14px;
-		}
-
-		.a2a_button_twitter::after {
-			content: "Tweet";
-		}
-
-		.a2a_button_flickr::after {
-			content: "Flickr";
-		}
-
-		.a2a_button_youtube::after {
-			content: "Watch";
-		}
-
-		.a2a_button_feed::after {
-			content: "News\00ad feed";
-		}
-
 		@include breakpoint(1000px down) {
 
 			.grid-x > &.cell {
