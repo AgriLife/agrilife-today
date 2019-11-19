@@ -48,7 +48,6 @@ h1.entry-title {
 	p {
 		margin: 0;
 		padding: $grid-margin-gutters / 2 0 0;
-		border-bottom: 1px solid $dark-blue;
 	}
 
 	span {
@@ -74,6 +73,10 @@ h1.entry-title {
 
 .entry-footer {
 	clear: both;
+
+	.grid-x {
+		padding: 1rem 0;
+	}
 
 	.author-name {
 		font-weight: bold;
