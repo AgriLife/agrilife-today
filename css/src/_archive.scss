@@ -7,6 +7,12 @@
 		~ * {
 			margin-top: $global-layout-space * 3;
 		}
+
+		@include breakpoint(small only) {
+			.archive-post-image {
+				margin-bottom: $grid-margin-gutters / 2;
+			}
+		}
 	}
 
 	.featured-post {
