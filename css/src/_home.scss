@@ -98,6 +98,7 @@
 	.subscribe {
 		.heading-sideline + .grid-container {
 			max-width: rem-calc(702) + $grid-margin-gutters;
+			text-align: center;
 		}
 
 		.grid-x {
