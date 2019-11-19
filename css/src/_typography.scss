@@ -62,12 +62,12 @@
 	hyphens: manual;
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
-	strong {
-		font-weight: inherit;
-	}
+strong,
+b {
+	font-weight: inherit;
+}
+
+form strong,
+form b {
+	font-weight: $global-weight-bold;
 }
