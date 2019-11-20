@@ -82,11 +82,19 @@
 	text-align: center;
 	margin-bottom: $grid-margin-gutters * 1.75;
 
-	.cell.shrink {
+	.cell:first-child + * {
 		max-width: 75%;
 		position: relative;
 		margin-bottom: 0;
 		line-height: 1.35em;
+		hyphens: auto;
+		letter-spacing: .18rem;
+		text-transform: uppercase;
+		font-size: 1.9rem;
+
+		.has-cloud-fonts & {
+			font-size: 2.25rem;
+		}
 	}
 
 	.grid-x {
