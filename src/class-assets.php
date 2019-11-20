@@ -50,8 +50,6 @@ class Assets {
 
 		// Remove default styles.
 		add_action( 'wp_print_styles', array( $this, 'remove_child_theme_style' ) );
-		add_action( 'wp_print_styles', array( $this, 'remove_default_gutenberg_styles' ), 100 );
-
 		// Detect A&M Fonts.
 		add_filter( 'style_loader_tag', array( $this, 'detect_cloudfonts_loaded' ) );
 
@@ -191,16 +189,6 @@ class Assets {
 		wp_dequeue_style( 'agrilife-today' );
 		wp_deregister_style( 'agrilife-today' );
 
-	}
-
-	/**
-	 * Remove default gutenberg styles.
-	 *
-	 * @since 0.5.7
-	 * @return void
-	 */
-	public function remove_default_gutenberg_styles() {
-		wp_dequeue_style( 'wp-block-library' );
 	}
 
 }
