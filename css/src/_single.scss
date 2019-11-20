@@ -1,0 +1,17 @@
+.single {
+	h1.entry-title {
+		font-size: 3rem;
+	}
+
+	.entry-header {
+		h2,
+		.h2 {
+			font: {
+				family: $opensans;
+				size: 1.25rem;
+			}
+			letter-spacing: 0;
+			line-height: 1.2;
+		}
+	}
+}

@@ -35,8 +35,12 @@ $align-breakpoint: 640px;
 	font-family: $opensans;
 }
 
-.wp-caption-text {
-	margin: .5em 0 1em 0;
+.wp-caption-text,
+figcaption {
+	margin: 0em .8em -1em 0;
+	background-color: $light-gray;
+	padding: 1.25rem;
+	border-left: .25rem solid $light-blue;
 }
 
 // Buttons

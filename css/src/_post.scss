@@ -12,10 +12,17 @@
 	}
 
 	.entry-meta {
-		font-weight: bold;
+		@extend %entry-meta;
 	}
 
 	@include breakpoint(medium) {
+		.entry-header {
+			margin: {
+				left: 7rem;
+				right: 7rem;
+			}
+		}
+
 		#genesis-content {
 			$medium-padding: map-get($grid-container-padding, "medium");
 			$margin-left: rem-calc($medium-padding / 2) + $grid-margin-gutters / 2;
@@ -80,6 +87,10 @@ h1.entry-title {
 
 	.author-name {
 		font-weight: bold;
+	}
+
+	p.entry-meta {
+		padding-top: 1rem;
 	}
 }
 

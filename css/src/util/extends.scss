@@ -1,3 +1,16 @@
+%entry-meta {
+	font: {
+		weight: normal;
+		style: italic;
+		size: .8rem;
+	}
+	text-transform: uppercase;
+	line-height: 2;
+	border-left: .25rem solid $light-blue;
+	padding-left: .5rem;
+	margin-top: 1rem;
+}
+
 %card-top-border {
 	border-top: 0.5rem solid $card-border-color;
 }
@@ -14,7 +27,7 @@
 %button {
 	font: 900 .75rem/1rem $opensans;
 	display: inline-block;
-	padding: 0.4rem .8rem;
+	padding: 0.5rem 0.8rem;
 	color: $white;
 	border: 1px solid lighten($dark-blue, 50%);
 	margin: {
@@ -35,13 +48,15 @@
 	&:focus,
 	&.hollow {
 		color: $dark-blue;
-		border-color: $dark-blue;
+		border-color: $medium-gray;
 		background-color: $white;
 		text-decoration: none;
 	}
 
-	&.hollow:hover {
-		color: $dark-blue;
+	&.hollow {
+		&:hover {
+			color: $dark-blue;
+		}
 	}
 
 	&.gradient-hover {

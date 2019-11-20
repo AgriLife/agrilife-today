@@ -105,3 +105,13 @@ input[type="submit"] {
 input[type="submit"] {
 	cursor: pointer;
 }
+
+input.hollow[type="submit"] {
+	border-color: $medium-gray;
+}
+
+h3,
+.h3 {
+	margin-top: 2.5rem;
+	margin-bottom: .5rem;
+}

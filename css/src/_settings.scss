@@ -20,9 +20,11 @@ $light-gray-2: #EAEAEA;
 $light-gray-blue: #C0C9CE;
 $light-blue: #28A9E1;
 $light-green: #B4D333;
+$medium-gray: #969696;
 $dark-gray-2: #595959;
 $dark-gray: #3F4041;
 $darker-gray: #2A2A2A;
+$header-color: #292929;
 $foundation-palette: (
 	primary: $dark-blue,
 	secondary: $light-blue,
@@ -74,21 +76,19 @@ $header-styles-tungsten: (
 	small: (
 		"h1": ("font-size": 39),
 		"h2": ("font-size": 32, "line-height": 1.1),
-		"h3": ("font-size": 26, "line-height": 1.1),
-		"h4": ("font-size": 22),
+		"h3": ("font-size": 26, "line-height": 1.1, "margin-top": 40, "margin-bottom": 8),
+		"h4": ("font-size": 24),
 		"h5": ("font-size": 19),
 		"h6": ("font-size": 18),
 	),
 	medium: (
 		"h1": ("font-size": 52),
 		"h2": ("font-size": 44),
-		"h3": ("font-size": 33),
 		"h4": ("font-size": 27),
 		"h5": ("font-size": 22),
 		"h6": ("font-size": 19),
 	),
 );
-$header-color: $dark-blue;
 $header-font-weight: 500;
 
 /* Header
