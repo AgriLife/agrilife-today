@@ -92,6 +92,7 @@ class Genesis {
 		add_filter( 'genesis_structural_wrap-site-inner', array( $this, 'class_site_inner_wrap' ) );
 		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
 		add_filter( 'genesis_attr_content', array( $this, 'content_attr' ) );
+		add_filter( 'genesis_attr_entry-content', array( $this, 'truncate_lines_attr' ) );
 
 		// Add featured post class.
 		add_filter( 'genesis_attr_entry', array( $this, 'af4_featured_post_class' ) );
@@ -539,8 +540,18 @@ class Genesis {
 	 */
 	public function agriflex_auto_excerpt_more( $more ) {
 
-		return '... <span class="read-more"><a href="' . get_permalink() . '">' .
-		__( 'Read More &rarr;', 'agrilife-today' ) . '</a></span>';
+		if ( ! is_archive() ) {
+
+			$more = '... <span class="read-more"><a href="' . get_permalink() . '">' .
+			__( 'Read More &rarr;', 'agrilife-today' ) . '</a></span>';
+
+		} else {
+
+			$more = '...';
+
+		}
+
+		return $more;
 
 	}
 
@@ -1607,6 +1618,25 @@ class Genesis {
 			add_filter( 'the_content', array( $this, 'remove_subheading_from_content' ) );
 
 		}
+
+	}
+
+	/**
+	 * Truncate lines to 3.
+	 *
+	 * @since 1.0.0
+	 * @param array $attr Attributes of the entry-content element.
+	 * @return array
+	 */
+	public function truncate_lines_attr( $attr ) {
+
+		if ( is_archive() ) {
+
+			$attr['class'] .= ' truncate-lines';
+
+		}
+
+		return $attr;
 
 	}
 
