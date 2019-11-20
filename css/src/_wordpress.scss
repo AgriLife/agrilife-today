@@ -58,14 +58,23 @@ $align-breakpoint: 640px;
 	}
 }
 
-body .wp-caption .wp-caption-text,
-body .wp-block-image figcaption {
-	background-color: $light-gray;
-	padding: 1.25rem;
-	border-left: .25rem solid $light-blue;
-	margin: {
-		top: .5rem;
-		bottom: 0;
+body .wp-caption,
+body .wp-block-image {
+	.wp-caption-text,
+	figcaption {
+		background-color: $light-gray;
+		padding: 1.25rem;
+		margin: {
+			top: .5rem;
+			bottom: 0;
+		}
+	}
+
+	&:not(.alignfull) {
+		.wp-caption-text,
+		figcaption {
+			border-left: .25rem solid $light-blue;
+		}
 	}
 }
 
