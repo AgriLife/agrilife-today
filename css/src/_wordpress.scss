@@ -56,6 +56,14 @@ $align-breakpoint: 640px;
 			margin-left: .625rem;
 		}
 	}
+
+	&.aligncenter {
+		padding-left: rem-calc(5);
+
+		.wp-caption-text {
+			margin-right: rem-calc(5);
+		}
+	}
 }
 
 body .wp-caption,
