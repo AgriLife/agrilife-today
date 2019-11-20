@@ -30,9 +30,11 @@ $align-breakpoint: 640px;
 .wp-caption {
 	max-width: 100%;
 	color: $dark-gray-2;
-	font-size: .875rem;
+	font: {
+		family: $opensans;
+		size: .875rem;
+	}
 	line-height: 1.1em;
-	font-family: $opensans;
 }
 
 .wp-caption-text,
