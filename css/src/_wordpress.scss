@@ -11,7 +11,9 @@ $align-breakpoint: 640px;
 	}
 }
 
-.alignleft {
+.alignleft,
+.alignright,
+.alignnone {
 	margin-bottom: $paragraph-margin-bottom;
 }
 
@@ -35,14 +37,36 @@ $align-breakpoint: 640px;
 		size: .875rem;
 	}
 	line-height: 1.1em;
+	margin-bottom: 1rem;
+
+	&.alignnone,
+	&.alignleft {
+		margin-right: .375rem;
+
+		.wp-caption-text {
+			margin-right: .625rem;
+		}
+	}
+
+	&.alignright {
+		margin-left: .375rem;
+		text-align: right;
+
+		.wp-caption-text {
+			margin-left: .625rem;
+		}
+	}
 }
 
-.wp-caption-text,
-figcaption {
-	margin-right: .625rem;
+body .wp-caption .wp-caption-text,
+body .wp-block-image figcaption {
 	background-color: $light-gray;
 	padding: 1.25rem;
 	border-left: .25rem solid $light-blue;
+	margin: {
+		top: .5rem;
+		bottom: 0;
+	}
 }
 
 // Buttons
@@ -327,6 +351,10 @@ figcaption {
 				right: calc(50% - 50vw);
 			}
 			width: 100vw;
+		}
+
+		&.wp-block-embed iframe {
+			width: 100%;
 		}
 	}
 
