@@ -30,15 +30,17 @@ input[type="submit"] {
 	margin-bottom: $paragraph-margin-bottom;
 }
 
-table {
-	border: $table-border {
-		collapse: collapse;
-	}
-	margin-bottom: $paragraph-margin-bottom;
+.entry-content {
+	table {
+		border: $table-border {
+			collapse: collapse;
+		}
+		margin-bottom: $paragraph-margin-bottom;
 
-	td {
-		border: $table-border;
-		padding: 0.5rem;
+		td {
+			border: $table-border;
+			padding: 0.5rem;
+		}
 	}
 }
 
