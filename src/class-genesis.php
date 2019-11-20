@@ -168,6 +168,9 @@ class Genesis {
 		// Replace nonbreaking spaces in excerpt.
 		add_filter( 'the_excerpt', array( $this, 'replace_nbsp' ) );
 
+		// Prevent WordPress from adding 10px to inline width of caption shortcode content.
+		add_filter( 'img_caption_shortcode_width', array( $this, 'reduce_caption_shortcode_width' ), 11, 3 );
+
 	}
 
 	/**
@@ -1637,6 +1640,27 @@ class Genesis {
 		}
 
 		return $attr;
+
+	}
+
+	/**
+	 * Filters the width of an image's caption.
+	 *
+	 * By default, the caption is 10 pixels greater than the width of the image,
+	 * to prevent post content from running up against a floated image.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @see img_caption_shortcode()
+	 *
+	 * @param int    $width    Width of the caption in pixels. To remove this inline style,
+	 *                         return zero.
+	 * @param array  $atts     Attributes of the caption shortcode.
+	 * @param string $content  The image element, possibly wrapped in a hyperlink.
+	 */
+	public function reduce_caption_shortcode_width( $width, $atts, $content ) {
+
+		return $atts['width'];
 
 	}
 

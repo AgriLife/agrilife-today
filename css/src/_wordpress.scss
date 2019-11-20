@@ -17,7 +17,14 @@ $align-breakpoint: 640px;
 	margin-bottom: $paragraph-margin-bottom;
 }
 
-@include breakpoint($align-breakpoint up) {
+@include breakpoint($align-breakpoint down) {
+	body .entry-content .wp-caption {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+@include breakpoint($align-breakpoint) {
 	.alignleft {
 		float: left;
 		margin-right: $paragraph-margin-bottom;
@@ -38,32 +45,6 @@ $align-breakpoint: 640px;
 	}
 	line-height: 1.1em;
 	margin-bottom: 1rem;
-
-	&.alignnone,
-	&.alignleft {
-		margin-right: .375rem;
-
-		.wp-caption-text {
-			margin-right: .625rem;
-		}
-	}
-
-	&.alignright {
-		margin-left: .375rem;
-		text-align: right;
-
-		.wp-caption-text {
-			margin-left: .625rem;
-		}
-	}
-
-	&.aligncenter {
-		padding-left: rem-calc(5);
-
-		.wp-caption-text {
-			margin-right: rem-calc(5);
-		}
-	}
 }
 
 body .wp-caption .wp-caption-text,
@@ -75,6 +56,10 @@ body .wp-block-image figcaption {
 		bottom: 0;
 	}
 	text-align: left;
+
+	@include breakpoint($align-breakpoint down) {
+		text-align: center;
+	}
 }
 
 body .wp-caption:not(.alignfull) .wp-caption-text,
@@ -140,14 +125,17 @@ body .wp-block-image:not(.alignfull) figcaption {
 	}
 }
 
-@include breakpoint(500px down) {
-	body .wp-block-image {
-		.alignleft,
-		.alignright {
-			float: none;
-			margin-left: auto;
-			margin-right: auto;
-		}
+@include breakpoint($align-breakpoint down) {
+	body .wp-block-image .alignleft,
+	body .wp-block-image .alignright,
+	body .wp-block-cover.alignleft,
+	body .wp-block-cover.alignright,
+	body .wp-caption.alignleft,
+	body .wp-caption.alignright {
+		text-align: center;
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
