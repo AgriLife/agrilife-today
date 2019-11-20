@@ -126,6 +126,16 @@ body .wp-block-image {
 	margin-bottom: $paragraph-margin-bottom;
 }
 
+.wp-block-cover {
+	&.alignleft {
+		margin-right: 1.5rem;
+	}
+
+	&.alignright {
+		margin-left: 1.5rem;
+	}
+}
+
 /* Quotes
 ------------------------- */
 // Non-admin styles
