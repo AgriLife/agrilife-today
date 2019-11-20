@@ -140,6 +140,17 @@ body .wp-block-image:not(.alignfull) figcaption {
 	}
 }
 
+@include breakpoint(500px down) {
+	body .wp-block-image {
+		.alignleft,
+		.alignright {
+			float: none;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+}
+
 /* Quotes
 ------------------------- */
 // Non-admin styles

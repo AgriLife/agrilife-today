@@ -242,6 +242,18 @@
 			padding: 0;
 			position: relative;
 		}
+
+		h3 {
+			margin-top: .5rem;
+		}
+
+		.cell.tall .card {
+			padding: 0;
+		}
+
+		.cell.quote {
+			padding: .75rem;
+		}
 	}
 
 	@include breakpoint(medium) {
