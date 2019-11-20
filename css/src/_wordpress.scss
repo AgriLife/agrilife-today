@@ -66,24 +66,20 @@ $align-breakpoint: 640px;
 	}
 }
 
-body .wp-caption,
-body .wp-block-image {
-	.wp-caption-text,
-	figcaption {
-		background-color: $light-gray;
-		padding: 1.25rem;
-		margin: {
-			top: .5rem;
-			bottom: 0;
-		}
+body .wp-caption .wp-caption-text,
+body .wp-block-image figcaption {
+	background-color: $light-gray;
+	padding: 1.25rem;
+	margin: {
+		top: 0;
+		bottom: 0;
 	}
+	text-align: left;
+}
 
-	&:not(.alignfull) {
-		.wp-caption-text,
-		figcaption {
-			border-left: .25rem solid $light-blue;
-		}
-	}
+body .wp-caption:not(.alignfull) .wp-caption-text,
+body .wp-block-image:not(.alignfull) figcaption {
+	border-left: .25rem solid $light-blue;
 }
 
 // Buttons
