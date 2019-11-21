@@ -95,8 +95,7 @@ class Genesis {
 		add_filter( 'genesis_attr_entry-content', array( $this, 'truncate_lines_attr' ) );
 
 		// Add featured post class.
-		add_filter( 'genesis_attr_entry', array( $this, 'af4_featured_post_class' ) );
-
+		// add_filter( 'genesis_attr_entry', array( $this, 'af4_featured_post_class' ) );
 		// Modify the post page output.
 		genesis_register_sidebar(
 			array(
