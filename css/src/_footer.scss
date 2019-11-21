@@ -183,12 +183,6 @@ $widget-space-x: 3rem;
 			}
 		}
 	}
-
-	@include breakpoint(small only) {
-		.has-cloud-fonts & .widgets-footer-2.heading-sideline .cell:first-child + * {
-			font-size: 1.9rem;
-		}
-	}
 }
 
 .site-footer {

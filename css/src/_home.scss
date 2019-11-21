@@ -62,13 +62,6 @@
 		line-height: 1.15;
 	}
 
-	.has-cloud-fonts & {
-		h2 {
-			font-size: 2.25rem;
-			line-height: 1;
-		}
-	}
-
 	.subscribe {
 		.heading-sideline + .grid-container {
 			max-width: rem-calc(702) + $grid-margin-gutters;

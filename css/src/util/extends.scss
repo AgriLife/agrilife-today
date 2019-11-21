@@ -106,10 +106,6 @@
 		letter-spacing: .18rem;
 		text-transform: uppercase;
 		font-size: 1.9rem;
-
-		.has-cloud-fonts & {
-			font-size: 2.25rem;
-		}
 	}
 
 	.grid-x {
@@ -141,11 +137,6 @@
 		margin: 0 0 .7rem;
 		font-size: 1.9rem;
 		line-height: 1.15;
-
-		.has-cloud-fonts & {
-			font-size: 2.25rem;
-			line-height: 1;
-		}
 
 		a {
 			color: $darker-gray;
