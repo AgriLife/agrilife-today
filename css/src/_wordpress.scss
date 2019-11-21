@@ -36,13 +36,16 @@ $align-breakpoint: 640px;
 	}
 }
 
+.wp-caption-text,
+figcaption {
+	font-size: .875rem;
+}
+
+
 .wp-caption {
 	max-width: 100%;
 	color: $dark-gray-2;
-	font: {
-		family: $opensans;
-		size: .875rem;
-	}
+	font-family: $opensans;
 	line-height: 1.1em;
 	margin-bottom: 1rem;
 }
@@ -56,10 +59,6 @@ body .wp-block-image figcaption {
 		bottom: 0;
 	}
 	text-align: left;
-
-	@include breakpoint($align-breakpoint down) {
-		text-align: center;
-	}
 }
 
 body .wp-caption:not(.alignfull) .wp-caption-text,
@@ -132,7 +131,6 @@ body .wp-block-image:not(.alignfull) figcaption {
 	body .wp-block-cover.alignright,
 	body .wp-caption.alignleft,
 	body .wp-caption.alignright {
-		text-align: center;
 		float: none;
 		margin-left: auto;
 		margin-right: auto;
