@@ -142,7 +142,7 @@ class Assets {
 
 		wp_register_style(
 			'cloudfonts',
-			'https://cloud.typography.com/6280314/7977592/css/fonts.css',
+			'https://cloud.typography.com/6280314/7070352/css/fonts.css',
 			array(),
 			'1.0.0',
 			'all'
