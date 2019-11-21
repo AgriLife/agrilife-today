@@ -75,7 +75,7 @@ class Navigation {
 		$nav_menu = wp_nav_menu( $args );
 
 		$title_bars = array(
-			'wrap_open'  => '<div class="title-bars title-bar-right cell small-3 show-for-small-only">',
+			'wrap_open'  => '<div class="title-bars hide-for-print title-bar-right cell small-3 show-for-small-only">',
 			'wrap_close' => '</div>',
 			'inside'     => '<div class="title-bar title-bar-search" data-responsive-toggle="header-widgets"><button class="search-icon" type="button" data-toggle="header-widgets"></button><div class="title-bar-title">Search</div></div><div class="title-bar title-bar-navigation" data-responsive-toggle="nav-menu-primary"><button class="menu-icon" type="button" data-toggle="nav-menu-primary"></button><div class="title-bar-title" data-toggle="nav-menu-primary">Menu</div></div>',
 		);
@@ -91,7 +91,7 @@ class Navigation {
 
 		$nav_markup_open = genesis_markup(
 			array(
-				'html5'   => '<nav class="nav-primary cell medium-12-collapse small-12-collapse" role="navigation">',
+				'html5'   => '<nav class="nav-primary hide-for-print cell medium-12-collapse small-12-collapse" role="navigation">',
 				'xhtml'   => '<div id="nav">',
 				'context' => 'nav-primary',
 				'echo'    => false,

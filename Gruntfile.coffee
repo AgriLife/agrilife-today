@@ -19,6 +19,7 @@ module.exports = (grunt) ->
           failOnError: true
         files:
           'css/style.css': 'css/style.css'
+          'css/print.css': 'css/print.css'
       dev:
         options:
           map: true
@@ -28,6 +29,7 @@ module.exports = (grunt) ->
           failOnError: true
         files:
           'css/style.css': 'css/style.css'
+          'css/print.css': 'css/print.css'
     cmq:
       your_target:
         files:
@@ -42,6 +44,7 @@ module.exports = (grunt) ->
           includePaths: ['node_modules/foundation-sites/scss']
         files:
           'css/style.css': 'css/src/style.scss'
+          'css/print.css': 'css/src/print.scss'
       dev:
         options:
           implementation: sass
@@ -51,6 +54,7 @@ module.exports = (grunt) ->
           includePaths: ['node_modules/foundation-sites/scss']
         files:
           'css/style.css': 'css/src/style.scss'
+          'css/print.css': 'css/src/print.scss'
     sasslint:
       options:
         configFile: '.sass-lint.yml'

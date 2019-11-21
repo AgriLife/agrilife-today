@@ -170,6 +170,9 @@ class Genesis {
 		// Prevent WordPress from adding 10px to inline width of caption shortcode content.
 		add_filter( 'img_caption_shortcode_width', array( $this, 'reduce_caption_shortcode_width' ), 11, 3 );
 
+		// Add hide-for-print class.
+		add_filter( 'genesis_attr_site-footer', array( $this, 'attr_hide_for_print' ) );
+
 	}
 
 	/**
@@ -501,7 +504,7 @@ class Genesis {
 	public function sticky_header( $output ) {
 
 		$header_widgets = array(
-			'open'   => '<div id="header-widgets"><div class="grid-container">',
+			'open'   => '<div id="header-widgets" class="hide-for-print"><div class="grid-container">',
 			'close'  => '</div></div>',
 			'inside' => get_search_form( false ),
 		);
@@ -568,13 +571,15 @@ class Genesis {
 	 */
 	public function add_logo( $title, $inside, $wrap ) {
 
-		$logo = sprintf( '<img src="%s">', AGTODAY_THEME_DIRURL . '/images/logo-light.svg' );
-		$home = trailingslashit( home_url() );
+		$logo       = sprintf( '<img class="hide-for-print" src="%s">', AGTODAY_THEME_DIRURL . '/images/logo-light.svg' );
+		$logo_print = sprintf( '<img class="show-for-print" src="%s">', AGTODAY_THEME_DIRURL . '/images/logo-dark-color.svg' );
+		$home       = trailingslashit( home_url() );
 
 		$new_inside = sprintf(
-			'<a href="%s" class="logo" title="Texas A&M AgriLife">%s</a>',
+			'<a href="%s" class="logo" title="Texas A&M AgriLife">%s%s</a>',
 			$home,
-			$logo
+			$logo,
+			$logo_print
 		);
 
 		$title = str_replace( $inside, $new_inside, $title );
@@ -673,11 +678,20 @@ class Genesis {
 			// Add class to LiveWhale widget.
 			if ( false !== strpos( $params[0]['widget_id'], 'agt_livewhale' ) ) {
 				$classes[] = 'livewhale invert';
+
+				if ( 'post-after-entry' === $params[0]['id'] ) {
+					$classes[] = 'hide-for-print';
+				}
 			}
 
 			// Invert footer widgets.
 			if ( in_array( $params[0]['id'], array( 'footer-1', 'footer-2', 'footer-3' ), true ) ) {
 				$classes[] = 'invert no-bg';
+			}
+
+			// Hide widget for print.
+			if ( 'footer-1' === $params[0]['id'] ) {
+				$classes[] = 'hide-for-print';
 			}
 
 			$class_output               = implode( ' ', $classes );
@@ -730,7 +744,7 @@ class Genesis {
 		genesis_widget_area(
 			'post-share',
 			array(
-				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:medium;marginTop:9;anchor:genesis-content">',
+				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12 hide-for-print" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:medium;marginTop:9;anchor:genesis-content">',
 				'after'  => '</div></div>',
 			)
 		);
@@ -799,7 +813,7 @@ class Genesis {
 			}
 		}
 
-		echo sprintf( '<div class="post-category">%s</div>', wp_kses_post( $cat_output ) );
+		echo sprintf( '<div class="post-category hide-for-print">%s</div>', wp_kses_post( $cat_output ) );
 
 	}
 
@@ -1003,7 +1017,7 @@ class Genesis {
 		// Related Posts.
 		if ( function_exists( 'rp4wp_children' ) ) {
 
-			$output .= '<div class="related_posts">';
+			$output .= '<div class="related_posts hide-for-print">';
 
 			$related_posts = rp4wp_children( get_the_ID(), false );
 			$related_posts = str_replace( '<ul>', '', $related_posts );
@@ -1220,7 +1234,7 @@ class Genesis {
 		genesis_widget_area(
 			'footer-1',
 			array(
-				'before' => '<div class="widgets-footer-1 cell small-12 medium-12"><div class="logo">' . $logo . '</div>',
+				'before' => '<div class="widgets-footer-1 cell small-12 medium-12"><div class="logo hide-for-print">' . $logo . '</div>',
 				'after'  => '</div>',
 			)
 		);
@@ -1228,7 +1242,7 @@ class Genesis {
 		genesis_widget_area(
 			'footer-2',
 			array(
-				'before' => '<div class="widgets-footer-2 heading-sideline cell small-12 medium-12"><div class="grid-x"><div class="cell auto title-line"></div><div class="cell shrink social-media">',
+				'before' => '<div class="widgets-footer-2 heading-sideline cell small-12 medium-12 hide-for-print"><div class="grid-x"><div class="cell auto title-line"></div><div class="cell shrink social-media">',
 				'after'  => '</div><div class="cell auto title-line"></div></div></div>',
 			)
 		);
@@ -1660,6 +1674,20 @@ class Genesis {
 	public function reduce_caption_shortcode_width( $width, $atts, $content ) {
 
 		return $atts['width'];
+
+	}
+
+	/**
+	 * Hide element for print.
+	 *
+	 * @since 1.1.0
+	 * @param array $attr Attributes of the entry-content element.
+	 * @return array
+	 */
+	public function attr_hide_for_print( $attr ) {
+
+		$attr['class'] .= ' hide-for-print';
+		return $attr;
 
 	}
 

@@ -108,6 +108,14 @@ class Assets {
 			'screen'
 		);
 
+		wp_register_style(
+			'today-print-styles',
+			AGTODAY_THEME_DIRURL . '/css/print.css',
+			array(),
+			filemtime( AGTODAY_THEME_DIRPATH . '/css/print.css' ),
+			'print'
+		);
+
 	}
 
 	/**
@@ -119,6 +127,7 @@ class Assets {
 	public function enqueue_public_styles() {
 
 		wp_enqueue_style( 'today-default-styles' );
+		wp_enqueue_style( 'today-print-styles' );
 
 	}
 
