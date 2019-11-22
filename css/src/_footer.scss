@@ -1,4 +1,3 @@
-$social-media-space: .5rem;
 $menu-items-padding-x: 1rem;
 $menu-items-padding-y: 0.6875rem;
 $widget-space-y: $menu-items-padding-y;
@@ -86,67 +85,12 @@ $widget-space-x: 3rem;
 		}
 	}
 
-	.widget {
-		&:first-child .addtoany_list a:first-child {
-			margin-left: 0;
+	.social-media .widget a {
+		display: inline-block;
+
+		+ a {
+			margin-left: .5rem;
 		}
-
-		.addtoany_list {
-			line-height: 1!important; // sass-lint:disable-line no-important
-
-			a {
-				display: inline-block;
-				width: 42px;
-				margin: 0 0 $social-media-space $social-media-space;
-				padding: 0;
-				background: {
-					repeat: no-repeat;
-					size: contain;
-					position: center;
-				}
-
-				img {
-					visibility: hidden;
-					width: calc(20% - #{$social-media-space * 2});
-					min-width: 40px;
-					max-width: 64px;
-				}
-			}
-
-			.a2a_count {
-				display: none;
-			}
-
-			@include breakpoint(small only) {
-				a {
-					margin-bottom: 0;
-				}
-			}
-		}
-	}
-
-	.widgets-footer-1 .social-media .widget:first-child .addtoany_list a:first-child {
-		margin-left: 0;
-	}
-
-	.a2a_button_facebook {
-		background-image: url("../images/facebook-white.svg");
-	}
-
-	.a2a_button_twitter {
-		background-image: url("../images/twitter-white.svg");
-	}
-
-	.a2a_button_youtube {
-		background-image: url("../images/youtube-white.svg");
-	}
-
-	.a2a_button_flickr {
-		background-image: url("../images/flickr-white.svg");
-	}
-
-	.a2a_button_feed {
-		background-image: url("../images/feed-white.svg");
 	}
 
 	.card {
