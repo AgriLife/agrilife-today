@@ -44,6 +44,15 @@ input[type="submit"] {
 	}
 }
 
+.single-post,
+body.page:not(.home) {
+	h3,
+	.h3 {
+		margin-top: 2.5rem;
+		margin-bottom: .5rem;
+	}
+}
+
 .heading-sideline {
 	@extend %heading-sideline;
 }
@@ -112,10 +121,4 @@ input[type="submit"] {
 
 input.hollow[type="submit"] {
 	border-color: $medium-gray;
-}
-
-h3,
-.h3 {
-	margin-top: 2.5rem;
-	margin-bottom: .5rem;
 }
