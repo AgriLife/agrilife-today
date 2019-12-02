@@ -114,6 +114,12 @@ body .wp-block-image:not(.alignfull) figcaption {
 	margin-bottom: $paragraph-margin-bottom;
 }
 
+.wp-block-image:first-child {
+	> :not(.alignleft):not(.alignright) {
+		margin-bottom: 1em;
+	}
+}
+
 .wp-block-cover {
 	&.alignleft {
 		margin-right: 1.5rem;

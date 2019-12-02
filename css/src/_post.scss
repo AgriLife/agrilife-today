@@ -36,6 +36,10 @@
 			}
 		}
 	}
+
+	.entry-content > .wp-block-image:first-child {
+		margin-bottom: 0;
+	}
 }
 
 h1.entry-title {
