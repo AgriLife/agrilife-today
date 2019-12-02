@@ -262,11 +262,18 @@ main {
 	}
 }
 
-.full-width-content:not(.wide) .site-inner .grid-container .entry {
-	max-width: 48.5rem;
-	margin: {
-		left: auto;
-		right: auto;
+.full-width-content {
+	&:not(.wide) .site-inner .grid-container .entry {
+		max-width: 48.5rem;
+		margin: {
+			left: auto;
+			right: auto;
+		}
+	}
+
+	.grid-x > #genesis-content.cell.medium-12 {
+		width: auto;
+		flex: 1 1 0px;
 	}
 }
 

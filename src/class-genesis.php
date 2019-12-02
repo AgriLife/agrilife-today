@@ -625,7 +625,7 @@ class Genesis {
 	public function content_attr( $attributes ) {
 		$attributes['class'] .= ' cell';
 		$site_layout          = genesis_site_layout();
-		if ( is_singular( 'post' ) && in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
+		if ( is_singular( 'post' ) ) {
 			$attributes['class'] .= ' medium-auto small-12';
 		} elseif ( in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
 			$attributes['class'] .= ' medium-8 small-12';
@@ -737,17 +737,17 @@ class Genesis {
 		$site_layout = genesis_site_layout();
 
 		// Don't load sidebar-alt on pages that don't need it.
-		if ( ! is_singular( 'post' ) || ! in_array( $site_layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
-			return;
-		}
+		if ( is_singular( 'post' ) ) {
 
-		genesis_widget_area(
-			'post-share',
-			array(
-				'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12 hide-for-print" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:medium;marginTop:9;anchor:genesis-content">',
-				'after'  => '</div></div>',
-			)
-		);
+			genesis_widget_area(
+				'post-share',
+				array(
+					'before' => '<div class="widgets-post-share page-widget cell medium-shrink small-12 hide-for-print" data-sticky-container><div class="wrap" data-sticky data-options="stickyOn:medium;marginTop:9;anchor:genesis-content">',
+					'after'  => '</div></div>',
+				)
+			);
+
+		}
 
 	}
 
