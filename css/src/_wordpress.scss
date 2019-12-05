@@ -205,10 +205,6 @@ body .wp-block-image:not(.alignfull) figcaption {
 .wp-block-pullquote {
 	font-size: 1.5rem;
 
-	blockquote {
-		padding: 0;
-	}
-
 	p {
 		margin-bottom: $paragraph-margin-bottom / 2;
 
@@ -224,19 +220,6 @@ body .wp-block-image:not(.alignfull) figcaption {
 			color: lighten($blockquote-color, 50%);
 			font-weight: bold;
 		}
-
-		// This font family's quotation marks have a leading space of approx. 9px at this font size.
-		&:before {
-			content: "\2018 \2018";
-			text-align: left;
-			margin-right: 0;
-			padding-right: 6px;
-		}
-
-		// This font family's quotation marks have a leading space of approx. 4.5px at this font size.
-		&:after {
-			content: "\2019 \2019";
-		}
 	}
 }
 
@@ -247,10 +230,11 @@ body .wp-block-image:not(.alignfull) figcaption {
 	}
 }
 
-.wp-block-pullquote {
+.entry .wp-block-pullquote {
 	clear: both;
 	margin-bottom: $paragraph-margin-bottom;
-	padding: $global-layout-space;
+	padding: 0;
+	text-align: left;
 
 	&.alignleft,
 	&.alignright {
@@ -284,17 +268,12 @@ body .wp-block-image:not(.alignfull) figcaption {
 		width: 100%;
 	}
 
-	&,
-	blockquote {
-		border: none;
+	p {
+		font-size: inherit;
 	}
 
 	blockquote {
 		margin: 0;
-	}
-
-	cite {
-		text-transform: uppercase;
 	}
 }
 
@@ -411,5 +390,122 @@ p.intro-text,
 .wp-block-embed {
 	iframe {
 		max-width: 100%;
+	}
+}
+
+// Blockquote CSS
+blockquote {
+	border-left: .25rem solid $light-blue;
+	font-family: $times;
+	font-size: 1.25rem;
+	font-style: italic;
+	line-height: 1.8em;
+	margin: 1.1em .5em;
+	padding: 1rem;
+	position: relative;
+	transition: .2s border ease-in-out;
+	z-index: 0;
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: -5px;
+		height: 2em;
+		background-color: $white;
+		width: 5px;
+		margin-top: -1em;
+	}
+
+	&:after {
+		content: "";
+		display: block;
+		height: 1em;
+		position: absolute;
+		top: 50%;
+		left: -0.8rem;
+		color: #2A2A2A;
+		font-style: normal;
+		line-height: 1em;
+		text-align: center;
+		text-indent: -2px;
+		width: 1.406rem;
+		margin-top: -0.5em;
+		transition: .2s all ease-in-out, .4s transform ease-in-out;
+		background: url("../images/_ionicons_svg_md-quote.svg") transparent no-repeat
+		center/contain;
+	}
+
+	.wp-block-quote.format &,
+	.wp-block-pullquote.format & {
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+
+	.wp-block-quote.book &:after,
+	.wp-block-pullquote.book &:after {
+		background-image: url("../images/_ionicons_svg_ios-book.svg");
+	}
+
+	.wp-block-quote.podcast &:after,
+	.wp-block-pullquote.podcast &:after {
+		background-image: url("../images/_ionicons_svg_md-mic-1.svg");
+	}
+
+	.wp-block-quote.lyrics &:after,
+	.wp-block-pullquote.lyrics &:after {
+		background-image: url("../images/_ionicons_svg_md-musical-notes.svg");
+	}
+
+	.wp-block-quote.favorite &:after,
+	.wp-block-pullquote.favorite &:after {
+		background-image: url("../images/_ionicons_svg_md-star.svg");
+	}
+
+	&:active:after {
+		transform: rotateY(360deg);
+	}
+
+	cite {
+		display: block;
+		font-size: 0.75em;
+		line-height: 1.8em;
+		margin-top: 1em;
+	}
+
+	@include breakpoint(small only) {
+		border-top: 2px solid $light-blue;
+		border-bottom: 2px solid $light-blue;
+		border-left: none;
+		margin: 1.1em 0em;
+		padding: 1.5em 1em;
+
+		&:before {
+			left: 50%;
+			top: 0;
+			height: 5px;
+			margin-top: -3px;
+			margin-left: -1em;
+			width: 2em;
+		}
+
+		&:after {
+			font-size: 0.75em;
+			left: 50%;
+			top: 0;
+			margin-top: -0.5rem;
+			margin-left: -0.703rem;
+		}
+
+		cite {
+			text-align: right;
+		}
+	}
+
+	@include breakpoint(medium) {
+		font-size: 1.406rem;
+		padding: 2rem 2.25rem + rem-calc(5);
 	}
 }
