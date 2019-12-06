@@ -30,6 +30,12 @@ class Meta_Boxes {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_postdata' ) );
 
+		// Add user profile fields.
+		add_action( 'show_user_profile', array( $this, 'extra_user_profile_fields' ) );
+		add_action( 'edit_user_profile', array( $this, 'extra_user_profile_fields' ) );
+		add_action( 'personal_options_update', array( $this, 'save_extra_user_profile_fields' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'save_extra_user_profile_fields' ) );
+
 	}
 
 	/**
@@ -110,6 +116,62 @@ class Meta_Boxes {
 
 			}
 		}
+	}
 
+	/**
+	 * Show user profile fields on dashboard page.
+	 *
+	 * @since 1.2.0
+	 * @param WP_User $user User object.
+	 * @return void
+	 */
+	public function extra_user_profile_fields( $user ) {
+
+		// Use nonce for verification.
+		wp_nonce_field( plugin_basename( __FILE__ ), 'user-phone_noncename' );
+
+		?>
+		<h3>Extra profile information</h3>
+		<table class="form-table">
+		<tr>
+		<th><label for="phone">Phone</label></th>
+		<td>
+		<input type="text" name="phone" id="phone" value="<?php echo esc_attr( get_the_author_meta( 'phone', $user->ID ) ); ?>" class="regular-text" /><br />
+		<span class="description">Please enter your phone number.</span>
+		</td>
+		</tr>
+		</table>
+
+		<?php
+	}
+
+	/**
+	 * Save user meta.
+	 *
+	 * @since 1.2.0
+	 * @param int $user_id User ID.
+	 * @return boolean
+	 */
+	public function save_extra_user_profile_fields( $user_id ) {
+
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+
+			return false;
+
+		}
+
+		if (
+			isset( $_POST['user-phone_noncename'] )
+			&& wp_verify_nonce( sanitize_key( $_POST['user-phone_noncename'] ), plugin_basename( __FILE__ ) )
+		) {
+
+			if ( isset( $_POST['phone'] ) ) {
+
+				$phone = sanitize_text_field( wp_unslash( $_POST['phone'] ) );
+
+				update_user_meta( $user_id, 'phone', $phone );
+
+			}
+		}
 	}
 }
