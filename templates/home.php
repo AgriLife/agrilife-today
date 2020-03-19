@@ -74,7 +74,7 @@ function agt_home_page() {
 	$story_sections = get_field( 'stories' );
 	$in_the_news    = get_field( 'in_the_news' );
 	$subscribe      = get_field( 'subscribe' );
-	$output         = '';
+	$output         = the_content();
 	$post_atts      = array(
 		'odd'  => array(
 			'thumb'   => 'medium-collapse-right medium-4-collapse-half',
