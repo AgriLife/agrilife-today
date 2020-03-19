@@ -1,4 +1,20 @@
 .page-template-home {
+	.site-inner {
+		margin-top: 0;
+
+		@include breakpoint(medium) {
+			margin-top: 0;
+		}
+	}
+
+	.entry-content > *:first-child:not(.alignwide):not(.alignfull) {
+		margin-top: 2 * $global-layout-space;
+
+		@include breakpoint(medium) {
+			margin-top: 4 * $global-layout-space;
+		}
+	}
+
 	.section article {
 		a {
 			color: $body-font-color;
