@@ -44,7 +44,7 @@
 
 		.sticky-container {
 			&.child-not-stuck {
-				height: $header-medium-height
+				height: $header-medium-height + $nav-primary-height - rem-calc(6)
 				!important; // sass-lint:disable-line no-important
 
 				&.search-open {
@@ -66,6 +66,25 @@
 		.widgets-header-subscribe {
 			position: relative;
 			height: 0;
+		}
+	}
+
+	@include breakpoint(965px) {
+		.sticky-container {
+			&.child-not-stuck {
+				height: $header-medium-height
+				!important; // sass-lint:disable-line no-important
+
+				&.search-open {
+					height: $header-medium-height
+					!important; // sass-lint:disable-line no-important
+				}
+			}
+
+			&.child-stuck {
+				height: $header-medium-sticky-height
+				!important; // sass-lint:disable-line no-important
+			}
 		}
 	}
 

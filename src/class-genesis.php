@@ -88,6 +88,34 @@ class Genesis {
 		add_filter( 'genesis_seo_title', array( $this, 'add_logo' ), 10, 3 );
 		add_filter( 'genesis_markup_title-area_open', array( $this, 'title_area' ) );
 
+		// After header.
+		add_action(
+			'genesis_after_header',
+			function() {
+				$term      = get_queried_object();
+				$tag_group = get_field( 'agtoday_tag_group', $term );
+				if ( $tag_group && array_key_exists( 'banner', $tag_group ) && $tag_group['banner'] ) {
+					$banner = $tag_group['banner'];
+					$image  = $banner['image'];
+					$link   = $banner['link'];
+					$hlink  = '';
+					foreach ( $link as $key => $value ) {
+						$hlink .= " $key=\"$value\"";
+					}
+					$align   = $banner['alignment'];
+					$bgcolor = $banner['background_color'];
+					$output  = '';
+					$output .= sprintf(
+						'<div style="text-align: center; background-color: %s"><a%s>%s</a></div>',
+						$bgcolor,
+						$hlink,
+						wp_get_attachment_image( $image['ID'], 'full' )
+					);
+					echo wp_kses_post( $output );
+				}
+			}
+		);
+
 		// Add classes for CSS grid presentation.
 		add_filter( 'genesis_structural_wrap-site-inner', array( $this, 'class_site_inner_wrap' ) );
 		add_filter( 'genesis_attr_content-sidebar-wrap', array( $this, 'content_sidebar_wrap_attr' ) );
