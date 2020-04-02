@@ -705,7 +705,9 @@ class Genesis {
 
 			// Add class to LiveWhale widget.
 			if ( false !== strpos( $params[0]['widget_id'], 'agt_livewhale' ) ) {
-				$classes[] = 'livewhale invert';
+				if ( false === in_array( 'invert', $classes, true ) ) {
+					$classes[] = 'invert';
+				}
 
 				if ( 'post-after-entry' === $params[0]['id'] ) {
 					$classes[] = 'hide-for-print';

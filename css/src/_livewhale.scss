@@ -1,6 +1,7 @@
 /* LiveWhale block.
 ---------------------------------- */
-.livewhale {
+.livewhale,
+.ag-wgt-lvwl {
 	&.invert {
 		background-color: $darker-gray;
 	}
@@ -80,44 +81,6 @@
 		align-items: center;
 	}
 
-	&.widget {
-		padding: 1.25rem;
-
-		.widget-title {
-			text-transform: uppercase;
-		}
-
-		.grid-container {
-			padding: 0;
-		}
-
-		.vertical .event {
-			margin: 0;
-			width: 100%;
-
-			~ .event {
-				margin-top: $grid-margin-gutters;
-			}
-
-			.cell {
-				padding: .75rem;
-			}
-		}
-
-		.events-all {
-			margin-top: $grid-margin-gutters * 1.5;
-			text-align: center;
-
-			.button {
-				margin-bottom: 0;
-			}
-		}
-
-		.date {
-			border-right-width: 1px;
-		}
-	}
-
 	@include breakpoint(small only) {
 		.small-12 ~ .small-12 {
 			margin-top: 2rem;
@@ -131,6 +94,44 @@
 				padding: $grid-margin-gutters / 2;
 			}
 		}
+	}
+}
+
+.ag-wgt-lvwl {
+	padding: 1.25rem;
+
+	.widget-title {
+		text-transform: uppercase;
+	}
+
+	.grid-container {
+		padding: 0;
+	}
+
+	.vertical .event {
+		margin: 0;
+		width: 100%;
+
+		~ .event {
+			margin-top: $grid-margin-gutters;
+		}
+
+		.cell {
+			padding: .75rem;
+		}
+	}
+
+	.events-all {
+		margin-top: $grid-margin-gutters * 1.5;
+		text-align: center;
+
+		.button {
+			margin-bottom: 0;
+		}
+	}
+
+	.date {
+		border-right-width: 1px;
 	}
 }
 
