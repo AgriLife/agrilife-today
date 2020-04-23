@@ -62,6 +62,9 @@ class AgToday {
 		// Change related post excerpt length.
 		add_filter( 'rp4wp_general_post_excerpt_length', array( $this, 'rp4wp_change_post_excerpt_length' ) );
 
+		// Speed up rss feed cache refresh.
+		add_filter( 'wp_feed_cache_transient_lifetime', array( $this, 'rss_widget_refresh_interval' ) );
+
 	}
 
 	/**
@@ -262,6 +265,19 @@ class AgToday {
 	 */
 	public function rp4wp_change_post_excerpt_length( $excerpt_length ) {
 		return '0';
+	}
+
+	/**
+	 * Speed up widget refresh interval.
+	 *
+	 * @since 1.3.4
+	 * @param int $seconds The current refresh rate in seconds.
+	 * @return int
+	 */
+	public function rss_widget_refresh_interval( $seconds ) {
+
+		return 600;
+
 	}
 
 }
