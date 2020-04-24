@@ -1,6 +1,9 @@
 $admin: false !default;
 $align-breakpoint: 640px;
 
+/* Alignment
+------------------------- */
+
 .aligncenter {
 	float: none;
 	clear: both;
@@ -15,6 +18,23 @@ $align-breakpoint: 640px;
 .alignright,
 .alignnone {
 	margin-bottom: $paragraph-margin-bottom;
+}
+
+.alignwide,
+.alignfull {
+	img,
+	video {
+		width: 100%;
+	}
+}
+
+.alignfull {
+	figcaption {
+		padding: {
+			left: 1em;
+			right: 1em;
+		}
+	}
 }
 
 @include breakpoint($align-breakpoint down) {
