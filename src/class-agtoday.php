@@ -65,6 +65,9 @@ class AgToday {
 		// Speed up rss feed cache refresh.
 		add_filter( 'wp_feed_cache_transient_lifetime', array( $this, 'rss_widget_refresh_interval' ) );
 
+		// Make Feedzy use the smaller of the first two enclosure images in an RSS feed item.
+		add_filter( 'feedzy_retrieve_image', array( $this, feedzy_retrieve_image ), 11, 2 );
+
 	}
 
 	/**
@@ -278,6 +281,43 @@ class AgToday {
 	public function rss_widget_refresh_interval( $seconds ) {
 
 		return 600;
+
+	}
+
+	/**
+	 * Retrive image from the item object
+	 *
+	 * @since   1.3.6
+	 *
+	 * @param   string $the_thumbnail The thumbnail url.
+	 * @param   object $item The item object.
+	 *
+	 * @return  string
+	 */
+	public function feedzy_retrieve_image( $the_thumbnail, $item ) {
+
+		$data = $item->data;
+
+		if ( array_key_exists( 'child', $data ) ) {
+
+			$child = array_values( $data['child'] )[0];
+
+			if ( count( $child['enclosure'] ) > 1 ) {
+
+				$enclosure_a = array_values( $child['enclosure'][0]['attribs'] )[0];
+				$enclosure_b = array_values( $child['enclosure'][1]['attribs'] )[0];
+				$length_a    = $enclosure_a['length'];
+				$length_b    = $enclosure_b['length'];
+
+				if ( $length_b < $length_a ) {
+
+					$the_thumbnail = $enclosure_b['url'];
+
+				}
+			}
+		}
+
+		return $the_thumbnail;
 
 	}
 
