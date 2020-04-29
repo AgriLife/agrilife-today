@@ -66,7 +66,7 @@ class AgToday {
 		add_filter( 'wp_feed_cache_transient_lifetime', array( $this, 'rss_widget_refresh_interval' ) );
 
 		// Make Feedzy use the smaller of the first two enclosure images in an RSS feed item.
-		add_filter( 'feedzy_retrieve_image', array( $this, feedzy_retrieve_image ), 11, 2 );
+		add_filter( 'feedzy_retrieve_image', array( $this, 'feedzy_retrieve_image' ), 11, 2 );
 
 	}
 
