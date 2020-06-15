@@ -26,6 +26,12 @@ class Assets {
 	 */
 	public function __construct() {
 
+		// Register admin scripts used in the theme.
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
+
+		// Enqueue admin scripts used in the theme.
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+
 		// Register global scripts used in the theme.
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_public_scripts' ) );
 
@@ -50,6 +56,36 @@ class Assets {
 
 		// Remove default styles.
 		add_action( 'wp_print_styles', array( $this, 'remove_child_theme_style' ) );
+
+	}
+
+	/**
+	 * Registers admin scripts
+	 *
+	 * @since 1.4.0
+	 * @return void
+	 */
+	public function register_admin_scripts() {
+
+		wp_register_script(
+			'admin-in-the-news',
+			AGTODAY_THEME_DIRURL . '/js/admin-in-the-news.min.js',
+			array( 'wp-blocks', 'wp-edit-post' ),
+			filemtime( AGTODAY_THEME_DIRPATH . '/js/admin-in-the-news.min.js' ),
+			true
+		);
+
+	}
+
+	/**
+	 * Enqueues admin scripts
+	 *
+	 * @since 1.4.0
+	 * @return void
+	 */
+	public function enqueue_admin_scripts() {
+
+		wp_enqueue_script( 'admin-in-the-news' );
 
 	}
 

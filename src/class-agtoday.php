@@ -49,6 +49,9 @@ class AgToday {
 
 		add_action( 'init', array( $this, 'init' ) );
 
+		// Add hooks for custom post type.
+		add_filter( 'post_type_link', array( $this, 'in_the_news_title_link' ), 11, 2 );
+
 		// Add Widgets.
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
@@ -129,16 +132,85 @@ class AgToday {
 	 */
 	public function init() {
 
-		// Include custom post types.
+		// Include custom post types and their filters or action hooks.
 		$this->register_post_types();
 
 		// Add page template custom fields.
 		if ( class_exists( 'acf' ) ) {
 			require_once AGTODAY_THEME_DIRPATH . '/fields/home.php';
 			require_once AGTODAY_THEME_DIRPATH . '/fields/news-post.php';
+			require_once AGTODAY_THEME_DIRPATH . '/fields/in-the-news.php';
+			require_once AGTODAY_THEME_DIRPATH . '/fields/news-source.php';
 			require_once AGTODAY_THEME_DIRPATH . '/fields/tag.php';
 		}
 
+	}
+
+	/**
+	 * Initialize custom post types
+	 *
+	 * @since 1.4.0
+	 * @return void
+	 */
+	public static function register_post_types() {
+
+		// Add In The News Post Type.
+		// Add taxonomies.
+		new \AgToday\Taxonomy(
+			'News Source',
+			'news-source',
+			'in-the-news',
+			array(
+				'labels' => array(
+					'name' => 'News Source',
+				),
+			)
+		);
+
+		// Add custom post type.
+		new \AgToday\PostType(
+			array(
+				'singular' => 'In The News',
+				'plural'   => 'In The News',
+			),
+			AGTODAY_THEME_TEMPLATE_PATH,
+			'in-the-news',
+			'agrilife-today',
+			array( 'news-source' ),
+			'dashicons-admin-site',
+			array( 'title', 'editor' ),
+			array( 'archive' => 'archive-in-the-news.php' )
+		);
+
+	}
+
+	/**
+	 * Add attributes for entry title link.
+	 *
+	 * @since 1.4.0
+	 * @param string  $post_link The post's permalink.
+	 * @param WP_Post $post      The post in question.
+	 * @return array
+	 */
+	public function in_the_news_title_link( $post_link, $post ) {
+
+		if ( 'in-the-news' === $post->post_type ) {
+
+			$field     = get_field( 'in_the_news_details', $post->ID );
+			$post_link = '#';
+
+			if (
+				$field &&
+				array_key_exists( 'link', $field ) &&
+				! empty( $field['link'] )
+			) {
+
+				$post_link = $field['link'];
+
+			}
+		}
+
+			return $post_link;
 
 	}
 

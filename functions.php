@@ -23,3 +23,36 @@ define( 'AGTODAY_THEME_TEMPLATE_PATH', AGTODAY_THEME_DIRPATH . '/templates' );
 require_once AGTODAY_THEME_DIRPATH . '/src/class-agtoday.php';
 spl_autoload_register( 'AgToday::autoload' );
 AgToday::get_instance();
+
+/* Activation hooks */
+register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
+register_activation_hook( __FILE__, 'agrilife_today_activation' );
+
+/**
+ * Helper option flag to indicate rewrite rules need flushing
+ *
+ * @since 1.4.0
+ * @return void
+ */
+function agrilife_today_activation() {
+
+	// Register post types and flush rewrite rules.
+	AgToday::register_post_types();
+	flush_rewrite_rules();
+
+	// Check for missing dependencies.
+	$theme  = wp_get_theme();
+	$plugin = is_plugin_active( 'advanced-custom-fields-pro/acf.php' );
+	if ( false === $plugin ) {
+		$error = sprintf(
+			/* translators: %s: URL for plugins dashboard page */
+			__(
+				'Plugin NOT activated: The <strong>AgriLife Today</strong> theme needs the <strong>Advanced Custom Fields Pro</strong> plugin to be installed and activated first. <a href="%s">Back to plugins page</a>',
+				'agrilife-today'
+			),
+			get_admin_url( null, '/plugins.php' )
+		);
+		wp_die( wp_kses_post( $error ) );
+	}
+
+}
