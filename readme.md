@@ -15,12 +15,12 @@ This WordPress theme provides functionality and visual styles for the AgriLife T
 2. Upload the theme to your site
 
 ## Features
-1. Post header image and title
-2. Related posts in post meta footer
-3. Post footer widget area for calendar
-4. Home page template
-5. Sticky social media buttons
-6. In The News custom post type with News Source taxonomy
+1. In The News custom post type with News Source taxonomy
+2. Post header image and title
+3. Related posts in post meta footer
+4. Post footer widget area for calendar
+5. Home page template
+6. Sticky social media buttons
 
 ## Development Installation
 
