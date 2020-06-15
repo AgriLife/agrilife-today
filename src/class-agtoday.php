@@ -210,7 +210,7 @@ class AgToday {
 			}
 		}
 
-			return $post_link;
+		return $post_link;
 
 	}
 
