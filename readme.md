@@ -20,7 +20,7 @@ This WordPress theme provides functionality and visual styles for the AgriLife T
 3. Post footer widget area for calendar
 4. Home page template
 5. Sticky social media buttons
-6. In The News custom post type
+6. In The News custom post type with News Source taxonomy
 
 ## Development Installation
 
