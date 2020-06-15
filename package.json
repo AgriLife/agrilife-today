@@ -1,6 +1,6 @@
 {
   "name": "agrilife-today",
-  "version": "1.3.7",
+  "version": "1.4.0",
   "description": "Genesis child theme for Texas A&M AgriLife Today",
   "private": "true",
   "main": "functions.php",
@@ -8,7 +8,8 @@
     "start": "git config core.hooksPath hooks && chmod u+x ./hooks/pre-commit && composer install && npm install && grunt",
     "checkwp": "npm run configphpcs && npm run checkphp",
     "configphpcs": "vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
-    "checkphp": "vendor/bin/phpcs --standard=WordPress --report=source ./*.php ./src ./templates ./fields && vendor/bin/phpcs --standard=WordPress ./*.php ./src ./templates ./fields",
+    "fixphp": "vendor/bin/phpcbf --standard=WordPress ./*.php ./src ./templates ./fields",
+    "checkphp": "vendor/bin/phpcs --standard=WordPress ./*.php ./src ./templates ./fields",
     "sassdev": "sass css/src/style.scss css/style.css --load-path node_modules/foundation-sites/scss --precision 4",
     "sasspkg": "sass css/src/style.scss css/style.css --load-path node_modules/foundation-sites/scss --precision 4 --style compressed"
   },
