@@ -243,13 +243,42 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'button_label'      => 'Add Story',
 							'sub_fields'        => array(
 								array(
+									'key'               => 'field_5ee79b69b5429',
+									'label'             => 'Post',
+									'name'              => 'post',
+									'type'              => 'post_object',
+									'instructions'      => '',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'post_type'         => array(
+										0 => 'in-the-news',
+									),
+									'taxonomy'          => '',
+									'allow_null'        => 1,
+									'multiple'          => 0,
+									'return_format'     => 'object',
+									'ui'                => 1,
+								),
+								array(
 									'key'               => 'field_5da754fed0db4',
 									'label'             => 'Logo',
 									'name'              => 'logo',
 									'type'              => 'image',
 									'instructions'      => 'Choose a logo representing the news agency',
 									'required'          => 1,
-									'conditional_logic' => 0,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => 'field_5ee79b69b5429',
+												'operator' => '==empty',
+											),
+										),
+									),
 									'wrapper'           => array(
 										'width' => '',
 										'class' => '',
@@ -273,7 +302,14 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 									'type'              => 'text',
 									'instructions'      => '',
 									'required'          => 1,
-									'conditional_logic' => 0,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => 'field_5ee79b69b5429',
+												'operator' => '==empty',
+											),
+										),
+									),
 									'wrapper'           => array(
 										'width' => '',
 										'class' => '',
@@ -292,7 +328,14 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 									'type'              => 'textarea',
 									'instructions'      => '',
 									'required'          => 1,
-									'conditional_logic' => 0,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => 'field_5ee79b69b5429',
+												'operator' => '==empty',
+											),
+										),
+									),
 									'wrapper'           => array(
 										'width' => '',
 										'class' => '',
@@ -311,7 +354,14 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 									'type'              => 'url',
 									'instructions'      => '',
 									'required'          => 0,
-									'conditional_logic' => 0,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => 'field_5ee79b69b5429',
+												'operator' => '==empty',
+											),
+										),
+									),
 									'wrapper'           => array(
 										'width' => '',
 										'class' => '',

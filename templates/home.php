@@ -503,12 +503,38 @@ function agt_home_page() {
 				$itn_list .= '</div><div class="grid-x">';
 			}
 
-			$logo          = wp_get_attachment_image( $value['logo']['id'], 'medium', false );
+			// Integration to post type.
+			if ( array_key_exists( 'post', $value ) && ! empty( $value['post'] ) ) {
+
+				$post_id          = $value['post'];
+				$post_fields      = get_field( 'in_the_news_details', $post_id );
+				$logo             = '';
+				$link             = get_permalink( $post_id );
+				$news_source_term = get_the_terms( $post_id, 'news-source' );
+
+				if ( is_array( $news_source_term ) ) {
+
+					$logo = wp_get_attachment_image( get_field( 'image', $news_source_term[0] ), 'medium_large', false );
+
+				}
+
+				$title = get_the_title( $post_id );
+				$desc  = get_the_content( null, false, $post_id );
+
+			} else {
+
+				$logo  = wp_get_attachment_image( $value['logo']['id'], 'medium_large', false );
+				$link  = $value['link'];
+				$title = $value['title'];
+				$desc  = $value['description'];
+
+			}
+
 			$link_open     = '';
 			$link_close    = '';
 			$no_link_class = ' nolink';
-			if ( ! empty( $value['link'] ) ) {
-				$link_open     = sprintf( '<a class="entry-title-link" href="%s" rel="nofollow" target="_blank">', $value['link'] );
+			if ( ! empty( $link ) ) {
+				$link_open     = sprintf( '<a class="entry-title-link" href="%s" rel="nofollow" target="_blank">', $link );
 				$link_close    = '</a>';
 				$no_link_class = '';
 			}
@@ -518,8 +544,8 @@ function agt_home_page() {
 				$no_link_class,
 				$link_open,
 				$logo,
-				$value['title'],
-				$value['description'],
+				$title,
+				$desc,
 				$link_close
 			);
 		}
