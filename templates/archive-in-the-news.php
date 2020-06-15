@@ -28,7 +28,7 @@ function news_source_thumbnail( $output, $args ) {
 
 		if ( is_array( $news_source_term ) ) {
 
-			$img = wp_get_attachment_image( get_field( 'image', $news_source_term[0] ), 'medium' );
+			$img = wp_get_attachment_image( get_field( 'image', $news_source_term[0] ), 'medium_large' );
 
 			$output = wp_kses_post( $img );
 
