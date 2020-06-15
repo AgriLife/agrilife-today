@@ -40,6 +40,9 @@ class AgToday {
 	 */
 	private function __construct() {
 
+		// Require classes.
+		$this->require_classes();
+
 		add_theme_support( 'html5', array() );
 
 		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
@@ -71,6 +74,41 @@ class AgToday {
 	}
 
 	/**
+	 * Initialize the various classes
+	 *
+	 * @since 1.4.0
+	 * @return void
+	 */
+	private function require_classes() {
+
+		// Initialize Genesis hooks.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-genesis.php';
+		$agt_genesis = new \AgToday\Genesis();
+
+		// Enqueue our assets.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-assets.php';
+		$agt_assets = new \AgToday\Assets();
+
+		// Make navigation changes.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-navigation.php';
+		$agt_nav = new \AgToday\Navigation();
+
+		// Include required elements.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-requireddom.php';
+		$agt_required = new \AgToday\RequiredDOM();
+
+		// Add meta boxes.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-meta-boxes.php';
+		$meta_boxes = new \AgToday\Meta_Boxes();
+
+		// Add post type classes.
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-posttype.php';
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-posttemplates.php';
+		require_once AGTODAY_THEME_DIRPATH . '/src/class-taxonomy.php';
+
+	}
+
+	/**
 	 * Add theme support for wide page alignment
 	 *
 	 * @since 0.1.0
@@ -91,21 +129,8 @@ class AgToday {
 	 */
 	public function init() {
 
-		// Enqueue our assets.
-		require_once AGTODAY_THEME_DIRPATH . '/src/class-genesis.php';
-		$agt_genesis = new \AgToday\Genesis();
-
-		// Enqueue our assets.
-		require_once AGTODAY_THEME_DIRPATH . '/src/class-assets.php';
-		$agt_assets = new \AgToday\Assets();
-
-		// Enqueue our assets.
-		require_once AGTODAY_THEME_DIRPATH . '/src/class-navigation.php';
-		$agt_nav = new \AgToday\Navigation();
-
-		// Enqueue our assets.
-		require_once AGTODAY_THEME_DIRPATH . '/src/class-requireddom.php';
-		$agt_required = new \AgToday\RequiredDOM();
+		// Include custom post types.
+		$this->register_post_types();
 
 		// Add page template custom fields.
 		if ( class_exists( 'acf' ) ) {
@@ -114,9 +139,6 @@ class AgToday {
 			require_once AGTODAY_THEME_DIRPATH . '/fields/tag.php';
 		}
 
-		// Add meta boxes.
-		require_once AGTODAY_THEME_DIRPATH . '/src/class-meta-boxes.php';
-		$meta_boxes = new \AgToday\Meta_Boxes();
 
 	}
 
