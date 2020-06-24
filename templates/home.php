@@ -494,7 +494,7 @@ function agt_home_page() {
 	}
 
 	// In The News Section.
-	if ( 'array' === gettype( $in_the_news ) && array_key_exists( 'stories', $in_the_news ) ) {
+	if ( $in_the_news && array_key_exists( 'stories', $in_the_news ) ) {
 
 		$itn_list            = '';
 		$archive_link        = get_post_type_archive_link( 'in-the-news' );
@@ -502,7 +502,7 @@ function agt_home_page() {
 
 		if ( false !== $archive_link ) {
 
-			$archive_link_output = sprintf( '<div class="grid-x view-all"><div class="cell"><a class="button h3 big" href="%s">View All</a></div></div>', $archive_link );
+			$archive_link_output = sprintf( '<div class="grid-x view-all section"><div class="cell"><a class="button h3 big" href="%s">View All</a></div></div>', $archive_link );
 
 		}
 
@@ -559,7 +559,7 @@ function agt_home_page() {
 		}
 
 		$output .= sprintf(
-			'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div><div class="grid-x">%s</div>%s</div></div>',
+			'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>%s',
 			$in_the_news['heading'],
 			$itn_list,
 			$archive_link_output
