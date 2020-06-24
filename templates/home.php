@@ -496,7 +496,15 @@ function agt_home_page() {
 	// In The News Section.
 	if ( 'array' === gettype( $in_the_news ) && array_key_exists( 'stories', $in_the_news ) ) {
 
-		$itn_list = '';
+		$itn_list            = '';
+		$archive_link        = get_post_type_archive_link( 'in-the-news' );
+		$archive_link_output = '';
+
+		if ( false !== $archive_link ) {
+
+			$archive_link_output = sprintf( '<div class="grid-x view-all"><div class="cell"><a class="button h3 big" href="%s">View All</a></div></div>', $archive_link );
+
+		}
 
 		foreach ( $in_the_news['stories'] as $key => $value ) {
 			if ( $key > 2 ) {
@@ -551,9 +559,10 @@ function agt_home_page() {
 		}
 
 		$output .= sprintf(
-			'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div></div></div>',
+			'<div class="in-the-news section"><div class="heading-sideline"><div class="grid-x"><div class="cell auto title-line"></div><h2 class="cell shrink">%s</h2><div class="cell auto title-line"></div></div></div><div class="section-content"><div class="grid-x">%s</div><div class="grid-x">%s</div>%s</div></div>',
 			$in_the_news['heading'],
-			$itn_list
+			$itn_list,
+			$archive_link_output
 		);
 
 	}
