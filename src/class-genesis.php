@@ -1014,7 +1014,7 @@ class Genesis {
 		if ( ! empty( get_the_author_meta( 'description' ) ) ) {
 
 			$author_biography = sprintf(
-				'<div class="p cell collapse small-12">%s</div>',
+				'<!--googleoff: index--><div class="subheader p cell collapse small-12"><small>%s</small></div><!--googleoff: index-->',
 				get_the_author_meta( 'description' )
 			);
 
