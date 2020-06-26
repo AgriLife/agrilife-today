@@ -1009,14 +1009,26 @@ class Genesis {
 		}
 
 		// Post author.
+		$author_biography = '';
+
+		if ( ! empty( get_the_author_meta( 'description' ) ) ) {
+
+			$author_biography = sprintf(
+				'<div class="cell small-12">%s</div>',
+				get_the_author_meta( 'description' )
+			);
+
+		}
+
 		$output .= sprintf(
-			'<div class="p grid-x"><div class="author-photo cell shrink collapse-left">%s</div><div class="author-info cell auto collapse-right"><div class="author-name">%s</div><div><a href="tel:+1%s">%s</a></div><div><a href="mailto:%s">%s</a></div></div></div>',
+			'<div class="grid-x"><div class="p author-photo cell shrink collapse-left">%s</div><div class="p author-info cell auto collapse-right"><div class="author-name">%s</div><div><a href="tel:+1%s">%s</a></div><div><a href="mailto:%s">%s</a></div></div>%s</div>',
 			get_avatar( get_the_author_meta( 'user_email' ) ),
 			get_the_author(),
 			get_the_author_meta( 'phone' ),
 			get_the_author_meta( 'phone' ),
 			get_the_author_meta( 'email' ),
-			get_the_author_meta( 'user_email' )
+			get_the_author_meta( 'user_email' ),
+			$author_biography
 		);
 
 		// Post taxonomy.
