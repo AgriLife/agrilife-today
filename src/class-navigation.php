@@ -91,8 +91,8 @@ class Navigation {
 
 		$nav_markup_open = genesis_markup(
 			array(
-				'html5'   => '<nav class="nav-primary hide-for-print cell medium-12-collapse small-12-collapse" role="navigation">',
-				'xhtml'   => '<div id="nav">',
+				'html5'   => '<nav id="genesis-nav-primary" class="nav-primary hide-for-print cell medium-12-collapse small-12-collapse" role="navigation">',
+				'xhtml'   => '<div id="genesis-nav-primary" class="nav-primary hide-for-print cell medium-12-collapse small-12-collapse">',
 				'context' => 'nav-primary',
 				'echo'    => false,
 			)
