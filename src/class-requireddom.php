@@ -144,8 +144,8 @@ class RequiredDOM {
 	public static function render_required_links() {
 
 		$output  = '<div class="footer-container cell medium-auto small-12"><ul class="req-links">';
-		$output .= '<li><a href="http://agrilife.org/required-links/compact/">Compact with Texans</a></li>';
-		$output .= '<li><a href="http://agrilife.org/required-links/privacy/">Privacy and Security</a></li>';
+		$output .= '<li><a href="https://agrilife.tamu.edu/required-links/compact/">Compact with Texans</a></li>';
+		$output .= '<li><a href="https://agrilife.tamu.edu/required-links/privacy/">Privacy and Security</a></li>';
 		$output .= '<li><a href="http://itaccessibility.tamu.edu/" target="_blank">Accessibility Policy</a></li>';
 		$output .= '<li><a href="http://publishingext.dir.texas.gov/portal/internal/resources/DocumentLibrary/State%20Website%20Linking%20and%20Privacy%20Policy.pdf" target="_blank">State Link Policy</a></li>';
 		$output .= '<li><a href="http://www.tsl.state.tx.us/trail" target="_blank">Statewide Search</a></li>';
@@ -154,8 +154,8 @@ class RequiredDOM {
 		$output .= '<li><a href="https://secure.ethicspoint.com/domain/en/report_custom.asp?clientid=19681" target="_blank">Risk, Fraud &amp; Misconduct Hotline</a></li>';
 		$output .= '<li><a href="https://gov.texas.gov/organization/hsgd" target="_blank">Texas Homeland Security</a></li>';
 		$output .= '<li><a href="http://veterans.portal.texas.gov/">Texas Veterans Portal</a></li>';
-		$output .= '<li><a href="http://agrilifeas.tamu.edu/hr/diversity/equal-opportunity-educational-programs/" target="_blank">Equal Opportunity</a></li>';
-		$output .= '<li class="last"><a href="http://agrilife.org/required-links/orpi/">Open Records/Public Information</a></li>';
+		$output .= '<li><a href="https://agrilifeas.tamu.edu/hr/diversity/equal-opportunity-educational-programs/" target="_blank">Equal Opportunity</a></li>';
+		$output .= '<li class="last"><a href="https://agrilife.tamu.edu/required-links/orpi/">Open Records/Public Information</a></li>';
 		$output .= '</ul></div>';
 
 		echo wp_kses_post( $output );
