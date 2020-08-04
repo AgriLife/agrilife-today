@@ -331,6 +331,7 @@ function agt_home_page() {
 	foreach ( $query->posts as $key => $story ) {
 		$id            = $story->ID;
 		$permalink     = get_permalink( $id );
+		$post_title    = get_the_title( $id );
 		$has_thumb     = 'thumb';
 		$subheading    = agt_get_subheading( $story->post_content );
 		$subheading    = preg_replace( '/<(\/)?h2>/', '', $subheading );
@@ -377,7 +378,7 @@ function agt_home_page() {
 				'<span class="cell image medium-4 small-12-collapse small-collapse small-order-1 %s"><a href="%s" title="%s">%s</a></span>',
 				$post_atts[ $eo ]['thumb'],
 				$permalink,
-				$post_obj->post_title,
+				$post_title,
 				$post_image
 			);
 
