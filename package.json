@@ -1,6 +1,6 @@
 {
   "name": "agrilife-today",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Genesis child theme for Texas A&M AgriLife Today",
   "private": "true",
   "main": "functions.php",
