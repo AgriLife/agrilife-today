@@ -34,7 +34,7 @@ do_action( 'genesis_meta' );
 
 wp_head(); // We need this for plugins.
 ?>
-<div class="test">&nbsp;</div>
+
 </head>
 <?php
 genesis_markup(
