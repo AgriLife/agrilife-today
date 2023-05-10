@@ -1000,7 +1000,7 @@ class Genesis {
 
 				}
 
-				$output .= implode( $contact_list, '; ' );
+				$output .= implode( '; ', $contact_list );
 
 			}
 
